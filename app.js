@@ -14,7 +14,7 @@ var bodyParser = require('body-parser');
 var app = express();
 
 var mongresto = require("./mongresto.js");
-mongresto.init(app[,options]);
+mongresto.init(app[options]);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
