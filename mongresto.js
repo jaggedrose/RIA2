@@ -120,6 +120,7 @@ var mongresto = module.exports = (function _mongresto(){ return {
     // Save the req and res objects + http method
     this.req = req;
     this.res = res;
+    console.log("hej",req.method);
     this.method = req.method;
     
     // Get the search object and mongoose model from the url

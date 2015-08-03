@@ -12,9 +12,19 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var app = express();
+console.log("app",app);
 
 var mongresto = require("./mongresto.js");
-mongresto.init(app[options]);
+mongresto.init(app,{
+  // The MongoDB database to connect to
+  dbName: "stories",
+
+  // The path to the rest api
+  apiPath: "/api",
+
+  // The path where you should put your Mongoose models
+  modelPath: "./mongoose-models/"
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -34,8 +44,8 @@ app.use(express.static(path.join(__dirname, 'public')));
   use custom api && routes
 */
 
-var myApi = require("./restApi/api.js");
-myApi.setApiRoute(app);
+//var myApi = require("./restApi/api.js");
+//myApi.setApiRoute(app);
 
 // 'catch all' route for angular in html5mode'
 app.get('*', function (req, res) {
