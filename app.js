@@ -1,5 +1,5 @@
 /**
- * NodeJS app/server settings  
+ * NodeJS app/server setting s  
  *
  */
 
