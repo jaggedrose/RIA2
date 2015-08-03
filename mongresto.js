@@ -81,6 +81,7 @@ var mongresto = module.exports = (function _mongresto(){ return {
 
     // Send all api request to apiCall
     app.all(this.apiPath + '/*', function (req, res) {
+      console.log("HAHAHHAAHAHAHA",req.body)
       mongresto.apiCall(req,res);
     });
 
@@ -112,6 +113,7 @@ var mongresto = module.exports = (function _mongresto(){ return {
     // (This is a nice alternative to sending around 
     //  a lot of parameters between methods - old school node)
 
+    //console.log("BAAAAASIC",req.body);
     Object.create(this).apiCallHandler(req,res);
 
   },
@@ -120,8 +122,8 @@ var mongresto = module.exports = (function _mongresto(){ return {
     // Save the req and res objects + http method
     this.req = req;
     this.res = res;
-    console.log("hej",req.method);
     this.method = req.method;
+    //console.log("Original",req.body)
     
     // Get the search object and mongoose model from the url
     var url = this.splitUrl(req.url);
@@ -306,6 +308,7 @@ var mongresto = module.exports = (function _mongresto(){ return {
     }
 
     if(this.method == "POST"){
+      //console.log("Hi there",this.req)
       var b = this.req.body;
       b = b.push ? b : [b];
       var l = b.length, r = [], anyError = false;
