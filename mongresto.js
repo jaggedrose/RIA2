@@ -81,7 +81,6 @@ var mongresto = module.exports = (function _mongresto(){ return {
 
     // Send all api request to apiCall
     app.all(this.apiPath + '/*', function (req, res) {
-      console.log("HAHAHHAAHAHAHA",req.body)
       mongresto.apiCall(req,res);
     });
 
