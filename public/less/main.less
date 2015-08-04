@@ -4,3 +4,41 @@
 .panel-title a {
   cursor: pointer;
 }
+
+// COLOUR VARIABLES
+// Grayscale for the time being
+
+@backgr: #292929;
+@txtheader: #FFF;
+@txtbody: #BBB;
+@txtcontrol: #DDD;
+@frame: #000;
+
+// COLOUR AND FONTS
+
+body {
+  background-color: #000;
+}
+
+.appbackground {
+  background-color: @backgr;
+}
+
+.mainframe {
+  border: 5px solid @frame;
+}
+
+.txtbody {
+  color: @txtbody;
+  font-family: 'Noticia Text', serif;
+}
+
+.txtcontrol {
+  color: @txtcontrol;
+  font-family: 'Roboto', sans-serif;
+}
+
+h1, h2, h3, h4 {
+  color: @txtheader;
+  font-family: 'Oswald', sans-serif;
+}

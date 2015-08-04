@@ -4,3 +4,27 @@
 .panel-title a {
   cursor: pointer;
 }
+body {
+  background-color: #000;
+}
+.appbackground {
+  background-color: #292929;
+}
+.mainframe {
+  border: 5px solid #000000;
+}
+.txtbody {
+  color: #bbbbbb;
+  font-family: 'Noticia Text', serif;
+}
+.txtcontrol {
+  color: #dddddd;
+  font-family: 'Roboto', sans-serif;
+}
+h1,
+h2,
+h3,
+h4 {
+  color: #ffffff;
+  font-family: 'Oswald', sans-serif;
+}
