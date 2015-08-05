@@ -4,17 +4,17 @@
             <form ng-submit="createStory()" novalidate name="storyForm">
                 <div class="form-group">
                     <label for="title">Title</label>
-                    <input ng-model="StoryData.title" class="form-control" type="text" id="title" required>
+                    <input ng-model="storyData.title" class="form-control" type="text" id="title" required>
                 </div>
                 <div class="form-group">
                     <label for="header">Header</label>
-                    <input ng-model="storyData['header'+n]" class="form-control" type="text" id="userName" required>
+                    <input ng-model="storySection.header" class="form-control" type="text" id="header" required>
                 </div>
                 <div class="form-group">
                     <label for="text">Text:</label>
-                    <textarea ng-model="storyData['text'+n]" class="form-control" type="text" id="text" required></textarea>
+                    <textarea ng-model="storySection.text" class="form-control" type="text" id="text" required></textarea>
                 </div>
-                <button class="btn btn-success" type="submit" ng-disabled="storyForm.$invalid">save!</button>
+                <button class="btn btn-success" ng-click="onSectionForward()">onward!</button>
             </form>
         </section>
     </div>
