@@ -4,6 +4,9 @@ module.exports = function(mongoose){
   // with properties
   var StorieSchema = mongoose.Schema({
     title: String,
+    header1: String,
+    header2: String,
+    header3: String,
     text1: String,
     text2: String,
     text3: String,

@@ -7,8 +7,8 @@ module.exports = function(mongoose){
     first_name: String,
     last_name: String,
     email: String,
-    stad: String,
-    land: String,
+    city: String,
+    country: String,
     password: String
   });
 
