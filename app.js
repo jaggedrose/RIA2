@@ -11,6 +11,9 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+// include the multipart middleware for file uploading
+var multipart = require('connect-multiparty');
+var multipartMiddleware = multipart();
 
 // Require modules
 var m = {};
@@ -20,6 +23,7 @@ var m = {};
   "serve-favicon",
   "cookie-parser",
   "body-parser",
+  "connect-multiparty",
   "./mongresto"
 ].forEach(function(x){
   // store required modules in m
@@ -34,6 +38,10 @@ app.use(m.bodyparser.json());
 app.use(m.bodyparser.urlencoded({ extended: false }));
 app.use(m.cookieparser());
 app.use(m.express.static(m.path.join(__dirname, 'public')));
+
+//Including multipart middleware for fileupload
+app.post('/api/files', multipartMiddleware, require('./files.route'));
+
 
 // Initialize our own REST api - mongresto
 m.mongresto.init(app,{
