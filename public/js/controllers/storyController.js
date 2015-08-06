@@ -2,8 +2,6 @@
 
 app.controller("storyController", ["$http", "$scope", "Story", function($http, $scope, Story) {
 
-
-
   // Create a new story and save immediately to the db
   Story.create({title:"Untitled"},function(arrayOfNewStories){
     $scope.storyData = arrayOfNewStories[0];

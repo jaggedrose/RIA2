@@ -13,8 +13,8 @@ app.config(["$routeProvider", "$locationProvider", function($routeProvider, $loc
       templateUrl: "partials/register.html",
       controller: "registerController"
     })
-    .when("/uploadStory", {
-      templateUrl: "partials/uploadStory.html",
+    .when("/writeStory", {
+      templateUrl: "partials/writeStory.html",
       controller: "storyController"
     })
     .otherwise({
