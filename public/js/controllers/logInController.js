@@ -9,10 +9,14 @@ app.controller("logInController", ["$http", "$scope", "$location", function($htt
       .post('api/login',{email:$scope.Loginfo.email, password: $scope.Loginfo.password})
         .then(function(response){
           if(!response.login){
-            $scope.autMsg = response;
-          }else{}
+            $scope.authMsg = response;
+          }else{
+          } 
+        },  function() {
+            $scope.authMsg = 'You entered wrong email or password';
+      });
 
-        });
+      
   }
 
  
