@@ -13,6 +13,10 @@ app.config(["$routeProvider", "$locationProvider", function($routeProvider, $loc
       templateUrl: "partials/register.html",
       controller: "registerController"
     })
+    .when("/writeStory", {
+      templateUrl: "partials/writeStory.html",
+      controller: "storyController"
+    })
     .otherwise({
       redirectTo: "/"
     });

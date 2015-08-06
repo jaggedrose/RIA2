@@ -4,7 +4,22 @@ module.exports = function(mongoose){
   // with properties
   var StorieSchema = mongoose.Schema({
     title: String,
-    header1: String,
+    section1: {
+      header: String,
+      text: String,
+      img: String
+    },
+     section2: {
+      header: String,
+      text: String,
+      img: String
+    },
+    section3: {
+      header: String,
+      text: String,
+      img: String
+    },
+    /*header1: String,
     header2: String,
     header3: String,
     text1: String,
@@ -12,7 +27,7 @@ module.exports = function(mongoose){
     text3: String,
     img1: String,
     img2: String,
-    img3: String,
+    img3: String,*/
     date_created: Date,
     date_modified: Date,
     number_views: Number,
