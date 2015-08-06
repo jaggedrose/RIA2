@@ -1,17 +1,21 @@
-.nav,
-.pagination,
-.carousel,
-.panel-title a {
-  cursor: pointer;
-}
 body {
   background-color: #000;
+}
+h1,
+h2,
+h3,
+h4 {
+  color: #ffffff;
+  font-family: 'Oswald', sans-serif;
 }
 .appbackground {
   background-color: #292929;
 }
-.mainframe {
-  border: 5px solid #000000;
+.stdinputtxtcolour {
+  color: #bbbbbb;
+}
+.stdinputbgcolour {
+  background-color: #000000;
 }
 .txtbody {
   color: #bbbbbb;
@@ -21,10 +25,27 @@ body {
   color: #dddddd;
   font-family: 'Roboto', sans-serif;
 }
-h1,
-h2,
-h3,
-h4 {
-  color: #ffffff;
-  font-family: 'Oswald', sans-serif;
+.control {
+  color: #999999;
+}
+.mainframe {
+  border: 5px solid #000000;
+  padding-top: 10px;
+}
+.navbox {
+  text-align: center;
+}
+.imgupload {
+  text-align: center;
+  height: 350px;
+}
+.stdinputborder {
+  border: 1px solid #555555;
+  border-radius: 4px;
+}
+.nav,
+.pagination,
+.carousel,
+.panel-title a {
+  cursor: pointer;
 }

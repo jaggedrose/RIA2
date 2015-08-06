@@ -1,20 +1,31 @@
-<div class "container">
+<div class="container-fluid appbackground">
     <div class="row">
-        <section class="col-xs-12 col-sm-10 col-md-8 col-lg-6 col-xs-offset-0 col-sm-offset-1  col-md-offset-2  col-lg-offset-3">
+        <section class="col-xs-12 mainframe">
             <form ng-submit="createStory()" novalidate name="storyForm">
+                <div class="form-group imgupload stdinputborder">
+                  <i class="fa fa-file-image-o fa-2x control" ng-click="uploadImage()"></i>
+                </div> 
                 <div class="form-group">
                     <label for="title" class="txtcontrol">Title</label>
-                    <input ng-model="storyData.title" class="form-control" type="text" id="title" required>
+                    <input ng-model="storyData.title" class="form-control stdinputbgcolour stdinputtxtcolour stdinputborder" type="text" id="title" placeholder="The title of your story." required>
                 </div>
                 <div class="form-group">
                     <label for="header" class="txtcontrol">Header</label>
-                    <input ng-model="storySection.header" class="form-control" type="text" id="header" required>
+                    <input ng-model="storySection.header" class="form-control stdinputbgcolour stdinputtxtcolour stdinputborder" type="text" id="header" placeholder="Headline for this section.." required>
                 </div>
                 <div class="form-group">
-                    <label for="text" class="txtcontrol">Text:</label>
-                    <textarea ng-model="storySection.text" class="form-control" type="text" id="text" required></textarea>
+                    <label for="text" class="txtcontrol">Text</label>
+                    <textarea ng-model="storySection.text" class="form-control stdinputbgcolour stdinputtxtcolour stdinputborder" type="text" id="text" placeholder="Your text.." required></textarea>
                 </div>
-                <button class="btn btn-success" ng-click="onSectionForward()">onward!</button>
+                <div class="form-group">
+                    <label for="tags" class="txtcontrol">Tags</label>
+                    <input ng-model="storyData.tags" class="form-control stdinputbgcolour stdinputtxtcolour stdinputborder" type="text" id="tags" placeholder="Add tags here, separated by commas. No #-sign needed." required>
+                </div>
+                <div class="navbox">
+                  <i class="fa fa-chevron-left fa-2x control" ng-click="onSectionBack()"></i>
+                  <i class="fa fa-chevron-right fa-2x control" ng-click="onSectionForward()" ></i>
+                </div>
+
             </form>
         </section>
     </div>
