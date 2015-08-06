@@ -37,15 +37,14 @@ app.use(m.cookieparser());
 app.use(m.express.static(m.path.join(__dirname, 'public')));
 
 
-// tell nodejs to use express-session 
-// for session management (all routes!)
+// Tell node to use express-session
 app.use(session({
-  // 'secret' authentication key, 
-  // should be changed to something hard to guess
+  // 'secret' is our authentication key, has been changed to something hard to guess.
   secret: 'ketchup',
   resave: false,
   saveUninitialized: true
 }));
+
 
 // Initialize our own REST api - mongresto
 m.mongresto.init(app,{
@@ -58,12 +57,27 @@ m.mongresto.init(app,{
   // A function that gets access to the current question
   // and can deny Mongresto permission to run it
   permissionToAsk:
-    function(modelName, method, query, rbody){ return true; },
-
+    function (modelName, method, query, rbody) {
+      return true;
+    },
   // A function that gets access to the current result
   // (and question) and can deny Mongresto permission to return it
   permissionToAnswer:
-    function(modelName, method, query, rbody, result){ return true; }
+    function (modelName, method, query, rbody, result) {
+      return true;
+    },
+  customRoutes: [
+    {
+      method: "all",
+      path: "login",
+      controller: function(mongoose){
+        return function(req, res) {
+          res.json(true);
+        };
+      }
+    }
+  ]
+
 });
 
 // Route everything "else" to angular (in html5mode)
