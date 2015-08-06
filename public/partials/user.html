@@ -1,0 +1,69 @@
+<div class"container">
+  <div class="row">
+    <section class="col-xs-12 col-sm-10 col-md-8 col-lg-6 col-xs-offset-0 col-sm-offset-1  col-md-offset-2  col-lg-offset-3">
+      <h2>User's profile</h2>
+       <form ng-submit="UserEdit()" novalidate name="userForm">
+        <div class="row">
+          <div class="col-md-6">
+            <p>Users Image</p>
+          </div>
+          <div class="col-xs-6">
+              <div class="row">
+                <div class="col-xs-6">
+                  <h3>{{User.user_name}}</h3>
+                </div>
+                <div class="col-xs-6">
+
+                   <label>{{UsersStories.length}} stories</label>
+                </div>
+              </div>
+               <div class="row">
+                <div class="col-xs-6">
+                  <label>{{User.first_name}}</label>
+                </div>
+                <div class="col-xs-6">
+                   <label>{{User.email}}</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-6">
+                  <label>{{User.last_name}}</label>
+                </div>
+                <div class="col-xs-6">
+                   <label>{{User.city}}</label>
+                   <label>{{User.country}}</label>
+                </div>
+              </div>
+        </div>
+        </div>
+        <div class="row">
+          ------------------------------------------------------------
+        </div>
+        <div class="row">
+            <div  class="row" ng-repeat="story in UsersStories">
+              <div class="col-xs-4">
+                <img ng-src="{{story.img1}}"></img>
+              </div>
+             <div class="col-xs-8">
+                <div class="row">
+                  <div class="col-xs-6">
+                    <label>{{story.title}}</label>
+                  </div>
+                  <div class="col-xs-6">
+                    <label>{{story.date_created| date:'yyyy-MM-dd'}}</label>
+                  </div>
+                </div>
+                <div class="row">{{story.text1}}</div>
+              </div>
+            
+            </div>
+        </div>
+
+          
+         <button class="btn btn-success" type="submit" ng-disabled="registrationForm.$invalid">Edit</button>
+       </form>
+    </section>
+
+  </div>
+
+</div>
