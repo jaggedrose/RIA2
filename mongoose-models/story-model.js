@@ -18,7 +18,7 @@ module.exports = function(mongoose){
       header: String,
       text: String,
       img: String
-    }
+    },
     /*header1: String,
     header2: String,
     header3: String,
