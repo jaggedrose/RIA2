@@ -16,7 +16,8 @@
   indent = 2 spaces, keep your rows reasonably short
   also your methods below sceen height.
 */
-/* jshint 
+/*
+jshint 
   loopfunc: true,
   trailing: true,
   sub: true,
@@ -48,15 +49,16 @@ var mongresto = module.exports = (function _mongresto(){ return {
     ngStopQueueOnError: false,
     
     // A function written by you - it gets access to the current question
-    // and can deny Mongresto permission to run it
-    
-    permissionToAsk:
-      function(modelName, method, query, rbody){ return true; },
+    // and can deny Mongresto permission to run it    
+    permissionToAsk: function(modelName, method, query, rbody) {
+      return true;
+    },
     
     // A function written by you - it gets access to the current result
     // (and question) and can deny Mongresto permission to return it
-    permissionToAnswer:
-      function(modelName, method, query, rbody, result){ return true; },
+    permissionToAnswer: function(modelName, method, query, rbody, result) {
+      return true;
+    },
 
     customRoutes:[]
       
@@ -280,7 +282,7 @@ var mongresto = module.exports = (function _mongresto(){ return {
       this.model.modelName,
       this.method,
       this.search,
-      this.req.body,
+      this.req,
       result
     )){return true;}
     this.responder("Forbidden",false,403);

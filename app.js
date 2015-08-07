@@ -56,16 +56,11 @@ m.mongresto.init(app,{
   modelPath: "./mongoose-models/",
   // A function that gets access to the current question
   // and can deny Mongresto permission to run it
-  permissionToAsk:
-    function (modelName, method, query, rbody) {
-      return true;
-    },
+  permissionToAsk: require('./api/permissions/toAsk'),
   // A function that gets access to the current result
   // (and question) and can deny Mongresto permission to return it
-  permissionToAnswer:
-    function (modelName, method, query, rbody, result) {
-      return true;
-    },
+  permissionToAnswer: require('.api/permissions/toAnswer'),
+  // Our custom routes
   customRoutes: [
     {
       method: "all",
