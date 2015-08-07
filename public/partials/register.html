@@ -21,8 +21,9 @@
          </div>
          <div class="form-group">
           <label for="email">Email:</label>
-          <input ng-model="newUser.email" name="userEmail" class="form-control" type="email" id = "email" name="email" placeholder="Enter e-mail" required>
+          <input ng-model="newUser.email" name="userEmail" class="form-control" type="email" id = "email" name="email" placeholder="Enter e-mail" ng-keyup="checkForEmail()" required>
           <p ng-show="registrationForm.userEmail.$dirty && registrationForm.userEmail.$invalid">Invalid email</p>
+          <p ng-show="">Email is already registered.</p>
          </div>
          <div class="form-group">
           <label for="city">City:</label>
