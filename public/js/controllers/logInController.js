@@ -1,28 +1,17 @@
 //"myAppName" controller.
-app.controller("logInController", ["$http", "$scope", "$location", function($http, $scope, $location) {
+app.controller("logInController", ["$http", "$scope", "$location","Login", function($http, $scope, $location, Login) {
   $scope.authMsg = '';
   $scope.Loginfo = {};
   
   $scope.logForm = function(){
     console.log("login",$scope.Loginfo);
-    $http
-      .post('api/login',{email:$scope.Loginfo.email, password: $scope.Loginfo.password})
-        .then(function(response){
-          if(!response.login){
-            $scope.authMsg = response;
-          }else{
-          } 
-        },  function() {
-            $scope.authMsg = 'You entered wrong email or password';
-      });
-
-      
-  }
-
- 
-    
-        
-
-
-    
+    Login.login($scope.Loginfo, function(data){
+      if(!data){
+        $scope.authMsg = "you entered wrong email or password";
+      }else{
+        var id = data._id;
+        $location.path('/home');
+      }
+    });
+  };    
 }]);
