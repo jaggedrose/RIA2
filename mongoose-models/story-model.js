@@ -19,15 +19,24 @@ module.exports = function(mongoose){
       text: String,
       img: String
     },
-    date_created: Date,
-    date_modified: Date,
+    date_created: {type: Date },
+    date_modified: {type: Date},
     number_views: Number,
     tags: String,
     user_id: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}
   });
 
+  StorieSchema.pre('save', function(next) {
+    now = new Date();
+    this.date_modified = now;
+    if ( !this.date_created ) {
+      this.date_created = now;
+    }
+    next();
+  })
+
   // Create a model from the schema
-  // give it the name "Person"
+  
   var Storie = mongoose.model("Story",StorieSchema);
 
   // Return the model

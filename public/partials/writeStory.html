@@ -1,20 +1,39 @@
-<div class "container">
+<div class="container-fluid appbackground">
     <div class="row">
-        <section class="col-xs-12 col-sm-10 col-md-8 col-lg-6 col-xs-offset-0 col-sm-offset-1  col-md-offset-2  col-lg-offset-3">
-            <form ng-submit="createStory()" novalidate name="storyForm">
+        <section class="col-xs-12 mainframe">
+            <form ng-submit="createStory()" novalidate name="storyForm" class="">
+              <div class="form-group">
+                    <!-- <label for="title" class="txtcontrol">Title</label> -->
+                    <input ng-model="storyData.title" class="form-control stdinputbgcolour brtinputtxtcolour stdinputborder headerfont plcholderhead cnttxt" type="text" id="title" placeholder="The title of your story." required>
+                </div>
+                <div class="form-group imgupload stdinputborder">
+                  <input type="file" ngf-select ng-model="files" ngf-change="upload($file)"> <i class="fa fa-file-image-o fa-2x control" ng-click="uploadImage()"></i>
+                </div> 
+                
                 <div class="form-group">
-                    <label for="title" class="txtcontrol">Title</label>
-                    <input ng-model="storyData.title" class="form-control" type="text" id="title" required>
+                    <!-- <label for="header" class="txtcontrol">Header</label> -->
+                    <input ng-model="storySection.header" class="form-control stdinputbgcolour brtinputtxtcolour stdinputborder headerfont plcholderhead" type="text" id="header" placeholder="Headline for this section.." required>
                 </div>
                 <div class="form-group">
-                    <label for="header" class="txtcontrol">Header</label>
-                    <input ng-model="storySection.header" class="form-control" type="text" id="header" required>
+                    <!-- <label for="text" class="txtcontrol">Text</label> -->
+                    <textarea ng-model="storySection.text" class="form-control stdinputbgcolour stdinputtxtcolour stdinputborder txtbody plcholdertxt" type="text" id="text" placeholder="Your text.." required></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="text" class="txtcontrol">Text:</label>
-                    <textarea ng-model="storySection.text" class="form-control" type="text" id="text" required></textarea>
+                    <!-- <label for="tags" class="txtcontrol">Tags</label> -->
+                    <input ng-model="storyData.tags" class="form-control stdinputbgcolour stdinputtxtcolour stdinputborder txtbody plcholdertxt" type="text" id="tags" placeholder="Add tags here, separated by commas. No # needed." required>
                 </div>
-                <button class="btn btn-success" ng-click="onSectionForward()">onward!</button>
+                
+                  
+                  <div class="cols-xs-8 txtcontrol control txtright">
+                    <p>Username - {{storyData.niceDate}}</p>
+                  </div>
+                
+                <div class="navbox">
+                  <i class="fa fa-chevron-left fa-2x control" ng-click="onSectionBack()"></i>
+                  <i class="fa fa-chevron-right fa-2x control" ng-click="onSectionForward()" ></i>
+                </div>
+                <br><br>
+
             </form>
         </section>
     </div>

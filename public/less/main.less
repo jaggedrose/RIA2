@@ -1,3 +1,112 @@
+// WU14-RIA 2-GRUPP 1
+// LESS for the app-project STORIES 
+
+// COLOUR VARIABLES ***********************************************************
+// Grayscale for the time being
+
+@backgr: #292929;
+@txtheader: #FFF;
+@txtbody: #CCC;
+@txtcontrol: #DDD; 
+@frame: #000;
+@control: #999;
+@stdinputtxtcolour: #CCC;
+@brtinputtxtcolour: red;
+@drkinputtxtcolour: #999;
+@stdinputbgcolour: #292929;
+@stdinputbordercolour: #000;
+@plcholderhead: #AAA;
+@plcholdertxt: #999;
+
+
+// COLOURS AND FONTS **********************************************************
+
+body {
+  background-color: #000;
+}
+
+h1, h2, h3, h4 {
+  color: @txtheader;
+  font-family: 'Oswald', sans-serif;
+}
+
+.appbackground {
+  background-color: @backgr;
+}
+
+.headerfont {
+  color: @txtheader;
+  font-family: 'Oswald', sans-serif;
+}
+
+// colour of *text* in text input fields 
+
+.stdinputtxtcolour {
+  color: @stdinputtxtcolour;
+}
+
+// colour of *background* of text input fields    
+
+.stdinputbgcolour {
+  background-color: @stdinputbgcolour;
+}
+
+// for story text, 'editorial' on landing page etc
+
+.txtbody {
+  font-family: 'Noticia Text', serif;
+}
+
+// for text displaying user details, text in buttons, labels
+
+.txtcontrol {
+  color: @txtcontrol;
+  font-family: 'Roboto', sans-serif;
+}
+
+// for control elements - buttons, icons
+
+.control {
+  color: @control;
+}
+
+// GENERIC FORMATTING STUFF FOR VARIOUS DIV'S AND ELEMENTS ********************
+
+// border for app's main div 
+
+.mainframe {
+  border: 5px solid @frame;
+  padding-top: 10px;
+}
+
+// Navigation box formatting - centered icons
+
+.navbox {
+  text-align: center;
+}
+
+.cnttxt {
+  text-align: center;
+}
+
+// Image upload - centered icon(s), border settings
+
+.imgupload {
+  text-align: center;
+  height: 350px;
+}
+
+.stdinputborder {
+  border: 1px solid @stdinputbordercolour;
+  border-radius: 4px;
+}
+
+.txtright {
+  text-align: right;
+}
+
+// CURSORS ********************************************************************
+
 .nav,
 .pagination,
 .carousel,
@@ -5,43 +114,43 @@
   cursor: pointer;
 }
 
-// COLOUR VARIABLES
-// Grayscale for the time being
+// PLACEHOLDER TEXT ***********************************************************
 
-@backgr: #292929;
-@txtheader: #FFF;
-@txtbody: #BBB;
-@txtcontrol: #DDD; 
-@frame: #000;
+.plcholderhead { 
 
+  &::-webkit-input-placeholder {
+     color: @plcholderhead;
+  }
 
-// COLOUR AND FONTS
+  &:-moz-placeholder { /* Firefox 18- */
+     color: @plcholderhead;  
+  }
 
-body {
-  background-color: #000;
+  &::-moz-placeholder {  /* Firefox 19+ */
+     color: @plcholderhead;  
+  }
+
+  &:-ms-input-placeholder {  
+     color: @plcholderhead;  
+  }
 }
 
-.appbackground {
-  background-color: @backgr;
+.plcholdertxt { 
+
+  &::-webkit-input-placeholder {
+     color: @plcholdertxt;
+  }
+
+  &:-moz-placeholder { /* Firefox 18- */
+     color: @plcholdertxt;  
+  }
+
+  &::-moz-placeholder {  /* Firefox 19+ */
+     color: @plcholdertxt;  
+  }
+
+  &:-ms-input-placeholder {  
+     color: @plcholdertxt;  
+  }
 }
 
-.mainframe {
-  border: 5px solid @frame;
-}
-
-// for story text, 'editorial' on landing page etc
-.txtbody {
-  color: @txtbody;
-  font-family: 'Noticia Text', serif;
-}
-
-// for user details, buttons, labels
-.txtcontrol {
-  color: @txtcontrol;
-  font-family: 'Roboto', sans-serif;
-}
-
-h1, h2, h3, h4 {
-  color: @txtheader;
-  font-family: 'Oswald', sans-serif;
-}
