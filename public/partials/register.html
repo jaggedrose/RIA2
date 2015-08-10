@@ -8,6 +8,7 @@
           <input ng-model="newUser.userName"class="form-control" type="text" id = "userName" name = "userName" ng-minlength="5" ng-maxlength="20" placeholder="Enter username" required>
           <p ng-show="registrationForm.userName.$error.minlength">The username is too short.</p>
           <p ng-show="registrationForm.userName.$error.maxlength">The username is too long.</p>
+          <p ng-show="userNameAlreadyRegistered">Username is already registered.</p>
          </div>
           <div class="form-group">
           <label for="firstName">First name:</label>
@@ -21,9 +22,9 @@
          </div>
          <div class="form-group">
           <label for="email">Email:</label>
-          <input ng-model="newUser.email" name="userEmail" class="form-control" type="email" id = "email" name="email" placeholder="Enter e-mail" ng-keyup="checkForEmail()" required>
+          <input ng-model="newUser.email" name="userEmail" class="form-control" type="email" id = "email" name="email" placeholder="Enter e-mail"  required>
           <p ng-show="registrationForm.userEmail.$dirty && registrationForm.userEmail.$invalid">Invalid email</p>
-          <p ng-show="">Email is already registered.</p>
+          <p ng-show="emailAlreadyRegistered">Email is already registered.</p>
          </div>
          <div class="form-group">
           <label for="city">City:</label>
@@ -33,7 +34,7 @@
          <div class="form-group">
           <p>Country:</p>
           <select class="form-control" ng-options="country for country in countries" ng-model="newUser.country">
-<!--             <option ng-repeat="country in countries">{{country}}</option> -->
+            <!-- <option ng-repeat="country in countries">{{country}}</option> -->
           </select>
          </div>
          <div class="form-group">
