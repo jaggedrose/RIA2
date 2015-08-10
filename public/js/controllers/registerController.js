@@ -1,5 +1,5 @@
 //"myAppName" controller.
-app.controller("registerController", ["$http", "$scope", "User", function($http, $scope, User) {
+app.controller("registerController", ["$http", "$scope", "User", "Login", function($http, $scope, User, Login) {
   $scope.newUser = {};
   $scope.newUserCreate = function() {
     $scope.createdUser = User.create($scope.newUser, function(data) {

@@ -54,25 +54,20 @@ m.mongresto.init(app,{
   apiPath: "/api",
   // The path where you should put your Mongoose models
   modelPath: "./mongoose-models/",
-  // A function that gets access to the current question
-  // and can deny Mongresto permission to run it
-  permissionToAsk: require('./api/permissions/toAsk'),
-  // A function that gets access to the current result
-  // (and question) and can deny Mongresto permission to return it
-  permissionToAnswer: require('./api/permissions/toAnswer'),
   // Our custom routes
   customRoutes: [
     {
       method: "all",
       path: "login",
-      controller: function(mongoose){
-        return function(req, res) {
-          res.json(true);
-        };
-      }
+      controller: require('./api/custom/login.route')
     }
-  ]
-
+  ],
+  // A function that gets access to the current question
+  // and can deny Mongresto permission to run it
+  permissionToAsk: require('./api/permissions/toAsk'),
+  // A function that gets access to the current result
+  // (and question) and can deny Mongresto permission to return it
+  permissionToAnswer: require('./api/permissions/toAnswer')
 });
 
 // Route everything "else" to angular (in html5mode)
