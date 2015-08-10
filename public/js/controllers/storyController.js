@@ -1,6 +1,7 @@
 //"myAppName" controller.
 
-app.controller("storyController", ["$http", "$scope", "Story", function($http, $scope, Story) {
+app.controller("storyController", ["$http", "$scope", "Story","$routeParams", 
+  function($http, $scope, Story, $routeParams) {
 
   // Create a new story and save immediately to the db
 
@@ -16,6 +17,12 @@ app.controller("storyController", ["$http", "$scope", "Story", function($http, $
   var currentSection = 1;
 
   // A representation of the currently edited section
+  var id=$routeParams.id;
+if(id){
+    $scope.storyData = Story.get(id);
+  
+};
+console.log('$scope.storyData ',id);
   $scope.storySection = {
     sectionNo:1, 
     header: "", 

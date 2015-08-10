@@ -29,5 +29,9 @@ app.controller("UserController", ["$http", "$scope", "Story","User", function($h
     window.location.assign("http://"+window.location.host+'/user');
   };
 
+  $scope.StoryEdit = function(StoryID) {
+    
+  }
+
 }]);
 
