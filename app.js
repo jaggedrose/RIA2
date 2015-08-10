@@ -59,7 +59,7 @@ m.mongresto.init(app,{
   permissionToAsk: require('./api/permissions/toAsk'),
   // A function that gets access to the current result
   // (and question) and can deny Mongresto permission to return it
-  permissionToAnswer: require('.api/permissions/toAnswer'),
+  permissionToAnswer: require('./api/permissions/toAnswer'),
   // Our custom routes
   customRoutes: [
     {
