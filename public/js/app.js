@@ -17,9 +17,9 @@ app.config(["$routeProvider", "$locationProvider", function($routeProvider, $loc
       templateUrl: "partials/uploadStory.html",
       controller: "storyController"
     })
-    .when("/logIn", {
-      templateUrl: "partials/logIn.html",
-      controller: "logInController"
+    .when("/login", {
+      templateUrl: "partials/login.html",
+      controller: "loginController"
     })
     .otherwise({
       redirectTo: "/"

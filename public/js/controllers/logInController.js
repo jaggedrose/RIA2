@@ -1,5 +1,5 @@
 //"myAppName" controller.
-app.controller("logInController", ["$http", "$scope", "$location","Login", function($http, $scope, $location, Login) {
+app.controller("loginController", ["$http", "$scope", "$location","Login", function($http, $scope, $location, Login) {
   $scope.authMsg = '';
   $scope.Loginfo = {};
   
@@ -13,5 +13,5 @@ app.controller("logInController", ["$http", "$scope", "$location","Login", funct
         $location.path('/home');
       }
     });
-  };    
+  };
 }]);
