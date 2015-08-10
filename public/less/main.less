@@ -1,21 +1,23 @@
 // WU14-RIA 2-GRUPP 1
 // LESS for the app-project STORIES 
 
-
-
 // COLOUR VARIABLES ***********************************************************
 // Grayscale for the time being
 
 @backgr: #292929;
 @txtheader: #FFF;
-@txtbody: #BBB;
+@txtbody: #CCC;
 @txtcontrol: #DDD; 
 @frame: #000;
 @control: #999;
-@stdinputtxtcolour: #BBB;
-@stdinputbgcolour: #000;
-@stdinputbordercolour: #555;
-@pholdertxt: #333;
+@stdinputtxtcolour: #CCC;
+@brtinputtxtcolour: red;
+@drkinputtxtcolour: #999;
+@stdinputbgcolour: #292929;
+@stdinputbordercolour: #000;
+@plcholderhead: #AAA;
+@plcholdertxt: #999;
+
 
 // COLOURS AND FONTS **********************************************************
 
@@ -30,6 +32,11 @@ h1, h2, h3, h4 {
 
 .appbackground {
   background-color: @backgr;
+}
+
+.headerfont {
+  color: @txtheader;
+  font-family: 'Oswald', sans-serif;
 }
 
 // colour of *text* in text input fields 
@@ -47,17 +54,18 @@ h1, h2, h3, h4 {
 // for story text, 'editorial' on landing page etc
 
 .txtbody {
-  color: @txtbody;
   font-family: 'Noticia Text', serif;
 }
 
 // for text displaying user details, text in buttons, labels
+
 .txtcontrol {
   color: @txtcontrol;
   font-family: 'Roboto', sans-serif;
 }
 
 // for control elements - buttons, icons
+
 .control {
   color: @control;
 }
@@ -77,6 +85,10 @@ h1, h2, h3, h4 {
   text-align: center;
 }
 
+.cnttxt {
+  text-align: center;
+}
+
 // Image upload - centered icon(s), border settings
 
 .imgupload {
@@ -89,6 +101,10 @@ h1, h2, h3, h4 {
   border-radius: 4px;
 }
 
+.txtright {
+  text-align: right;
+}
+
 // CURSORS ********************************************************************
 
 .nav,
@@ -97,3 +113,44 @@ h1, h2, h3, h4 {
 .panel-title a {
   cursor: pointer;
 }
+
+// PLACEHOLDER TEXT ***********************************************************
+
+.plcholderhead { 
+
+  &::-webkit-input-placeholder {
+     color: @plcholderhead;
+  }
+
+  &:-moz-placeholder { /* Firefox 18- */
+     color: @plcholderhead;  
+  }
+
+  &::-moz-placeholder {  /* Firefox 19+ */
+     color: @plcholderhead;  
+  }
+
+  &:-ms-input-placeholder {  
+     color: @plcholderhead;  
+  }
+}
+
+.plcholdertxt { 
+
+  &::-webkit-input-placeholder {
+     color: @plcholdertxt;
+  }
+
+  &:-moz-placeholder { /* Firefox 18- */
+     color: @plcholdertxt;  
+  }
+
+  &::-moz-placeholder {  /* Firefox 19+ */
+     color: @plcholdertxt;  
+  }
+
+  &:-ms-input-placeholder {  
+     color: @plcholdertxt;  
+  }
+}
+

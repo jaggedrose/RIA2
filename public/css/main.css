@@ -11,14 +11,17 @@ h4 {
 .appbackground {
   background-color: #292929;
 }
+.headerfont {
+  color: #ffffff;
+  font-family: 'Oswald', sans-serif;
+}
 .stdinputtxtcolour {
-  color: #bbbbbb;
+  color: #cccccc;
 }
 .stdinputbgcolour {
-  background-color: #000000;
+  background-color: #292929;
 }
 .txtbody {
-  color: #bbbbbb;
   font-family: 'Noticia Text', serif;
 }
 .txtcontrol {
@@ -35,17 +38,51 @@ h4 {
 .navbox {
   text-align: center;
 }
+.cnttxt {
+  text-align: center;
+}
 .imgupload {
   text-align: center;
   height: 350px;
 }
 .stdinputborder {
-  border: 1px solid #555555;
+  border: 1px solid #000000;
   border-radius: 4px;
+}
+.txtright {
+  text-align: right;
 }
 .nav,
 .pagination,
 .carousel,
 .panel-title a {
   cursor: pointer;
+}
+.plcholderhead::-webkit-input-placeholder {
+  color: #aaaaaa;
+}
+.plcholderhead:-moz-placeholder {
+  /* Firefox 18- */
+  color: #aaaaaa;
+}
+.plcholderhead::-moz-placeholder {
+  /* Firefox 19+ */
+  color: #aaaaaa;
+}
+.plcholderhead:-ms-input-placeholder {
+  color: #aaaaaa;
+}
+.plcholdertxt::-webkit-input-placeholder {
+  color: #999999;
+}
+.plcholdertxt:-moz-placeholder {
+  /* Firefox 18- */
+  color: #999999;
+}
+.plcholdertxt::-moz-placeholder {
+  /* Firefox 19+ */
+  color: #999999;
+}
+.plcholdertxt:-ms-input-placeholder {
+  color: #999999;
 }
