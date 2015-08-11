@@ -9,7 +9,7 @@ module.exports = function(mongoose){
       text: String,
       img: String
     },
-     section2: {
+    section2: {
       header: String,
       text: String,
       img: String
@@ -19,7 +19,6 @@ module.exports = function(mongoose){
       text: String,
       img: String
     },
-    
     date_created: {type: Date },
     date_modified: {type: Date},
     number_views: Number,

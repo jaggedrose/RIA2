@@ -395,7 +395,7 @@ var mongresto = module.exports = (function _mongresto(){ return {
       // Create an ng resource
       var re = $resource(
         "pathToApi/" + entity.toLowerCase() + "/:id/",
-        {id:"@id"}, methods
+        {id:"@_id"}, methods
       );
       
       // Wrap it in our own special object (queue handling etc)

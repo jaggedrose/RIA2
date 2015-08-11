@@ -1,0 +1,51 @@
+<div class "container">
+    <div class="row userRow">
+        <section class="col-xs-12 col-sm-10 col-md-8 col-lg-6 col-xs-offset-0 col-sm-offset-1  col-md-offset-2  col-lg-offset-3">
+            <h2>User's profile</h2>
+            <article class="row">
+                <div class="col-xs-6">
+                    <h3>Users Image Will Go Here Later (will NOT be a title)</h3>
+                </div>
+                <div class="col-xs-6">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <h3>{{User.user_name}}</h3>
+                            <p>{{User.first_name}}</p>
+                            <p>{{User.last_name}}</p>
+                        </div>
+                        <div class="col-xs-6">
+                            <p>{{UsersStories.length}} stories</p>
+                            <p>{{User.email}}</p>
+                            <p>{{User.city}}, {{User.country}}</p>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            <br>
+            <a ng-href="/writeStory">New story</a>
+            <div class="row">
+                <div class="row" ng-repeat="story in UsersStories">
+                    <div class="col-xs-4">
+                        <img ng-src="{{story.section1.img}}"></img>
+                    </div>
+                    <div class="col-xs-8">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <h3>{{story.title}}</h3>
+                            </div>
+                            <div class="col-xs-6">
+                                <p>{{story.date_created| date:'yyyy-MM-dd'}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <p>{{story.section1.text | limitTo: 300 }}{{story.section1.text.length > 300 ? '...' : ''}}</p>
+                            <a ng-href="/writeStory/{{story._id}}">Edit</a>
+                            <button ng-click="deleteStory($index)" type="submit" class="btn btn-success">Delete</button>
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
