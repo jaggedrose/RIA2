@@ -1,6 +1,7 @@
 <div class="container-fluid appbackground" >
     <div class="row">
         <div class="col-xs-12 mainframe">
+
             <form name="form" ng-submit="logForm()" role="form">
                 <div class="form-group" ng-class="{'has-error': form.email.$dirty && form.email.$error.required }">
                     <label for="email">Email:</label>
@@ -14,11 +15,19 @@
                 </div>
                 <div class="form-actions">
                     <button type="submit" ng-disabled="form.$invalid" class="btn btn-primary">Login</button>
-                    <!-- <a ng-href="/register" class="btn btn-link">{{authMsg}}</a> -->
-                    <a ng-href="/register" class="btn btn-link"><button type="submit" class="btn btn-primary">Register</button></a>
                     <p class="loginErrorMsg">{{authMsg}}</p>
                 </div>
             </form>
+
+            <div>
+                <h4>New to Stories?</h4>
+                <a ng-href="/register" class="btn btn-link">
+                    <button type="submit" class="btn btn-primary">Register
+                    </button>
+                </a>
+            </div>    
+                
+            
         </div>
     </div>
 </div>
