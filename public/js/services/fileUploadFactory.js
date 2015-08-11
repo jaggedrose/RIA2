@@ -9,9 +9,9 @@ app.factory("FileUploader", ["Upload", function(Upload) {
     // our controllers
     return Upload.upload({
       // POST REST URL
-      url: '/upload',
+      url: '/api/files',
       // send filename to save
-      fileName: file,
+      fileName: file.name,
       // and the file data
       file: file
     });

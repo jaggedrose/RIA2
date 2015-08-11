@@ -6,7 +6,7 @@ app.controller("fileUploadController", ["FileUploader", "$scope", function(FileU
     // only supporting single file upload ([0]) 
     // at the moment...
     FileUploader($scope.files[0]).success(function(data) {
-    console.log("saved file, public path: ", data);
+    	console.log("saved file, public path: ", data);
     });
   };
 }]);

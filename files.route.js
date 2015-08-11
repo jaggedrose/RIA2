@@ -1,3 +1,5 @@
+var fs = require('fs');
+
 module.exports = function (req, res) {
 	console.log("req.files: ", req.files);
 
@@ -7,9 +9,9 @@ module.exports = function (req, res) {
   // read the recieved file
   fs.readFile(file.path, function (err, data) {
     // decide where to store the file
-    var uploadPath = __dirname + "/upload/" + file.name;
+    var uploadPath = __dirname + "/public/upload/" + file.name;
 
-    // write file to file system
+    // write file to file system/
     fs.writeFile(uploadPath, data, function (err, data) {
       if (err) throw err;
 
