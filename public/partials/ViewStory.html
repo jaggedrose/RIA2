@@ -1,0 +1,18 @@
+<div class="container-fluid appbackground">
+    <div class="row">
+        <section class="col-xs-12 mainframe">
+            <h1> {{storyData.title}}</h1>
+                
+            <h3>Story.Section.Image Here Later (will NOT be a title)</h3>
+                
+            <h4>{{storyData.Section1.header}}</h4>
+            <p>{{storyData.Section1.text}}</p>
+            <p>{{storyData.user_id}}</p>
+
+            <div class="navbox">
+              <i class="fa fa-chevron-left fa-2x control" ng-click="onSectionBack()"></i>
+              <i class="fa fa-chevron-right fa-2x control" ng-click="onSectionForward()" ></i>
+            </div>
+        </section>
+    </div>
+</div>

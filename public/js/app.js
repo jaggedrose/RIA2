@@ -25,6 +25,9 @@ app.config(["$routeProvider", "$locationProvider", function($routeProvider, $loc
       templateUrl: "partials/userEdit.html",
       controller: "UserController"
     })
+    .when("/viewStory/:id", {
+      templateUrl: "partials/viewStory.html"
+    })
     .otherwise({
       redirectTo: "/"
     });

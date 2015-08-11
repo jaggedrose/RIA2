@@ -14,7 +14,6 @@
               <p>{{User.last_name}}</p>
             </div>
             <div class="col-xs-6">
-                    <br>
               <p>{{UsersStories.length}} stories</p>
               <p>{{User.email}}</p>
               <p>{{User.city}}, {{User.country}}</p>
@@ -34,14 +33,13 @@
                     <h3>{{story.title}}</h3>
                   </div>
                   <div class="col-xs-6">
-                    <br>
                     <p>{{story.date_created| date:'yyyy-MM-dd'}}</p>
                   </div>
                 </div>
                 <div class="row">
-                  <p>{{story.section1.text | limitTo: 300 }}{{story.section1.text.length > 300 ? '...' : ''}}</p>
-                   
+                  <p>{{story.section1.text | limitTo: 300 }}{{story.section1.text.length > 300 ? '...' : ''}}</p>          
                     <a ng-href="/writeStory/{{story._id}}">Edit</a>
+                   
 
                    <span></span>
                 </div>
