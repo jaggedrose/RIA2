@@ -21,6 +21,7 @@ module.exports = function(mongoose){
     },
     date_created: {type: Date },
     date_modified: {type: Date},
+
     number_views: Number,
     tags: String,
     user_id: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}

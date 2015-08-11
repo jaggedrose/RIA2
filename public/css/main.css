@@ -86,3 +86,11 @@ h4 {
 .plcholdertxt:-ms-input-placeholder {
   color: #999999;
 }
+
+h1,
+h2,
+h3,
+h4 {
+  color: #ffffff;
+  font-family: 'Oswald', sans-serif;
+}

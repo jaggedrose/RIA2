@@ -26,7 +26,11 @@ app.config(["$routeProvider", "$locationProvider", function($routeProvider, $loc
       controller: "UserController"
     })
     .when("/viewStory/:id", {
-      templateUrl: "partials/viewStory.html"
+      templateUrl: "partials/viewStory.html",
+      controller:"ViewStoryController"
+    .when("/login", {
+      templateUrl: "partials/login.html",
+      controller: "loginController"
     })
     .otherwise({
       redirectTo: "/"

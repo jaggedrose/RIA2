@@ -11,6 +11,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var session = require('express-session');
 
 // Require modules
 var m = {};
@@ -35,6 +36,16 @@ app.use(m.bodyparser.urlencoded({ extended: false }));
 app.use(m.cookieparser());
 app.use(m.express.static(m.path.join(__dirname, 'public')));
 
+
+// Tell node to use express-session
+app.use(session({
+  // 'secret' is our authentication key, has been changed to something hard to guess.
+  secret: 'ketchup',
+  resave: false,
+  saveUninitialized: true
+}));
+
+
 // Initialize our own REST api - mongresto
 m.mongresto.init(app,{
   // The MongoDB database to connect to
@@ -43,6 +54,20 @@ m.mongresto.init(app,{
   apiPath: "/api",
   // The path where you should put your Mongoose models
   modelPath: "./mongoose-models/",
+  // Our custom routes
+  customRoutes: [
+    {
+      method: "all",
+      path: "login",
+      controller: require('./api/custom/login.route')
+    }
+  ],
+  // A function that gets access to the current question
+  // and can deny Mongresto permission to run it
+  permissionToAsk: require('./api/permissions/toAsk'),
+  // A function that gets access to the current result
+  // (and question) and can deny Mongresto permission to return it
+  permissionToAnswer: require('./api/permissions/toAnswer')
 });
 
 // Route everything "else" to angular (in html5mode)
