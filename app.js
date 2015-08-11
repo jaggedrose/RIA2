@@ -11,7 +11,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-// include the multipart middleware for file uploading
+// include the multipart middleware for file uploading-Bengt
 var multipart = require('connect-multiparty');
 var multipartMiddleware = multipart();
 
@@ -39,7 +39,7 @@ app.use(m.bodyparser.urlencoded({ extended: false }));
 app.use(m.cookieparser());
 app.use(m.express.static(m.path.join(__dirname, 'public')));
 
-//Including multipart middleware for fileupload
+//Showing the route for the uploaded image on serverside(/api/files) starting multipartM and calling function 'require'
 app.post('/api/files', multipartMiddleware, require('./files.route'));
 
 

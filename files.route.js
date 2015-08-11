@@ -1,3 +1,4 @@
+// fs is NodeJs file system module used for storing files from server locally
 var fs = require('fs');
 
 module.exports = function (req, res) {
