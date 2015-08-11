@@ -1,4 +1,5 @@
 // FileUploader factory, dependent on
+//
 // "Upload" service from ngFileUpload module
 app.factory("FileUploader", ["Upload", function(Upload) {
   // FileUploader factory returns a function
@@ -8,9 +9,9 @@ app.factory("FileUploader", ["Upload", function(Upload) {
     // our controllers
     return Upload.upload({
       // POST REST URL
-      url: '/api/files',
+      url: '/upload',
       // send filename to save
-      fileName: file.name,
+      fileName: file,
       // and the file data
       file: file
     });
