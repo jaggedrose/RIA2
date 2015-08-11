@@ -17,8 +17,8 @@ app.controller("storyController", ["$http", "$scope", "Story", "Tag", function($
 
   // A representation of the currently edited section
   $scope.storySection = {
-    sectionNo:1, 
-    header: "", 
+    sectionNo:1,
+    header: "",
     text: "",
     img: "",
     date_created: "",

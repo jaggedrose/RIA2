@@ -34,7 +34,7 @@ module.exports = function(mongoose){
       this.date_created = now;
     }
     next();
-  })
+  });
 
   // Create a model from the schema
   

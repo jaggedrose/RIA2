@@ -1,3 +1,10 @@
+.nav,
+.pagination,
+.carousel,
+.panel-title a {
+  cursor: pointer;
+}
+
 body {
   background-color: #000;
 }
@@ -28,6 +35,7 @@ h4 {
   color: #dddddd;
   font-family: 'Roboto', sans-serif;
 }
+
 .control {
   color: #999999;
 }
@@ -86,3 +94,5 @@ h4 {
 .plcholdertxt:-ms-input-placeholder {
   color: #999999;
 }
+
+
