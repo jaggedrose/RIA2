@@ -28,6 +28,9 @@ app.config(["$routeProvider", "$locationProvider", function($routeProvider, $loc
     .when("/viewStory/:id", {
       templateUrl: "partials/viewStory.html",
       controller:"ViewStoryController"
+    .when("/login", {
+      templateUrl: "partials/login.html",
+      controller: "loginController"
     })
     .otherwise({
       redirectTo: "/"

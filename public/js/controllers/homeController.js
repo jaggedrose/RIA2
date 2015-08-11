@@ -1,5 +1,5 @@
 //"myAppName" controller.
-app.controller("homeController", ["$http", "$scope", "Story","User", function($http, $scope, Story, User) {
+app.controller("homeController", ["$http", "$scope","Login", function($http, $scope, Login) {
   /*$scope.newUser = User.create({
   	user_name: "hepp",
     first_name: "Graaaa",
@@ -9,8 +9,11 @@ app.controller("homeController", ["$http", "$scope", "Story","User", function($h
     land: "Sverige",
     password: "1234"
   });*/
-  $scope.newUser = User.get();
-  Story.get({_populate:"user_id"}, function(data) {
-    console.log("d", data);
-  })
+
+  // if (Login.user()) {
+  //   $scope.user = Login.user();
+  //   Story.get({user_id: $scope.user._id, _populate:"user_id"}, function(data) {
+  //     console.log("d", data);
+  //   })
+  // }
 }]);
