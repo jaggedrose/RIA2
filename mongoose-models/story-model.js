@@ -9,7 +9,7 @@ module.exports = function(mongoose){
       text: String,
       img: String
     },
-     section2: {
+    section2: {
       header: String,
       text: String,
       img: String
