@@ -57,7 +57,7 @@ app.controller("storyController", ["$http", "$scope", "Story","$routeParams","$l
     return nDate;
     
   };
-    
+   
   // On section change
   $scope.onSectionForward = function(back){
 
@@ -81,32 +81,7 @@ app.controller("storyController", ["$http", "$scope", "Story","$routeParams","$l
     // Now change to what is stored for this section in myStory
     $scope.storySection =  $scope.storyData["section" + currentSection] || {};
   }
-    
-  // On section change
-  $scope.onSectionForward = function(back){
-    
-    console.log ("$scope.storySection: ",$scope.storySection);
-
-    // Add the current section in the larger storyData object
-    $scope.storyData["section" + currentSection] = $scope.storySection;
-
-    // Save to DB
-    Story.update({_id:$scope.storyData._id},$scope.storyData);
-
-    // Don't do anything else if we are in the last section
-    if(
-      (currentSection >= 3 && !back) ||
-      (currentSection <= 1 && back)
-    ){return;}
-    
-    // Increment section number
-    currentSection += (back ? -1 : 1);
-    console.log ("currentSection - post inc/dec: ", currentSection);
-    
-    // Now change to what is stored for this section in myStory
-    $scope.storySection =  $scope.storyData["section" + currentSection] || {};
-  };
-
+  
   $scope.onSectionBack = function(){
     $scope.onSectionForward(true);
   };
