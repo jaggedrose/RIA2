@@ -1,5 +1,6 @@
 //app declaration and dependency injection
-var app = angular.module("stories", ["ngRoute", "ngResource", "ngFileUpload", "ui.bootstrap"]);
+var app = angular.module("stories", ["ngRoute", "ngResource", 'ngFileUpload', "ui.bootstrap"]);
+
 
 //app config
 app.config(["$routeProvider", "$locationProvider", function($routeProvider, $locationProvider) {
@@ -12,6 +13,10 @@ app.config(["$routeProvider", "$locationProvider", function($routeProvider, $loc
     .when("/register", {
       templateUrl: "partials/register.html",
       controller: "registerController"
+    })
+    .when("/fileUpload",{
+      templateUrl: "partials/fileUpload.html",
+      controller: "fileUploadController"
     })
     .when("/writeStory/:id?", {
       templateUrl: "partials/writeStory.html",
@@ -28,6 +33,7 @@ app.config(["$routeProvider", "$locationProvider", function($routeProvider, $loc
     .when("/viewStory/:id", {
       templateUrl: "partials/viewStory.html",
       controller:"ViewStoryController"
+    })
     .when("/login", {
       templateUrl: "partials/login.html",
       controller: "loginController"
