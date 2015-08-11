@@ -3,9 +3,6 @@ app.controller("registerController", ["$http", "$scope", "User", "Login", functi
   $scope.newUser = {};
   $scope.newUserCreate = function() {
 
-    $scope.createdUser = User.create($scope.newUser, function() {
-      console.log("$scope.createdUser",$scope.createdUser);
-
     $scope.createdUser = User.create($scope.newUser, function(data) {
       console.log("User.create($scope.newUser)",data);
       

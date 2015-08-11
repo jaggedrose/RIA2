@@ -18,12 +18,20 @@ app.controller("storyController", ["$http", "$scope", "Story","$routeParams","$l
   }
   else {
     // Create a new story and save immediately to the db
-    Story.create({title:"", date_created: "", date_modified: "", tags:"", number_views: ""},function(arrayOfNewStories){
-      $scope.storyData = arrayOfNewStories[0];
-      console.log ("created new story");
-      $scope.storyData.niceDate = niceDate ($scope.storyData.date_created);
-      console.log ("$scope.storyData post created story: ", $scope.storyData);
-    });
+    Story.create(
+      {
+        title:"", 
+        date_created: "", 
+        date_modified: "", 
+        tags:"", 
+        number_views: ""
+      }, function(arrayOfNewStories){
+        $scope.storyData = arrayOfNewStories[0];
+        console.log ("created new story");
+        $scope.storyData.niceDate = niceDate ($scope.storyData.date_created);
+        console.log ("$scope.storyData post created story: ", $scope.storyData);
+      }
+    );
 
 
   }
