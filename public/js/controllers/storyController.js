@@ -1,10 +1,10 @@
 //"myAppName" controller.
 
-app.controller("storyController", ["$http", "$scope", "Story", function($http, $scope, Story) {
+app.controller("storyController", ["$http", "$scope", "Story", "Tag", function($http, $scope, Story, Tag) {
 
   // Create a new story and save immediately to the db
 
-  Story.create({title:"", date_created: "", date_modified: "", tags:"", number_views: ""},function(arrayOfNewStories){
+  Story.create({title:"", date_created: "", date_modified: "", tags:[], number_views: ""},function(arrayOfNewStories){
     $scope.storyData = arrayOfNewStories[0];
     console.log ("created new story");
     $scope.storyData.niceDate = niceDate ($scope.storyData.date_created);
@@ -31,12 +31,10 @@ app.controller("storyController", ["$http", "$scope", "Story", function($http, $
   function niceDate (date) {
 
     var nDate = new Date (date);
-    nDate = nDate.toString();
-    nDate = nDate.slice(0,21);
-
+    nDate = nDate.toString().slice(0,21);
     return nDate;
     
-  };
+  }
     
   // On section change
   $scope.onSectionForward = function(back){
@@ -61,18 +59,25 @@ app.controller("storyController", ["$http", "$scope", "Story", function($http, $
     
     // Now change to what is stored for this section in myStory
     $scope.storySection =  $scope.storyData["section" + currentSection] || {};
-  }
+  };
 
   $scope.onSectionBack = function(){
     $scope.onSectionForward(true);
-  }
+  };
 
   $scope.uploadImage = function(){
     console.log ("Hey! Image upload!");
     console.log ("storyData: ", $scope.storyData);
-  }
 
+    Tag.get({},function(tags){
+      console.log ("Tag.get: ", tags);
+    });
 
+    Tag.get({tagName: {$in:["det", "vet", "get"]}},function(tags){
+      console.log ("Tag.get({tagName:array}: ", tags);
+    });
+    
+  };
 
 }]);
 
