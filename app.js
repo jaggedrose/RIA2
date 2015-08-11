@@ -14,6 +14,7 @@ var bodyParser = require('body-parser');
 // include the multipart middleware for file uploading-Bengt
 var multipart = require('connect-multiparty');
 var multipartMiddleware = multipart();
+var session = require('express-session');
 
 // Require modules
 var m = {};
@@ -43,6 +44,15 @@ app.use(m.express.static(m.path.join(__dirname, 'public')));
 app.post('/api/files', multipartMiddleware, require('./files.route'));
 
 
+// Tell node to use express-session
+app.use(session({
+  // 'secret' is our authentication key, has been changed to something hard to guess.
+  secret: 'ketchup',
+  resave: false,
+  saveUninitialized: true
+}));
+
+
 // Initialize our own REST api - mongresto
 m.mongresto.init(app,{
   // The MongoDB database to connect to
@@ -51,6 +61,20 @@ m.mongresto.init(app,{
   apiPath: "/api",
   // The path where you should put your Mongoose models
   modelPath: "./mongoose-models/",
+  // Our custom routes
+  customRoutes: [
+    {
+      method: "all",
+      path: "login",
+      controller: require('./api/custom/login.route')
+    }
+  ],
+  // A function that gets access to the current question
+  // and can deny Mongresto permission to run it
+  permissionToAsk: require('./api/permissions/toAsk'),
+  // A function that gets access to the current result
+  // (and question) and can deny Mongresto permission to return it
+  permissionToAnswer: require('./api/permissions/toAnswer')
 });
 
 // Route everything "else" to angular (in html5mode)

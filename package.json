@@ -15,7 +15,7 @@
     "serve-favicon": "~2.2.0",
     "mongo-express": "*",
     "mongoose": "*",
-    //connect-multiparty is needed for file upload- Bengt
-    "connect-multiparty": "*"
+    "connect-multiparty": "*",
+    "express-session": "*"
   }
 }
