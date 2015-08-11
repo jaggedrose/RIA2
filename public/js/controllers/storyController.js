@@ -1,7 +1,7 @@
 //"myAppName" controller.
 
-app.controller("storyController", ["$http", "$scope", "Story","$routeParams",
-  function($http, $scope, Story, $routeParams) {
+app.controller("storyController", ["$http", "$scope", "Story","$routeParams","$location",
+  function($http, $scope, Story, $routeParams, $location) {
   // Counter
   var currentSection = 1;
 
@@ -11,9 +11,9 @@ app.controller("storyController", ["$http", "$scope", "Story","$routeParams",
     // Get existing story from db
     $scope.storyData = Story.getById({"_id" : id}, function(response){
       console.log('response ',response);
-      $scope.storyData=response;
+      $scope.storyData = response;
       $scope.storySection =  $scope.storyData["section1"];
-      console.log($scope.storySection);
+      
     });
   }
   else {
@@ -64,7 +64,7 @@ app.controller("storyController", ["$http", "$scope", "Story","$routeParams",
     if(
       (currentSection >= 3 && !back) ||
       (currentSection <= 1 && back)
-    ){return;}
+    ){return $location.url('/user');}
   
     // Increment section number
     currentSection += (back ? -1 : 1);

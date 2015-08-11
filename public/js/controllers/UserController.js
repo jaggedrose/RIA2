@@ -1,20 +1,18 @@
 //"myAppName" controller.
 app.controller("UserController", ["$http", "$scope", "Story","User", function($http, $scope, Story, User) {
-  /*$scope.newUser = User.create({
-  	user_name: "hepp",
-    first_name: "Graaaa",
-    last_name: "Grasson",
-    email: "graa@hotmail.com",
-    stad: "Malmö",
-    land: "Sverige",
-    password: "1234"
-  });*/
-//    55c0b6c2110d04b01e469f0a
-   
+  
+
+
   $scope.User = User.getById("55c0b804b04519b813c10433", function() {
     
     // $scope.User = User.getById ("55c0b804b04519b813c10433") ;
-    $scope.UsersStories = Story.get({user_id: $scope.User._id, _populate:"user_id"});
+    $scope.UsersStories = Story.get({user_id: $scope.User._id, _populate:"user_id"}, function() {
+      $scope.UsersStories.sort(function(x, y) {
+        var a = new Date(x.date_created);
+        var b = new Date(y.date_created);
+        return a>b ? -1 : a<b ? 1 : 0;
+      });
+    });
   }) ;
 
   $scope.userEdit = function() {
@@ -32,6 +30,12 @@ app.controller("UserController", ["$http", "$scope", "Story","User", function($h
   $scope.StoryEdit = function(StoryID) {
     
   }
+  $scope.deleteStory = function(index){
+    
+    $scope.UsersStories[index].$remove(function(){
+      $scope.UsersStories = Story.get({user_id: $scope.User._id, _populate:"user_id"});
+    });
+  };
 
 }]);
 
