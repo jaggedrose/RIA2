@@ -1,6 +1,6 @@
 //"myAppName" controller.
-app.controller("registerController", ["$http", "$scope", "User", "$location", function($http, $scope, User, $location) {
-  
+app.controller("registerController", ["$http", "$scope", "User", "Login","$location", function($http, $scope, User, Login, $location) {
+
   $scope.newUser = {};
 
   var userWhenReset = {
@@ -14,12 +14,12 @@ app.controller("registerController", ["$http", "$scope", "User", "$location", fu
   };
 
   $scope.newUserCreate = function() {
-    User.create($scope.newUser, function(data) {
-      console.log("user created", data);
-    });
-    console.log("$scope.newUser: ", $scope.newUser);
-    //Add code to redirect registered user to his/her page
 
+    User.create($scope.newUser, function(data) {
+
+      console.log("$scope.newUser: ", $scope.newUser);
+      //Add code to redirect registered user to his/her page
+    });
   };
 
   $http.get('js/resources/countries.json').then(function(res){
