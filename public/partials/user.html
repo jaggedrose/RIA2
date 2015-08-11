@@ -40,8 +40,8 @@
                 </div>
                 <div class="row">
                   <p>{{story.section1.text | limitTo: 300 }}{{story.section1.text.length > 300 ? '...' : ''}}</p>
-                   <!-- <a ng-href="/writeStory/{{story._id}}">Edit</a> -->
-                    <button class="btn btn-success" type="submit"  ng-click="StoryEdit(story._id)">Edit</button>
+                   
+                    <a ng-href="/writeStory/{{story._id}}">Edit</a>
 
                    <span></span>
                 </div>

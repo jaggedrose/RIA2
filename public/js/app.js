@@ -13,7 +13,7 @@ app.config(["$routeProvider", "$locationProvider", function($routeProvider, $loc
       templateUrl: "partials/register.html",
       controller: "registerController"
     })
-    .when("/writeStory", {
+    .when("/writeStory/:id?", {
       templateUrl: "partials/writeStory.html",
       controller: "storyController"
     })

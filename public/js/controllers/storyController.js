@@ -1,28 +1,34 @@
 //"myAppName" controller.
 
-app.controller("storyController", ["$http", "$scope", "Story","$routeParams", 
+app.controller("storyController", ["$http", "$scope", "Story","$routeParams",
   function($http, $scope, Story, $routeParams) {
-
-  // Create a new story and save immediately to the db
-
-  Story.create({title:"", date_created: "", date_modified: "", tags:"", number_views: ""},function(arrayOfNewStories){
-    $scope.storyData = arrayOfNewStories[0];
-    console.log ("created new story");
-    $scope.storyData.niceDate = niceDate ($scope.storyData.date_created);
-    console.log ("$scope.storyData post created story: ", $scope.storyData);
-
-  });
-
   // Counter
   var currentSection = 1;
 
-  // A representation of the currently edited section
-  var id=$routeParams.id;
-if(id){
-    $scope.storyData = Story.get(id);
+  // If we should load an existing story
+  var id = $routeParams.id;
+  if(id){
+    // Get existing story from db
+    $scope.storyData = Story.getById({"_id" : id}, function(response){
+      console.log('response ',response);
+      $scope.storyData=response;
+      $scope.storySection =  $scope.storyData["section1"];
+      console.log($scope.storySection);
+    });
+  }
+  else {
+    // Create a new story and save immediately to the db
+    Story.create({title:"", date_created: "", date_modified: "", tags:"", number_views: ""},function(arrayOfNewStories){
+      $scope.storyData = arrayOfNewStories[0];
+      console.log ("created new story");
+      $scope.storyData.niceDate = niceDate ($scope.storyData.date_created);
+      console.log ("$scope.storyData post created story: ", $scope.storyData);
+    });
+
+
+  }
   
-};
-console.log('$scope.storyData ',id);
+
   $scope.storySection = {
     sectionNo:1, 
     header: "", 
@@ -47,8 +53,6 @@ console.log('$scope.storyData ',id);
     
   // On section change
   $scope.onSectionForward = function(back){
-    
-    console.log ("$scope.storySection: ",$scope.storySection);
 
     // Add the current section in the larger storyData object
     $scope.storyData["section" + currentSection] = $scope.storySection;
@@ -61,9 +65,10 @@ console.log('$scope.storyData ',id);
       (currentSection >= 3 && !back) ||
       (currentSection <= 1 && back)
     ){return;}
-    
+  
     // Increment section number
     currentSection += (back ? -1 : 1);
+    
     console.log ("currentSection - post inc/dec: ", currentSection);
     
     // Now change to what is stored for this section in myStory
