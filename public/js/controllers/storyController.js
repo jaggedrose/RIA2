@@ -1,6 +1,6 @@
 //"myAppName" controller
-app.controller("storyController", ["$http", "$scope", "Story","$routeParams","$location",
-  function($http, $scope, Story, $routeParams, $location) {
+app.controller("storyController", ["$http", "$scope", "Story", "Tag", "$routeParams","$location",
+  function($http, $scope, Story, Tag, $routeParams, $location) {
   // Counter
   var currentSection = 1;
 
