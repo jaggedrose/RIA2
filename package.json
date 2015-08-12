@@ -15,6 +15,7 @@
     "serve-favicon": "~2.2.0",
     "mongo-express": "*",
     "mongoose": "*",
+    "connect-multiparty": "*",
     "express-session": "*"
   }
 }
