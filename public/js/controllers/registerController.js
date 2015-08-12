@@ -57,5 +57,3 @@ app.controller("registerController", ["$http", "$scope", "User", "Login", functi
   ];
 
 }]);
-
-
