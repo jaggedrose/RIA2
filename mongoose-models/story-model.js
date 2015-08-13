@@ -37,7 +37,7 @@ module.exports = function(mongoose){
 
   // Create a model from the schema
   
-  var Story = mongoose.model("Story",StorieSchema);
+  var Story = mongoose.model("Story",StorySchema);
 
   // Return the model
   return Story;
