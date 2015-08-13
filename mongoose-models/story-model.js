@@ -22,7 +22,7 @@ module.exports = function(mongoose){
     date_created: {type: Date },
     date_modified: {type: Date},
     number_views: Number,
-    tags: String,
+    tags: {type:mongoose.Schema.Types.ObjectId, ref: 'Tag'},
     user_id: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}
   });
 

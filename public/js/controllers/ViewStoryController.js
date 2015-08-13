@@ -26,11 +26,11 @@ app.controller("ViewStoryController", ["$http", "$scope", "Story","User","$route
     
     // Now change to what is stored for this section in myStory
     $scope.storySection =  $scope.aStory["section" + currentSection] || {};
-  }
+  };
 
   $scope.onSectionBack = function(){
     $scope.onSectionForward(true);
-  }
+  };
 
 }]);
 
