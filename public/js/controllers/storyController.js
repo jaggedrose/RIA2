@@ -19,10 +19,10 @@ app.controller("storyController", ["$http", "$scope", "Story","$routeParams","$l
     // Create a new story and save immediately to the db
     Story.create(
       {
-        title:"", 
-        date_created: "", 
-        date_modified: "", 
-        tags:"", 
+        title:"",
+        date_created: "",
+        date_modified: "",
+        tags:[],
         number_views: ""
       }, function(arrayOfNewStories){
         $scope.storyData = arrayOfNewStories[0];
