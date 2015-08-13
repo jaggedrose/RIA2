@@ -3,6 +3,7 @@ app.controller("fileUploadController", ["FileUploader", "$scope", function(FileU
 
   $scope.formSubmit = function() {
     FileUploader($scope.files[0]).success(function(data) {
+    console.log("uploadPath = ");
  });
   };
 }]);

@@ -16,7 +16,7 @@ app.controller("UserController", ["$http", "$scope", "Story","User", function($h
   }) ;
 
   $scope.userEdit = function() {
-    window.location.assign("http://"+window.location.host+'/userEdit');
+    $location.path('/userEdit');
     $scope.User = User.getById("55c0b804b04519b813c10433");
     console.log("User ",$scope.User.userName);
   };
@@ -24,12 +24,9 @@ app.controller("UserController", ["$http", "$scope", "Story","User", function($h
   $scope.UserChanged = function() {
     console.log($scope.User);
     User.update({_id:$scope.User._id},$scope.User);
-    window.location.assign("http://"+window.location.host+'/user');
+    $location.path('/user');
   };
-
-  $scope.StoryEdit = function(StoryID) {
-    
-  }
+  
   $scope.deleteStory = function(index){
     
     $scope.UsersStories[index].$remove(function(){
