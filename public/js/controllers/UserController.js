@@ -1,11 +1,22 @@
 //"myAppName" controller.
-app.controller("UserController", ["$http", "$scope", "Story","User", function($http, $scope, Story, User) {
+app.controller("UserController", ["$http", "$scope", "Story","User","Login", function($http, $scope, Story, User, Login) {
   
 
+$scope.User=Login.user;
+hehehe = $scope.User;
+console.log("UserController", Login.user);
 
-  $scope.User = User.getById("55c0b804b04519b813c10433", function() {
-    
-    // $scope.User = User.getById ("55c0b804b04519b813c10433") ;
+function waitForUser(callback) {
+  if (!$scope.User._id) {
+    setTimeout(function() {
+      waitForUser(callback);
+    },500);
+  } else {
+    callback();
+  }
+}
+  // $scope.User = User.getById("55c0b804b04519b813c10433", function() {
+  waitForUser(function() {
     $scope.UsersStories = Story.get({user_id: $scope.User._id, _populate:"user_id"}, function() {
       $scope.UsersStories.sort(function(x, y) {
         var a = new Date(x.date_created);
@@ -13,11 +24,13 @@ app.controller("UserController", ["$http", "$scope", "Story","User", function($h
         return a>b ? -1 : a<b ? 1 : 0;
       });
     });
-  }) ;
+  })
+    // $scope.User = User.getById ("55c0b804b04519b813c10433") ;
+  // }) ;
 
   $scope.userEdit = function() {
     $location.path('/userEdit');
-    $scope.User = User.getById("55c0b804b04519b813c10433");
+    $scope.User = Login.user;
     console.log("User ",$scope.User.userName);
   };
 
