@@ -24,7 +24,7 @@
             <br>
             <a ng-href="/writeStory">New story</a>
             <div class="row">
-                <div class="row" ng-repeat="story in UsersStories">
+                <div class="row" ng-repeat="story in UsersStories|orderBy: '-date_created'">
                     <div class="col-xs-4">
                         <img ng-src="{{story.section1.img}}"></img>
                     </div>
