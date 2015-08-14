@@ -1,6 +1,10 @@
 // A custom controller for /api/login,
 // that needs to connect to the mongoose DB from inside mongresto
 module.exports = function(mongoose) {
+
+   var config = require("../../config.json");
+   var sha256 = require("sha256");
+
    return function(req, res) {
       // Get currently logged in user information (if there is any)
       if (req.method == "GET") {
@@ -11,26 +15,27 @@ module.exports = function(mongoose) {
             res.json(false);
          }
       } else if (req.method == "POST") {
-         if(!req.body.email || !req.body.pass){
+         if(!req.body.email || !req.body.password){
             res.json(false);
             return;
          }
 
-         console.log("PW before sha: ", req.body.pass);
-         //Encrypt the user password
-         req.body.pass = sha256(req.body.pass);
-         console.log("PW after sha:", req.body.pass);
+         //encrypt the users password
+         console.log("Before sha256", req.body.password);
+         req.body.password = sha256(config.hashSalt + req.body.password);
+         console.log("After sha256", req.body.password);
 
          // Log in user with following email and password
-         mongoose.model("User").findOne(req.body, function(err, data) {
+         mongoose.model("User").findOne(req.body, function(err, userObj) {
          if (err) { throw err; }
-            console.log("ss", data);
+            console.log("ss", userObj);
             // Never store the password
-            data && (delete data.pass);
+            userObj && (userObj.password = "");
+
             // Store all other user info in a session property
-            data && (req.session.user = data);
+            userObj && (req.session.user = userObj);
             // Answer with the logged in user (if there is one)
-            res.json(data ? data : false);
+            res.json(userObj ? userObj : false);
          });
       } else if (req.method == "DELETE") {
          // Destroy the entire user session on logout
