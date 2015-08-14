@@ -31,6 +31,9 @@ app.config(["$routeProvider", "$locationProvider", function($routeProvider, $loc
       controller: "UserController"
     })
     .when("/viewStory/:id", {
+      redirectTo: "/viewStory/:id/section/1"
+    })
+    .when("/viewStory/:id/section/:sectionid", {
       templateUrl: "partials/viewStory.html",
       controller:"ViewStoryController"
     })
