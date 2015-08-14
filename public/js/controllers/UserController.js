@@ -18,11 +18,6 @@ function waitForUser(callback) {
   // $scope.User = User.getById("55c0b804b04519b813c10433", function() {
   waitForUser(function() {
     $scope.UsersStories = Story.get({user_id: $scope.User._id, _populate:"user_id"}, function() {
-      $scope.UsersStories.sort(function(x, y) {
-        var a = new Date(x.date_created);
-        var b = new Date(y.date_created);
-        return a>b ? -1 : a<b ? 1 : 0;
-      });
     });
   })
     // $scope.User = User.getById ("55c0b804b04519b813c10433") ;
@@ -39,7 +34,7 @@ function waitForUser(callback) {
     User.update({_id:$scope.User._id},$scope.User);
     $location.path('/user');
   };
-  
+
   $scope.deleteStory = function(index){
     
     $scope.UsersStories[index].$remove(function(){
