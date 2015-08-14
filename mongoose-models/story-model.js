@@ -2,7 +2,7 @@ module.exports = function(mongoose){
 
   // Create a new mongoose schema 
   // with properties
-  var StorieSchema = mongoose.Schema({
+  var StorySchema = mongoose.Schema({
     title: String,
     section1: {
       header: String,
@@ -22,11 +22,11 @@ module.exports = function(mongoose){
     date_created: {type: Date },
     date_modified: {type: Date},
     number_views: Number,
-    tags: {type:mongoose.Schema.Types.ObjectId, ref: 'Tag'},
+    tags: [{type:mongoose.Schema.Types.ObjectId, ref: 'Tag'}],
     user_id: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}
   });
 
-  StorieSchema.pre('save', function(next) {
+  StorySchema.pre('save', function(next) {
     now = new Date();
     this.date_modified = now;
     if ( !this.date_created ) {
@@ -37,9 +37,9 @@ module.exports = function(mongoose){
 
   // Create a model from the schema
   
-  var Storie = mongoose.model("Story",StorieSchema);
+  var Story = mongoose.model("Story",StorySchema);
 
   // Return the model
-  return Storie;
+  return Story;
 
 };
