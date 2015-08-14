@@ -11,6 +11,16 @@ module.exports = function(mongoose) {
             res.json(false);
          }
       } else if (req.method == "POST") {
+         if(!req.body.email || !req.body.pass){
+            res.json(false);
+            return;
+         }
+
+        /* console.log("PW before sha: ", req.body.pass);
+         //Encrypt the user password
+         req.body.pass = sha256(req.body.pass);
+         console.log("PW after sha:", req.body.pass);*/
+
          // Log in user with following email and password
          mongoose.model("User").findOne(req.body, function(err, data) {
          if (err) { throw err; }

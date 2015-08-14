@@ -16,6 +16,7 @@
     "mongo-express": "*",
     "mongoose": "*",
     "connect-multiparty": "*",
-    "express-session": "*"
+    "express-session": "*",
+    "sha256": "*"
   }
 }
