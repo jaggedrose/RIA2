@@ -1,6 +1,6 @@
 //"myAppName" controller
-app.controller("storyController", ["$http", "$scope", "Story","$routeParams","$location",
-  function($http, $scope, Story, $routeParams, $location) {
+app.controller("storyController", ["$http", "$scope","$routeParams","$location", "Story", "Tag",
+  function($http, $scope, $routeParams, $location, Story, Tag) {
   // Counter
   var sectionid = $routeParams.sectionid;
  
@@ -8,11 +8,11 @@ app.controller("storyController", ["$http", "$scope", "Story","$routeParams","$l
   var id = $routeParams.id;
   if(id && id!="new"){
     // Get existing story from db
-    $scope.storyData = Story.getById({"_id" : id}, function(response){
+    $scope.storyData = Story.getById({"_id" : id, _populate: "tags"}, function(response){
       console.log('response ',response);
       $scope.storyData = response;
       $scope.storySection =  $scope.storyData["section" + sectionid];
-      
+      $scope.tagNames = $scope.storyData.tags.map(function(tag){return tag.tagName}).join(", ");
     });
   }
   else {
@@ -72,14 +72,78 @@ app.controller("storyController", ["$http", "$scope", "Story","$routeParams","$l
      $location.url('/writeStory/' + id + '/section/' + nextSection);
   };
 
+  // On location change try to save the story including updated section, tags etc
   $scope.$on('$locationChangeStart',function(){
+
+    // Don't do anything if no storyData loaded 
+    if(!$scope.storyData){return;}
+
     // Add the current section in the larger storyData object
     $scope.storyData["section" + sectionid] = $scope.storySection;
 
-    // Save to DB
-    Story.update({_id:$scope.storyData._id},$scope.storyData);
+    // Handle tags (handle tags will eventually call saveStory)
+    handleTags();
+
   });
+
+
+  function handleTags(){
+
+    var tagArray = $scope.tagNames;
+    tagArray = tagArray.replace(/,\s/g,',').split(","); 
+    
+    // Remove duplicate tags
+    // ..filter!
+
+    // Then GET them from db
+
+    Tag.get({tagName: {$in:tagArray}},function(tags){
+
+      // tags is an array of objects. 'map' out tagName(s) to new array 
+
+      existingTagNames = tags.map(function(x){
+        return x.tagName;
+      });
+      
+      // find non-existing tagnames by filter and to user-entered
+
+      nonExistingTagNames = tagArray.filter(function(aTagName){
+        return aTagName && existingTagNames.indexOf(aTagName)<0;
+      });
+
+      console.log("Needs to be created",nonExistingTagNames);
+
+
+      var tagObjectsToCreate = nonExistingTagNames.map(function(tagName){
+        return {tagName: tagName};
+      });
+
+      // Save new tags to DB if needed (.create does not like empty arrays)
+      if(tagObjectsToCreate.length > 0){
+        Tag.create(tagObjectsToCreate,preSaveStory)
+      }
+      else {
+        preSaveStory();
+      };
+
+      function preSaveStory(newTags){
+        newTags = newTags || [];
+        var allTags = tags.concat(newTags);
+        saveStory(allTags);
+      }
+
+    });
+  }
    
+  function saveStory(allTags){
+
+    // Add both new tag objects to the story
+    $scope.storyData.tags =  allTags;
+
+    // Save the story to DB
+    Story.update({_id:$scope.storyData._id},$scope.storyData);
+
+  }
  
   $scope.uploadImage = function(){
     console.log ("Hey! Image upload!");
