@@ -26,6 +26,7 @@ app.controller("registerController", ["$http", "$scope", "User", "$location", fu
     $scope.countries = res.data;
   });
 
+
   //Empties form fields
   $scope.resetForm = function() {
     /*
