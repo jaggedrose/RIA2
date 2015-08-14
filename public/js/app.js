@@ -18,7 +18,13 @@ app.config(["$routeProvider", "$locationProvider", function($routeProvider, $loc
       templateUrl: "partials/fileUpload.html",
       controller: "fileUploadController"
     })
-    .when("/writeStory/:id?", {
+    .when("/writeStory/:id", {
+      redirectTo: "/writeStory/:id/section/1"
+    })
+    .when("/writeStory", {
+      redirectTo: "/writeStory/new/section/1"
+    })
+    .when("/writeStory/:id/section/:sectionid", {
       templateUrl: "partials/writeStory.html",
       controller: "storyController"
     })
