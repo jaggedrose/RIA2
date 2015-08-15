@@ -40,6 +40,7 @@ module.exports = function(mongoose) {
       } else if (req.method == "DELETE") {
          // Destroy the entire user session on logout
          req.session.destroy(function(err) {
+            console.log("User logged out!");
             if (err) { throw err; }
             res.json(true);
          });
