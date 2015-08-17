@@ -1,24 +1,55 @@
 //"myAppName" controller
-app.controller("storyController", ["$http", "$scope","$routeParams","$location", "Story", "Tag",
-  function($http, $scope, $routeParams, $location, Story, Tag) {
+
+app.controller("storyController", ["$http", "$scope","$routeParams","$location", "Story", "Tag", "Login",
+  function($http, $scope, $routeParams, $location, Story, Tag, Login) {
+
   // Counter
   var sectionid = $routeParams.sectionid;
  
-  // If we should load an existing story
+  // IF WE SHOULD LOAD AN EXISTING STORY
   var id = $routeParams.id;
   if(id && id!="new"){
-    // Get existing story from db
+    
+    // GET EXISTING STORY FROM DB
     $scope.storyData = Story.getById({"_id" : id, _populate: "tags"}, function(response){
+
+      // logged in?
+      if(response.user_id != Login.user._id){
+        
+        // User_id of story does not match logged in user, so
+        // do something
+        if(!Login.user._id){
+          // not logged in at all - goto login page?
+        }
+        else {
+          // logged in as a different user - other error message?
+        }
+        alert("Something went wrong");
+        $location.url("/");
+        return;
+      }
+
       $scope.storyData = response;
       $scope.storySection =  $scope.storyData["section" + sectionid];
       $scope.tagNames = $scope.storyData.tags.map(function(tag){return tag.tagName}).join(", ");
     });
   }
+
   else {
-    // Create a new story and save immediately to the db
+
+    // CREATE A NEW STORY AND IMMIDIATELY SAVE TO DB
+
+    // logged in?
+    if(!Login.user._id){
+      //goto "went wrong controller";
+      alert("Something went wrong");
+      $location.url("/");
+      return;
+    }
+
     Story.create(
       {
-        // we should add user_id here later!!!
+        user_id:Login.user._id,
         title:"",
         date_created: "",
         date_modified: "",
@@ -32,7 +63,6 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
     );
 
   }
-  
 
   $scope.storySection = {
     sectionNo:1, 
@@ -57,21 +87,21 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
   }
 
 
-  // Change section
+  // CHANGE SECTION
   $scope.onSectionForward = function(){
      var nextSection = sectionid/1 + 1;
      if(nextSection > 3){nextSection = 1;}
      $location.url('/writeStory/' + id + '/section/' + nextSection);
   };
 
-  // Change section
+  // CHANGE SECTION
   $scope.onSectionBack = function(){
      var nextSection = sectionid/1 - 1;
      if(nextSection < 1){nextSection = 3;}
      $location.url('/writeStory/' + id + '/section/' + nextSection);
   };
 
-  // On location change try to save the story including updated section, tags etc
+  // ON LOCATION CHANGE try to save the story including updated section, tags etc
   $scope.$on('$locationChangeStart',function(){
 
     // Don't do anything if no storyData loaded 
@@ -85,11 +115,11 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
 
   });
 
+  // TAGS!
 
   function handleTags(){
 
     // Read entered tags, remove whitespace, split on comma
-
     var tagArray = $scope.tagNames;
     tagArray = tagArray.replace(/,\s/g,',').split(","); 
     
