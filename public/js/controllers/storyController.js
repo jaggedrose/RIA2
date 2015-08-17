@@ -1,6 +1,6 @@
 //"myAppName" controller
-app.controller("storyController", ["$http", "$scope", "Story","$routeParams","$location",
-  function($http, $scope, Story, $routeParams, $location) {
+app.controller("storyController", ["$http", "$scope", "Story","$routeParams","$location", "Login",
+  function($http, $scope, Story, $routeParams, $location, Login) {
   // Counter
   var sectionid = $routeParams.sectionid;
  
@@ -9,6 +9,19 @@ app.controller("storyController", ["$http", "$scope", "Story","$routeParams","$l
   if(id && id!="new"){
     // Get existing story from db
     $scope.storyData = Story.getById({"_id" : id}, function(response){
+      if(response.user_id != Login.user._id){
+        // User_id of story does not match logged in user, so
+        // do something
+        if(!Login.user._id){
+          // not logged in at all - goto login page?
+        }
+        else {
+          // logged in as a different user - other error message?
+        }
+        alert("Something went wrong");
+        $location.url("/");
+        return;
+      }
       console.log('response ',response);
       $scope.storyData = response;
       $scope.storySection =  $scope.storyData["section" + sectionid];
@@ -17,9 +30,15 @@ app.controller("storyController", ["$http", "$scope", "Story","$routeParams","$l
   }
   else {
     // Create a new story and save immediately to the db
+    if(!Login.user._id){
+      //goto "went wrong controller";
+      alert("Something went wrong");
+      $location.url("/");
+      return;
+    }
     Story.create(
       {
-        // we should add user_id here later!!!
+        user_id:Login.user._id,
         title:"",
         date_created: "",
         date_modified: "",
@@ -73,6 +92,7 @@ app.controller("storyController", ["$http", "$scope", "Story","$routeParams","$l
   };
 
   $scope.$on('$locationChangeStart',function(){
+    if(!$scope.storyData){return;}
     // Add the current section in the larger storyData object
     $scope.storyData["section" + sectionid] = $scope.storySection;
 
