@@ -9,7 +9,6 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
   if(id && id!="new"){
     // Get existing story from db
     $scope.storyData = Story.getById({"_id" : id, _populate: "tags"}, function(response){
-      console.log('response ',response);
       $scope.storyData = response;
       $scope.storySection =  $scope.storyData["section" + sectionid];
       $scope.tagNames = $scope.storyData.tags.map(function(tag){return tag.tagName}).join(", ");
@@ -89,23 +88,28 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
 
   function handleTags(){
 
+    // Read entered tags, remove whitespace, split on comma
+
     var tagArray = $scope.tagNames;
     tagArray = tagArray.replace(/,\s/g,',').split(","); 
     
     // Remove duplicate tags
-    // ..filter!
+    // ..use js filter!
 
     // Then GET them from db
+    // The GET is on our 'cleaned and split tagArray, the callback takes the result
+    // (as 'tags')
 
     Tag.get({tagName: {$in:tagArray}},function(tags){
 
-      // tags is an array of objects. 'map' out tagName(s) to new array 
+      // tags is an array of objects. 'map' out only the tagName(s) to new array 
+      // (existingTagNames)
 
       existingTagNames = tags.map(function(x){
         return x.tagName;
       });
       
-      // find non-existing tagnames by filter and to user-entered
+      // find non-existing tagnames 
 
       nonExistingTagNames = tagArray.filter(function(aTagName){
         return aTagName && existingTagNames.indexOf(aTagName)<0;
@@ -113,12 +117,13 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
 
       console.log("Needs to be created",nonExistingTagNames);
 
-
       var tagObjectsToCreate = nonExistingTagNames.map(function(tagName){
         return {tagName: tagName};
       });
 
-      // Save new tags to DB if needed (.create does not like empty arrays)
+      // Save new tags to DB if needed 
+      // .create does not like empty arrays - hence if/else
+
       if(tagObjectsToCreate.length > 0){
         Tag.create(tagObjectsToCreate,preSaveStory)
       }
@@ -147,14 +152,6 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
  
   $scope.uploadImage = function(){
     console.log ("Hey! Image upload!");
-    console.log ("storyData: ", $scope.storyData);
-    Tag.get({},function(tags){
-      console.log ("Tag.get: ", tags);
-    });
-
-    Tag.get({tagName: {$in:["det", "vet", "get"]}},function(tags){
-      console.log ("Tag.get({tagName:array}: ", tags);
-    });
-    
+      
   };
 }]);
