@@ -33,11 +33,15 @@ function waitForUser(callback) {
     $location.path('/user');
   };
 
-  $scope.deleteStory = function(index){
-    
-    $scope.UsersStories[index].$remove(function(){
-      $scope.UsersStories = Story.get({user_id: $scope.User._id, _populate:"user_id"});
+  $scope.deleteStory = function(storyid){
+
+    Story.remove({_id:storyid},function(){
+       $scope.UsersStories = Story.get({user_id: $scope.User._id, _populate:"user_id"});
     });
+    
+   /* $scope.UsersStories[index].$remove(function(){
+      $scope.UsersStories = Story.get({user_id: $scope.User._id, _populate:"user_id"});
+    });*/
   };
 
 }]);

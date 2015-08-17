@@ -41,7 +41,7 @@
                         <div class="row">
                             <p>{{story.section1.text | limitTo: 300 }}{{story.section1.text.length > 300 ? '...' : ''}}</p></a>
                             <a ng-href="/writeStory/{{story._id}}">Edit</a>
-                            <button ng-click="deleteStory($index)" type="submit" class="btn btn-success">Delete</button>
+                            <button ng-click="deleteStory(story._id)" type="submit" class="btn btn-success">Delete</button>
                             <span></span>
                         </div>
                     </div>
