@@ -72,18 +72,21 @@ app.controller("registerController", ["$http", "$scope", "User", "$location", fu
     });
   });
 
-  $scope.$watch("newUser.password", function(newVal, oldVal){
-    console.log("Check if passwords are identical", newVal, oldVal);
-    console.log("form: ", $scope.registrationForm);
+  //When valid word in password-input1 changes
+  function pwdWatch(){
+    // console.log("watch for pw1");
+    console.log("$scope.registrationForm.password", $scope.registrationForm.password);
     if($scope.newUser.password == $scope.password2){
-      //Invalidate form
+      //Make form item valid
       console.log("They are the same");
+      $scope.registrationForm.password.$setValidity("identical", true);
     }else {
-      //validate form
+      //Make form item invalid
       console.log("They are not the same");
+      $scope.registrationForm.password.$setValidity("identical", false);
     }
-  });
-
-  //Also need to create watch for psswordfeild 2!!!
+  }
+  $scope.$watch("newUser.password", pwdWatch );
+  $scope.$watch("password2", pwdWatch);
 
 }]);
