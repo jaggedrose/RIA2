@@ -4,6 +4,16 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
   // Counter
   var sectionid = $routeParams.sectionid;
  
+  var storySectionCC = {
+    sectionNo:1,
+    header: "",
+    text: "",
+    img: "",
+    date_created: "",
+    date_modified: "",
+    number_views: "",
+  };
+
   // If we should load an existing story
   var id = $routeParams.id;
   if(id && id!="new"){
@@ -24,7 +34,7 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
       }
       console.log('response ',response);
       $scope.storyData = response;
-      $scope.storySection =  $scope.storyData["section" + sectionid];
+      $scope.storySection = $scope.storyData["section" + sectionid] ? $scope.storyData["section" + sectionid] : angular.copy(storySectionCC);
       
     });
   }
@@ -54,16 +64,7 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
   }
   
 
-  $scope.storySection = {
-    sectionNo:1,
-    header: "",
-    text: "",
-    img: "",
-    date_created: "",
-    date_modified: "",
-    number_views: "",
-
-  };
+  $scope.storySection = angular.copy(storySectionCC);
 
   // compose a 'nice' date
   function niceDate (date) {
@@ -73,17 +74,19 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
     return nDate;
     
   }
-/*
+
   //Check if a image is choosen, upload the image and return the image url
   $scope.$watch("files",function(){
+    console.log("s", $scope);
+    //console.log("s2", $scope.$parent);
     // If there is no file array or it has not length do nothing
     if(!$scope.files || $scope.files.length < 1){return;}
     // Otherwise upload the file properly
     FileUploader($scope.files[0]).success(function(imgurl) {
-    $scope.imgurl = storySection.img;
-    console.log("filnamn: ", $scope.files[0].name, "sökväg = ", storySection.img);
+      $scope.storySection.img = imgurl;
+      console.log("filnamn: ", $scope.files[0].name, "sökväg = ", $scope.storySection.img);
+    });
   });
-  });*/
 
 
   // Change section
@@ -169,7 +172,7 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
   function saveStory(allTags){
 
     // Add both new tag objects to the story
-    $scope.storyData.tags =  allTags;
+    $scope.storyData.tags = allTags;
 
     // Save the story to DB
     Story.update({_id:$scope.storyData._id},$scope.storyData);
@@ -190,6 +193,7 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
 });
 }
 */
+/*
   $scope.uploadImage = function(){
     console.log ("Hey! Image upload!");
     console.log ("storyData: ", $scope.storyData);
@@ -202,4 +206,5 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
     });
     
   };
+  */
 }]);
