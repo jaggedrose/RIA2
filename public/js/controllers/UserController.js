@@ -1,6 +1,6 @@
 //"myAppName" controller.
+
 app.controller("UserController", ["$http", "$scope", "$location", "Story", "User","Login", function($http, $scope, $location, Story, User, Login) {
-  
 
   $scope.User = Login.user;
   console.log("UserController", Login.user);
@@ -14,12 +14,13 @@ app.controller("UserController", ["$http", "$scope", "$location", "Story", "User
       callback();
     }
   }
-  // $scope.User = User.getById("55c0b804b04519b813c10433", function() {
+  
   waitForUser(function() {
     $scope.UsersStories = Story.get({user_id: $scope.User._id, _populate:"user_id"});
     // $scope.User = User.getById ("55c0b804b04519b813c10433") ;
-  });
+    console.log("UserController :", $scope.User);
 
+  });
 
   // Log out function
   $scope.logoutUser = function(data) {
@@ -28,21 +29,16 @@ app.controller("UserController", ["$http", "$scope", "$location", "Story", "User
       $location.path('/');
     };
 
-
-
   $scope.userEdit = function() {
-    $location.path('/userEdit');
-    $scope.User = Login.user;
     console.log("User ",$scope.User.userName);
+     $location.path('/userEdit');
+    // $scope.User = Login.user;
+   
   };
 
-
-  
-
-  $scope.deleteStory = function(index){
-    
-    $scope.UsersStories[index].$remove(function(){
-      $scope.UsersStories = Story.get({user_id: $scope.User._id, _populate:"user_id"});
+  $scope.deleteStory = function(storyid){
+    Story.remove({_id:storyid},function(){
+       $scope.UsersStories = Story.get({user_id: $scope.User._id, _populate:"user_id"});
     });
   };
 

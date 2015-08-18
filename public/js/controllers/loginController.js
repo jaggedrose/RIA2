@@ -12,7 +12,7 @@ app.controller("loginController", ["$http", "$scope", "$location","Login", funct
         $scope.authMsg = "Your email or password is incorrect!";
       } else {
         var id = data._id;
-        console.log("UserId: ", id);
+        console.log("userId: ", id);
         $location.path('/user');
       }
     });

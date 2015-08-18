@@ -22,12 +22,16 @@
                             <p>{{UsersStories.length}} stories</p>
                             <p>{{User.email}}</p>
                             <p>{{User.city}}, {{User.country}}</p>
+                            <button ng-click="userEdit();" type="button" class="btn btn-default btn-xs">
+                                Edit user info
+                            </button>
                         </div>
                     </div>
                 </div>
+                <a ng-href="/writeStory" >New story</a>
             </article>
-            <br>
-            <a ng-href="/writeStory">New story</a>
+            <a ng-href="/viewStory/{{story._id}}">
+            <br>            
             <div class="row">
                 <div class="row" ng-repeat="story in UsersStories|orderBy: '-date_created'">
                     <div class="col-xs-4">
@@ -43,9 +47,9 @@
                             </div>
                         </div>
                         <div class="row">
-                            <p>{{story.section1.text | limitTo: 300 }}{{story.section1.text.length > 300 ? '...' : ''}}</p>
+                            <p>{{story.section1.text | limitTo: 300 }}{{story.section1.text.length > 300 ? '...' : ''}}</p></a>
                             <a ng-href="/writeStory/{{story._id}}">Edit</a>
-                            <button ng-click="deleteStory($index)" type="submit" class="btn btn-success">Delete</button>
+                            <button ng-click="deleteStory(story._id)" type="submit" class="btn btn-success">Delete</button>
                             <span></span>
                         </div>
                     </div>
