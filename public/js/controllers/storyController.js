@@ -14,12 +14,16 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
     number_views: "",
   };
 
-  // If we should load an existing story
+  // IF WE SHOULD LOAD AN EXISTING STORY
   var id = $routeParams.id;
   if(id && id!="new"){
-    // Get existing story from db
-    $scope.storyData = Story.getById({"_id" : id}, function(response){
+    
+    // GET EXISTING STORY FROM DB
+    $scope.storyData = Story.getById({"_id" : id, _populate: "tags"}, function(response){
+
+      // logged in?
       if(response.user_id != Login.user._id){
+        
         // User_id of story does not match logged in user, so
         // do something
         if(!Login.user._id){
@@ -32,20 +36,25 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
         $location.url("/");
         return;
       }
-      console.log('response ',response);
+
       $scope.storyData = response;
       $scope.storySection = $scope.storyData["section" + sectionid] ? $scope.storyData["section" + sectionid] : angular.copy(storySectionCC);
-      
+      $scope.tagNames = $scope.storyData.tags.map(function(tag){return tag.tagName}).join(", ");
     });
   }
+
   else {
-    // Create a new story and save immediately to the db
+
+    // CREATE A NEW STORY AND IMMIDIATELY SAVE TO DB
+
+    // logged in?
     if(!Login.user._id){
       //goto "went wrong controller";
       alert("Something went wrong");
       $location.url("/");
       return;
     }
+
     Story.create(
       {
         user_id:Login.user._id,
@@ -62,7 +71,6 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
     );
 
   }
-  
 
   $scope.storySection = angular.copy(storySectionCC);
 
@@ -89,28 +97,32 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
   });
 
 
-  // Change section
+  // CHANGE SECTION
   $scope.onSectionForward = function(){
      var nextSection = sectionid/1 + 1;
-     if(nextSection > 3){ return $location.url("/user");}
+     if(nextSection > 3){nextSection = 1;}
      $location.url('/writeStory/' + id + '/section/' + nextSection);
-
   };
 
-  // Change section
+  // CHANGE SECTION
   $scope.onSectionBack = function(){
      var nextSection = sectionid/1 - 1;
-     if(nextSection < 1){ return $location.url("/user");}
+     if(nextSection < 1){nextSection = 3;}
      $location.url('/writeStory/' + id + '/section/' + nextSection);
   };
 
+  // ON LOCATION CHANGE try to save the story including updated section, tags etc
   $scope.$on('$locationChangeStart',function(){
+
+    // Don't do anything if no storyData loaded 
     if(!$scope.storyData){return;}
+
     // Add the current section in the larger storyData object
     $scope.storyData["section" + sectionid] = $scope.storySection;
 
-    // Save to DB
-    Story.update({_id:$scope.storyData._id},$scope.storyData);
+    // Handle tags (handle tags will eventually call saveStory)
+    handleTags();
+
   });
 
   // TAGS!
@@ -120,10 +132,8 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
     // Read entered tags, remove whitespace, split on comma
     var tagArray = $scope.tagNames;
     tagArray = tagArray.replace(/,\s/g,',').split(",");
-    
     // Remove duplicate tags
     // ..use js filter!
-
 
     // Then GET them from db
     // The GET is on our 'cleaned and split tagArray, the callback takes the result
@@ -159,7 +169,6 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
       else {
         preSaveStory();
       }
-
       function preSaveStory(newTags){
         newTags = newTags || [];
         var allTags = tags.concat(newTags);
@@ -173,7 +182,6 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
 
     // Add both new tag objects to the story
     $scope.storyData.tags = allTags;
-
     // Save the story to DB
     Story.update({_id:$scope.storyData._id},$scope.storyData);
 
@@ -196,15 +204,7 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
 /*
   $scope.uploadImage = function(){
     console.log ("Hey! Image upload!");
-    console.log ("storyData: ", $scope.storyData);
-    Tag.get({},function(tags){
-      console.log ("Tag.get: ", tags);
-    });
-
-    Tag.get({tagName: {$in:["det", "vet", "get"]}},function(tags){
-      console.log ("Tag.get({tagName:array}: ", tags);
-    });
-    
+      
   };
-  */
+*/
 }]);
