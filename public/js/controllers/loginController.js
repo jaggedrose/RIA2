@@ -18,10 +18,10 @@ app.controller("loginController", ["$http", "$scope", "$location","Login", funct
     });
   };
 
-    $scope.logoutUser = function(data) {
-      Login.logout();
-      console.log("User logged out!");
-      $location.path('/');
-    };
+    // $scope.logoutUser = function(data) {
+    //   Login.logout();
+    //   console.log("User logged out!");
+    //   $location.path('/');
+    // };
 
 }]);
