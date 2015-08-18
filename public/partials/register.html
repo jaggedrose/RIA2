@@ -5,10 +5,10 @@
        <form ng-submit="newUserCreate()" name="registrationForm" novalidate>
          <div class="form-group">
           <label for="userName">User name</label>
-          <input ng-model="newUser.user_name"class="form-control" type="text" id = "userName" name = "userName" ng-minlength="5" ng-maxlength="20" placeholder="Enter username" required>
+          <input ng-model="newUser.user_name" class="form-control" type="text" id = "userName" name = "userName" ng-minlength="5" ng-maxlength="20" placeholder="Enter username" required>
           <p ng-show="registrationForm.userName.$error.minlength">The username is too short.</p>
           <p ng-show="registrationForm.userName.$error.maxlength">The username is too long.</p>
-          <p ng-show="userNameAlreadyRegistered">Username is already registered.</p>
+          <p ng-show="registrationForm.userName.$error.unique">Username is already registered.</p>
          </div>
           <div class="form-group">
           <label for="firstName">First name:</label>
@@ -22,9 +22,9 @@
          </div>
          <div class="form-group">
           <label for="email">Email:</label>
-          <input ng-model="newUser.email" name="userEmail" class="form-control" type="email" id = "email" name="email" placeholder="Enter e-mail"  required>
-          <p ng-show="registrationForm.userEmail.$dirty && registrationForm.userEmail.$invalid">Invalid email</p>
-          <p ng-show="emailAlreadyRegistered">Email is already registered.</p>
+          <input ng-model="newUser.email" class="form-control" type="email" id = "email" name="email" placeholder="Enter e-mail"  required>
+          <p ng-show="registrationForm.email.$dirty && registrationForm.userEmail.$invalid">Invalid email</p>
+          <p ng-show="registrationForm.email.$error.unique">Email is already registered.</p>
          </div>
          <div class="form-group">
           <label for="city">City:</label>
@@ -39,8 +39,14 @@
          </div>
          <div class="form-group">
           <label for="password">Password:</label>
-          <input ng-model="newUser.password" class="form-control" type="text" id = "password" name="password" ng-minlength="7" placeholder="Enter password" required>
-          <p ng-show="registrationForm.password.$dirty && registrationForm.password.$invalid">The password must be at least 7 characters long.</p>
+          <input ng-model="newUser.password" class="form-control" type="password" id = "password" name="password" ng-minlength="7" placeholder="Enter password" required>
+          <p ng-show="registrationForm.password.$dirty && registrationForm.password.$invalid && !newUser.password">The password must be at least 7 characters long.</p>
+            <p ng-show="registrationForm.password.$error.identical">Be sure to verify your password below.</p>
+         </div>
+         <div class="form-group">
+          <label for="password2">Password again:</label>
+          <input ng-model="password2" class="form-control" type="password" id="password2" name="password2"  ng-minlength="7" placeholder="Enter password again" required>
+          <!-- <p ng-show="registrationForm.password.$error.identical">The passwords doesn't match.</p> -->
          </div>
          <button class="btn btn-success" type="submit" ng-disabled="registrationForm.$invalid">Register</button>
          <button class="btn" type="button" ng-click="resetForm()">Empty</button>
