@@ -12,7 +12,7 @@ app.controller("loginController", ["$http", "$scope", "$location","Login", funct
       } else {
         var id = data._id;
         console.log("userId: ", id);
-        $location.path('/home');
+        $location.path('/user');
       }
     });
   };

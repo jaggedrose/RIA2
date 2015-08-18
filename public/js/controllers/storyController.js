@@ -1,21 +1,15 @@
 //"myAppName" controller
-
-
 app.controller("storyController", ["$http", "$scope","$routeParams","$location", "Story", "Tag", "Login", "FileUploader",
   function($http, $scope, $routeParams, $location, Story, Tag, Login, FileUploader) {
   // Counter
   var sectionid = $routeParams.sectionid;
  
-  // IF WE SHOULD LOAD AN EXISTING STORY
+  // If we should load an existing story
   var id = $routeParams.id;
   if(id && id!="new"){
-    
-    // GET EXISTING STORY FROM DB
-    $scope.storyData = Story.getById({"_id" : id, _populate: "tags"}, function(response){
-
-      // logged in?
+    // Get existing story from db
+    $scope.storyData = Story.getById({"_id" : id}, function(response){
       if(response.user_id != Login.user._id){
-        
         // User_id of story does not match logged in user, so
         // do something
         if(!Login.user._id){
@@ -28,25 +22,20 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
         $location.url("/");
         return;
       }
-
+      console.log('response ',response);
       $scope.storyData = response;
       $scope.storySection =  $scope.storyData["section" + sectionid];
-      $scope.tagNames = $scope.storyData.tags.map(function(tag){return tag.tagName}).join(", ");
+      
     });
   }
-
   else {
-
-    // CREATE A NEW STORY AND IMMIDIATELY SAVE TO DB
-
-    // logged in?
+    // Create a new story and save immediately to the db
     if(!Login.user._id){
       //goto "went wrong controller";
       alert("Something went wrong");
       $location.url("/");
       return;
     }
-
     Story.create(
       {
         user_id:Login.user._id,
@@ -63,6 +52,7 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
     );
 
   }
+  
 
   $scope.storySection = {
     sectionNo:1,
@@ -96,32 +86,28 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
   });*/
 
 
-  // CHANGE SECTION
+  // Change section
   $scope.onSectionForward = function(){
      var nextSection = sectionid/1 + 1;
-     if(nextSection > 3){nextSection = 1;}
+     if(nextSection > 3){ return $location.url("/user");}
      $location.url('/writeStory/' + id + '/section/' + nextSection);
+
   };
 
-  // CHANGE SECTION
+  // Change section
   $scope.onSectionBack = function(){
      var nextSection = sectionid/1 - 1;
-     if(nextSection < 1){nextSection = 3;}
+     if(nextSection < 1){ return $location.url("/user");}
      $location.url('/writeStory/' + id + '/section/' + nextSection);
   };
 
-  // ON LOCATION CHANGE try to save the story including updated section, tags etc
   $scope.$on('$locationChangeStart',function(){
-
-    // Don't do anything if no storyData loaded 
     if(!$scope.storyData){return;}
-
     // Add the current section in the larger storyData object
     $scope.storyData["section" + sectionid] = $scope.storySection;
 
-    // Handle tags (handle tags will eventually call saveStory)
-    handleTags();
-
+    // Save to DB
+    Story.update({_id:$scope.storyData._id},$scope.storyData);
   });
 
   // TAGS!
@@ -204,4 +190,16 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
 });
 }
 */
+  $scope.uploadImage = function(){
+    console.log ("Hey! Image upload!");
+    console.log ("storyData: ", $scope.storyData);
+    Tag.get({},function(tags){
+      console.log ("Tag.get: ", tags);
+    });
+
+    Tag.get({tagName: {$in:["det", "vet", "get"]}},function(tags){
+      console.log ("Tag.get({tagName:array}: ", tags);
+    });
+    
+  };
 }]);
