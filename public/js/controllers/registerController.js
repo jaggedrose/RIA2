@@ -23,6 +23,7 @@ app.controller("registerController", ["$http", "$scope", "User", "$location", fu
 
   };
 
+  //get country data
   $http.get('js/resources/countries.json').then(function(res){
     $scope.countries = res.data;
   });

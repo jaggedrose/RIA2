@@ -1,8 +1,14 @@
 // "Stories" user edit controller
 app.controller("userEditController", ["$http", "$scope", "$location", "Story", "User", "Login", function($http, $scope, $location, Story, User, Login) {
 
+   //get country data
+   $http.get('js/resources/countries.json').then(function(res){
+      $scope.countries = res.data;
+   });
+
+   console.log("User", User, "Login", Login);
    $scope.User = Login.user;
-   console.log("UserEditController", Login.user);
+   console.log("UserEditController", $scope.User);
 
    //Every time $scope.User.userName changes
    $scope.$watch("User.user_name",function(newVal, oldVal) {
@@ -20,7 +26,7 @@ app.controller("userEditController", ["$http", "$scope", "$location", "Story", "
             }
          });
       }
-  });
+   });
 
    //Every time $scope.User.email changes
    $scope.$watch("User.email",function(newVal,oldVal) {
@@ -36,7 +42,7 @@ app.controller("userEditController", ["$http", "$scope", "$location", "Story", "
             }
          });
       }
-  });
+   });
 
 
    $scope.UserChanged = function() {
