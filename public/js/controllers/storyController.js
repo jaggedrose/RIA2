@@ -1,41 +1,68 @@
 //"myAppName" controller
 
-app.controller("storyController", ["$http", "$scope", "Story", "Tag", "FileUploader", "$routeParams","$location",
-  function($http, $scope, Story, Tag, FileUploader, $routeParams, $location) {
-  // Counter
-  var currentSection = 1;
 
-  // If we should load an existing story
+app.controller("storyController", ["$http", "$scope","$routeParams","$location", "Story", "Tag", "Login", "FileUploader",
+  function($http, $scope, $routeParams, $location, Story, Tag, Login, FileUploader) {
+  // Counter
+  var sectionid = $routeParams.sectionid;
+ 
+  // IF WE SHOULD LOAD AN EXISTING STORY
   var id = $routeParams.id;
-  if(id){
-    // Get existing story from db
-    $scope.storyData = Story.getById({"_id" : id}, function(response){
-      console.log('response ',response);
+  if(id && id!="new"){
+    
+    // GET EXISTING STORY FROM DB
+    $scope.storyData = Story.getById({"_id" : id, _populate: "tags"}, function(response){
+
+      // logged in?
+      if(response.user_id != Login.user._id){
+        
+        // User_id of story does not match logged in user, so
+        // do something
+        if(!Login.user._id){
+          // not logged in at all - goto login page?
+        }
+        else {
+          // logged in as a different user - other error message?
+        }
+        alert("Something went wrong");
+        $location.url("/");
+        return;
+      }
+
       $scope.storyData = response;
-      $scope.storySection =  $scope.storyData["section1"];
-      
+      $scope.storySection =  $scope.storyData["section" + sectionid];
+      $scope.tagNames = $scope.storyData.tags.map(function(tag){return tag.tagName}).join(", ");
     });
   }
+
   else {
-    // Create a new story and save immediately to the db
+
+    // CREATE A NEW STORY AND IMMIDIATELY SAVE TO DB
+
+    // logged in?
+    if(!Login.user._id){
+      //goto "went wrong controller";
+      alert("Something went wrong");
+      $location.url("/");
+      return;
+    }
+
     Story.create(
       {
+        user_id:Login.user._id,
         title:"",
         date_created: "",
         date_modified: "",
-        tags:"",
+        tags:[],
         number_views: ""
       }, function(arrayOfNewStories){
-        $scope.storyData = arrayOfNewStories[0];
-        console.log ("created new story");
-        $scope.storyData.niceDate = niceDate ($scope.storyData.date_created);
-        console.log ("$scope.storyData post created story: ", $scope.storyData);
+        // As soon as we have a new story and its id
+        // change url to reflect the story id
+        $location.url("/writeStory/" + arrayOfNewStories[0]._id);
       }
     );
 
-
   }
-  
 
   $scope.storySection = {
     sectionNo:1,
@@ -56,22 +83,125 @@ app.controller("storyController", ["$http", "$scope", "Story", "Tag", "FileUploa
     return nDate;
     
   }
+/*
+  //Check if a image is choosen, upload the image and return the image url
+  $scope.$watch("files",function(){
+    // If there is no file array or it has not length do nothing
+    if(!$scope.files || $scope.files.length < 1){return;}
+    // Otherwise upload the file properly
+    FileUploader($scope.files[0]).success(function(imgurl) {
+    $scope.imgurl = storySection.img;
+    console.log("filnamn: ", $scope.files[0].name, "sökväg = ", storySection.img);
+  });
+  });*/
 
 
+  // CHANGE SECTION
+  $scope.onSectionForward = function(){
+     var nextSection = sectionid/1 + 1;
+     if(nextSection > 3){nextSection = 1;}
+     $location.url('/writeStory/' + id + '/section/' + nextSection);
+  };
+
+  // CHANGE SECTION
   $scope.onSectionBack = function(){
-    $scope.onSectionForward(true);
+     var nextSection = sectionid/1 - 1;
+     if(nextSection < 1){nextSection = 3;}
+     $location.url('/writeStory/' + id + '/section/' + nextSection);
   };
 
-  $scope.uploadImage = function(){
-    console.log ("Hey! Image upload!");
-    console.log ("storyData: ", $scope.storyData);
-    Tag.get({},function(tags){
-      console.log ("Tag.get: ", tags);
-    });
+  // ON LOCATION CHANGE try to save the story including updated section, tags etc
+  $scope.$on('$locationChangeStart',function(){
 
-    Tag.get({tagName: {$in:["det", "vet", "get"]}},function(tags){
-      console.log ("Tag.get({tagName:array}: ", tags);
-    });
+    // Don't do anything if no storyData loaded 
+    if(!$scope.storyData){return;}
+
+    // Add the current section in the larger storyData object
+    $scope.storyData["section" + sectionid] = $scope.storySection;
+
+    // Handle tags (handle tags will eventually call saveStory)
+    handleTags();
+
+  });
+
+  // TAGS!
+
+  function handleTags(){
+
+    // Read entered tags, remove whitespace, split on comma
+    var tagArray = $scope.tagNames;
+    tagArray = tagArray.replace(/,\s/g,',').split(",");
     
-  };
+    // Remove duplicate tags
+    // ..use js filter!
+
+
+    // Then GET them from db
+    // The GET is on our 'cleaned and split tagArray, the callback takes the result
+    // (as 'tags')
+
+    Tag.get({tagName: {$in:tagArray}},function(tags){
+
+      // tags is an array of objects. 'map' out only the tagName(s) to new array 
+      // (existingTagNames)
+
+      existingTagNames = tags.map(function(x){
+        return x.tagName;
+      });
+      
+      // find non-existing tagnames 
+
+      nonExistingTagNames = tagArray.filter(function(aTagName){
+        return aTagName && existingTagNames.indexOf(aTagName)<0;
+      });
+
+      console.log("Needs to be created",nonExistingTagNames);
+
+      var tagObjectsToCreate = nonExistingTagNames.map(function(tagName){
+        return {tagName: tagName};
+      });
+
+      // Save new tags to DB if needed 
+      // .create does not like empty arrays - hence if/else
+
+      if(tagObjectsToCreate.length > 0){
+        Tag.create(tagObjectsToCreate,preSaveStory);
+      }
+      else {
+        preSaveStory();
+      }
+
+      function preSaveStory(newTags){
+        newTags = newTags || [];
+        var allTags = tags.concat(newTags);
+        saveStory(allTags);
+      }
+
+    });
+  }
+   
+  function saveStory(allTags){
+
+    // Add both new tag objects to the story
+    $scope.storyData.tags =  allTags;
+
+    // Save the story to DB
+    Story.update({_id:$scope.storyData._id},$scope.storyData);
+
+  }
+/*
+//Function will check if there is a file choosen and then sent it to server folder uploads
+//then send the image url to the db
+  function uploadImage(){
+    $scope.$watch("files",function(){
+    // If there is no file array or it has not length do nothing
+    if(!$scope.files || $scope.files.length < 1){return;}
+    // Otherwise upload the file properly
+    FileUploader($scope.files[0]).success(function(imgurl) {
+    $scope.imgurl = storySection.img;
+    console.log("filnamn: ", $scope.files[0].name, "sökväg = ", storySection.img);
+  });
+});
+}
+*/
 }]);

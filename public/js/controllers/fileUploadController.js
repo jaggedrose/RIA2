@@ -2,6 +2,7 @@
 
 app.controller("fileUploadController", ["FileUploader", "$scope", function(FileUploader, $scope) {
 
+
 	/*$scope.upload = function(files) {
 //If a image file is loaded this if-statement checks the temporary url
 	if (files && files.length>0) {
@@ -14,17 +15,19 @@ app.controller("fileUploadController", ["FileUploader", "$scope", function(FileU
 }
 console.log("Upload function is running");
 };*/
-
+//This is moved to storyController
+/*
 $scope.$watch("files",function(){
   // If there is no file array or it has not length do nothing
   if(!$scope.files || $scope.files.length < 1){return;}
   // Otherwise upload the file properly
   FileUploader($scope.files[0]).success(function(imgurl) {
-    $scope.imgurl = imgurl;
-    console.log("filnamn: ", $scope.files[0].name, "sökväg = ", imgurl);
+    $scope.imgurl = storySection.img;
+    console.log("filnamn: ", $scope.files[0].name, "sökväg = ", storySection.img);
   });
 });
 
+*/
 
 
 }]);

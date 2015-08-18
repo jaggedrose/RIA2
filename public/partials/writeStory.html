@@ -7,12 +7,13 @@
                     <input ng-model="storyData.title" class="form-control stdinputbgcolour brtinputtxtcolour stdinputborder headerfont plcholderhead cnttxt" type="text" id="title" placeholder="The title of your story." required>
                 </div>
                 <div class="form-group imgupload stdinputborder">
-                  <input type="file" ngf-select ng-model="files" ngf-change="upload($file)"> <i class="fa fa-file-image-o fa-2x control" ng-click="uploadImage()"></i>
+                    <input type="file" ngf-select ng-model="files" ngf-accept="'image/*'"><i class="fa fa-file-image-o fa-2x control" ng-click="uploadImage()"></i>
+                  <!--<input type="file" ngf-select ng-model="files" ngf-change="upload($file)"> <i class="fa fa-file-image-o fa-2x control" ng-click="uploadImage()"></i>-->
                 </div> 
                 
                 <div class="form-group">
                     <!-- <label for="header" class="txtcontrol">Header</label> -->
-                    <input ng-model="storySection.header" class="form-control stdinputbgcolour brtinputtxtcolour stdinputborder headerfont plcholderhead" type="text" id="header" placeholder="Headline for this section.." required>
+                    <input ng-model="2" class="form-control stdinputbgcolour brtinputtxtcolour stdinputborder headerfont plcholderhead" type="text" id="header" placeholder="Headline for this section.." required>
                 </div>
                 <div class="form-group">
                     <!-- <label for="text" class="txtcontrol">Text</label> -->
@@ -20,7 +21,7 @@
                 </div>
                 <div class="form-group">
                     <!-- <label for="tags" class="txtcontrol">Tags</label> -->
-                    <input ng-model="storyData.tags" class="form-control stdinputbgcolour stdinputtxtcolour stdinputborder txtbody plcholdertxt" type="text" id="tags" placeholder="Add tags here, separated by commas. No # needed." required>
+                    <input ng-model="tagNames" class="form-control stdinputbgcolour stdinputtxtcolour stdinputborder txtbody plcholdertxt" type="text" id="tags" placeholder="Add tags here, separated by commas. No # needed." required>
                 </div>
                 
                   
