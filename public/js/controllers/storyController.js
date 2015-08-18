@@ -69,7 +69,7 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
         $location.url("/writeStory/" + arrayOfNewStories[0]._id);
       }
     );
-
+    $scope.tagNames = '';
   }
 
   $scope.storySection = angular.copy(storySectionCC);
