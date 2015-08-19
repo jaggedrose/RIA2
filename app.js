@@ -11,7 +11,6 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-// include the multipart middleware for file uploading-Bengt
 var multipart = require('connect-multiparty');
 var multipartMiddleware = multipart();
 var session = require('express-session');

@@ -34,7 +34,7 @@ app.config(["$routeProvider", "$locationProvider", function($routeProvider, $loc
     })
     .when("/userEdit", {
       templateUrl: "partials/userEdit.html",
-      controller: "UserController"
+      controller: "userEditController"
     })
     .when("/viewStory/:id", {
       redirectTo: "/viewStory/:id/section/1"

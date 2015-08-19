@@ -4,12 +4,14 @@ app.factory("Login",["$http", "$rootScope", "$location", function($http, $rootSc
   // a function to empty and fill an object
   // without loosing the reference to it
   function updateObj(inObj, outObj) {
-    for (var i in outObj) {
-      delete outObj[i];
-    }
+    if (JSON.stringify(inObj) !== JSON.stringify(outObj)) {
+      for (var i in outObj) {
+        delete outObj[i];
+      }
 
-    for (var i in inObj) {
-      outObj[i] = inObj[i];
+      for (var i in inObj) {
+        outObj[i] = inObj[i];
+      }
     }
   }
 
@@ -18,7 +20,6 @@ app.factory("Login",["$http", "$rootScope", "$location", function($http, $rootSc
     login: function(credentials, callback) {
       $http.post('api/login', credentials).success(function(data) {
         updateObj(data ? data : {}, loginObj.user);
-        
         // let the entire app know we are logged in
         $rootScope.$broadcast("login");
 
