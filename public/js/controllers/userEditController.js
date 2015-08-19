@@ -7,7 +7,17 @@ app.controller("userEditController", ["$http", "$scope", "$location", "Story", "
    });
 
    console.log("User", User, "Login", Login);
-   $scope.User = Login.user;
+
+
+   $scope.orgUserData = Login.user;
+   $scope.$watch("orgUserData._id",function(){
+      // Since Login.user is originally empty wait for it to have an id
+      // then clone to $scope.User in order to have a copy that won't change 
+      // on every logIn-check.
+      $scope.User = JSON.parse(JSON.stringify(Login.user));
+   });
+
+
    console.log("UserEditController", $scope.User);
 
    //Every time $scope.User.userName changes
