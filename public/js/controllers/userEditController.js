@@ -6,10 +6,10 @@ app.controller("userEditController", ["$http", "$scope", "$location", "Story", "
       $scope.countries = res.data;
    });
 
-   console.log("User", User, "Login", Login);
-
+   //console.log("User", User, "Login", Login);
 
    $scope.orgUserData = Login.user;
+   
    $scope.$watch("orgUserData._id",function(){
       // Since Login.user is originally empty wait for it to have an id
       // then clone to $scope.User in order to have a copy that won't change 
@@ -57,7 +57,10 @@ app.controller("userEditController", ["$http", "$scope", "$location", "Story", "
 
    $scope.UserChanged = function() {
       console.log($scope.User);
+      //if no password property is sent in, that value remains untouched
+      delete $scope.User.password;
       User.update({_id:$scope.User._id},$scope.User);
+      Login.check($scope.User);
       $location.path('/user');
    };
 

@@ -1,6 +1,6 @@
 //"myAppName" controller.
 
-app.controller("UserController", ["$http", "$scope", "$location", "Story", "User","Login", function($http, $scope, $location, Story, User, Login) {
+app.controller("UserController", ["$http", "$scope", "$location", "Story","Login", function($http, $scope, $location, Story, Login) {
 
   $scope.User = Login.user;
   console.log("UserController", Login.user);
