@@ -82,7 +82,7 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
     return nDate;
     
   }
-
+  
   //Check if a image is choosen, upload the image and return the image url
   $scope.$watch("files",function(){
     console.log("s", $scope);
