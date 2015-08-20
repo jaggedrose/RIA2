@@ -1,24 +1,15 @@
-<script type="text/ng-template" >
-  <a>
-      <img ng-src="http://upload.wikimedia.org/wikipedia/commons/thumb/{{match.model.flag}}" width="16">
-      <span bind-html-unsafe="match.label | typeaheadHighlight:query"></span>
-  </a>
+<script type="text/ng-template">
 </script>
 <div class='container-fluid'>
-
-    <h4>Static arrays</h4>
-    <pre>Model: {{selected | json}}</pre>
-    <input type="text" ng-model="selected" typeahead="state for state in states | filter:$viewValue | limitTo:8" class="form-control">
-
-    <h4>Asynchronous results</h4>
-    <pre>Model: {{asyncSelected | json}}</pre>
-    <input type="text" ng-model="asyncSelected" placeholder="Locations loaded via $http" typeahead="address for address in getLocation($viewValue)" typeahead-loading="loadingLocations" typeahead-no-results="noResults" class="form-control">
-    <i ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></i>
-    <div ng-show="noResults">
-      <i class="glyphicon glyphicon-remove"></i> No Results Found
+    <div>
+        <i class="glyphicon glyphicon-search"></i> <input type="text" class="ng-hide" ng-show="showusers" ng-model="users" ng-change="onChangeUsers();" placeholder="search users" class="form-control">
+        
+        <input type="text" class="ng-hide" ng-show="showtags"; ng-model="tags" ng-change="onChangeTags();" placeholder="search tags" class="form-control">
+        <pre><button ng-click="activateSearchUsers();">search users</button><button ng-click="activateSearchTags();">search tags</button></pre>
+        <br>
+        <pre><ul>
+            <li ng-repeat="state in statesWithFlags | filter:filterProp">{{state.name}}</li>
+        </ul>
+      </pre>
     </div>
-
-    <h4>Custom templates for results</h4>
-    <pre>Model: {{customSelected | json}}</pre>
-    <input type="text" ng-model="customSelected" placeholder="Custom template" typeahead="state as state.name for state in statesWithFlags | filter:{name:$viewValue}" typeahead-template-url="customTemplate.html" class="form-control">
 </div>
