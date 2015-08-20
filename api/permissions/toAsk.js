@@ -2,7 +2,7 @@ var config = require("../../config.json");
 var sha256 = require("sha256");
 
 module.exports = function(modelName, method, query, req) {
-   //console.log("Ask", modelName, method, query, req.body);
+   //console.log("toAsk");
 
    if (
          req.method != "GET" && !req.session.user &&
@@ -16,5 +16,6 @@ module.exports = function(modelName, method, query, req) {
          req.body.password = sha256(config.hashSalt + req.body.password);
       }
    }
+   
    return true;
 };

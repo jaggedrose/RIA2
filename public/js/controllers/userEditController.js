@@ -1,6 +1,9 @@
 // "Stories" user edit controller
 app.controller("userEditController", ["$http", "$scope", "$location", "Story", "User", "Login", function($http, $scope, $location, Story, User, Login) {
 
+   console.log("UserEditController");
+
+    
    //get country data
    $http.get('js/resources/countries.json').then(function(res){
       $scope.countries = res.data;
@@ -19,8 +22,6 @@ app.controller("userEditController", ["$http", "$scope", "$location", "Story", "
       $scope.User.password = "+-+-+-+";
    });
 
-
-   console.log("UserEditController", $scope.User);
 
    //Every time $scope.User.userName changes
    $scope.$watch("User.user_name",function(newVal, oldVal) {

@@ -30,10 +30,9 @@ app.controller("UserController", ["$http", "$scope", "$location", "Story","Login
     };
 
   $scope.userEdit = function() {
-    console.log("User ",$scope.User.userName);
+    console.log("User ",$scope.User.user_name);
      $location.path('/userEdit');
-    // $scope.User = Login.user;
-   
+    // $scope.User = Login.user;   
   };
 
   $scope.deleteStory = function(storyid){
