@@ -27,7 +27,7 @@
     <div class="">
       <div class="panel-body" >
         <ul class="list-group">
-        <li class="list-group-item" ng-repeat="res in searchResults">{{show == 'tags' ? res.tagName : res.user_name}}</li>
+        <li class="list-group-item" ng-repeat="res in searchResults"><a ng href="/user{{User._id}}">{{res.user_name}}</a><a ng href="/user{{User._id}}">{{res.tagName}}</a></li>
         </ul>
       </div>
     </div>
