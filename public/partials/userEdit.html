@@ -6,8 +6,9 @@
          <div class="form-group">
           <label for="userName">User name</label>
           <input ng-model="User.user_name"class="form-control" type="text" name="user_name" id="user_name" ng-minlength=5 required>
-          <p ng-show="!User.user_name">The username should be at least 5 characters long.</p>
-          <p ng-show="userNameAlreadyRegistered">Username is already registered.</p>
+          <p ng-show="UserEditform.user_name.$error.minlength">The username is too short.</p>
+          <p ng-show="UserEditForm.user_name.$error.maxlength">The username is too long.</>
+          <p ng-show="UserEditForm.user_name.$error.unique">Username is already registered.</p>
          </div>
           <div class="form-group">
           <label for="firstName">First name:</label>
@@ -21,9 +22,9 @@
          </div>
          <div class="form-group">
           <label for="email">Email:</label>
-          <input ng-model="User.email" class="form-control" type="email" name="userEmail" id="email" required>
-          <p ng-show="registrationForm.userEmail.$invalid">Invalid email</p>
-          <p ng-show="emailAlreadyRegistered">Email is already registered.</p>
+          <input ng-model="User.email" class="form-control" type="email" name="email" id="email" required>
+          <p ng-show="UserEditForm.email.$dirty && UserEditForm.email.$invalid">Invalid email</p>
+          <p ng-show="UserEditForm.email.$error.unique">Email is already registered.</p>
          </div> 
          <div class="form-group">
           <label for="city">City:</label>
