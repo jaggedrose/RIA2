@@ -14,6 +14,13 @@ module.exports = function(mongoose) {
          } else {
             res.json(false);
          }
+      if(req.method == "PUT") {
+         if(req.session.user) {
+            
+         }
+      }
+
+      //log in user 
       } else if (req.method == "POST") {
          if(!req.body.email || !req.body.password){
             res.json(false);

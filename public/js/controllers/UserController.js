@@ -18,7 +18,7 @@ app.controller("UserController", ["$http", "$scope", "$location", "Story","Login
   waitForUser(function() {
     $scope.UsersStories = Story.get({user_id: $scope.User._id, _populate:"user_id"});
     // $scope.User = User.getById ("55c0b804b04519b813c10433") ;
-    console.log("UserController :", $scope.User);
+    //console.log("UserController :", $scope.User);
 
   });
 

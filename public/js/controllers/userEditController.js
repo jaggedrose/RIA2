@@ -15,6 +15,8 @@ app.controller("userEditController", ["$http", "$scope", "$location", "Story", "
       // then clone to $scope.User in order to have a copy that won't change 
       // on every logIn-check.
       $scope.User = JSON.parse(JSON.stringify(Login.user));
+      //set users password to something because we want to show bullets in input
+      $scope.User.password = "+-+-+-+";
    });
 
 
@@ -54,13 +56,19 @@ app.controller("userEditController", ["$http", "$scope", "$location", "Story", "
       }
    });
 
-
-   $scope.UserChanged = function() {
+   //on userEdit-Form-Submit
+   $scope.UserChange = function() {
       console.log($scope.User);
-      //if no password property is sent in, that value remains untouched
-      delete $scope.User.password;
+      //if the password is the same as we made it on line 19
+      if($scope.User.password == "+-+-+-+"){
+         //remove the entire property from User - then it wont save a new password at all
+         delete $scope.User.password;
+      }
+      //update user
       User.update({_id:$scope.User._id},$scope.User);
+      //get users updated information
       Login.check($scope.User);
+      //show userpage
       $location.path('/user');
    };
 
