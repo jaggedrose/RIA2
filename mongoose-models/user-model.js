@@ -6,13 +6,13 @@ module.exports = function(mongoose){
   // Create a new mongoose schema 
   // with properties
   var UserSchema = mongoose.Schema({
-    user_name: {type: String, unique: true},
-    first_name: String,
-    last_name: String,
-    email: {type: String, unique: true},
-    city: String,
-    country: String,
-    password: String
+    user_name: {type: String, unique: true, required: true},
+    first_name: {type: String, required: true},
+    last_name: {type: String, required: true},
+    email: {type: String, unique: true, required: true},
+    city: {type: String, required: true},
+    country: {type: String, required: true},
+    password: {type: String, required: true}
   });
 
   //Fixa så det blir ej dublett - gör namngiven funktion
@@ -24,7 +24,7 @@ module.exports = function(mongoose){
   });
 
   UserSchema.pre('update', function(next) {
-      //console.log("update", JSON.stringify(this));
+      console.log("update");
     if(this.password){
     }
       next();
