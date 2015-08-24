@@ -27,7 +27,16 @@
     <div class="">
       <div class="panel-body" >
         <ul class="list-group">
-        <li class="list-group-item" ng-repeat="res in searchResults"><a ng href="/user{{User._id}}">{{res.user_name}}</a><a ng href="/user{{User._id}}">{{res.tagName}}</a></li>
+        <li class="list-group-item" ng-repeat="res in searchResults"><a ng href="/user{{User._id}}">{{res.user_name}}</a><a href="" ng-click="searchStories(res._id,res.tagName)">{{hashtag}} {{res.machineName}}</a></li>
+        </ul>
+      </div>
+    </div>
+  </div
+  <div class="row">
+    <div class="">
+      <div class="panel-body" >
+        <ul class="list-group">
+        <li class="list-group-item" ng-repeat="stories in data"><a ng-href="/viewStory/{{stories._id}}">{{stories.title}}</a></li>
         </ul>
       </div>
     </div>
