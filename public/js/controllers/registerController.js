@@ -82,7 +82,7 @@ app.controller("registerController", ["$http", "$scope", "User", "$location", fu
   });
 
 
-  //When valid word in password-inputs changes
+  //When word in password-inputs changes to valid word
   function pwdWatch(){
     // console.log("watch for pw");
     console.log("$scope.registrationForm.password", $scope.registrationForm.password);
@@ -96,6 +96,8 @@ app.controller("registerController", ["$http", "$scope", "User", "$location", fu
       $scope.registrationForm.password.$setValidity("identical", false);
     }
   }
+
+  //Whenever these changes value - run pwdWatch
   $scope.$watch("newUser.password", pwdWatch);
   $scope.$watch("password2", pwdWatch);
 
