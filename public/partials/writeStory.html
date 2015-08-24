@@ -7,10 +7,11 @@
                     <input ng-model="storyData.title" class="form-control stdinputbgcolour brtinputtxtcolour stdinputborder headerfont plcholderhead cnttxt" type="text" id="title" placeholder="The title of your story." required>
                 </div>
                 <div class="form-group imgupload stdinputborder">
-                    <input type="file" ngf-select ng-model="files" ngf-accept="'image/*'"><i ng-show="x" class="fa fa-file-image-o fa-2x control"></i>
-                    <img ng-hide= "x" width="100" height="100" ng-src="{{storySection.img}}">
+                    <input type="file" ngf-select ng-model="files" ngf-accept="'image/*'"><i ng-hide="files[0]" class="fa fa-file-image-o fa-2x control" required></i>
+                    <i ng-show="files[0]" ng-click="openModal()" class="on-top fa fa-trash-o fa-2x control nav" ></i>
+                    <img class="img-responsive" ng-if="storySection.img" ng-src="{{storySection.img}}">
                 </div> 
-                
+
                 <div class="form-group">
                     <!-- <label for="header" class="txtcontrol">Header</label> -->
                     <!-- ng-model="2" NOT working //HL -->

@@ -1,6 +1,6 @@
 //"myAppName" controller
-app.controller("storyController", ["$http", "$scope","$routeParams","$location", "Story", "Tag", "Login", "FileUploader",
-  function($http, $scope, $routeParams, $location, Story, Tag, Login, FileUploader) {
+app.controller("storyController", ["$http", "$scope","$routeParams","$location", "Story", "Tag", "Login", "FileUploader", "$modal",
+  function($http, $scope, $routeParams, $location, Story, Tag, Login, FileUploader, $modal) {
   // Counter
   var sectionid = $routeParams.sectionid;
  
@@ -11,7 +11,7 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
     img: "",
     date_created: "",
     date_modified: "",
-    number_views: "",
+    number_views: ""
   };
 
   // IF WE SHOULD LOAD AN EXISTING STORY
@@ -69,10 +69,13 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
         $location.url("/writeStory/" + arrayOfNewStories[0]._id);
       }
     );
-    $scope.tagNames = '';
-  }
+    //$scope.tagNames = '';
 
-  $scope.storySection = angular.copy(storySectionCC);
+    // DON'T DO ANYTHING ELSE INSIDE THIS ELSE
+    // REDIRECT IS UNDERWAY
+  }
+  // END OF LOADING THE STORY
+
 
   // compose a 'nice' date
   function niceDate (date) {
@@ -85,16 +88,18 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
   
   //Check if a image is choosen, upload the image and return the image url
   $scope.$watch("files",function(){
-    console.log("s", $scope);
+    //console.log("s", $scope);
     //console.log("s2", $scope.$parent);
     // If there is no file array or it has not length do nothing
     if(!$scope.files || $scope.files.length < 1){return;}
     // Otherwise upload the file properly
     FileUploader($scope.files[0]).success(function(imgurl) {
+      $scope.hide = false;
       $scope.storySection.img = imgurl;
       console.log("filnamn: ", $scope.files[0].name, "sökväg = ", $scope.storySection.img);
     });
   });
+
 
 
   // CHANGE SECTION
@@ -186,25 +191,60 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
     Story.update({_id:$scope.storyData._id},$scope.storyData);
 
   }
+
+  //Control modal for deleting image
+ window.theScope = $scope;
+  $scope.openModal = function(size) {
+    var imgName = $scope.storySection.img.substr($scope.storySection.img.lastIndexOf('/') + 1);
+    console.log("openModal !!!", imgName);
+    var modalInstance = $modal.open({
+      templateUrl: 'partials/deleteImgModal.html',
+      controller: 'deleteImgController',
+      scope: $scope,
+      size: size,
+      resolve: {
+        imgUrl: function () {
+          return imgName;
+          //return $scope.storySection.img;
+        }
+      }
+    });
+
+    modalInstance.result.then(function() {
+      // If user choose "Yes"-button
+      $http.post('/api/removeImage', {imgsrc: $scope.storySection.img});
+      $scope.storySection.img = "";
+      console.log("You choosed Yes-button", "Bildfil =",$scope.storySection.img);
+       
+    }, function () {
+      // If user choose "No"-button
+      console.log("You choosed No-button");
+    });
+  };
+}]);
+
+app.controller('deleteImgController', ["$scope", "$modalInstance", "imgUrl", function($scope, $modalInstance, imgUrl) {
+
+  $scope.imgUrl = imgUrl;
+
+  $scope.ok = function() {
+    $modalInstance.close();
+  };
+
+  $scope.cancel = function() {
+    $modalInstance.dismiss();
+  };
+
+}]);
+
+
+
+  // Use to delete img
 /*
-//Function will check if there is a file choosen and then sent it to server folder uploads
-//then send the image url to the db
-  function uploadImage(){
-    $scope.$watch("files",function(){
-    // If there is no file array or it has not length do nothing
-    if(!$scope.files || $scope.files.length < 1){return;}
-    // Otherwise upload the file properly
-    FileUploader($scope.files[0]).success(function(imgurl) {
-    $scope.imgurl = storySection.img;
-    console.log("filnamn: ", $scope.files[0].name, "sökväg = ", storySection.img);
-  });
-});
-}
-*/
-/*
-  $scope.uploadImage = function(){
-    console.log ("Hey! Image upload!");
-      
+  $scope.deleteStory = function(storyid){
+    Story.remove({_id:storyid},function(){
+       $scope.UsersStories = Story.get({user_id: $scope.User._id, _populate:"user_id"});
+    });
+ 
   };
 */
-}]);
