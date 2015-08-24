@@ -6,19 +6,28 @@
                     <!-- <label for="title" class="txtcontrol">Title</label> -->
                     <input ng-model="storyData.title" class="form-control stdinputbgcolour brtinputtxtcolour stdinputborder headerfont plcholderhead cnttxt" type="text" id="title" placeholder="The title of your story." required>
                 </div>
-                <div class="form-group imgupload stdinputborder">
+                <div class="form-group stryimg stdinputborder">
                     <input type="file" ngf-select ng-model="files" ngf-accept="'image/*'"><i ng-show="x" class="fa fa-file-image-o fa-2x control"></i>
                     <img ng-hide= "x" width="100" height="100" ng-src="{{storySection.img}}">
                 </div> 
-                
-                <div class="form-group">
+                <div class="row">
+                  <div class="form-group col-xs-6">
                     <!-- <label for="header" class="txtcontrol">Header</label> -->
                     <!-- ng-model="2" NOT working //HL -->
                     <input ng-model="storySection.header" class="form-control stdinputbgcolour brtinputtxtcolour stdinputborder headerfont plcholderhead" type="text" id="header" placeholder="Headline for this section.." required>
+                  </div>
+                  <div class="col-xs-6 navthumbs">
+                    
+                    <a href="#"><img class="navthumb pull-right"></a> 
+                    <a href="#"><img class="navthumb pull-right"></a> 
+                    <a href="#"><img class="navthumb pull-right"></a> 
+                    
+                  </div> 
+                   
                 </div>
                 <div class="form-group">
                     <!-- <label for="text" class="txtcontrol">Text</label> -->
-                    <textarea ng-model="storySection.text" class="form-control stdinputbgcolour stdinputtxtcolour stdinputborder txtbody plcholdertxt" type="text" id="text" placeholder="Your text.." required></textarea>
+                    <textarea ng-model="storySection.text" class="form-control strytxt stdinputborder " id="text" placeholder="Your text.." required></textarea>
                 </div>
                 <div class="form-group">
                     <!-- <label for="tags" class="txtcontrol">Tags</label> -->
