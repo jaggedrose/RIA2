@@ -7,7 +7,8 @@
 @backgr: #292929;
 @txtheader: #FFF;
 @txtbody: #CCC;
-@txtcontrol: #DDD; 
+@txtcontrol: #DDD;
+@txtuserdate: #777; 
 @frame: #000;
 @control: #999;
 @stdinputtxtcolour: #CCC;
@@ -65,6 +66,10 @@ h1, h2, h3, h4 {
   font-family: 'Roboto', sans-serif;
 }
 
+.txtuserdate {
+  color: @txtuserdate;
+}
+
 // for control elements - buttons, icons
 
 .control {
@@ -78,6 +83,7 @@ h1, h2, h3, h4 {
 .mainframe {
   border: 5px solid @frame;
   padding-top: 10px;
+  height:100vh;
 }
 
 // Navigation box formatting - centered icons
@@ -86,15 +92,24 @@ h1, h2, h3, h4 {
   text-align: center;
 }
 
-.cnttxt {
-  text-align: center;
+.navthumbs {
+  float:right;
 }
 
-// Image upload - centered icon(s), border settings
+.navthumb {
+  border: 3px solid black;
+  height: 60px;
+  width: 90px;
+  margin: 0 0 10px 10px;
+  opacity: 0.3;
+}
 
-.imgupload {
+.navthumbcurrent {
+  opacity: 1;
+}
+
+.cnttxt {
   text-align: center;
-  height: 350px;
 }
 
 .stdinputborder {
@@ -105,6 +120,41 @@ h1, h2, h3, h4 {
 .txtright {
   text-align: right;
 }
+
+// STORY WRITE / PRESENTATION *************************************************
+
+.strytitle {
+  text-align: center;
+}
+
+.stryimg {
+  height: 35vh;
+  text-align: center;
+}
+
+.stryheader {
+
+}
+
+.strytxt {
+  .stdinputbgcolour; 
+  .stdinputtxtcolour;
+  .txtbody;
+  .plcholdertxt;
+}
+
+p.strytxt {
+  margin-top: 2vh;
+}
+
+.strytags {
+
+}
+
+textarea.form-control {
+  height: 35vh;
+}
+
 
 // CURSORS ********************************************************************
 
