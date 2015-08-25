@@ -1,5 +1,5 @@
 //"myAppName" controller.
-app.controller("registerController", ["$http", "$scope", "User", "$location", function($http, $scope, User, $location) {
+app.controller("registerController", ["$http", "$scope", "User", "Login", "$location", function($http, $scope, User, Login, $location) {
   
   $scope.newUser = {};
 
@@ -16,11 +16,19 @@ app.controller("registerController", ["$http", "$scope", "User", "$location", fu
 
   $scope.newUserCreate = function() {
     User.create($scope.newUser, function(data) {
-      console.log("user created", data);
+      if (!data.status) {
+        console.log("user created", data);
+        // When a new user registers, call the login function
+        // to log them in automatically
+        Login.login($scope.newUser, function() {
+          if (Login.user._id) {
+            // And relocate them to theor user profile page
+            $location.path('/user');
+          }
+        });
+      }
     });
     console.log("$scope.newUser: ", $scope.newUser);
-    //Add code to redirect registered user to his/her page
-
   };
 
   //get country data
