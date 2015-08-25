@@ -6,6 +6,7 @@ module.exports = function(mongoose){
   // Create a new mongoose schema 
   // with properties
   var UserSchema = mongoose.Schema({
+    img: String,
     user_name: {type: String, unique: true},
     first_name: String,
     last_name: String,
