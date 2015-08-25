@@ -10,7 +10,7 @@ app.controller("userEditController", ["$http", "$scope", "$location", "Story", "
    });
 
    //console.log("User", User, "Login", Login);
-
+   $scope.orgUserData = '';
    $scope.User = User.getById(Login.user._id,  function() {
       $scope.User.password = "+-+-+-+";
       $scope.password2 = "+-+-+-+";
@@ -38,8 +38,9 @@ app.controller("userEditController", ["$http", "$scope", "$location", "Story", "
    //resetForm-function
    $scope.resetForm = function() {
       console.log("Reset form function");
-      $scope.orgUserData = Login.user;
-      modifyScopeUser();
+      //$scope.orgUserData = Login.user;
+      //modifyScopeUser();
+      $scope.User = angular.copy($scope.orgUserData);
       //set form to untouched state
       $scope.UserEditForm.$setPristine();
 
