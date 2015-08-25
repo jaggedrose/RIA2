@@ -30,7 +30,9 @@
     <script src="js/controllers/userEditController.js"></script>
     <script src="js/controllers/homeController.js"></script>
     <script src="js/controllers/viewStoryController.js"></script>
+
     <script src="js/controllers/searchController.js"></script>
+
    
     <script src ="/js/services/fileUploadFactory.js"></script>
     <script src="js/services/loginFactory.js"></script>
@@ -38,7 +40,25 @@
     <script src="js/main.js"></script>
 
   </head>
+
   <body ng-app="stories">
+    <header>
+       <nav class="navbar .navbar-static-top .navbar-inverse">
+          <div class="container-fluid">
+            <div class="navbar-header">
+                <br>
+                <a ng-href="/login"><span class="badge" title="Login">&#9997</span></a>
+              
+              <span class="badge" title="Search">&#128270</span>
+
+                 <a ng-href="/"><span class="badge" title="Home">&#9733</span></a>
+             
+              
+                <br>
+            </div>
+          </div>
+        </nav>  
+    </header>
     <div ng-view></div>
   </body>
 </html>
