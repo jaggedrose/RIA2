@@ -4,20 +4,20 @@
       <h3>Welcome!</h3>
       <p class="txtbody">
 
-        <div class="row" ng-repeat="story in AllStories|orderBy: '-date_created'|  offset: currentPage*itemsPerPage | limitTo: itemsPerPage">
+        <div class="row" ng-repeat="story in currentPageStories">
           <div class="row">
               <div class="col-xs-4 "> 
-                    <a href="#" class="thumbnail">
+                    <a ng-href="/viewStory/{{story._id}}/section/1" class="thumbnail">
                       <img src={{story.section1.img}} title={{story.title}} class="img-responsive">
                     </a>
                </div>
                 <div class="col-xs-4"> 
-                   <a href="#" class="thumbnail">
+                   <a href="/viewStory/{{story._id}}/section/2" class="thumbnail">
                       <img src={{story.section2.img}} title={{story.title}} class="img-responsive">
                     </a>
                 </div>   
                 <div class="col-xs-4"> 
-                   <a href="#" class="thumbnail">
+                   <a href="/viewStory/{{story._id}}/section/3" class="thumbnail">
                       <img src={{story.section3.img}} title={{story.title}} class="img-responsive">
                     </a>
                 </div>
@@ -25,17 +25,18 @@
         </div>
               
          </p> 
-         <div class="pagination">
-            <ul>
+         <div class="row">
+            <ul class="pagination">
+              <!-- ng-class="prevPageDisabled()" -->
               <li ng-class="prevPageDisabled()">
-                <a href ng-click="prevPage()">« Prev</a>
+                <a href ng-click="prevPage()"><i class="fa fa-caret-left fa-4x"></i></a>
               </li>
-              <li ng-repeat="n in range()"
+             <!--  <li ng-repeat="n in [] | range: pageCount()"
                 ng-class="{active: n == currentPage}" ng-click="setPage(n)">
-                <a href="#">{{n+1}}</a>
-              </li>
+                <a href="#">{{n}}</a>
+              </li> -->
               <li ng-class="nextPageDisabled()">
-                <a href ng-click="nextPage()">Next »</a>
+                <a href ng-click="nextPage()"><i class="fa fa-caret-right fa-4x"></i></a>
               </li>
             </ul>
           </div>  
