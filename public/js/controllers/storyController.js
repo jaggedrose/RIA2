@@ -38,6 +38,7 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
       }
 
       $scope.storyData = response;
+      $scope.niceDate = niceDate($scope.storyData.date_created);
       $scope.storySection = $scope.storyData["section" + sectionid] ? $scope.storyData["section" + sectionid] : angular.copy(storySectionCC);
       $scope.tagNames = $scope.storyData.tags.map(function(tag){return tag.tagName}).join(", ");
     });
@@ -101,25 +102,40 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
     });
   });
 
-
-
   // CHANGE SECTION
   $scope.onSectionForward = function(){
-     var nextSection = sectionid/1 + 1;
-     if(nextSection > 3){nextSection = 1;}
-     $location.url('/writeStory/' + id + '/section/' + nextSection);
+    if ($scope.storyForm.$valid) {
+      console.log ("Piff valid!", $scope.storyForm.$valid);
+      var nextSection = sectionid/1 + 1;
+      if(nextSection > 3){nextSection = 1;}
+      $location.url('/writeStory/' + id + '/section/' + nextSection);
+    }
+    else {
+      console.log ("Piff Forward motherFucker!", $scope.storyForm.$valid);
+      return;
+    }
   };
 
   // CHANGE SECTION
   $scope.onSectionBack = function(){
-     var nextSection = sectionid/1 - 1;
-     if(nextSection < 1){nextSection = 3;}
-     $location.url('/writeStory/' + id + '/section/' + nextSection);
+    if ($scope.storyForm.$valid) {
+
+      var nextSection = sectionid/1 - 1;
+      if(nextSection < 1){nextSection = 3;}
+      $location.url('/writeStory/' + id + '/section/' + nextSection);
+    }
+    else {
+      console.log ("Piff backward motherFucker!", $scope.storyForm.$valid);
+      return;
+    }
   };
+
+  
+
 
   // ON LOCATION CHANGE try to save the story including updated section, tags etc
   $scope.$on('$locationChangeStart',function(){
-
+    
     // Don't do anything if no storyData loaded 
     if(!$scope.storyData){return;}
 

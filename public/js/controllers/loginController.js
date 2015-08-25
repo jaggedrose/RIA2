@@ -7,7 +7,7 @@ app.controller("loginController", ["$http", "$scope", "$location","Login", funct
     console.log("login",$scope.Loginfo);
     Login.login($scope.Loginfo, function(data) {
       console.log(data);
-      if (!data) {
+      if (!data._id) {
         $scope.authMsg = "Your email or password is incorrect!";
       } else {
         var id = data._id;

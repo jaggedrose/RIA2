@@ -1,50 +1,49 @@
 <div class="container-fluid appbackground">
     <div class="row">
         <section class="col-xs-12 mainframe">
-            <form ng-submit="createStory()" novalidate name="storyForm" class="">
+            <form ng-submit="apanStory()" novalidate name="storyForm" class="">
               <div class="form-group">
-                    <!-- <label for="title" class="txtcontrol">Title</label> -->
-                    <input ng-model="storyData.title" class="form-control stdinputbgcolour brtinputtxtcolour stdinputborder headerfont plcholderhead cnttxt" type="text" id="title" placeholder="The title of your story." required>
+                <!-- <label for="title" class="txtcontrol">Title</label> -->
+                <input ng-model="storyData.title" name="storyTitle" class="form-control stdinputbgcolour brtinputtxtcolour stdinputborder headerfont plcholderhead cnttxt" type="text" id="title" placeholder="The title of your story." ng-minlength="2" ng-maxlength="30" required>
+              </div>
+              <div class="form-group imgupload stdinputborder">
+                  <input type="file" ngf-select ng-model="files" ngf-accept="'image/*'"><i ng-hide="storySection.img" class="fa fa-file-image-o fa-2x control" required></i>
+                  <i ng-show="storySection.img" ng-click="openModal()" class="on-top fa fa-trash-o fa-2x control nav" ></i>
+                  <img class="img-responsive" ng-if="storySection.img" ng-src="{{storySection.img}}">
+              </div> 
+              <div class="row">
+                <div class="form-group col-xs-4">
+                  <input ng-class="{true: 'invalidInput', false: ''}[storyForm.sectionHeader.$invalid]" ng-model="storySection.header" name="sectionHeader" class="form-control stdinputbgcolour brtinputtxtcolour stdinputborder headerfont plcholderhead" type="text" id="header" placeholder="Headline for this section.." required>
+                  <p class="txtcontrol formerror" ng-show="storyForm.sectionHeader.$dirty && storyForm.sectionHeader.$invalid">Write a headline for this section.</p>
                 </div>
-
-                <div class="form-group imgupload stdinputborder">
-                    <input type="file" ngf-select ng-model="files" ngf-accept="'image/*'"><i ng-hide="storySection.img" class="fa fa-file-image-o fa-2x control" required></i>
-                    <i ng-show="storySection.img" ng-click="openModal()" class="on-top fa fa-trash-o fa-2x control nav" ></i>
-                    <img class="img-responsive" ng-if="storySection.img" ng-src="{{storySection.img}}">
-                </div> 
-
-                <div class="row">
-                  <div class="form-group col-xs-6">
-                    <input ng-model="storySection.header" class="form-control stdinputbgcolour brtinputtxtcolour stdinputborder headerfont plcholderhead" type="text" id="header" placeholder="Headline for this section.." required>
-                  </div>
-                  <div class="col-xs-6 navthumbs">
-                    
-                    <a href="#"><img class="navthumb pull-right"></a> 
-                    <a href="#"><img class="navthumb pull-right"></a> 
-                    <a href="#"><img class="navthumb pull-right"></a> 
-                    
-                  </div> 
-                   
-                </div>
-                <div class="form-group">
-                    <!-- <label for="text" class="txtcontrol">Text</label> -->
-                    <textarea ng-model="storySection.text" class="form-control strytxt stdinputborder " id="text" placeholder="Your text.." required></textarea>
-                </div>
-                <div class="form-group">
-                    <!-- <label for="tags" class="txtcontrol">Tags</label> -->
-                    <input ng-model="tagNames" class="form-control stdinputbgcolour stdinputtxtcolour stdinputborder txtbody plcholdertxt" type="text" id="tags" placeholder="Add tags here, separated by commas. No # needed." required>
-                </div>
-                
+                <div class="col-xs-8 navthumbs">
                   
-                  <div class="cols-xs-8 txtcontrol control txtright">
-                    <p>Username - {{storyData.niceDate}}</p>
-                  </div>
+                  <a href="#"><img class="navthumb pull-right"></a> 
+                  <a href="#"><img class="navthumb pull-right"></a> 
+                  <a href="#"><img class="navthumb pull-right"></a> 
+                  
+                </div> 
+                 
+              </div>
+              <div class="form-group">
+                  <!-- <label for="text" class="txtcontrol">Text</label> -->
+                  <textarea ng-model="storySection.text" name="sectionText" class="form-control strytxt stdinputborder " id="text" placeholder="Your text.." required></textarea>
+              </div>
+              <div class="form-group">
+                  <!-- <label for="tags" class="txtcontrol">Tags</label> -->
+                  <input ng-model="tagNames" name="storyTags" class="form-control stdinputbgcolour stdinputtxtcolour stdinputborder txtbody plcholdertxt" type="text" id="tags" placeholder="Add tags here, separated by commas. No # needed." required>
+              </div>
+              
                 
-                <div class="navbox">
-                  <i class="fa fa-chevron-left fa-2x control" ng-click="onSectionBack()"></i>
-                  <i class="fa fa-chevron-right fa-2x control" ng-click="onSectionForward()" ></i>
+                <div class="cols-xs-8 txtcontrol control txtright">
+                  <p>Username - {{niceDate}}</p>
                 </div>
-                <br><br>
+              
+              <div class="navbox">
+                <i class="fa fa-chevron-left fa-2x control" ng-disabled="storyForm.$invalid" ng-click="onSectionBack()"></i>
+                <i class="fa fa-chevron-right fa-2x control" ng-disabled="storyForm.$invalid" ng-click="onSectionForward()" ></i>
+              </div>
+              <br><br>
 
             </form>
         </section>

@@ -1,16 +1,15 @@
 <div class="container-fluid appbackground">
     <div class="row">
         <section class="col-xs-12 mainframe">
-            <h2 class="strytitle">{{aStory.title}}</h1>
-                
+            <h2 class="strytitle">{{aStory.title}}</h1>            
             <div class="stryimg">
               <img ng-src="{{storySection.img}}">
             </div>
             <div class="row">
-              <div class="col-xs-6">
+              <div class="col-xs-4">
                 <h4 class="stryheader">{{storySection.header}}</h4>
               </div>
-              <div class="col-xs-6 navthumbs">
+              <div class="col-xs-8 navthumbs">
                 <a ng-href="/viewStory/{{aStory._id}}/section/3"><img ng-class="activeClass(3)" ng-src="{{aStory.section3.img}}" class="navthumb pull-right"></a> 
 
                 <a ng-href="/viewStory/{{aStory._id}}/section/2"><img  ng-class="activeClass(2)" ng-src="{{aStory.section2.img}}" class="navthumb pull-right"></a> 
