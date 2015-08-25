@@ -95,8 +95,9 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
     // Otherwise upload the file properly
     FileUploader($scope.files[0]).success(function(imgurl) {
       $scope.hide = false;
+      //Set the image url to the greater storySection object
       $scope.storySection.img = imgurl;
-      console.log("filnamn: ", $scope.files[0].name, "sökväg = ", $scope.storySection.img);
+      //console.log("filnamn: ", $scope.files[0].name, "sökväg = ", $scope.storySection.img);
     });
   });
 
@@ -196,7 +197,7 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
  window.theScope = $scope;
   $scope.openModal = function(size) {
     var imgName = $scope.storySection.img.substr($scope.storySection.img.lastIndexOf('/') + 1);
-    console.log("openModal !!!", imgName);
+    //console.log("openModal !!!", imgName);
     var modalInstance = $modal.open({
       templateUrl: 'partials/deleteImgModal.html',
       controller: 'deleteImgController',
@@ -214,38 +215,12 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
       // If user choose "Yes"-button
       $http.post('/api/removeImage', {imgsrc: $scope.storySection.img}).success(function() {
         $scope.storySection.img = "";
-        console.log("You choosed Yes-button", "Bildfil =",$scope.storySection.img);
+        //console.log("You choosed Yes-button", "Bildfil =",$scope.storySection.img);
       });
        
     }, function () {
       // If user choose "No"-button
-      console.log("You choosed No-button");
+      //console.log("You choosed No-button");
     });
   };
 }]);
-
-app.controller('deleteImgController', ["$scope", "$modalInstance", "imgUrl", function($scope, $modalInstance, imgUrl) {
-
-  $scope.imgUrl = imgUrl;
-
-  $scope.ok = function() {
-    $modalInstance.close();
-  };
-
-  $scope.cancel = function() {
-    $modalInstance.dismiss();
-  };
-
-}]);
-
-
-
-  // Use to delete img
-/*
-  $scope.deleteStory = function(storyid){
-    Story.remove({_id:storyid},function(){
-       $scope.UsersStories = Story.get({user_id: $scope.User._id, _populate:"user_id"});
-    });
- 
-  };
-*/
