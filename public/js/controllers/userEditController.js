@@ -11,9 +11,15 @@ app.controller("userEditController", ["$http", "$scope", "$location", "Story", "
 
    //console.log("User", User, "Login", Login);
 
-   $scope.orgUserData = Login.user;
-
+   $scope.User = User.getById(Login.user._id,  function() {
+      $scope.User.password = "+-+-+-+";
+      $scope.password2 = "+-+-+-+";
+      $scope.orgUserData = angular.copy($scope.User);
+      $scope.originalUserName = $scope.orgUserData.user_name;
+      $scope.originalEmail = $scope.orgUserData.email;
+   });
    // Since Login.user is originally empty wait for it to have an id
+  /* $scope.orgUserData = Login.user;
    $scope.$watch("orgUserData._id", modifyScopeUser);
 
    function modifyScopeUser(){
@@ -27,7 +33,7 @@ app.controller("userEditController", ["$http", "$scope", "$location", "Story", "
       $scope.originalUserName = angular.copy(Login.user.user_name);
       $scope.originalEmail = angular.copy(Login.user.email);
       console.log("$scope.originalUserName", $scope.originalUserName);
-   }
+   }*/
 
    //resetForm-function
    $scope.resetForm = function() {
@@ -41,7 +47,8 @@ app.controller("userEditController", ["$http", "$scope", "$location", "Story", "
 
    //Every time $scope.User.userName changes
    $scope.$watch("User.user_name",function(newVal, oldVal) {
-      
+      if (!$scope.User.user_name) { return; }
+      console.log("uu", $scope.User.user_name);
       //do username lowercase
       $scope.User.user_name = $scope.User.user_name.toLowerCase();
       //console.log("names in watch", $scope.UserEditForm.user_name.$viewValue, $scope.originalUserName);
