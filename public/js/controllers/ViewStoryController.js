@@ -15,7 +15,7 @@ app.controller("ViewStoryController", ["$http", "$scope", "$location", "Story","
   // Check if active - set CSS .navthumbcurrent
   $scope.activeClass = function(section){
     if(section == sectionid){return "navthumbcurrent";}
-  }
+  };
 
 }]);
 

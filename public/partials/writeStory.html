@@ -8,8 +8,8 @@
                 </div>
 
                 <div class="form-group imgupload stdinputborder">
-                    <input type="file" ngf-select ng-model="files" ngf-accept="'image/*'"><i ng-hide="files[0]" class="fa fa-file-image-o fa-2x control" required></i>
-                    <i ng-show="files[0]" ng-click="openModal()" class="on-top fa fa-trash-o fa-2x control nav" ></i>
+                    <input type="file" ngf-select ng-model="files" ngf-accept="'image/*'"><i ng-hide="storySection.img" class="fa fa-file-image-o fa-2x control" required></i>
+                    <i ng-show="storySection.img" ng-click="openModal()" class="on-top fa fa-trash-o fa-2x control nav" ></i>
                     <img class="img-responsive" ng-if="storySection.img" ng-src="{{storySection.img}}">
                 </div> 
 

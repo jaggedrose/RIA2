@@ -75,7 +75,7 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
     // REDIRECT IS UNDERWAY
   }
   // END OF LOADING THE STORY
-
+  window.scope = $scope;
 
   // compose a 'nice' date
   function niceDate (date) {
@@ -212,9 +212,10 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
 
     modalInstance.result.then(function() {
       // If user choose "Yes"-button
-      $http.post('/api/removeImage', {imgsrc: $scope.storySection.img});
-      $scope.storySection.img = "";
-      console.log("You choosed Yes-button", "Bildfil =",$scope.storySection.img);
+      $http.post('/api/removeImage', {imgsrc: $scope.storySection.img}).success(function() {
+        $scope.storySection.img = "";
+        console.log("You choosed Yes-button", "Bildfil =",$scope.storySection.img);
+      });
        
     }, function () {
       // If user choose "No"-button

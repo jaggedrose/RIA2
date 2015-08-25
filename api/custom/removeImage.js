@@ -6,6 +6,9 @@ module.exports = function(mongoose) {
     console.log("hej",publicFolder);
    var fs = require('fs');
    return function(req, res) {
-      fs.unlink(publicFolder + req.body.imgsrc);
+      fs.unlink(publicFolder + req.body.imgsrc, function(err) {
+         if (err) { throw err; }
+         res.json(true);
+      });
    };
 };
