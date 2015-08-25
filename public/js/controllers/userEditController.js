@@ -42,6 +42,8 @@ app.controller("userEditController", ["$http", "$scope", "$location", "Story", "
    //Every time $scope.User.userName changes
    $scope.$watch("User.user_name",function(newVal, oldVal) {
       
+      //do username lowercase
+      $scope.User.user_name = $scope.User.user_name.toLowerCase();
       //console.log("names in watch", $scope.UserEditForm.user_name.$viewValue, $scope.originalUserName);
       if ($scope.UserEditForm.user_name.$dirty && $scope.UserEditForm.user_name.$viewValue != $scope.originalUserName) {
          console.log("watch for user name :", $scope.originalUserName);
@@ -110,6 +112,9 @@ app.controller("userEditController", ["$http", "$scope", "$location", "Story", "
          //remove the entire property from User - then it won't save a new password at all
          delete $scope.User.password;
       }
+      //make username toLowerCase
+      $scope.User.user_name = $scope.User.user_name.toLowerCase();
+      console.log("username after toLowerCase", $scope.User.user_name);
       //update user
       User.update({_id:$scope.User._id},$scope.User);
       //get users updated information
