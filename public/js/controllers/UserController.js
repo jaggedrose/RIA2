@@ -1,6 +1,6 @@
 //"myAppName" controller.
 
-app.controller("UserController", ["$http", "$scope", "$location", "Story", "User","Login","FileUploader", function($http, $scope, $location, Story, User, Login, FileUploader) {
+app.controller("UserController", ["$http", "$scope", "$location", "Story", "User", "Login", "FileUploader", function($http, $scope, $location, Story, User, Login, FileUploader) {
 
   //$scope.User = Login.user;
   console.log("UserController", Login.user);
@@ -14,14 +14,14 @@ app.controller("UserController", ["$http", "$scope", "$location", "Story", "User
       callback();
     }
   }
-  
+
   waitForUser(function() {
     $scope.UsersStories = Story.get({user_id: Login.user._id, _populate:"user_id"});
     $scope.User = User.getById(Login.user._id, function() {
       console.log("UserController :", $scope.User);
     });
-
   });
+
 
   $scope.profImage = '';
 
@@ -52,10 +52,9 @@ app.controller("UserController", ["$http", "$scope", "$location", "Story", "User
     };
 
   $scope.userEdit = function() {
-    console.log("User ",$scope.User.userName);
+    console.log("User ",$scope.User.user_name);
      $location.path('/userEdit');
     // $scope.User = Login.user;
-   
   };
 
   $scope.deleteStory = function(storyid){

@@ -23,7 +23,7 @@
          <div class="form-group">
           <label for="email">Email:</label>
           <input ng-model="newUser.email" class="form-control" type="email" id = "email" name="email" placeholder="Enter e-mail"  required>
-          <p ng-show="registrationForm.email.$dirty && registrationForm.userEmail.$invalid">Invalid email</p>
+          <p ng-show="registrationForm.email.$dirty && registrationForm.email.$invalid">Invalid email</p>
           <p ng-show="registrationForm.email.$error.unique">Email is already registered.</p>
          </div>
          <div class="form-group">

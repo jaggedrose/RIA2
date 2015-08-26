@@ -1,25 +1,25 @@
 // login factory
 app.factory("Login",["$http", "$rootScope", "$location", function($http, $rootScope, $location){
 
-  // a function to empty and fill an object
-  // without loosing the reference to it
-  function updateObj(inObj, outObj) {
-    if (JSON.stringify(inObj) !== JSON.stringify(outObj)) {
-      for (var i in outObj) {
-        delete outObj[i];
-      }
 
-      for (var i in inObj) {
-        outObj[i] = inObj[i];
-      }
+  // Never ever change which object loginObj.user is once it has been created
+  // since the will break references to the object from $scope.User etc in different controllers
+  function updateUserObj(toClone){
+    for(var i in loginObj.user){
+      delete loginObj.user[i];
     }
+    for(i in toClone){
+      loginObj.user[i] = toClone[i];
+    }
+    console.log("UPDATED USER OBJ",loginObj.user)
   }
+
 
   var loginObj = {
     user: {},
     login: function(credentials, callback) {
       $http.post('api/login', credentials).success(function(data) {
-        updateObj(data ? data : {}, loginObj.user);
+        updateUserObj(data);
         // let the entire app know we are logged in
         $rootScope.$broadcast("login");
 
@@ -27,15 +27,15 @@ app.factory("Login",["$http", "$rootScope", "$location", function($http, $rootSc
       });
     },
     check: function(callback) {
+      if(typeof callback == "object"){updateUserObj(callback);return;}
       $http.get('api/login').success(function(data) {
-        updateObj(data ? data : {}, loginObj.user);
-
+        updateUserObj(data);
         callback && callback(loginObj.user);
       });
     },
     logout: function(callback) {
       $http.delete('api/login').success(function(data) {
-        updateObj({}, loginObj.user);
+        updateUserObj(data);
         
         // let the entire app know we are logged out
         $rootScope.$broadcast("logout");
