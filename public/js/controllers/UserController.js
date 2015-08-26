@@ -37,7 +37,7 @@ app.controller("UserController", ["$http", "$scope", "$location", "Story", "User
     });
   });
 
-  $scope.save=function() {
+  $scope.save = function() {
     $scope.User.$update(function() {
       console.log("Saved new profile pic ", $scope.User);
     });
