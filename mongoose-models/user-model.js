@@ -12,7 +12,8 @@ module.exports = function(mongoose){
     email: {type: String, unique: true, required: true},
     city: {type: String, required: true},
     country: {type: String, required: true},
-    password: {type: String, required: true}
+    password: {type: String, required: true},
+    img: String
   });
 
   //Fixa så det blir ej dublett - gör namngiven funktion
