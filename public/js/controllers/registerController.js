@@ -1,5 +1,5 @@
 //"myAppName" controller.
-app.controller("registerController", ["$http", "$scope", "User", "$location", function($http, $scope, User, $location) {
+app.controller("registerController", ["$http", "$scope", "User", "Login", "$location", function($http, $scope, User, Login, $location) {
   
   $scope.newUser = {};
 
@@ -15,12 +15,23 @@ app.controller("registerController", ["$http", "$scope", "User", "$location", fu
   };
 
   $scope.newUserCreate = function() {
+    //make username toLowerCase
+    $scope.newUser.user_name = $scope.newUser.user_name.toLowerCase();
+    console.log("$scope.newUser.user_name after toLowerCase", $scope.newUser.user_name);
     User.create($scope.newUser, function(data) {
-      console.log("user created", data);
+      if (!data.status) {
+        console.log("user created", data);
+        // When a new user registers, call the login function
+        // to log them in automatically
+        Login.login($scope.newUser, function() {
+          if (Login.user._id) {
+            // And relocate them to theor user profile page
+            $location.path('/user');
+          }
+        });
+      }
     });
     console.log("$scope.newUser: ", $scope.newUser);
-    //Add code to redirect registered user to his/her page
-
   };
 
   //get country data
@@ -46,6 +57,9 @@ app.controller("registerController", ["$http", "$scope", "User", "$location", fu
 
   //Every time $scope.newUser.userName changes
   $scope.$watch("newUser.user_name",function(newVal, oldVal){
+
+    //do user_name lowercase
+    $scope.newUser.user_name = $scope.newUser.user_name.toLowerCase();
     console.log("$scope watch for userName", newVal, oldVal);
     //$scope.userNameAlreadyRegistered = false;
     if(!newVal){return;}
@@ -82,7 +96,7 @@ app.controller("registerController", ["$http", "$scope", "User", "$location", fu
   });
 
 
-  //When valid word in password-inputs changes
+  //When word in password-inputs changes to valid word
   function pwdWatch(){
     // console.log("watch for pw");
     console.log("$scope.registrationForm.password", $scope.registrationForm.password);
@@ -96,6 +110,8 @@ app.controller("registerController", ["$http", "$scope", "User", "$location", fu
       $scope.registrationForm.password.$setValidity("identical", false);
     }
   }
+
+  //Whenever these changes value - run pwdWatch
   $scope.$watch("newUser.password", pwdWatch);
   $scope.$watch("password2", pwdWatch);
 
