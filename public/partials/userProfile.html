@@ -1,48 +1,35 @@
-<div class="container appbackground">
+<div class"container-fluid appbackground">
     <div class="row userRow">
         <section class="col-xs-12 col-sm-10 col-md-8 col-lg-6 col-xs-offset-0 col-sm-offset-1  col-md-offset-2  col-lg-offset-3 mainframe">
-            <div ng-show="User._id">
-                <button type="submit" class="btn btn-danger" ng-click="logoutUser()">Log Out</button>
-            </div>
 
             <h2>User Profile</h2>
-            <div class="form-group imgupload stdinputborder">
-                <input type="file" ngf-select ng-model="files" ngf-accept="'image/*'"><i class="fa fa-file-image-o fa-2x control"></i>
-                <img width="100" height="100" ng-if="User.img" ng-src="{{User.img}}">
-                <button class="btn btn-success" type="submit">Save</button>
-            </div>
-
             <article class="row">
                 <div class="col-xs-6">
-                    <h3>Users Image Will Go Here Later (will NOT be a title)</h3>
+                    <!-- TODO - Remove inline style, just for dev testing -->
+                    <img style="width: 100px; height: 100px;" ng-src="{{User.img}}"></img>
                 </div>
                 <div class="col-xs-6">
                     <div class="row">
                         <div class="col-xs-6">
                             <h3>{{User.user_name}}</h3>
-                            <p>{{User.first_name}}</p>
-                            <p>{{User.last_name}}</p>
+                            <p>{{User.first_name}} {{User.last_name}}</p>
                         </div>
                         <div class="col-xs-6">
                             <p>{{UsersStories.length}} stories</p>
-                            <p>{{User.email}}</p>
+                            <!-- <p>{{User.email}}</p> -->
                             <p>{{User.city}}, {{User.country}}</p>
-                            <button ng-click="userEdit();" type="button" class="btn btn-default btn-xs">
-                                Edit user info
-                            </button>
                         </div>
                     </div>
                 </div>
             </article>
-
-            <a ng-href="/writeStory"><i class="fa fa-pencil fa-2x"></i>Add new story</a>
 
             <a ng-href="/viewStory/{{story._id}}">
             <br>
             <div class="row">
                 <div class="row" ng-repeat="story in UsersStories|orderBy: '-date_created'">
                     <div class="col-xs-4">
-                        <img ng-src="{{story.section1.img}}"></img>
+                        <!-- TODO - Remove inline style, just for dev testing -->
+                        <img style="width: 100px; height: 100px;" ng-src="{{story.section1.img}}"></img>
                     </div>
                     <div class="col-xs-8">
                         <div class="row">
@@ -55,10 +42,6 @@
                         </div>
                         <div class="row">
                             <p>{{story.section1.text | limitTo: 300 }}{{story.section1.text.length > 300 ? '...' : ''}}</p></a>
-                            <a ng-href="/writeStory/{{story._id}}"><i class="fa fa-pencil-square-o fa-2x"></i></a>
-                            <button ng-click="deleteStory(story._id)" type="submit" class="btn btn-danger btn-xs">
-                                <i class="fa fa-trash-o fa-2x"></i>
-                            </button>
                             <span></span>
                         </div>
                     </div>
