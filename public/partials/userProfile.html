@@ -5,8 +5,7 @@
             <h2>User Profile</h2>
             <article class="row">
                 <div class="col-xs-6">
-                    <!-- TODO - Remove inline style, just for dev testing -->
-                    <img style="width: 100px; height: 100px;" ng-src="{{User.img}}"></img>
+                    <img ng-src="{{User.img}}"></img>
                 </div>
                 <div class="col-xs-6">
                     <div class="row">
@@ -28,8 +27,7 @@
             <div class="row">
                 <div class="row" ng-repeat="story in UsersStories|orderBy: '-date_created'">
                     <div class="col-xs-4">
-                        <!-- TODO - Remove inline style, just for dev testing -->
-                        <img style="width: 100px; height: 100px;" ng-src="{{story.section1.img}}"></img>
+                        <img ng-src="{{story.section1.img}}"></img>
                     </div>
                     <div class="col-xs-8">
                         <div class="row">
