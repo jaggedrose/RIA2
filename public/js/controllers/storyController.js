@@ -83,7 +83,7 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
     
   }
 
-  //Check if a image is choosen, upload the image and return the image url
+  //Check if a image is chosen, upload the image and return the image url
   $scope.$watch("files",function(){
     console.log("s", $scope);
     //console.log("s2", $scope.$parent);
@@ -213,7 +213,12 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
   });
 
   $scope.$on("cropme:done", function(ev, result, canvasEl) {
-    console.log("cropme:done");
+    var pseudoFile = result.croppedImage;
+        pseudoFile.name = result.filename;
+    FileUploader(pseudoFile).success(function(imgurl) {
+      //$scope.storySection.img = imgurl;
+      console.log("EUREKA: ", pseudoFile, "eeehhh = ", imgurl);
+    });
   });
 
 }]);
