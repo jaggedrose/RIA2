@@ -138,3 +138,9 @@ textarea.form-control {
 .on-top {
   z-index: 99;
 }
+.disappear {
+  display: none;
+}
+div.imgupload input {
+  display: none;
+}
