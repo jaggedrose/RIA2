@@ -86,7 +86,7 @@ var pCount = 0;
   };
   
   $scope.prevPageDisabled = function() {
-    return currentPage === 1 ? "disabled" : "";
+    return currentPage === 1 ? "hidden" : "";
   };
 
  function pageCount() {
@@ -97,7 +97,7 @@ var pCount = 0;
 
 
   $scope.nextPageDisabled = function() {
-    return currentPage === pageCount ? "disabled" : "";
+    return currentPage === pageCount ? "hidden" : "";
   };
 
   //$scope.search();
