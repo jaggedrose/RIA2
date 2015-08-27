@@ -1,5 +1,5 @@
 //"myAppName" controller.
-app.controller("searchController", ["$http", "$scope", "Tag","User","Story", function($http, $scope, Tag, User, Story) {
+app.controller("searchController", ["$http", "$scope", "$location", "Tag", "User", "Story", function($http, $scope, $location, Tag, User, Story) {
 
   $scope.show = "tags";
   
@@ -47,13 +47,15 @@ app.controller("searchController", ["$http", "$scope", "Tag","User","Story", fun
     console.log("tagName",tagName);
     var data;
     $scope.data = Story.get({tags:tagid,_populate:"tags"});
-      console.log("data", $scope.data);    
+      console.log("data", $scope.data);
       $scope.searchText = ("#") + tagName ;
       $scope.searchResults ="";
-      
-      
+  };
 
-    
+  // Takes you to the users profile page
+  $scope.searchUsers = function(userid, user_name) {
+    console.log("user id + user name", userid, user_name);
+    $location.path('/userProfile/' + userid);
   };
 
   //$scope.search();
