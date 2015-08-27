@@ -11,7 +11,6 @@ h4 {
 .appbackground {
   background-color: #292929;
 }
-
 .headerfont {
   color: #ffffff;
   font-family: 'Oswald', sans-serif;
@@ -32,6 +31,9 @@ h4 {
 }
 .txtuserdate {
   color: #777777;
+}
+p.formerror {
+  margin: 5px 0 0 12px;
 }
 .control {
   color: #999999;
@@ -136,4 +138,3 @@ textarea.form-control {
 .on-top {
   z-index: 99;
 }
-
