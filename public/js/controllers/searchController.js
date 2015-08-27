@@ -55,7 +55,7 @@ var pCount = 0;
       $scope.searchResults ="";
       createCurrentPage(1);
     });
-      
+  };    
 
   // Takes you to the users profile page
   $scope.searchUsers = function(userid, user_name) {
