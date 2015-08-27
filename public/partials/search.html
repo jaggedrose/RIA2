@@ -35,9 +35,44 @@
   <div class="row">
     <div class="">
       <div class="panel-body" >
-        <ul class="list-group">
+       <!--  <ul class="list-group">
         <li class="list-group-item" ng-repeat="stories in data"><a ng-href="/viewStory/{{stories._id}}">{{stories.title}}</a></li>
-        </ul>
+        </ul> -->
+        <div class="row" ng-repeat="story in data">
+          <div class="row">
+              <div class="col-xs-4 "> 
+                    <a ng-href="/viewStory/{{story._id}}/section/1" class="thumbnail">
+                      <img src={{story.section1.img}} title={{story.title}} class="img-responsive">
+                    </a>
+               </div>
+                <div class="col-xs-4"> 
+                   <a href="/viewStory/{{story._id}}/section/1" class="thumbnail">
+                      <img src={{story.section2.img}} title={{story.title}} class="img-responsive">
+                    </a>
+                </div>   
+                <div class="col-xs-4"> 
+                   <a href="/viewStory/{{story._id}}/section/1" class="thumbnail">
+                      <img src={{story.section3.img}} title={{story.title}} class="img-responsive">
+                    </a>
+                </div>
+          </div>
+        </div>
+              
+         <div class="row">
+            <ul class="pagination">
+              <!-- ng-class="prevPageDisabled()" -->
+              <li ng-class="prevPageDisabled()">
+                <a href ng-click="prevPage()"><i class="fa fa-caret-left fa-4x"></i></a>
+              </li>
+             <!--  <li ng-repeat="n in [] | range: pageCount()"
+                ng-class="{active: n == currentPage}" ng-click="setPage(n)">
+                <a href="#">{{n}}</a>
+              </li> -->
+              <li ng-class="nextPageDisabled()">
+                <a href ng-click="nextPage()"><i class="fa fa-caret-right fa-4x"></i></a>
+              </li>
+            </ul>
+          </div>  
       </div>
     </div>
   </div>

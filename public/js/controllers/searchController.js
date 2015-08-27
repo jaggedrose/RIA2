@@ -43,17 +43,61 @@ app.controller("searchController", ["$http", "$scope", "Tag","User","Story", fun
     }
   };
 
+var pCount = 0;
+
   $scope.searchStories = function(tagid,tagName){
     console.log("tagName",tagName);
     var data;
-    $scope.data = Story.get({tags:tagid,_populate:"tags"});
+    $scope.data = Story.get({tags:tagid,_populate:"tags"}, function() {
+      pCount=Math.ceil($scope.data.length/3);
       console.log("data", $scope.data);    
       $scope.searchText = ("#") + tagName ;
       $scope.searchResults ="";
-      
+      createCurrentPage(1);
+    });
       
 
     
+  };
+
+ function createCurrentPage(page){
+      $scope.currentPageStories =  $scope.data.slice((page-1)*3,page*3);
+        console.log(page,$scope.currentPageStories);
+    }
+
+
+  var currentPage = 1;
+
+   $scope.prevPage = function() {
+     console.log("Prev: ",currentPage+" "+ pageCount);
+    if (currentPage > 1) {
+      currentPage--;
+      createCurrentPage(currentPage);
+    }
+  };
+
+   $scope.nextPage = function() {
+     console.log("Next: ",currentPage+" "+ pageCount);
+     if (currentPage <= pageCount) {
+      currentPage++;
+     
+      createCurrentPage(currentPage);
+    }
+  };
+  
+  $scope.prevPageDisabled = function() {
+    return currentPage === 1 ? "disabled" : "";
+  };
+
+ function pageCount() {
+ 
+    return pCount;
+    // Math.ceil($scope.data.length/3);
+  }
+
+
+  $scope.nextPageDisabled = function() {
+    return currentPage === pageCount ? "disabled" : "";
   };
 
   //$scope.search();
