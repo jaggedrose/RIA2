@@ -72,7 +72,7 @@ var pCount = 0;
   var currentPage = 1;
 
    $scope.prevPage = function() {
-     console.log("Prev: ",currentPage+" "+ pageCount);
+     console.log("Prev: ",currentPage+" "+ pCount);
     if (currentPage > 1) {
       currentPage--;
       createCurrentPage(currentPage);
@@ -80,8 +80,8 @@ var pCount = 0;
   };
 
    $scope.nextPage = function() {
-     console.log("Next: ",currentPage+" "+ pageCount);
-     if (currentPage <= pageCount) {
+     console.log("Next: ",currentPage+" "+ pCount);
+     if (currentPage <= pCount) {
       currentPage++;
      
       createCurrentPage(currentPage);
@@ -92,15 +92,8 @@ var pCount = 0;
     return currentPage === 1 ? "hidden" : "";
   };
 
- function pageCount() {
- 
-    return pCount;
-    // Math.ceil($scope.data.length/3);
-  }
-
-
   $scope.nextPageDisabled = function() {
-    return currentPage === pageCount ? "hidden" : "";
+    return currentPage >= pCount ? "hidden" : "";
   };
 
   //$scope.search();

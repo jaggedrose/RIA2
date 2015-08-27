@@ -38,7 +38,7 @@
        <!--  <ul class="list-group">
         <li class="list-group-item" ng-repeat="stories in data"><a ng-href="/viewStory/{{stories._id}}">{{stories.title}}</a></li>
         </ul> -->
-        <div class="row" ng-repeat="story in data">
+        <div class="row" ng-repeat="story in currentPageStories">
           <div class="row">
               <div class="col-xs-4 "> 
                     <a ng-href="/viewStory/{{story._id}}/section/1" class="thumbnail">
