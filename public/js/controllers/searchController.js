@@ -1,5 +1,5 @@
 //"myAppName" controller.
-app.controller("searchController", ["$http", "$scope", "Tag","User","Story", function($http, $scope, Tag, User, Story) {
+app.controller("searchController", ["$http", "$scope", "$location", "Tag", "User", "Story", function($http, $scope, $location, Tag, User, Story) {
 
   $scope.show = "tags";
   
@@ -50,14 +50,17 @@ var pCount = 0;
     var data;
     $scope.data = Story.get({tags:tagid,_populate:"tags"}, function() {
       pCount=Math.ceil($scope.data.length/3);
-      console.log("data", $scope.data);    
+      console.log("data", $scope.data);  
       $scope.searchText = ("#") + tagName ;
       $scope.searchResults ="";
       createCurrentPage(1);
     });
       
 
-    
+  // Takes you to the users profile page
+  $scope.searchUsers = function(userid, user_name) {
+    console.log("user id + user name", userid, user_name);
+    $location.path('/userProfile/' + userid);
   };
 
  function createCurrentPage(page){
