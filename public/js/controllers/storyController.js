@@ -186,25 +186,36 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
     Story.update({_id:$scope.storyData._id},$scope.storyData);
 
   }
-/*
-//Function will check if there is a file choosen and then sent it to server folder uploads
-//then send the image url to the db
-  function uploadImage(){
-    $scope.$watch("files",function(){
-    // If there is no file array or it has not length do nothing
-    if(!$scope.files || $scope.files.length < 1){return;}
-    // Otherwise upload the file properly
-    FileUploader($scope.files[0]).success(function(imgurl) {
-    $scope.imgurl = storySection.img;
-    console.log("filnamn: ", $scope.files[0].name, "sökväg = ", storySection.img);
+  /*
+  //Function will check if there is a file choosen and then sent it to server folder uploads
+  //then send the image url to the db
+    function uploadImage(){
+      $scope.$watch("files",function(){
+      // If there is no file array or it has not length do nothing
+      if(!$scope.files || $scope.files.length < 1){return;}
+      // Otherwise upload the file properly
+      FileUploader($scope.files[0]).success(function(imgurl) {
+      $scope.imgurl = storySection.img;
+      console.log("filnamn: ", $scope.files[0].name, "sökväg = ", storySection.img);
+    });
   });
-});
-}
-*/
-/*
-  $scope.uploadImage = function(){
-    console.log ("Hey! Image upload!");
-      
-  };
-*/
+  }
+  */
+  /*
+    $scope.uploadImage = function(){
+      console.log ("Hey! Image upload!");
+        
+    };
+  */
+
+  $scope.$on("cropme:loaded", function(ev, width, height) {
+    console.log("cropme:loaded");
+  });
+
+  $scope.$on("cropme:done", function(ev, result, canvasEl) {
+    console.log("cropme:done");
+  });
+
 }]);
+
+

@@ -1,5 +1,5 @@
 //app declaration and dependency injection
-var app = angular.module("stories", ["ngRoute", "ngResource", 'ngFileUpload', "ui.bootstrap"]);
+var app = angular.module("stories", ["ngRoute", "ngResource", 'ngFileUpload', "ui.bootstrap","ngSanitize","ngTouch", "superswipe", "cropme"]);
 
 
 //app config
