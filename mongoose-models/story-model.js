@@ -19,7 +19,7 @@ module.exports = function(mongoose){
       text: String,
       img: String
     },
-    date_created: {type: Date },
+    date_created: {type: Date},
     date_modified: {type: Date},
     number_views: Number,
     tags: [{type:mongoose.Schema.Types.ObjectId, ref: 'Tag'}],

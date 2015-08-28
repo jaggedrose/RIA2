@@ -30,7 +30,8 @@ app.config(["$routeProvider", "$locationProvider", function($routeProvider, $loc
     })
     .when("/user", {
       templateUrl: "partials/user.html",
-      controller: "UserController"
+      controller: "UserController",
+      login: true // route is login protected
     })
     .when("/userEdit", {
       templateUrl: "partials/userEdit.html",
@@ -50,6 +51,10 @@ app.config(["$routeProvider", "$locationProvider", function($routeProvider, $loc
     .when("/search", {
       templateUrl: "partials/search.html",
       controller: "searchController"
+    })
+    .when("/userProfile/:id", {
+      templateUrl: "partials/userProfile.html",
+      controller: "userProfileController"
     })
     .otherwise({
       redirectTo: "/"
