@@ -1,18 +1,26 @@
 <div class="container-fluid appbackground">
     <div class="row">
         <section class="col-xs-12 mainframe">
-            <h1>{{aStory.title}}</h1>
-                
-            <h3>Story.Section.Image Here Later (will NOT be a title)</h3>
-                
-            <h4>{{storySection.header}}</h4>
-            <p>{{storySection.text}}</p>
-            <p>{{aStory.user_id.user_name}} {{aStory.date_created| date:'yyyy-MM-dd'}}</p>
-
-            <div class="navbox">
-              <i class="fa fa-chevron-left fa-2x control" ng-click="onSectionBack()"></i>
-              <i class="fa fa-chevron-right fa-2x control" ng-click="onSectionForward()" ></i>
+            <h2 class="strytitle">{{aStory.title}}</h1>            
+            <div class="stryimg">
+              <img ng-src="{{storySection.img}}">
             </div>
+            <div class="row">
+              <div class="col-xs-4">
+                <h4 class="stryheader">{{storySection.header}}</h4>
+              </div>
+              <div class="col-xs-8 navthumbs">
+                <a ng-href="/viewStory/{{aStory._id}}/section/3"><img ng-class="activeClass(3)" ng-src="{{aStory.section3.img}}" class="navthumb pull-right"></a> 
+
+                <a ng-href="/viewStory/{{aStory._id}}/section/2"><img  ng-class="activeClass(2)" ng-src="{{aStory.section2.img}}" class="navthumb pull-right"></a> 
+
+                <a ng-href="/viewStory/{{aStory._id}}/section/1"><img ng-class="activeClass(1)" ng-src="{{aStory.section1.img}}" class="navthumb pull-right"></a> 
+
+              </div>
+            </div>
+            <p class="strytxt">{{storySection.text}}</p>
+            <p class="txtcontrol txtuserdate pull-right">{{aStory.user_id.user_name}} {{aStory.date_created| date:'yyyy-MM-dd'}}</p>
+
         </section>
     </div>
 </div>

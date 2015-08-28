@@ -11,7 +11,7 @@ app.factory("Login",["$http", "$rootScope", "$location", function($http, $rootSc
     for(i in toClone){
       loginObj.user[i] = toClone[i];
     }
-    console.log("UPDATED USER OBJ",loginObj.user)
+    //console.log("UPDATED USER OBJ",loginObj.user)
   }
 
 

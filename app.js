@@ -66,6 +66,11 @@ m.mongresto.init(app,{
       method: "all",
       path: "login",
       controller: require('./api/custom/login.route')
+    },
+    {
+      method: "all",
+      path: "removeImage",
+      controller: require('./api/custom/removeImage')
     }
   ],
   // A function that gets access to the current question

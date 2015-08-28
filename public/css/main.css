@@ -29,22 +29,38 @@ h4 {
   color: #dddddd;
   font-family: 'Roboto', sans-serif;
 }
+.txtuserdate {
+  color: #777777;
+}
+p.formerror {
+  margin: 5px 0 0 12px;
+}
 .control {
   color: #999999;
 }
 .mainframe {
   border: 5px solid #000000;
   padding-top: 10px;
+  height: 100vh;
 }
 .navbox {
   text-align: center;
 }
+.navthumbs {
+  float: right;
+}
+.navthumb {
+  border: 3px solid black;
+  height: 60px;
+  width: 90px;
+  margin: 0 0 10px 10px;
+  opacity: 0.3;
+}
+.navthumbcurrent {
+  opacity: 1;
+}
 .cnttxt {
   text-align: center;
-}
-.imgupload {
-  text-align: center;
-  height: 350px;
 }
 .stdinputborder {
   border: 1px solid #000000;
@@ -53,6 +69,39 @@ h4 {
 .txtright {
   text-align: right;
 }
+.strytitle {
+  text-align: center;
+}
+.stryimg {
+  height: 35vh;
+  text-align: center;
+}
+.strytxt {
+  background-color: #292929;
+  font-family: 'Noticia Text', serif;
+  color: #cccccc;
+}
+.strytxt::-webkit-input-placeholder {
+  color: #999999;
+}
+.strytxt:-moz-placeholder {
+  /* Firefox 18- */
+  color: #999999;
+}
+.strytxt::-moz-placeholder {
+  /* Firefox 19+ */
+  color: #999999;
+}
+.strytxt:-ms-input-placeholder {
+  color: #999999;
+}
+p.strytxt {
+  margin-top: 2vh;
+}
+textarea.form-control {
+  height: 35vh;
+}
+.div.imgupload i,
 .nav,
 .pagination,
 .carousel,
@@ -94,4 +143,13 @@ h4 {
 .userStoryImg {
   max-height: 40vh;
   max-width: 40vw;
+}
+.on-top {
+  z-index: 99;
+}
+.disappear {
+  display: none;
+}
+div.imgupload input {
+  display: none;
 }
