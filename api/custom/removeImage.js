@@ -7,7 +7,9 @@ module.exports = function(mongoose) {
    var fs = require('fs');
    return function(req, res) {
       fs.unlink(publicFolder + req.body.imgsrc, function(err) {
-         if (err) { throw err; }
+        if (err) { 
+          //throw err; // @bug cannot throw err as some files have already been deleted from file system but not from DB, this needs to be fixed.
+        }
          res.json(true);
       });
    };

@@ -1,6 +1,7 @@
 //"myAppName" controller
 app.controller("storyController", ["$http", "$scope","$routeParams","$location", "Story", "Tag", "Login", "FileUploader", "$modal",
   function($http, $scope, $routeParams, $location, Story, Tag, Login, FileUploader, $modal) {
+  
   // Counter
   var sectionid = $routeParams.sectionid;
  
@@ -41,6 +42,7 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
       $scope.niceDate = niceDate($scope.storyData.date_created);
       $scope.storySection = $scope.storyData["section" + sectionid] ? $scope.storyData["section" + sectionid] : angular.copy(storySectionCC);
       $scope.tagNames = $scope.storyData.tags.map(function(tag){return tag.tagName}).join(", ");
+      
     });
   }
 
@@ -86,15 +88,17 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
     return nDate;
     
   }
+
   
   //Check if a image is choosen, upload the image and return the image url
-  $scope.$watch("files",function(){
+  $scope.$watch("file",function(){
     //console.log("s", $scope);
     //console.log("s2", $scope.$parent);
     // If there is no file array or it has not length do nothing
-    if(!$scope.files || $scope.files.length < 1){return;}
+    if(!$scope.file || $scope.file.length < 1){return;}
     // Otherwise upload the file properly
-    FileUploader($scope.files[0]).success(function(imgurl) {
+    FileUploader($scope.file[0]).success(function(imgurl) {
+      console.log("file: ", $scope.file[0]);
       $scope.hide = false;
       //Set the image url to the greater storySection object
       $scope.storySection.img = imgurl;
@@ -102,30 +106,73 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
     });
   });
 
-  // CHANGE SECTION
+  // CHANGE SECTION - Forward
   $scope.onSectionForward = function(){
+    
+    $scope.moved = true;
+
+    // Validation for the sectionFile field, *in case we are editing an existing story/section*.
+    // The *ng-model* of the sectionFile input is set to 'file' in order to feed ng-file-upload,
+    // and won't do for validating. Hence, we test .img on the storySection object.
+    
+    if ($scope.storySection.img) {
+      
+      // We got an image. Set the field to valid..
+      $scope.storyForm.sectionFile.$setValidity("required", true);
+      
+      // bugfix for duplicate "lost" sectionFile field created by
+      // ngf-select directive.
+      if ($scope.storyForm.$error.required) {
+        $scope.storyForm.$error.required.forEach(function(vErr) {
+          if (vErr.$name === $scope.storyForm.sectionFile.$name) {
+            vErr.$setValidity("required", true);
+          }
+        })
+      }
+    }
+
     if ($scope.storyForm.$valid) {
-      console.log ("Piff valid!", $scope.storyForm.$valid);
+      console.log ("Form valid!", $scope.storyForm.$valid);
       var nextSection = sectionid/1 + 1;
       if(nextSection > 3){nextSection = 1;}
       $location.url('/writeStory/' + id + '/section/' + nextSection);
+      $scope.moved = false;
     }
     else {
-      console.log ("Piff Forward motherFucker!", $scope.storyForm.$valid);
+      console.log ("storyForm.$valid: ", $scope.storyForm.$valid);
       return;
     }
   };
 
-  // CHANGE SECTION
+  // CHANGE SECTION - Backwards
   $scope.onSectionBack = function(){
-    if ($scope.storyForm.$valid) {
+    $scope.moved = true;
 
+    if ($scope.storySection.img) {
+      
+      // We got an image. Set the field to valid..
+      $scope.storyForm.sectionFile.$setValidity("required", true);
+      
+      // bugfix for duplicate "lost" sectionFile field created by
+      // ngf-select directive.
+      if ($scope.storyForm.$error.required) {
+        $scope.storyForm.$error.required.forEach(function(vErr) {
+          if (vErr.$name === $scope.storyForm.sectionFile.$name) {
+            vErr.$setValidity("required", true);
+          }
+        })
+      }
+    }
+
+    if ($scope.storyForm.$valid) {
+      console.log ("Form valid! backwards..", $scope.storyForm.$valid);
       var nextSection = sectionid/1 - 1;
       if(nextSection < 1){nextSection = 3;}
       $location.url('/writeStory/' + id + '/section/' + nextSection);
+      $scope.moved = false;
     }
     else {
-      console.log ("Piff backward motherFucker!", $scope.storyForm.$valid);
+      console.log ("backward motherFucker! valid: ", $scope.storyForm.$valid);
       return;
     }
   };
