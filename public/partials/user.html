@@ -2,7 +2,7 @@
     <div class="row userRow">
         <section class="col-xs-12 col-sm-10 col-md-8 col-lg-6 col-xs-offset-0 col-sm-offset-1  col-md-offset-2  col-lg-offset-3 mainframe">
             <div ng-show="User._id">
-                <button type="submit" class="btn btn-danger" ng-click="logoutUser()">Log Out</button>
+                <button type="submit" class="btn btn-default" ng-click="logoutUser()">Log Out</button>
             </div>
 
             <h2>User Profile</h2>
@@ -56,7 +56,7 @@
                         <div class="row">
                             <p>{{story.section1.text | limitTo: 300 }}{{story.section1.text.length > 300 ? '...' : ''}}</p></a>
                             <a ng-href="/writeStory/{{story._id}}"><i class="fa fa-pencil-square-o fa-2x"></i></a>
-                            <button ng-click="deleteStory(story._id)" type="submit" class="btn btn-danger btn-xs">
+                            <button ng-click="deleteStory(story._id)" type="submit">
                                 <i class="fa fa-trash-o fa-2x"></i>
                             </button>
                             <span></span>
