@@ -52,6 +52,10 @@ app.config(["$routeProvider", "$locationProvider", function($routeProvider, $loc
       templateUrl: "partials/search.html",
       controller: "searchController"
     })
+    .when("/userProfile/:id", {
+      templateUrl: "partials/userProfile.html",
+      controller: "userProfileController"
+    })
     .otherwise({
       redirectTo: "/"
     });
