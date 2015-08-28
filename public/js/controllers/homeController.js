@@ -52,7 +52,7 @@ app.controller("homeController", ["$http", "$scope", "Story","$routeParams","$lo
     };
 
   $scope.prevPageDisabled = function() {
-    return currentPage === 1 ? "disabled" : "";
+    return currentPage === 1 ? "hidden" : "";
   };
 
   $scope.pageCount = function() {
@@ -62,7 +62,7 @@ app.controller("homeController", ["$http", "$scope", "Story","$routeParams","$lo
 
 
   $scope.nextPageDisabled = function() {
-    return currentPage === $scope.pageCount() ? "disabled" : "";
+    return currentPage === $scope.pageCount() ? "hidden" : "";
   };
 
 }]);
