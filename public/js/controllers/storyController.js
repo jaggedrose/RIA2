@@ -1,6 +1,7 @@
 //"myAppName" controller
-app.controller("storyController", ["$http", "$scope","$routeParams","$location", "Story", "Tag", "Login", "FileUploader",
-  function($http, $scope, $routeParams, $location, Story, Tag, Login, FileUploader) {
+app.controller("storyController", ["$http", "$scope","$routeParams","$location", "Story", "Tag", "Login", "FileUploader", "$modal",
+  function($http, $scope, $routeParams, $location, Story, Tag, Login, FileUploader, $modal) {
+  
   // Counter
   var sectionid = $routeParams.sectionid;
  
@@ -11,7 +12,7 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
     img: "",
     date_created: "",
     date_modified: "",
-    number_views: "",
+    number_views: ""
   };
 
   // IF WE SHOULD LOAD AN EXISTING STORY
@@ -38,8 +39,10 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
       }
 
       $scope.storyData = response;
+      $scope.niceDate = niceDate($scope.storyData.date_created);
       $scope.storySection = $scope.storyData["section" + sectionid] ? $scope.storyData["section" + sectionid] : angular.copy(storySectionCC);
       $scope.tagNames = $scope.storyData.tags.map(function(tag){return tag.tagName}).join(", ");
+      
     });
   }
 
@@ -69,10 +72,13 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
         $location.url("/writeStory/" + arrayOfNewStories[0]._id);
       }
     );
-    $scope.tagNames = '';
-  }
+    //$scope.tagNames = '';
 
-  $scope.storySection = angular.copy(storySectionCC);
+    // DON'T DO ANYTHING ELSE INSIDE THIS ELSE
+    // REDIRECT IS UNDERWAY
+  }
+  // END OF LOADING THE STORY
+  window.scope = $scope;
 
   // compose a 'nice' date
   function niceDate (date) {
@@ -82,38 +88,102 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
     return nDate;
     
   }
+ 
 
-  //Check if a image is chosen, upload the image and return the image url
-  $scope.$watch("files",function(){
-    console.log("s", $scope);
+  //Check if a image is choosen, upload the image and return the image url
+  $scope.$watch("file",function(){
+    //console.log("s", $scope);
+
     //console.log("s2", $scope.$parent);
     // If there is no file array or it has not length do nothing
-    if(!$scope.files || $scope.files.length < 1){return;}
+    if(!$scope.file || $scope.file.length < 1){return;}
     // Otherwise upload the file properly
-    FileUploader($scope.files[0]).success(function(imgurl) {
+    FileUploader($scope.file[0]).success(function(imgurl) {
+      console.log("file: ", $scope.file[0]);
+      $scope.hide = false;
+      //Set the image url to the greater storySection object
       $scope.storySection.img = imgurl;
-      console.log("filnamn: ", $scope.files[0].name, "sökväg = ", $scope.storySection.img);
+      //console.log("filnamn: ", $scope.files[0].name, "sökväg = ", $scope.storySection.img);
     });
   });
 
-
-  // CHANGE SECTION
+  // CHANGE SECTION - Forward
   $scope.onSectionForward = function(){
-     var nextSection = sectionid/1 + 1;
-     if(nextSection > 3){nextSection = 1;}
-     $location.url('/writeStory/' + id + '/section/' + nextSection);
+    
+    $scope.moved = true;
+
+    // Validation for the sectionFile field, *in case we are editing an existing story/section*.
+    // The *ng-model* of the sectionFile input is set to 'file' in order to feed ng-file-upload,
+    // and won't do for validating. Hence, we test .img on the storySection object.
+    
+    if ($scope.storySection.img) {
+      
+      // We got an image. Set the field to valid..
+      $scope.storyForm.sectionFile.$setValidity("required", true);
+      
+      // bugfix for duplicate "lost" sectionFile field created by
+      // ngf-select directive.
+      if ($scope.storyForm.$error.required) {
+        $scope.storyForm.$error.required.forEach(function(vErr) {
+          if (vErr.$name === $scope.storyForm.sectionFile.$name) {
+            vErr.$setValidity("required", true);
+          }
+        })
+      }
+    }
+
+    if ($scope.storyForm.$valid) {
+      console.log ("Form valid!", $scope.storyForm.$valid);
+      var nextSection = sectionid/1 + 1;
+      if(nextSection > 3){nextSection = 1;}
+      $location.url('/writeStory/' + id + '/section/' + nextSection);
+      $scope.moved = false;
+    }
+    else {
+      console.log ("storyForm.$valid: ", $scope.storyForm.$valid);
+      return;
+    }
   };
 
-  // CHANGE SECTION
+  // CHANGE SECTION - Backwards
   $scope.onSectionBack = function(){
-     var nextSection = sectionid/1 - 1;
-     if(nextSection < 1){nextSection = 3;}
-     $location.url('/writeStory/' + id + '/section/' + nextSection);
+    $scope.moved = true;
+
+    if ($scope.storySection.img) {
+      
+      // We got an image. Set the field to valid..
+      $scope.storyForm.sectionFile.$setValidity("required", true);
+      
+      // bugfix for duplicate "lost" sectionFile field created by
+      // ngf-select directive.
+      if ($scope.storyForm.$error.required) {
+        $scope.storyForm.$error.required.forEach(function(vErr) {
+          if (vErr.$name === $scope.storyForm.sectionFile.$name) {
+            vErr.$setValidity("required", true);
+          }
+        })
+      }
+    }
+
+    if ($scope.storyForm.$valid) {
+      console.log ("Form valid! backwards..", $scope.storyForm.$valid);
+      var nextSection = sectionid/1 - 1;
+      if(nextSection < 1){nextSection = 3;}
+      $location.url('/writeStory/' + id + '/section/' + nextSection);
+      $scope.moved = false;
+    }
+    else {
+      console.log ("backward motherFucker! valid: ", $scope.storyForm.$valid);
+      return;
+    }
   };
+
+  
+
 
   // ON LOCATION CHANGE try to save the story including updated section, tags etc
   $scope.$on('$locationChangeStart',function(){
-
+    
     // Don't do anything if no storyData loaded 
     if(!$scope.storyData){return;}
 
@@ -186,6 +256,7 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
     Story.update({_id:$scope.storyData._id},$scope.storyData);
 
   }
+
   /*
   //Function will check if there is a file choosen and then sent it to server folder uploads
   //then send the image url to the db
@@ -223,6 +294,38 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
       $scope.cropped = true;
     });
   });
+
+
+  //Control modal for deleting image
+ window.theScope = $scope;
+  $scope.openModal = function(size) {
+    var imgName = $scope.storySection.img.substr($scope.storySection.img.lastIndexOf('/') + 1);
+    //console.log("openModal !!!", imgName);
+    var modalInstance = $modal.open({
+      templateUrl: 'partials/deleteImgModal.html',
+      controller: 'deleteImgController',
+      scope: $scope,
+      size: size,
+      resolve: {
+        imgUrl: function () {
+          return imgName;
+          //return $scope.storySection.img;
+        }
+      }
+    });
+
+    modalInstance.result.then(function() {
+      // If user choose "Yes"-button
+      $http.post('/api/removeImage', {imgsrc: $scope.storySection.img}).success(function() {
+        $scope.storySection.img = "";
+        //console.log("You choosed Yes-button", "Bildfil =",$scope.storySection.img);
+      });
+       
+    }, function () {
+      // If user choose "No"-button
+      //console.log("You choosed No-button");
+    });
+  };
 
 }]);
 

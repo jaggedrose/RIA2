@@ -9,7 +9,9 @@
             <div class="form-group imgupload stdinputborder">
                 <input type="file" ngf-select ng-model="files" ngf-accept="'image/*'"><i class="fa fa-file-image-o fa-2x control"></i>
                 <img width="100" height="100" ng-if="User.img" ng-src="{{User.img}}">
-                <button class="btn btn-default" ng-click="save()" type="submit">Save</button>
+
+                <button class="btn btn-success" ng-click="save()" type="submit">Save</button>
+
             </div>
 
             <article class="row">
@@ -40,7 +42,7 @@
             <a ng-href="/viewStory/{{story._id}}">
             <br>
             <div class="row">
-                <div class="row" ng-repeat="story in UsersStories|orderBy: '-date_created'">
+                <div class="row" scroll-to-top-when="storyDeleted" ng-repeat="story in UsersStories|orderBy: '-date_created'" data-story-id="{{story._id}}">
                     <div class="col-xs-4">
                         <img ng-src="{{story.section1.img}}"></img>
                     </div>

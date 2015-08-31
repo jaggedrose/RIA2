@@ -1,6 +1,6 @@
 //"myAppName" controller.
 
-app.controller("UserController", ["$http", "$scope", "$location", "Story", "User", "Login", "FileUploader", function($http, $scope, $location, Story, User, Login, FileUploader) {
+app.controller("UserController", ["$http", "$scope", "$location", "Story", "User","Login","FileUploader", function($http, $scope, $location, Story, User, Login, FileUploader) {
 
   //$scope.User = Login.user;
   console.log("UserController", Login.user);
@@ -14,14 +14,22 @@ app.controller("UserController", ["$http", "$scope", "$location", "Story", "User
       callback();
     }
   }
-
+  
+  var storyHash = {};
   waitForUser(function() {
-    $scope.UsersStories = Story.get({user_id: Login.user._id, _populate:"user_id"});
+    $scope.UsersStories = Story.get({user_id: Login.user._id, _populate:"user_id"}, function() {
+      $scope.UsersStories.forEach(function(story, index) {
+        storyHash[story._id] = {
+          index: index,
+          story:story
+        };
+      });
+    });
     $scope.User = User.getById(Login.user._id, function() {
       console.log("UserController :", $scope.User);
     });
-  });
 
+  });
 
   $scope.profImage = '';
 
@@ -52,15 +60,22 @@ app.controller("UserController", ["$http", "$scope", "$location", "Story", "User
     };
 
   $scope.userEdit = function() {
-    console.log("User ",$scope.User.user_name);
+    console.log("User ",$scope.User.userName);
      $location.path('/userEdit');
     // $scope.User = Login.user;
+   
+  };
+
+  $scope.scrollToStory = function(storyid) {
+    $scope.$broadcast("storyDeleted", storyid);
   };
 
   $scope.deleteStory = function(storyid){
     Story.remove({_id:storyid},function(){
-       $scope.UsersStories = Story.get({user_id: $scope.User._id, _populate:"user_id"});
+      $scope.UsersStories.splice(storyHash[storyid].index, 1);
+      //$scope.UsersStories = Story.get({user_id: $scope.User._id, _populate:"user_id"});
     });
   };
+
 
 }]);
