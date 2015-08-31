@@ -2,15 +2,33 @@
     <div class="row">
         <section class="col-xs-12 mainframe">
             <form ng-submit="createStory()" novalidate name="storyForm" class="">
-              <div class="form-group">
+                <div class="form-group">
                     <!-- <label for="title" class="txtcontrol">Title</label> -->
                     <input ng-model="storyData.title" class="form-control stdinputbgcolour brtinputtxtcolour stdinputborder headerfont plcholderhead cnttxt" type="text" id="title" placeholder="The title of your story." required>
                 </div>
+                <!-- 
                 <div class="form-group imgupload stdinputborder">
                     <input type="file" ngf-select ng-model="files" ngf-accept="'image/*'"><i class="fa fa-file-image-o fa-2x control"></i>
                     <img width="100" height="100" ng-if="imgurl" ng-src="{{imgurl}}">
-                </div> 
-                
+                </div>
+                -->
+                <!-- Testing a crop module -->
+                <div class="form-group">
+                    <cropme
+                        width="640"
+                        height="400"
+                        ratio="1"
+                        icon-class=""
+                        type="png"
+                        destination-width="300"
+                        id="cropme1"
+                        ok-label="Crop"
+                        ng-src="{{imgurl}}"
+                        ng-model="files"
+                        cancel-label="Cancel">
+                    </cropme>
+                    <p ng-show="cropped">Cropping done!</p>
+                </div>
                 <div class="form-group">
                     <!-- <label for="header" class="txtcontrol">Header</label> -->
                     <!-- ng-model="2" NOT working //HL -->
@@ -24,33 +42,15 @@
                     <!-- <label for="tags" class="txtcontrol">Tags</label> -->
                     <input ng-model="tagNames" class="form-control stdinputbgcolour stdinputtxtcolour stdinputborder txtbody plcholdertxt" type="text" id="tags" placeholder="Add tags here, separated by commas. No # needed." required>
                 </div>
-                
-                  
-                  <div class="cols-xs-8 txtcontrol control txtright">
+                <div class="cols-xs-8 txtcontrol control txtright">
                     <p>Username - {{storyData.niceDate}}</p>
-                  </div>
-                
+                </div>
                 <div class="navbox">
                   <i class="fa fa-chevron-left fa-2x control" ng-click="onSectionBack()"></i>
                   <i class="fa fa-chevron-right fa-2x control" ng-click="onSectionForward()" ></i>
                 </div>
                 <br><br>
-
             </form>
-
-            <!-- Testing a crop module -->
-            <cropme
-                width="640"
-                height="400"
-                ratio="1"
-                icon-class=""
-                type="png"
-                destination-width="300"
-                id="cropme1"
-                ok-label="Ok"
-                src="images/myImage.jpg"
-                cancel-label="Cancel">
-            </cropme>
         </section>
     </div>
 </div>

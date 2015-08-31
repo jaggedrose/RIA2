@@ -209,15 +209,18 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
   */
 
   $scope.$on("cropme:loaded", function(ev, width, height) {
+    $scope.cropped = false;
     console.log("cropme:loaded");
   });
 
+  //When user presses "Crop"-button
   $scope.$on("cropme:done", function(ev, result, canvasEl) {
     var pseudoFile = result.croppedImage;
         pseudoFile.name = result.filename;
     FileUploader(pseudoFile).success(function(imgurl) {
       //$scope.storySection.img = imgurl;
       console.log("EUREKA: ", pseudoFile, "eeehhh = ", imgurl);
+      $scope.cropped = true;
     });
   });
 
