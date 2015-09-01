@@ -14,22 +14,24 @@
                   <!-- <p class="txtcontrol formerror" ng-show="storyForm.sectionFile.$touched && storyForm.sectionFile.$invalid || (moved && storyForm.sectionFile.$invalid)">Choose an image for this section.</p>
                   
                   <p class="txtcontrol formerror" ng-show="storyForm.sectionFile.$touched && storyForm.sectionFile.$invalid || (moved && storyForm.sectionFile.$invalid)">Choose an image for this section.</p>
-
               </div>  -->
               <div class="form-group">
-                  <cropme
-                      width="640"
-                      height="400"
-                      ratio="1"
-                      icon-class=""
-                      type="png"
-                      destination-width="300"
-                      id="cropme1"
-                      ok-label="Crop"
-                      ng-src="{{imgurl}}"
-                      cancel-label="Cancel">
-                  </cropme>
-                  <p ng-show="cropped">Cropping done!</p>
+                <cropme
+                  width="640"
+                  height="400"
+                  ratio="1"
+                  icon-class=""
+                  type="png"
+                  destination-width="300"
+                  id="fileUpload"
+                  ok-label="Crop"
+                  cancel-label="Cancel"
+                  ng-show="croppingNotDone"
+                  >
+                </cropme>
+                <p class="txtcontrol formerror" ng-show="storyForm.sectionFile.$invalid || (moved && storyForm.sectionFile.$invalid)">Choose and crop an image for this section.</p>
+                <!-- Nonvisible input to store <cropme>'s required value -->
+                <input type="hidden" name="sectionFile" ng-model="unusedBananaModel" required>
               </div>
               <div class="form-group stryimg stdinputborder imgview">
                 <img class="img-responsive" ng-if="storySection.img" ng-src="{{storySection.img}}"> 

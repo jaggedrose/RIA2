@@ -2,6 +2,8 @@
 app.controller("storyController", ["$http", "$scope","$routeParams","$location", "Story", "Tag", "Login", "FileUploader", "$modal",
   function($http, $scope, $routeParams, $location, Story, Tag, Login, FileUploader, $modal) {
   
+  $scope.croppingNotDone = true;
+
   // Counter
   var sectionid = $routeParams.sectionid;
  
@@ -103,6 +105,7 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
       $scope.hide = false;
       //Set the image url to the greater storySection object
       $scope.storySection.img = imgurl;
+      $scope.storyForm.sectionFile.$setValidity("required", true);
       //console.log("filnamn: ", $scope.files[0].name, "sökväg = ", $scope.storySection.img);
     });
   });
@@ -118,8 +121,9 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
     
     if ($scope.storySection.img) {
       
+      //console.log("FOrm.sectionFile", $scope.storyForm.sectionFile);
       // We got an image. Set the field to valid..
-      $scope.storyForm.sectionFile.$setValidity("required", true);
+      //$scope.storyForm.sectionFile.$setValidity("required", true);
       
       // bugfix for duplicate "lost" sectionFile field created by
       // ngf-select directive.
@@ -152,7 +156,7 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
     if ($scope.storySection.img) {
       
       // We got an image. Set the field to valid..
-      $scope.storyForm.sectionFile.$setValidity("required", true);
+      //$scope.storyForm.sectionFile.$setValidity("required", true);
       
       // bugfix for duplicate "lost" sectionFile field created by
       // ngf-select directive.
@@ -293,7 +297,7 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
     //});
     console.log("Pseudofile: ", pseudoFile);
     $scope.file = pseudoFile;
-    $scope.cropped = true;
+    $scope.croppingNotDone = false;
   });
 
 
