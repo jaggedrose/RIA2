@@ -8,7 +8,8 @@
 @txtheader: #FFF;
 @txtbody: #CCC;
 @txtcontrol: #DDD;
-@txtuserdate: #777; 
+@txtuserdatetags: #777;
+@taglabel: #444; 
 @frame: #000;
 @control: #999;
 @stdinputtxtcolour: #CCC;
@@ -66,8 +67,10 @@ h1, h2, h3, h4 {
   font-family: 'Roboto', sans-serif;
 }
 
-.txtuserdate {
-  color: @txtuserdate;
+.txtuserdatetags {
+  color: @txtuserdatetags;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 p.formerror {
@@ -81,6 +84,17 @@ p.formerror {
 }
 
 // GENERIC FORMATTING STUFF FOR VARIOUS DIV'S AND ELEMENTS ********************
+
+// tag display in viewstory
+
+.tag {
+  display: inline-block;
+  margin: 0 4px 4px 0;
+  padding: 0 5px 0 5px;
+  border: @taglabel;
+  border-radius: 3px;
+  background-color: @taglabel;
+}
 
 // border for app's main div 
 
@@ -97,19 +111,29 @@ p.formerror {
 }
 
 .navthumbs {
-  float:right;
+  
+}
+
+.navthumbs a {
+  
 }
 
 .navthumb {
   border: 3px solid black;
   height: 60px;
   width: 90px;
-  margin: 0 0 10px 10px;
   opacity: 0.3;
+
 }
 
 .navthumbcurrent {
   opacity: 1;
+}
+
+.center {
+  margin-left: auto;
+  margin-right: auto;
+  
 }
 
 .cnttxt {
@@ -133,6 +157,7 @@ p.formerror {
 
 .stryimg {
   height: 35vh;
+  overflow: hidden;
   text-align: center;
 }
 
@@ -145,6 +170,8 @@ p.formerror {
   .stdinputtxtcolour;
   .txtbody;
   .plcholdertxt;
+  // height: 35vh; I commented this out. We're going to look at formatting this box with the rows property /Per
+  word-wrap: break-word;
 }
 
 p.strytxt {
@@ -210,13 +237,14 @@ textarea.form-control {
 }
 
 //  Change element depth ***********************************************************
-
 // Z-angel
 .on-top {
   z-index: 99;
 }
+
 // Visibility **********************************************************************
 // Hide element
+
 .disappear {
   display: none;
 }
