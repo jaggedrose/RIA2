@@ -37,13 +37,16 @@ h6 {
 p.formerror {
   margin: 5px 0 0 12px;
 }
+.userPage p {
+  font-size: 11px;
+  color: #cccccc;
+}
 .control {
   color: #999999;
 }
 .mainframe {
   border: 5px solid #000000;
   padding-top: 10px;
-  height: 100vh;
 }
 .navbox {
   text-align: center;
@@ -70,6 +73,12 @@ p.formerror {
 }
 .txtright {
   text-align: right;
+}
+.mb20 {
+  margin-bottom: 20px;
+}
+.mb40 {
+  margin-bottom: 40px;
 }
 .strytitle {
   text-align: center;
@@ -138,20 +147,11 @@ textarea.form-control {
 .plcholdertxt:-ms-input-placeholder {
   color: #999999;
 }
-.userPage {
-  margin: 0 10px 0;
-}
 .userProfileImg {
-  max-height: 45vh;
-  max-width: 45vw;
-}
-.userProfileInfo,
-.userStoryList {
-  margin-bottom: 40px;
+  width: 100%;
 }
 .userStoryImg {
-  max-height: 30vh;
-  max-width: 30vw;
+  width: 100%;
 }
 .on-top {
   z-index: 99;

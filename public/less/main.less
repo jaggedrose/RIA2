@@ -1,5 +1,5 @@
 // WU14-RIA 2-GRUPP 1
-// LESS for the app-project STORIES 
+// LESS for the app-project STORIES
 
 // COLOUR VARIABLES ***********************************************************
 // Grayscale for the time being
@@ -8,7 +8,7 @@
 @txtheader: #FFF;
 @txtbody: #CCC;
 @txtcontrol: #DDD;
-@txtuserdate: #777; 
+@txtuserdate: #777;
 @frame: #000;
 @control: #999;
 @stdinputtxtcolour: #CCC;
@@ -40,13 +40,13 @@ h1, h2, h3, h4, h5, h6 {
   font-family: 'Oswald', sans-serif;
 }
 
-// colour of *text* in text input fields 
+// colour of *text* in text input fields
 
 .stdinputtxtcolour {
   color: @stdinputtxtcolour;
 }
 
-// colour of *background* of text input fields    
+// colour of *background* of text input fields
 
 .stdinputbgcolour {
   background-color: @stdinputbgcolour;
@@ -73,6 +73,11 @@ h1, h2, h3, h4, h5, h6 {
 p.formerror {
   margin: 5px 0 0 12px;
 }
+// For user profile txt
+.userPage p {
+  font-size: 11px;
+  color: @txtbody;
+}
 
 // for control elements - buttons, icons
 
@@ -82,12 +87,12 @@ p.formerror {
 
 // GENERIC FORMATTING STUFF FOR VARIOUS DIV'S AND ELEMENTS ********************
 
-// border for app's main div 
+// border for app's main div
 
 .mainframe {
   border: 5px solid @frame;
   padding-top: 10px;
-  height:100vh;
+  // height: 100vh;
 }
 
 // Navigation box formatting - centered icons
@@ -123,6 +128,12 @@ p.formerror {
 
 .txtright {
   text-align: right;
+}
+.mb20 {
+  margin-bottom: 20px;
+}
+.mb40 {
+  margin-bottom: 40px;
 }
 
 // STORY WRITE / PRESENTATION *************************************************
@@ -252,19 +263,11 @@ textarea.form-control {
 
 
 // User Profile Styling *********************
-.userPage {
-  margin: 0 10px 0;
-}
 .userProfileImg {
-  max-height: 45vh;
-  max-width: 45vw;
-}
-.userProfileInfo, .userStoryList {
-  margin-bottom: 40px;
+  width: 100%;
 }
 .userStoryImg {
-  max-height: 30vh;
-  max-width: 30vw;
+  width: 100%;
 }
 
 //  Change element depth ***********************************************************
