@@ -21,12 +21,12 @@
                 </div>
             
             <div class="row"layout="row" layout-align="center center">
-              <div>
-                <ng-md-icon ng-click="goToFAQ()" icon="!" style="fill:white" size="40"></ng-md-icon></div>
-              <div>
-                <ng-md-icon ng-class="{true: 'disabled', false: ''}[prevPageDisabled()]" ng-click="prevPage()" icon="play_arrow" class="rotatedIcon" style="fill:white" size="50"></ng-md-icon><ng-md-icon ng-hide="nextPageDisabled()" ng-click="nextPage()" icon="play_arrow" style="fill:white" size="50"></ng-md-icon></div>
-                <div>
-                   <ng-md-icon ng-click="goToCreateStory()"icon="add_circle" style="fill:white" size="40"></ng-md-icon></div>
+              <div><md-button>
+                <ng-md-icon ng-click="goToFAQ()" icon="!" style="fill:white" size="40"></ng-md-icon></md-button></div>
+              <div><md-button>
+                <ng-md-icon ng-class="{true: 'disabled', false: ''}[prevPageDisabled()]" ng-click="prevPage()" icon="play_arrow" class="rotatedIcon" style="fill:white" size="50"></ng-md-icon><ng-md-icon ng-hide="nextPageDisabled()" ng-click="nextPage()" icon="play_arrow" style="fill:white" size="50"></ng-md-icon></md-button></div>
+                <div><md-button>
+                   <ng-md-icon ng-click="goToCreateStory()"icon="add_circle" style="fill:white" size="40"></ng-md-icon></md-button></div>
                 </div>               
             </div>
         </div>
