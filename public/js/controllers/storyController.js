@@ -128,7 +128,7 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
           if (vErr.$name === $scope.storyForm.sectionFile.$name) {
             vErr.$setValidity("required", true);
           }
-        })
+        });
       }
     }
 
@@ -161,7 +161,7 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
           if (vErr.$name === $scope.storyForm.sectionFile.$name) {
             vErr.$setValidity("required", true);
           }
-        })
+        });
       }
     }
 
@@ -287,12 +287,13 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
   //When user presses "Crop"-button
   $scope.$on("cropme:done", function(ev, result, canvasEl) {
     var pseudoFile = result.croppedImage;
-        pseudoFile.name = result.filename;
-    FileUploader(pseudoFile).success(function(imgurl) {
+    pseudoFile.name = result.filename;
+    //FileUploader(pseudoFile).success(function(imgurl) {
       //$scope.storySection.img = imgurl;
-      console.log("EUREKA: ", pseudoFile, "eeehhh = ", imgurl);
-      $scope.cropped = true;
-    });
+    //});
+    console.log("Pseudofile: ", pseudoFile);
+    $scope.file = pseudoFile;
+    $scope.cropped = true;
   });
 
 
