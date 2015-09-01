@@ -4,7 +4,9 @@ body {
 h1,
 h2,
 h3,
-h4 {
+h4,
+h5,
+h6 {
   color: #ffffff;
   font-family: 'Oswald', sans-serif;
 }
@@ -136,19 +138,23 @@ textarea.form-control {
 .plcholdertxt:-ms-input-placeholder {
   color: #999999;
 }
+.userPage {
+  margin: 0 10px 0;
+}
 .userProfileImg {
-  max-height: 50vh;
-  max-width: 50vw;
+  max-height: 45vh;
+  max-width: 45vw;
+}
+.userProfileInfo,
+.userStoryList {
+  margin-bottom: 40px;
 }
 .userStoryImg {
-  max-height: 40vh;
-  max-width: 40vw;
+  max-height: 30vh;
+  max-width: 30vw;
 }
 .on-top {
   z-index: 99;
-}
-.disappear {
-  display: none;
 }
 div.imgupload input {
   display: none;

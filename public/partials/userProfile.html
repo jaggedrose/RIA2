@@ -1,16 +1,15 @@
 <div class"container-fluid appbackground">
     <div class="row">
-        <section class="col-xs-12 col-sm-10 col-md-8 col-lg-6 col-xs-offset-0 col-sm-offset-1  col-md-offset-2  col-lg-offset-3 mainframe">
+        <section class="col-xs-12 mainframe userPage">
 
-            <h2>{{User.user_name}}</h2>
-            <article class="row">
+            <div class="row userProfileInfo">
                 <div class="col-xs-6">
+                    <h2>{{User.user_name}}</h2>
                     <img ng-src="{{User.img}}" class="userProfileImg"></img>
                 </div>
                 <div class="col-xs-6">
                     <div class="row">
                         <div class="col-xs-6">
-                            <!-- <h3>{{User.user_name}}</h3> -->
                             <p>{{User.first_name}} {{User.last_name}}</p>
                         </div>
                         <div class="col-xs-6">
@@ -19,31 +18,31 @@
                         </div>
                     </div>
                 </div>
-            </article>
+            </div>
 
             <a ng-href="/viewStory/{{story._id}}">
-            <br>
-            <div class="row">
-                <div class="row" ng-repeat="story in UsersStories|orderBy: '-date_created'">
-                    <div class="col-xs-4">
-                        <img ng-src="{{story.section1.img}}" class="userStoryImg"></img>
-                    </div>
-                    <div class="col-xs-8">
-                        <div class="row">
-                            <div class="col-xs-4">
-                                <h3>{{story.title}}</h3>
-                            </div>
-                            <div class="col-xs-6">
-                                <p>{{story.date_created| date:'yyyy-MM-dd'}}</p>
-                            </div>
+            
+                <div class="row userStoryList">
+                    <div class="row" ng-repeat="story in UsersStories|orderBy: '-date_created'">
+                        <div class="col-xs-4">
+                            <img ng-src="{{story.section1.img}}" class="userStoryImg"></img>
                         </div>
-                        <div class="row">
-                            <p>{{story.section1.text | limitTo: 300 }}{{story.section1.text.length > 300 ? '...' : ''}}</p></a>
-                            <span></span>
+                        <div class="col-xs-8">
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <h3>{{story.title}}</h3>
+                                </div>
+                                <div class="col-xs-6">
+                                    <span>{{story.date_created| date:'yyyy-MM-dd'}}</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <p>{{story.section1.text | limitTo: 50 }}{{story.section1.text.length > 50 ? '...' : ''}}</p>        
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </a>
         </section>
     </div>
 </div>
