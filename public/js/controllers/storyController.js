@@ -92,14 +92,14 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
 
   //Check if a image is choosen, upload the image and return the image url
   $scope.$watch("file",function(){
-    //console.log("s", $scope);
+    console.log("file", $scope.file);
 
     //console.log("s2", $scope.$parent);
     // If there is no file array or it has not length do nothing
     if(!$scope.file || $scope.file.length < 1){return;}
     // Otherwise upload the file properly
-    FileUploader($scope.file[0]).success(function(imgurl) {
-      console.log("file: ", $scope.file[0]);
+    FileUploader($scope.file).success(function(imgurl) {
+      console.log("file: ", $scope.file);
       $scope.hide = false;
       //Set the image url to the greater storySection object
       $scope.storySection.img = imgurl;
