@@ -3,15 +3,17 @@
         <div class="col-xs-12 mainframe">
             <h2>Welcome!</h2>
             <div class="row" md-swipe-left="onSwipeLeft()" md-swipe-right="onSwipeRight()" ng-repeat="story in currentPageStories">
-                <div class="row" layout="row" layout-align="space-between center">
+                <div class="row"  layout-align="space-between center">
                     <div class="col-xs-4 "><a ng-href="viewStory/{{story._id}}">
                         <img src={{story.section1.img}} title={{story.title}}  class="img-responsive">
                         </a>
                     </div>
+                     <md-divider></md-divider>
                     <div class="col-xs-4"><a ng-href="viewStory/{{story._id}}">
                         <img src={{story.section2.img}} title={{story.title}} class="img-responsive">
                         </a>
                     </div>
+                     <md-divider></md-divider>
                     <div class="col-xs-4"><a ng-href="viewStory/{{story._id}}">
                         <img src={{story.section3.img}} title={{story.title}} class="img-responsive">
                         </a>
@@ -20,7 +22,7 @@
             </div>
             <div class="row" layout="row" layout-align="center center">
                 <div>
-                    <ng-md-icon ng-click="goToFAQ()" icon="!" style="fill:white" size="40"></ng-md-icon>
+                    <ng-md-icon ng-click="goToFAQ()" icon="" style="fill:white" size="40"></ng-md-icon>
                 </div>
                 <div>
                     <ng-md-icon ng-class="{true: 'disabled', false: ''}[prevPageDisabled()]" ng-click="prevPage()" ng-hide="prevPageDisabled()" icon="keyboard_arrow_left"  style="fill:white" size="70"></ng-md-icon>
