@@ -18,7 +18,8 @@
 @stdinputbordercolour: #000;
 @plcholderhead: #AAA;
 @plcholdertxt: #999;
-
+@btn-non-active-bg:#707070;
+@btn-active-bg:#fff;
 
 // COLOURS AND FONTS **********************************************************
 
@@ -57,6 +58,22 @@ h1, h2, h3, h4, h5, h6 {
 .txtbody {
   font-family: 'Noticia Text', serif;
   color: @txtbody;
+}
+
+.btn-search {
+  .btn-primary {
+    background-color: @btn-active-bg;
+    color:#333;
+    border-color:@txtuserdate;
+     &:hover {
+      background-color: @btn-default-color;
+      border-color: #fff;
+  }
+  .btn-default {
+    background-color: @btn-non-active-bg;
+    color:#333;
+    border-color:@txtcontrol;
+  }
 }
 
 // for text displaying user details, text in buttons, labels
