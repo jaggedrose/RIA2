@@ -82,10 +82,14 @@ app.controller("homeController", ["$http", "$scope", "Story","$routeParams","$lo
     return Math.ceil(allStories.length/3);
   };
 
+
   $scope.nextPageDisabled = function() {
     return currentPage === $scope.pageCount();
   };
-  
+
+  $scope.goToCreateStory = function(){
+    $location.path('/writeStory');
+  };
   $scope.goToFAQ = function(){
     $location.path('/FAQ');
   };
