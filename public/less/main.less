@@ -61,18 +61,27 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .btn-search {
-  .btn-primary {
+  .btn-active {
     background-color: @btn-active-bg;
     color:#333;
-    border-color:@txtuserdate;
+    border-color:#fff;
      &:hover {
-      background-color: @btn-default-color;
+      background-color: #eee;
       border-color: #fff;
+    }
+     &:focus {
+      background-color: @btn-active-bg;
+      border-color: #fff;
+    }
   }
-  .btn-default {
+  .btn-inactive {
     background-color: @btn-non-active-bg;
     color:#333;
     border-color:@txtcontrol;
+    &:hover {
+      background-color: #ddd;
+      border-color: #444;
+    }
   }
 }
 
@@ -317,4 +326,3 @@ div.profileImgFrame {
 div.imgupload input {
     display: none;  
 }
-
