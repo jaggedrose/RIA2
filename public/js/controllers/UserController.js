@@ -25,8 +25,10 @@ app.controller("UserController", ["$http", "$scope", "$location", "Story", "User
         };
       });
     });
-    $scope.User = Login.user;
-    console.log("Keep calm and keep user:",$scope.User);
+    $scope.User = User.getById(Login.user._id, function() {
+      delete $scope.User.password;
+      console.log("UserController :", $scope.User);
+    });
 
   });
 
