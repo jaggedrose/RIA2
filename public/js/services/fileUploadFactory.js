@@ -4,6 +4,9 @@
 app.factory("FileUploader", ["Upload", "$q", function(Upload, $q) {
   // FileUploader factory returns a function
   return function(file) {
+
+    console.log("f", file);
+
     if (!file.name) {
       // @bug THIS IS A TEMPORARY BUGFIX FOR ngf-select field duplication
       console.log("FileUploader missing filename, deep clone: ", angular.copy(file));

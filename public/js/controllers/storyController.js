@@ -2,6 +2,8 @@
 app.controller("storyController", ["$http", "$scope","$routeParams","$location", "Story", "Tag", "Login", "FileUploader", "$modal",
   function($http, $scope, $routeParams, $location, Story, Tag, Login, FileUploader, $modal) {
   
+  $scope.croppingNotDone = true;
+
   // Counter
   var sectionid = $routeParams.sectionid;
  
@@ -88,20 +90,22 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
     return nDate;
     
   }
+ 
 
-  
   //Check if a image is choosen, upload the image and return the image url
   $scope.$watch("file",function(){
-    //console.log("s", $scope);
+    console.log("file", $scope.file);
+
     //console.log("s2", $scope.$parent);
     // If there is no file array or it has not length do nothing
     if(!$scope.file || $scope.file.length < 1){return;}
     // Otherwise upload the file properly
-    FileUploader($scope.file[0]).success(function(imgurl) {
-      console.log("file: ", $scope.file[0]);
+    FileUploader($scope.file).success(function(imgurl) {
+      console.log("file: ", $scope.file);
       $scope.hide = false;
       //Set the image url to the greater storySection object
       $scope.storySection.img = imgurl;
+      $scope.storyForm.sectionFile.$setValidity("required", true);
       //console.log("filnamn: ", $scope.files[0].name, "sökväg = ", $scope.storySection.img);
     });
   });
@@ -117,8 +121,9 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
     
     if ($scope.storySection.img) {
       
+      //console.log("FOrm.sectionFile", $scope.storyForm.sectionFile);
       // We got an image. Set the field to valid..
-      $scope.storyForm.sectionFile.$setValidity("required", true);
+      //$scope.storyForm.sectionFile.$setValidity("required", true);
       
       // bugfix for duplicate "lost" sectionFile field created by
       // ngf-select directive.
@@ -127,7 +132,7 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
           if (vErr.$name === $scope.storyForm.sectionFile.$name) {
             vErr.$setValidity("required", true);
           }
-        })
+        });
       }
     }
 
@@ -151,7 +156,7 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
     if ($scope.storySection.img) {
       
       // We got an image. Set the field to valid..
-      $scope.storyForm.sectionFile.$setValidity("required", true);
+      //$scope.storyForm.sectionFile.$setValidity("required", true);
       
       // bugfix for duplicate "lost" sectionFile field created by
       // ngf-select directive.
@@ -160,7 +165,7 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
           if (vErr.$name === $scope.storyForm.sectionFile.$name) {
             vErr.$setValidity("required", true);
           }
-        })
+        });
       }
     }
 
@@ -256,6 +261,46 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
 
   }
 
+  /*
+  //Function will check if there is a file choosen and then sent it to server folder uploads
+  //then send the image url to the db
+    function uploadImage(){
+      $scope.$watch("files",function(){
+      // If there is no file array or it has not length do nothing
+      if(!$scope.files || $scope.files.length < 1){return;}
+      // Otherwise upload the file properly
+      FileUploader($scope.files[0]).success(function(imgurl) {
+      $scope.imgurl = storySection.img;
+      console.log("filnamn: ", $scope.files[0].name, "sökväg = ", storySection.img);
+    });
+  });
+  }
+  */
+  /*
+    $scope.uploadImage = function(){
+      console.log ("Hey! Image upload!");
+        
+    };
+  */
+
+  $scope.$on("cropme:loaded", function(ev, width, height) {
+    $scope.cropped = false;
+    console.log("cropme:loaded");
+  });
+
+  //When user presses "Crop"-button
+  $scope.$on("cropme:done", function(ev, result, canvasEl) {
+    var pseudoFile = result.croppedImage;
+    pseudoFile.name = result.filename;
+    //FileUploader(pseudoFile).success(function(imgurl) {
+      //$scope.storySection.img = imgurl;
+    //});
+    console.log("Pseudofile: ", pseudoFile);
+    $scope.file = pseudoFile;
+    $scope.croppingNotDone = false;
+  });
+
+
   //Control modal for deleting image
  window.theScope = $scope;
   $scope.openModal = function(size) {
@@ -286,4 +331,7 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
       //console.log("You choosed No-button");
     });
   };
+
 }]);
+
+
