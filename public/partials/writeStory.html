@@ -7,15 +7,32 @@
                 <input ng-model="storyData.title" name="storyTitle" class="form-control stdinputbgcolour brtinputtxtcolour stdinputborder headerfont plcholderhead cnttxt" type="text" id="title" placeholder="The title of your story." ng-minlength="2" ng-maxlength="60" required>
                 <p class="txtcontrol formerror" ng-show="storyForm.storyTitle.$touched && storyForm.storyTitle.$invalid || (moved && storyForm.storyTitle.$invalid)">Give your story a title. (2 - 60 characters)</p>
               </div>
-              <div class="form-group imgupload stdinputborder">
+              <!-- <div class="form-group imgupload stdinputborder">
                 <label for="fileUpload"><i ng-hide="storySection.img" class="fa fa-file-image-o fa-2x control"></i></label>
                 <i ng-show="storySection.img" ng-click="openModal()" class="fa fa-trash-o fa-2x control" ></i>
                 <input type="file" id="fileUpload" name="sectionFile" ngf-select ng-model="file" valid-file ngf-accept="'image/*'" ng-required="true">                  
-                  <!-- <p class="txtcontrol formerror" ng-show="storyForm.sectionFile.$touched && storyForm.sectionFile.$invalid || (moved && storyForm.sectionFile.$invalid)">Choose an image for this section.</p> -->
+                  <!-- <p class="txtcontrol formerror" ng-show="storyForm.sectionFile.$touched && storyForm.sectionFile.$invalid || (moved && storyForm.sectionFile.$invalid)">Choose an image for this section.</p>
                   
                   <p class="txtcontrol formerror" ng-show="storyForm.sectionFile.$touched && storyForm.sectionFile.$invalid || (moved && storyForm.sectionFile.$invalid)">Choose an image for this section.</p>
-
-              </div> 
+              </div>  -->
+              <div class="form-group">
+                <cropme
+                  width="640"
+                  height="400"
+                  ratio="1"
+                  icon-class=""
+                  type="png"
+                  destination-width="300"
+                  id="fileUpload"
+                  ok-label="Crop"
+                  cancel-label="Cancel"
+                  ng-show="croppingNotDone"
+                  >
+                </cropme>
+                <p class="txtcontrol formerror" ng-show="storyForm.sectionFile.$invalid || (moved && storyForm.sectionFile.$invalid)">Choose and crop an image for this section.</p>
+                <!-- Nonvisible input to store <cropme>'s required value -->
+                <input type="hidden" name="sectionFile" ng-model="unusedBananaModel" required>
+              </div>
               <div class="form-group stryimg stdinputborder imgview">
                 <img class="img-responsive" ng-if="storySection.img" ng-src="{{storySection.img}}"> 
               </div>
@@ -52,7 +69,6 @@
                 <i class="fa fa-chevron-right fa-2x control" ng-disabled="storyForm.$invalid" ng-click="onSectionForward()" ></i>
               </div>
               <br><br>
-
             </form>
         </section>
     </div>

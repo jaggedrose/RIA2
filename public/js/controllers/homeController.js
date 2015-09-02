@@ -7,7 +7,7 @@ app.filter('range', function() {
   };
 });
 
-app.controller("homeController", ["$http", "$scope", "Story","$routeParams","$location", 
+app.controller("homeController", ["$http", "$scope", "Story","$routeParams","$location",
   function($http, $scope, Story, $routeParams, $location) {
 
     var allStories = [];
@@ -27,8 +27,28 @@ app.controller("homeController", ["$http", "$scope", "Story","$routeParams","$lo
 
     window.da = $scope;
 
-  var currentPage = 1;  
+  var currentPage = 1;
+  $scope.onSwipeLeft= function() {
+         console.log("Next: ",currentPage+" "+ $scope.pageCount());
+    if (currentPage <= $scope.pageCount()) {
+      currentPage++;
+         
+      createCurrentPage(currentPage);
+    }
+  };
 
+  $scope.storySection = function(storyId){
+    $location.path('/viewStory/' + storyId + "/section/"+ 1 );
+
+  };
+
+  $scope.onSwipeRight = function() {
+     console.log("Prev: ",currentPage+" "+ $scope.pageCount());
+    if (currentPage > 1) {
+      currentPage--;
+      createCurrentPage(currentPage);
+    }
+  };
    $scope.prevPage = function() {
      console.log("Prev: ",currentPage+" "+ $scope.pageCount());
     if (currentPage > 1) {
@@ -36,6 +56,8 @@ app.controller("homeController", ["$http", "$scope", "Story","$routeParams","$lo
       createCurrentPage(currentPage);
     }
   };
+
+
 
    $scope.nextPage = function() {
      console.log("Next: ",currentPage+" "+ $scope.pageCount());
@@ -63,6 +85,13 @@ app.controller("homeController", ["$http", "$scope", "Story","$routeParams","$lo
 
   $scope.nextPageDisabled = function() {
     return currentPage === $scope.pageCount() ? "hidden" : "";
+  };
+
+  $scope.goToCreateStory = function(){
+    $location.path('/writeStory');
+  };
+  $scope.goToFAQ = function(){
+    $location.path('/FAQ');
   };
 
 }]);

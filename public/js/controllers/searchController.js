@@ -2,7 +2,9 @@
 app.controller("searchController", ["$http", "$scope", "$location", "Tag", "User", "Story", function($http, $scope, $location, Tag, User, Story) {
 
   $scope.show = "tags";
-  
+  $scope.$watch(function() {
+    console.log("s", $scope.show);
+  });
   $scope.activateSearchUsers = function(){
     $scope.show = "users";
     $scope.searchText = '';
