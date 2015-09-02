@@ -8,33 +8,40 @@ app.controller("searchController", ["$http", "$scope", "$location", "Tag", "User
   $scope.activateSearchUsers = function(){
     $scope.show = "users";
     $scope.searchText = '';
-    $scope.search();
+    $scope.currentPageStories={};
+    // $scope.search();
   };
   
   $scope.activateSearchTags = function(){
     $scope.show = "tags";
-    $scope.searchText = '';
-    $scope.search();
+    $scope.searchText = '';    
+    $scope.currentPageStories={};
+    // $scope.search();
   };
 
   $scope.search = function() {
+   $scope.searchResults='';
     switch ($scope.show) {
       case 'users':
         $scope.data="";
+         if ($scope.searchText.length>0) {
         User.get({user_name: new RegExp($scope.searchText, 'i')}, function(data) {
           console.log("got users", data);
           $scope.searchResults = data;
            $scope.hashtag=("");
         });
+      }
         break;
 
       case 'tags':
         $scope.data="";
+         if ($scope.searchText.length>0) {
         Tag.get({tagName: new RegExp($scope.searchText, 'i')}, function(data) {
           console.log("got tags", data);
           $scope.searchResults = data;
           $scope.hashtag=("#");
         });
+      }
         break;
 
       default:
@@ -42,6 +49,7 @@ app.controller("searchController", ["$http", "$scope", "$location", "Tag", "User
           console.log("got stories", data.title);
           $scope.searchResults = data;
         });
+
     }
   };
 

@@ -27,6 +27,28 @@ h6 {
   font-family: 'Noticia Text', serif;
   color: #cccccc;
 }
+.btn-search .btn-active {
+  background-color: #ffffff;
+  color: #333;
+  border-color: #fff;
+}
+.btn-search .btn-active:hover {
+  background-color: #eee;
+  border-color: #fff;
+}
+.btn-search .btn-active:focus {
+  background-color: #ffffff;
+  border-color: #fff;
+}
+.btn-search .btn-inactive {
+  background-color: #707070;
+  color: #333;
+  border-color: #dddddd;
+}
+.btn-search .btn-inactive:hover {
+  background-color: #ddd;
+  border-color: #444;
+}
 .txtcontrol {
   color: #dddddd;
   font-family: 'Roboto', sans-serif;
