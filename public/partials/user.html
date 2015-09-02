@@ -3,17 +3,17 @@
         <section class="col-xs-12 mainframe userPage">
 
             <div ng-show="User._id" class="logoutBtn">
-                <button type="submit" class="btn btn-default btn-xs" ng-click="logoutUser()">Log Out</button>
+                <button type="submit" class="btn btn-xs" ng-click="logoutUser()">Log Out</button>
             </div>
 
             <h2>{{User.user_name}}</h2>
             <div class="row userProfileInfo mb40">
                 <div class="col-xs-6">
-                    <div class="imgupload stdinputborder">
-                        <label for="profileImg"><i class="fa fa-file-image-o fa-2x control"></i></label>
+                    <div class="imgupload stdinputborder profileImgFrame">
+                        <label for="profileImg" ng-class="{'dispNone': User.img}"><i class="fa fa-file-image-o fa-2x control uploadIcon" ng-hide="User.img"></i></label>
                         <input type="file" id="profileImg" name="profileImg" ngf-select ng-model="files" ngf-accept="'image/*'">
                         <img ng-if="User.img" ng-src="{{User.img}}" class="userProfileImg">
-                        <button class="btn btn-default btn-xs" ng-click="save()" type="submit">Save</button>
+                        <i class="fa fa-check-square fa-1x saveImg" ng-show="User.img" ng-click="save()"></i>
                     </div>
                 </div>
                 <div class="col-xs-6">
@@ -28,7 +28,7 @@
                     </div>
                     <div>
                         <p>{{User.email}}</p>
-                        <button ng-click="userEdit();" type="button" class="btn btn-default btn-xs">
+                        <button ng-click="userEdit();" type="button" class="btn btn-xs">
                                 Edit user info
                         </button>
                     </div>
