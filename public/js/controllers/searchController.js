@@ -8,14 +8,16 @@ app.controller("searchController", ["$http", "$scope", "$location", "Tag", "User
   $scope.activateSearchUsers = function(){
     $scope.show = "users";
     $scope.searchText = '';
-    $scope.currentPageStories={};
+     $scope.searchResults ="";
+    $scope.currentPageStories='';
     // $scope.search();
   };
   
   $scope.activateSearchTags = function(){
     $scope.show = "tags";
-    $scope.searchText = '';    
-    $scope.currentPageStories={};
+    $scope.searchText = '';  
+     $scope.searchResults =""; 
+    $scope.currentPageStories='';
     // $scope.search();
   };
 
