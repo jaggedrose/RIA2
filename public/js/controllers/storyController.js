@@ -323,6 +323,7 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
       // If user choose "Yes"-button
       $http.post('/api/removeImage', {imgsrc: $scope.storySection.img}).success(function() {
         $scope.storySection.img = "";
+        $scope.croppingNotDone = true;
         //console.log("You choosed Yes-button", "Bildfil =",$scope.storySection.img);
       });
        
