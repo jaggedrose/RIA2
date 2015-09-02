@@ -29,12 +29,15 @@ h4 {
   color: #dddddd;
   font-family: 'Roboto', sans-serif;
 }
+
+
 .txtuserdate {
   color: #777777;
 }
 p.formerror {
   margin: 5px 0 0 12px;
 }
+
 .control {
   color: #999999;
 }
@@ -136,6 +139,7 @@ textarea.form-control {
 .plcholdertxt:-ms-input-placeholder {
   color: #999999;
 }
+
 .on-top {
   z-index: 99;
 }
@@ -145,3 +149,4 @@ textarea.form-control {
 div.imgupload input {
   display: none;
 }
+>>>>>>> origin/master
