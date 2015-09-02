@@ -29,12 +29,15 @@ h4 {
   color: #dddddd;
   font-family: 'Roboto', sans-serif;
 }
+
+
 .txtuserdate {
   color: #777777;
 }
 p.formerror {
   margin: 5px 0 0 12px;
 }
+
 .control {
   color: #999999;
 }
@@ -136,6 +139,7 @@ textarea.form-control {
 .plcholdertxt:-ms-input-placeholder {
   color: #999999;
 }
+
 .on-top {
   z-index: 99;
 }
@@ -145,15 +149,3 @@ textarea.form-control {
 div.imgupload input {
   display: none;
 }
-
-.swipedemoBasicUsage .demo-swipe {
-  color: white;
-  padding: 20px 10px; }
-.swipedemoBasicUsage .no-select {
-  pointer-events: none;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none; }
