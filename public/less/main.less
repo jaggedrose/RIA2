@@ -14,6 +14,7 @@
 @stdinputtxtcolour: #CCC;
 @brtinputtxtcolour: #EEE;
 @drkinputtxtcolour: #999;
+@resultcolor:#888;
 @stdinputbgcolour: #292929;
 @stdinputbordercolour: #000;
 @plcholderhead: #AAA;
@@ -60,11 +61,20 @@ h1, h2, h3, h4, h5, h6 {
   color: @txtbody;
 }
 
-.btn-search {
+#btn-search {
+  margin-top: -15px;
+ 
+  .btn:last-child:not(:first-child) {
+    margin-left: -5px;
+  }
   .btn-active {
     background-color: @btn-active-bg;
     color:#333;
     border-color:#fff;
+    width: 50%;
+    z-index: 2;
+    border-bottom-right-radius:0.8em;
+    border-bottom-left-radius:0.8em;
      &:hover {
       background-color: #eee;
       border-color: #fff;
@@ -72,17 +82,41 @@ h1, h2, h3, h4, h5, h6 {
      &:focus {
       background-color: @btn-active-bg;
       border-color: #fff;
-    }
+    } 
   }
   .btn-inactive {
-    background-color: @btn-non-active-bg;
-    color:#333;
-    border-color:@txtcontrol;
+    background-color: @btn-non-active-bg; 
+    color:@brtinputtxtcolour;
+    border-color:@txtcontrol;    
+    width: 50%;
+    z-index: 1;
+    border-bottom-right-radius:0.8em;
+    border-bottom-left-radius:0.8em;
     &:hover {
       background-color: #ddd;
       border-color: #444;
     }
   }
+}
+
+#asearch {
+  .list-group-item {
+    background-color: @resultcolor;
+    border-radius: 0.5em;
+    margin: 3px 0;
+     &:hover {
+      background-color: #999;
+      border-color: #fff;
+    }
+    a {
+      color: @brtinputtxtcolour;
+    }
+ }
+}
+
+#basic-addon1 {
+  padding: 0 12px;
+  background-color: @stdinputbgcolour;
 }
 
 // for text displaying user details, text in buttons, labels
@@ -186,7 +220,7 @@ p.formerror {
 
 }
 
-.strytxt {
+.strytxt, #SearchInput {
   .stdinputbgcolour; 
   .stdinputtxtcolour;
   .txtbody;
