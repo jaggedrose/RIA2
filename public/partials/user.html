@@ -10,7 +10,8 @@
             <div class="row userProfileInfo mb40">
                 <div class="col-xs-6">
                     <div class="imgupload stdinputborder profileImgFrame">
-                        <label for="profileImg" ng-class="{'dispNone': User.img}"><i class="fa fa-file-image-o fa-2x control uploadIcon" ng-hide="User.img"></i></label>
+                        <!-- <label for="profileImg" ng-class="{'dispNone': User.img}"></label> -->
+                        <i class="fa fa-file-image-o fa-4x control uploadIcon" ng-hide="User.img" ng-class="{'dispNone': User.img}"></i>
                         <input type="file" id="profileImg" name="profileImg" ngf-select ng-model="files" ngf-accept="'image/*'">
                         <img ng-if="User.img" ng-src="{{User.img}}" class="userProfileImg">
                         <i class="fa fa-check-square fa-1x saveImg" ng-show="User.img" ng-click="save()"></i>

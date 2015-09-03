@@ -298,6 +298,23 @@ textarea.form-control {
 
 
 // User Profile Styling *********************
+
+// Hide image input button
+div.imgupload input {
+  max-width: 93px;
+  position: absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  padding: 25px 0;
+  opacity: 0;
+}
+.uploadIcon {
+  position: absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%)
+}
 .userProfileImg {
   width: 100%;
 }
@@ -307,12 +324,6 @@ textarea.form-control {
 div.profileImgFrame {
   min-height: 80px;
   position: relative;
-}
-.uploadIcon {
-  position: absolute;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%)
 }
 .saveImg {
   position: absolute;
@@ -329,13 +340,9 @@ div.profileImgFrame {
 
 // Visibility **********************************************************************
 
-// Hide image input button
-div.imgupload input {
-    display: none;  
-}
-
 //Materia*****************************************************************************
 
 div.icons {
  fill: @control;
 }
+
