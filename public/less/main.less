@@ -128,6 +128,15 @@ h1, h2, h3, h4, h5, h6 {
   background-color: @stdinputbgcolour;
 }
 
+#padd18 {
+  padding: 0 18px;
+}
+
+.center {
+  width: 20%;
+  margin: auto;
+}
+
 // for text displaying user details, text in buttons, labels
 
 .txtcontrol {
@@ -226,10 +235,20 @@ p.formerror {
 .stryimg {
   height: 35vh;
   text-align: center;
-}
+} 
 
 .stryheader {
 
+}
+
+#SearchArrow {
+  .stdinputbgcolour; 
+  .stdinputtxtcolour;
+  .plcholdertxt;
+  border-style: none;
+  &:focus {
+    outline: 0;
+  }
 }
 
 .strytxt, #SearchInput {

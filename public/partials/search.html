@@ -2,8 +2,8 @@
   <div class="row">
     <form class="form-horizontal text-center">
       <div class="form-group">
-        <div class="col-xs-12 input-group">
-          <span class="input-group-addon" id="basic-addon1"><i class="fa fa-search fa-2x control"></i></span>
+        <div class="col-xs-12 input-group" id="padd18">
+          <span class="input-group-addon" id="basic-addon1"><i class="fa fa-search fa-1x control"></i></span>
                <input type="text" id="SearchInput" ng-model="searchText"  ng-change="search();" placeholder="{{show}}"  class="form-control " aria-describedby="basic-addon1">
         </div>
       </div>
@@ -54,19 +54,21 @@
         </div>
               
          <div class="row">
+            <div class="center">
             <ul class="pagination">
               <!-- ng-class="prevPageDisabled()" -->
               <li ng-class="prevPageDisabled()">
-                <a href ng-click="prevPage()"><i class="fa fa-caret-left fa-4x"></i></a>
+                <a id="SearchArrow" href ng-click="prevPage()"><i class=" fa fa-caret-left fa-4x"></i></a>
               </li>
              <!--  <li ng-repeat="n in [] | range: pageCount()"
                 ng-class="{active: n == currentPage}" ng-click="setPage(n)">
                 <a href="#">{{n}}</a>
               </li> -->
               <li ng-class="nextPageDisabled()">
-                <a href ng-click="nextPage()"><i class="fa fa-caret-right fa-4x"></i></a>
+                <a id="SearchArrow" href ng-click="nextPage()"><i class="fa fa-caret-right fa-4x"></i></a>
               </li>
             </ul>
+           </div>
           </div>  
       </div>
     </div>

@@ -10,6 +10,7 @@ app.controller("searchController", ["$http", "$scope", "$location", "Tag", "User
     $scope.searchText = '';
      $scope.searchResults ="";
     $scope.currentPageStories='';
+    $(".pagination").hide();
     // $scope.search();
   };
   
@@ -18,6 +19,7 @@ app.controller("searchController", ["$http", "$scope", "$location", "Tag", "User
     $scope.searchText = '';  
      $scope.searchResults =""; 
     $scope.currentPageStories='';
+     $(".pagination").hide();
     // $scope.search();
   };
 
