@@ -95,7 +95,7 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
     
   }
    
-  //Check if an image is choosen, upload the image and return the image url
+  // Check if an image is choosen, upload the image and return the image url
   $scope.$watch("file",function(){
     // If there is no file array or it has no length do nothing
     if(!$scope.file || $scope.file.length < 1){return;}
@@ -103,15 +103,59 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
     FileUploader($scope.file).success(function(imgurl) {
       console.log("file: ", $scope.file);
       $scope.hide = false;
-      //Set the image url to the greater storySection object
+      // Set the image url to the greater storySection object
       $scope.storySection.img = imgurl;
+      // Handle validation
       $scope.storyForm.sectionFile.$setValidity("required", true);
+      // Set storySection.img to current section in storyData
+      /*
+      Story.create(
+      {
+        user_id:Login.user._id,
+        title:"",
+        date_created: "",
+        date_modified: "",
+        tags:[],
+        number_views: ""
+      }, function(arrayOfNewStories){
+        // As soon as we have a new story and its id
+        // change url to reflect the story id
+        $location.url("/writeStory/" + arrayOfNewStories[0]._id);
+      });
+      */
+    
+
+
+
       
-      // Save image
-      Story.update({_id:$scope.storyData._id}, $scope.storyData["section" + sectionid].img);
-      
+      console.log("storySection: ", $scope.storySection);
+      /*
+      $scope.storyData["section" + sectionid] = $scope.storySection;
+      $scope.storyData["section" + sectionid].img = $scope.storySection.img;
+      */
     });
   });
+
+  // function to show a section's saved image OR a section's currently loaded but not saved image 
+
+  $scope.showImg = function(currSec) {
+    var img = '';
+    if (
+      $scope.storyData &&
+      $scope.storyData['section' + currSec] &&
+      $scope.storyData['section' + currSec].img
+    ) {
+      img = $scope.storyData['section' + currSec].img;
+    } else if (
+      $scope.storySection &&
+      $scope.storySection.img &&
+      $scope.storySection.sectionNo == currSec
+    ) {
+      img = $scope.storySection.img;
+    }
+
+    return img;
+  }
 
   // CHANGE SECTION - Forward
   $scope.onSectionForward = function(){
