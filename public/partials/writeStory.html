@@ -37,23 +37,33 @@
                 <i ng-show="storySection.img" ng-click="openModal()" class="fa fa-trash-o fa-2x control" ></i>
                 <img class="img-responsive" ng-if="storySection.img" ng-src="{{storySection.img}}"> 
               </div>
-              <div class="row">
-                <div class="form-group col-xs-4">
+              
+                <div class="form-group stdinputborder">
                   <input ng-class="{true: 'invalidInput', false: ''}[storyForm.sectionHeader.$invalid]" ng-model="storySection.header" name="sectionHeader" class="form-control stdinputbgcolour brtinputtxtcolour stdinputborder headerfont plcholderhead" type="text" id="header" placeholder="Headline for this section.." ng-minlength="2" ng-maxlength="30" required>
                   <p class="txtcontrol formerror" ng-show="storyForm.sectionHeader.$touched && storyForm.sectionHeader.$invalid || (moved && storyForm.sectionHeader.$invalid)">Write a headline for this section. (2 - 60 characters)</p>
                 </div>
-                <div class="col-xs-8 navthumbs">
-                  <a href="#"><img class="navthumb pull-right"></a> 
-                  <a href="#"><img class="navthumb pull-right"></a> 
-                  <a href="#"><img class="navthumb pull-right"></a> 
-                </div> 
-                 
-              </div>
+      
               <div class="form-group">
                   
                   <textarea ng-model="storySection.text" name="sectionText" class="form-control strytxt stdinputborder " id="text" placeholder="Your text.." required ng-minlength="150" ng-maxlength="300"></textarea>
                   <p class="txtcontrol formerror" ng-show="storyForm.sectionText.$touched && storyForm.sectionText.$invalid || (moved && storyForm.sectionText.$invalid)">Express yourself! (We expect a text of minimum 150 and up to 300 characters)</p>
               </div>
+
+              <div class="navthumbs center" center>
+                  
+                <!-- 
+                <a href="#" ng-if="storySection.img"><img class="navthumb pull-right" ng-src="{{storySection.img}}"></a> 
+                <a href="#"><img class="navthumb pull-right"></a> 
+                <a href="#"><img class="navthumb pull-right"></a> -->
+
+                <a ng-href="/writeStory/{{storyData._id}}/section/1"><img ng-class="activeClass(1)" ng-src="{{storyData.section1.img || storySection.img}}" class="navthumb"></a> 
+
+                <a ng-href="/writeStory/{{storyData._id}}/section/2"><img ng-class="activeClass(2)" ng-src="{{storyData.section2.img || storySection.img}}" class="navthumb"></a> 
+
+                <a ng-href="/writeStory/{{storyData._id}}/section/3"><img ng-class="activeClass(3)" ng-src="{{storyData.section3.img || storySection.img}}" class="navthumb"></a> 
+
+              </div>
+
               <div class="form-group">
                   <!-- <label for="tags" class="txtcontrol">Tags</label> -->
                   <input ng-model="tagNames" name="storyTags" class="form-control stdinputbgcolour stdinputtxtcolour stdinputborder txtbody plcholdertxt" type="text" id="tags" placeholder="Add tags here, separated by commas. No # needed." ng-minlength="2" ng-maxlength="150"required>
@@ -62,7 +72,7 @@
               
                 
                 <div class="cols-xs-8 txtuserdatetags control txtright">
-                  <p>Username - {{niceDate}}</p>
+                  <p>{{niceDate}}</p>
                 </div>
               
               <div class="navbox">

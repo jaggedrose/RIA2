@@ -4,7 +4,7 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
   
   $scope.croppingNotDone = true;
 
-  // Counter
+  // track which section we are on
   var sectionid = $routeParams.sectionid;
  
   var storySectionCC = {
@@ -23,7 +23,7 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
     
     // GET EXISTING STORY FROM DB
     $scope.storyData = Story.getById({"_id" : id, _populate: "tags"}, function(response){
-
+      console.log("storyData: ", $scope.storyData);
       // logged in?
       if(response.user_id != Login.user._id){
         
@@ -74,13 +74,17 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
         $location.url("/writeStory/" + arrayOfNewStories[0]._id);
       }
     );
-    //$scope.tagNames = '';
-
     // DON'T DO ANYTHING ELSE INSIDE THIS ELSE
     // REDIRECT IS UNDERWAY
   }
+
   // END OF LOADING THE STORY
   window.scope = $scope;
+
+  // Check if active - set CSS .navthumbcurrent
+  $scope.activeClass = function(section){
+    if(section == sectionid){return "navthumbcurrent";}
+  };
 
   // compose a 'nice' date
   function niceDate (date) {
@@ -90,14 +94,10 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
     return nDate;
     
   }
- 
-
-  //Check if a image is choosen, upload the image and return the image url
+   
+  //Check if an image is choosen, upload the image and return the image url
   $scope.$watch("file",function(){
-    console.log("file", $scope.file);
-
-    //console.log("s2", $scope.$parent);
-    // If there is no file array or it has not length do nothing
+    // If there is no file array or it has no length do nothing
     if(!$scope.file || $scope.file.length < 1){return;}
     // Otherwise upload the file properly
     FileUploader($scope.file).success(function(imgurl) {
@@ -106,7 +106,10 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
       //Set the image url to the greater storySection object
       $scope.storySection.img = imgurl;
       $scope.storyForm.sectionFile.$setValidity("required", true);
-      //console.log("filnamn: ", $scope.files[0].name, "sökväg = ", $scope.storySection.img);
+      
+      // Save image
+      Story.update({_id:$scope.storyData._id}, $scope.storyData["section" + sectionid].img);
+      
     });
   });
 
@@ -207,10 +210,10 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
     var tagArray = $scope.tagNames;
     tagArray = tagArray.replace(/,\s/g,',').split(",");
     // Remove duplicate tags
-    // ..use js filter!
+    // ..use js filter! - dev suspended
 
     // Then GET them from db
-    // The GET is on our 'cleaned and split tagArray, the callback takes the result
+    // The GET is on our 'cleaned' and split tagArray, the callback takes the result
     // (as 'tags')
 
     Tag.get({tagName: {$in:tagArray}},function(tags){
