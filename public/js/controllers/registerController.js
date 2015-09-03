@@ -2,7 +2,7 @@
 app.controller("registerController", ["$http", "$scope", "User", "Login", "$location", function($http, $scope, User, Login, $location) {
   
   $scope.newUser = {};
-
+  
   //template to copy into $scope.newUser on form reset
   var userWhenReset = {
     user_name: "",
@@ -37,8 +37,9 @@ app.controller("registerController", ["$http", "$scope", "User", "Login", "$loca
   //get country data
   $http.get('js/resources/countries.json').then(function(res){
     $scope.countries = res.data;
+    $scope.newUser.country = $scope.countries[0];
+    console.log("$scope.countries", $scope.countries);
   });
-
 
   //Empties form fields
   $scope.resetForm = function() {
