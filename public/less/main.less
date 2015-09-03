@@ -21,6 +21,7 @@
 @plcholdertxt: #999;
 @btn-non-active-bg:#707070;
 @btn-active-bg:#fff;
+@errormsg: #BD591C;
 
 // COLOURS AND FONTS **********************************************************
 
@@ -40,6 +41,10 @@ h1, h2, h3, h4, h5, h6 {
 .headerfont {
   color: @txtheader;
   font-family: 'Oswald', sans-serif;
+}
+
+.errormsg {
+  color: @errormsg;
 }
 
 // colour of *text* in text input fields
@@ -147,6 +152,9 @@ p.formerror {
 
 .control {
   color: @control;
+}
+.btncolor {
+  background-color: @txtbody; 
 }
 
 // GENERIC FORMATTING STUFF FOR VARIOUS DIV'S AND ELEMENTS ********************
@@ -320,22 +328,7 @@ textarea.form-control {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// User Profile Styling *********************
+// User Profile/Edit Styling *********************
 
 // Hide image input button
 div.imgupload input {
@@ -367,6 +360,17 @@ div.profileImgFrame {
   position: absolute;
   top: 1px;
   left: 3px;
+}
+.userEditPage input, .userEditPage select {
+  .stdinputtxtcolour;
+  .stdinputbgcolour;
+  .stdinputborder;
+}
+.userEditPage label {
+  color: @brtinputtxtcolour;
+}
+.userEditPage p {
+  .errormsg;
 }
 
 //  Change element depth ***********************************************************

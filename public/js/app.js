@@ -58,8 +58,7 @@ app.config(["$routeProvider", "$locationProvider", function($routeProvider, $loc
       controller: "userProfileController"
     })
     .when("/FAQ", {
-      templateUrl: "partials/FAQ.html",
-      controller: "FaqController"
+      templateUrl: "partials/FAQ.html"
     })
     .otherwise({
       redirectTo: "/"

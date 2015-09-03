@@ -6,11 +6,10 @@
                 <button type="submit" class="btn btn-xs" ng-click="logoutUser()">Log Out</button>
             </div>
 
-            <h2>{{User.user_name}}</h2>
+            <h2 class="headerfont">{{User.user_name}}</h2>
             <div class="row userProfileInfo mb40">
                 <div class="col-xs-6">
                     <div class="imgupload stdinputborder profileImgFrame">
-                        <!-- <label for="profileImg" ng-class="{'dispNone': User.img}"></label> -->
                         <i class="fa fa-file-image-o fa-4x control uploadIcon" ng-hide="User.img" ng-class="{'dispNone': User.img}"></i>
                         <input type="file" id="profileImg" name="profileImg" ngf-select ng-model="files" ngf-accept="'image/*'">
                         <img ng-if="User.img" ng-src="{{User.img}}" class="userProfileImg">
@@ -51,16 +50,14 @@
                         <div class="col-xs-8">
                             <div class="row">
                                 <div class="col-xs-8">
-                                    <h4>{{story.title}}</h4>
+                                    <h4 class="headerfont">{{story.title}}</h4>
                                     <p>{{story.date_created| date:'yyyy-MM-dd'}}</p>
                                 </div>
                                 <div class="col-xs-4">
                                     <a ng-href="/writeStory/{{story._id}}">
                                         <i class="fa fa-pencil-square-o fa-1x control"></i>
                                     </a>
-                                    <!-- <button  type="submit"> -->
-                                        <i class="fa fa-trash-o fa-1x control" ng-click="deleteStory(story._id)"></i>
-                                    <!-- </button> -->
+                                    <i class="fa fa-trash-o fa-1x control" ng-click="deleteStory(story._id)"></i>
                                 </div>
                             </div>
                             <div>
