@@ -7,6 +7,7 @@
                 <input ng-model="storyData.title" name="storyTitle" class="form-control stdinputbgcolour brtinputtxtcolour stdinputborder headerfont plcholderhead cnttxt" type="text" id="title" placeholder="The title of your story." ng-minlength="2" ng-maxlength="60" required>
                 <p class="txtcontrol formerror" ng-show="storyForm.storyTitle.$touched && storyForm.storyTitle.$invalid || (moved && storyForm.storyTitle.$invalid)">Give your story a title. (2 - 60 characters)</p>
               </div>
+
               <!-- <div class="form-group imgupload stdinputborder">
                 <label for="fileUpload"><i ng-hide="storySection.img" class="fa fa-file-image-o fa-2x control"></i></label>
                 <i ng-show="storySection.img" ng-click="openModal()" class="fa fa-trash-o fa-2x control" ></i>
@@ -15,6 +16,9 @@
                   
                   <p class="txtcontrol formerror" ng-show="storyForm.sectionFile.$touched && storyForm.sectionFile.$invalid || (moved && storyForm.sectionFile.$invalid)">Choose an image for this section.</p>
               </div>  -->
+
+
+              <!-- Crop and upload image **********************************************************-->
               <div class="form-group">
                 <cropme
                   width="640"
@@ -29,14 +33,16 @@
                   ng-show="croppingNotDone"
                   >
                 </cropme>
-                <p class="txtcontrol formerror" ng-show="storyForm.sectionFile.$invalid || (moved && storyForm.sectionFile.$invalid)">Choose and crop an image for this section.</p>
+                <p class="txtcontrol" ng-show="storyForm.sectionFile.$invalid || (moved && storyForm.sectionFile.$invalid)">Choose and crop an image for this section.</p>
                 <!-- Nonvisible input to store <cropme>'s required value -->
                 <input type="hidden" name="sectionFile" ng-model="unusedBananaModel" required>
               </div>
-              <div class="form-group stryimg stdinputborder imgview">
-                <i ng-show="storySection.img" ng-click="openModal()" class="fa fa-trash-o fa-2x control" ></i>
-                <img class="img-responsive" ng-if="storySection.img" ng-src="{{storySection.img}}"> 
+              <div class="form-group stryimg stdinputborder imgview" ng-show="storySection.img">
+                <i ng-click="openModal()" class="fa fa-trash-o fa-2x control" ></i>
+                <img class="img-responsive" ng-src="{{storySection.img}}"> 
               </div>
+
+
               <div class="row">
                 <div class="form-group col-xs-4">
                   <input ng-class="{true: 'invalidInput', false: ''}[storyForm.sectionHeader.$invalid]" ng-model="storySection.header" name="sectionHeader" class="form-control stdinputbgcolour brtinputtxtcolour stdinputborder headerfont plcholderhead" type="text" id="header" placeholder="Headline for this section.." ng-minlength="2" ng-maxlength="30" required>
