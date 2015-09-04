@@ -18,6 +18,10 @@ app.controller("loginController", ["$http", "$scope", "$location","Login", funct
     });
   };
 
+  $scope.gotoRegister = function(){
+    $location.path('/register');
+  };
+
     // $scope.logoutUser = function(data) {
     //   Login.logout();
     //   console.log("User logged out!");

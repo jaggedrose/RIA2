@@ -151,6 +151,10 @@ h1, h2, h3, h4, h5, h6 {
   padding: 0 18px;
 }
 
+.padding-bottom {
+  padding: 0 0 30px 0;
+}
+
 .center {
   width: 20%;
   margin: auto;
@@ -193,6 +197,10 @@ p.formerror {
   border: 5px solid @frame;
   padding-top: 10px;
   min-height: 100vh;
+}
+
+.border-bottom {
+  border-bottom: 1px solid black;
 }
 
 // Navigation box formatting - centered icons
@@ -366,7 +374,7 @@ textarea.form-control {
 
 
 
-// User Profile/Edit/Register Styling *********************
+// User Profile/Edit/Register/login Styling *********************
 
 // Hide image input button
 div.imgupload input {
@@ -399,15 +407,15 @@ div.profileImgFrame {
   top: 1px;
   left: 3px;
 }
-.userEditPage input, .userEditPage select, .registerPage input, .registerPage select {
+.userEditPage input, .userEditPage select, .registerPage input, .registerPage select, .loginPage input{
   .stdinputtxtcolour;
   .stdinputbgcolour;
   .stdinputborder;
 }
-.userEditPage label {
+.userEditPage label, .loginPage label {
   color: @brtinputtxtcolour;
 }
-.userEditPage p, .registerPage p {
+.userEditPage p, .registerPage p, .loginPage span {
   .errormsg;
 }
 
