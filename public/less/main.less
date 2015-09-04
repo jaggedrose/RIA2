@@ -103,6 +103,7 @@ h1, h2, h3, h4, h5, h6 {
     z-index: 2;
     border-bottom-right-radius:0.8em;
     border-bottom-left-radius:0.8em;
+    font-family: 'Roboto', sans-serif;
      &:hover {
       background-color: #eee;
       border-color: #fff;
@@ -120,6 +121,7 @@ h1, h2, h3, h4, h5, h6 {
     z-index: 1;
     border-bottom-right-radius:0.8em;
     border-bottom-left-radius:0.8em;
+    font-family: 'Roboto', sans-serif;
     &:hover {
       background-color: #ddd;
       border-color: #444;
@@ -257,7 +259,7 @@ p.formerror {
 
 .strytitle {
   text-align: center;
-}
+} 
 
 .stryimg {
   height: 35vh;
@@ -278,10 +280,17 @@ p.formerror {
   }
 }
 
-.strytxt, #SearchInput {
+.strytxt {
   .stdinputbgcolour; 
   .stdinputtxtcolour;
   .txtbody;
+  .plcholdertxt;
+}
+
+ #SearchInput {
+  .stdinputbgcolour; 
+  .stdinputtxtcolour;
+  .txtcontrol;
   .plcholdertxt;
 }
 
