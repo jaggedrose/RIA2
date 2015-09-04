@@ -21,12 +21,18 @@ app.controller("ViewStoryController", ["$http", "$scope", "$location", "$routePa
 
   $scope.onSectionForward = function(){
     
-    $scope.moved = true;
+    var nextSection = sectionid/1 + 1;
+    if(nextSection > 3){nextSection = 1;}
+    $location.url('/viewStory/' + id + '/section/' + nextSection);
+    
+  };
 
-      var nextSection = sectionid/1 + 1;
-      if(nextSection > 3){nextSection = 1;}
-      $location.url('/viewStory/' + id + '/section/' + nextSection);
-      $scope.moved = false;
+  $scope.onSectionBack = function(){
+
+    var nextSection = sectionid/1 - 1;
+    if(nextSection < 1){nextSection = 3;}
+    $location.url('/viewStory/' + id + '/section/' + nextSection);
+    
   };
 
 }]);
