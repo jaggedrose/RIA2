@@ -14,12 +14,14 @@
 @stdinputtxtcolour: #CCC;
 @brtinputtxtcolour: #EEE;
 @drkinputtxtcolour: #999;
+@resultcolor:#888;
 @stdinputbgcolour: #292929;
 @stdinputbordercolour: #000;
 @plcholderhead: #AAA;
 @plcholdertxt: #999;
 @btn-non-active-bg:#707070;
 @btn-active-bg:#fff;
+@errormsg: #BD591C;
 
 // COLOURS AND FONTS **********************************************************
 
@@ -41,6 +43,10 @@ h1, h2, h3, h4, h5, h6 {
   font-family: 'Oswald', sans-serif;
 }
 
+.errormsg {
+  color: @errormsg;
+}
+
 // colour of *text* in text input fields
 
 .stdinputtxtcolour {
@@ -60,11 +66,42 @@ h1, h2, h3, h4, h5, h6 {
   color: @txtbody;
 }
 
-.btn-search {
+.labels {
+  color: @txtbody;
+}
+
+// Main menu nav
+.menuColor {
+  background-color: @backgr;
+  border-color: @backgr;
+}
+.menuNav {
+  position: relative;
+}
+.menuNav a {
+  .control;
+}
+.menuNav i {
+  margin-top: 2px;
+  position: absolute;
+  left: 30%;
+  right: 30%;
+}
+
+#btn-search {
+  margin-top: -15px;
+ 
+  .btn:last-child:not(:first-child) {
+    margin-left: -5px;
+  }
   .btn-active {
     background-color: @btn-active-bg;
     color:#333;
     border-color:#fff;
+    width: 50%;
+    z-index: 2;
+    border-bottom-right-radius:0.8em;
+    border-bottom-left-radius:0.8em;
      &:hover {
       background-color: #eee;
       border-color: #fff;
@@ -72,17 +109,50 @@ h1, h2, h3, h4, h5, h6 {
      &:focus {
       background-color: @btn-active-bg;
       border-color: #fff;
-    }
+    } 
   }
   .btn-inactive {
-    background-color: @btn-non-active-bg;
-    color:#333;
-    border-color:@txtcontrol;
+    background-color: @btn-non-active-bg; 
+    color:@brtinputtxtcolour;
+    border-color:@txtcontrol;    
+    width: 50%;
+    z-index: 1;
+    border-bottom-right-radius:0.8em;
+    border-bottom-left-radius:0.8em;
     &:hover {
       background-color: #ddd;
       border-color: #444;
     }
   }
+}
+
+#asearch {
+  .list-group-item {
+    background-color: @resultcolor;
+    border-radius: 0.5em;
+    margin: 3px 0;
+     &:hover {
+      background-color: #999;
+      border-color: #fff;
+    }
+    a {
+      color: @brtinputtxtcolour;
+    }
+ }
+}
+
+#basic-addon1 {
+  padding: 0 12px;
+  background-color: @stdinputbgcolour;
+}
+
+#padd18 {
+  padding: 0 18px;
+}
+
+.center {
+  width: 20%;
+  margin: auto;
 }
 
 // for text displaying user details, text in buttons, labels
@@ -110,6 +180,9 @@ p.formerror {
 .control {
   color: @control;
 }
+.btncolor {
+  background-color: @txtbody; 
+}
 
 // GENERIC FORMATTING STUFF FOR VARIOUS DIV'S AND ELEMENTS ********************
 
@@ -118,7 +191,7 @@ p.formerror {
 .mainframe {
   border: 5px solid @frame;
   padding-top: 10px;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 // Navigation box formatting - centered icons
@@ -180,13 +253,23 @@ p.formerror {
 .stryimg {
   height: 35vh;
   text-align: center;
-}
+} 
 
 .stryheader {
 
 }
 
-.strytxt {
+#SearchArrow {
+  .stdinputbgcolour; 
+  .stdinputtxtcolour;
+  .plcholdertxt;
+  border-style: none;
+  &:focus {
+    outline: 0;
+  }
+}
+
+.strytxt, #SearchInput {
   .stdinputbgcolour; 
   .stdinputtxtcolour;
   .txtbody;
@@ -282,22 +365,24 @@ textarea.form-control {
 
 
 
+// User Profile/Edit/Register Styling *********************
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// User Profile Styling *********************
+// Hide image input button
+div.imgupload input {
+  max-width: 93px;
+  position: absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  padding: 25px 0;
+  opacity: 0;
+}
+.centerIcon {
+  position: absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%)
+}
 .userProfileImg {
   width: 100%;
 }
@@ -308,16 +393,21 @@ div.profileImgFrame {
   min-height: 80px;
   position: relative;
 }
-.uploadIcon {
-  position: absolute;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%)
-}
 .saveImg {
   position: absolute;
   top: 1px;
   left: 3px;
+}
+.userEditPage input, .userEditPage select, .registerPage input, .registerPage select {
+  .stdinputtxtcolour;
+  .stdinputbgcolour;
+  .stdinputborder;
+}
+.userEditPage label {
+  color: @brtinputtxtcolour;
+}
+.userEditPage p, .registerPage p {
+  .errormsg;
 }
 
 //  Change element depth ***********************************************************
@@ -329,13 +419,9 @@ div.profileImgFrame {
 
 // Visibility **********************************************************************
 
-// Hide image input button
-div.imgupload input {
-    display: none;  
-}
-
 //Materia*****************************************************************************
 
 div.icons {
  fill: @control;
 }
+
