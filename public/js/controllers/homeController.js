@@ -7,8 +7,8 @@ app.filter('range', function() {
   };
 });
 
-app.controller("homeController", ["$http", "$scope", "Story","$routeParams","$location",
-  function($http, $scope, Story, $routeParams, $location) {
+app.controller("homeController", ["$http", "$scope", "$routeParams", "$location", "Story", "Login",
+  function($http, $scope, $routeParams, $location, Story, Login) {
 
     var allStories = [];
     Story.get(function(data){
@@ -82,16 +82,26 @@ app.controller("homeController", ["$http", "$scope", "Story","$routeParams","$lo
     return Math.ceil(allStories.length/3);
   };
 
-
   $scope.nextPageDisabled = function() {
     return currentPage === $scope.pageCount();
   };
 
-  $scope.goToCreateStory = function(){
-    $location.path('/writeStory');
-  };
   $scope.goToFAQ = function(){
     $location.path('/FAQ');
+  };
+
+  // If there is a logged in user go to writestory otherwise go to login
+  $scope.User = Login.user;
+
+  $scope.goToCreateStory = function(){
+    if (Login.user._id) {
+      $location.path('/writeStory');
+      console.log("Logged in, now you can write a story!");
+    } else {
+      $location.path('/login');
+      console.log("Please login to write a story!");
+    }
+    
   };
 
 }]);
