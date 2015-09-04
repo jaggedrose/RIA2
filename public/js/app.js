@@ -1,5 +1,6 @@
 //app declaration and dependency injection
-var app = angular.module("stories", ["ngRoute", "ngResource", 'ngFileUpload', "ui.bootstrap","ngSanitize","ngTouch", "superswipe", "cropme"]);
+var app = angular.module("stories", ["ngRoute", "ngResource", 'ngFileUpload', "ui.bootstrap","ngSanitize","ngTouch", "superswipe", "cropme",'ngMaterial','ngMdIcons']);
+
 
 
 //app config
@@ -55,6 +56,10 @@ app.config(["$routeProvider", "$locationProvider", function($routeProvider, $loc
     .when("/userProfile/:id", {
       templateUrl: "partials/userProfile.html",
       controller: "userProfileController"
+    })
+    .when("/FAQ", {
+      templateUrl: "partials/FAQ.html",
+      controller: "FaqController"
     })
     .otherwise({
       redirectTo: "/"

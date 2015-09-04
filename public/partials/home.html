@@ -1,57 +1,37 @@
-<div class="container-fluid appbackground" >
-  <div class="row">
-    <div class="col-xs-12 mainframe">
-      <h3>Welcome!</h3>
-      <p class="txtbody">
-
-        <div class="row" ng-repeat="story in currentPageStories">
-          <div class="row">
-              <div class="col-xs-4 "> 
-                    <a ng-href="/viewStory/{{story._id}}/section/1" class="thumbnail">
-                      <img src={{story.section1.img}} title={{story.title}} class="img-responsive">
-                    </a>
-               </div>
-                <div class="col-xs-4"> 
-                   <a href="/viewStory/{{story._id}}/section/2" class="thumbnail">
-                      <img src={{story.section2.img}} title={{story.title}} class="img-responsive">
-                    </a>
-                </div>   
-                <div class="col-xs-4"> 
-                   <a href="/viewStory/{{story._id}}/section/3" class="thumbnail">
-                      <img src={{story.section3.img}} title={{story.title}} class="img-responsive">
-                    </a>
+<div class="container-fluid appbackground">
+    <div class="row">
+        <div class="col-xs-12 mainframe">
+            <h2>Welcome!</h2>
+            <div class="row" md-swipe-left="onSwipeLeft()" md-swipe-right="onSwipeRight()" ng-repeat="story in currentPageStories">
+                <div class="row" layout="row" layout-align="space-between center">
+                    <div class="col-xs-4 "><a ng-href="viewStory/{{story._id}}">
+                        <img src={{story.section1.img}} title={{story.title}}  class="img-responsive">
+                        </a>
+                    </div>
+                    <div class="col-xs-4"><a ng-href="viewStory/{{story._id}}">
+                        <img src={{story.section2.img}} title={{story.title}} class="img-responsive">
+                        </a>
+                    </div>
+                    <div class="col-xs-4"><a ng-href="viewStory/{{story._id}}">
+                        <img src={{story.section3.img}} title={{story.title}} class="img-responsive">
+                        </a>
+                    </div>
                 </div>
-          </div>
+            </div>
+            <div class="row" layout="row" layout-align="center center">
+                <div>
+                    <ng-md-icon ng-click="goToFAQ()" icon="!" style="fill:white" size="40"></ng-md-icon>
+                </div>
+                <div>
+                    <ng-md-icon ng-class="{true: 'disabled', false: ''}[prevPageDisabled()]" ng-click="prevPage()" ng-hide="prevPageDisabled()" icon="keyboard_arrow_left"  style="fill:white" size="70"></ng-md-icon>
+                    <ng-md-icon ng-hide="nextPageDisabled()" ng-click="nextPage()" icon="keyboard_arrow_right" style="fill:white" size="70"></ng-md-icon>
+                    </md-button>
+                </div>
+                <div>
+                    <ng-md-icon ng-click="goToCreateStory()" icon="create" style="fill:white" size="40"></ng-md-icon>
+                </div>
+            </div>
         </div>
-              
-         </p> 
-         <div class="row">
-            <ul class="pagination">
-              <!-- ng-class="prevPageDisabled()" -->
-              <li ng-class="prevPageDisabled()">
-                <a href ng-click="prevPage()"><i class="fa fa-caret-left fa-4x"></i></a>
-              </li>
-             <!--  <li ng-repeat="n in [] | range: pageCount()"
-                ng-class="{active: n == currentPage}" ng-click="setPage(n)">
-                <a href="#">{{n}}</a>
-              </li> -->
-              <li ng-class="nextPageDisabled()">
-                <a href ng-click="nextPage()"><i class="fa fa-caret-right fa-4x"></i></a>
-              </li>
-            </ul>
-          </div>  
-        </div>
-     
-      <br>
-      <h4 class="txtcontrol">txtcontrol</h4> 
-      <p class="txtbody">
-        ..is the class for user details, buttons, etc.
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-      </p>
     </div>
-  </div>
 </div>
+
