@@ -8,7 +8,7 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
   var sectionid = $routeParams.sectionid;
  
   var storySectionCC = {
-    sectionNo:1,
+    sectionNo: sectionid,
     header: "",
     text: "",
     img: "",
@@ -20,7 +20,10 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
   // IF WE SHOULD LOAD AN EXISTING STORY
   var id = $routeParams.id;
   if(id && id!="new"){
-    
+    // An existing story has images.. hide cropMe.
+    // $scope.croppingNotDone = false;
+
+
     // GET EXISTING STORY FROM DB
     $scope.storyData = Story.getById({"_id" : id, _populate: "tags"}, function(response){
       console.log("storyData: ", $scope.storyData);
@@ -39,12 +42,10 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
         $location.url("/");
         return;
       }
-
       $scope.storyData = response;
       $scope.niceDate = niceDate($scope.storyData.date_created);
       $scope.storySection = $scope.storyData["section" + sectionid] ? $scope.storyData["section" + sectionid] : angular.copy(storySectionCC);
       $scope.tagNames = $scope.storyData.tags.map(function(tag){return tag.tagName}).join(", ");
-      
     });
   }
 
@@ -107,32 +108,9 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
       $scope.storySection.img = imgurl;
       // Handle validation
       $scope.storyForm.sectionFile.$setValidity("required", true);
-      // Set storySection.img to current section in storyData
-      /*
-      Story.create(
-      {
-        user_id:Login.user._id,
-        title:"",
-        date_created: "",
-        date_modified: "",
-        tags:[],
-        number_views: ""
-      }, function(arrayOfNewStories){
-        // As soon as we have a new story and its id
-        // change url to reflect the story id
-        $location.url("/writeStory/" + arrayOfNewStories[0]._id);
-      });
-      */
-    
-
-
-
       
       console.log("storySection: ", $scope.storySection);
-      /*
-      $scope.storyData["section" + sectionid] = $scope.storySection;
-      $scope.storyData["section" + sectionid].img = $scope.storySection.img;
-      */
+      
     });
   });
 
@@ -143,19 +121,23 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
     if (
       $scope.storyData &&
       $scope.storyData['section' + currSec] &&
-      $scope.storyData['section' + currSec].img
+      $scope.storyData['section' + currSec].img // &&
+      // currSec != sectionid
     ) {
       img = $scope.storyData['section' + currSec].img;
+      currSec == sectionid && ($scope.croppingNotDone = false);
     } else if (
       $scope.storySection &&
       $scope.storySection.img &&
       $scope.storySection.sectionNo == currSec
     ) {
       img = $scope.storySection.img;
+      currSec == sectionid && ($scope.croppingNotDone = false);
+    } else {
+      
     }
-
     return img;
-  }
+  };
 
   // CHANGE SECTION - Forward
   $scope.onSectionForward = function(){
@@ -168,7 +150,6 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
     
     if ($scope.storySection.img) {
       
-      //console.log("FOrm.sectionFile", $scope.storyForm.sectionFile);
       // We got an image. Set the field to valid..
       //$scope.storyForm.sectionFile.$setValidity("required", true);
       
@@ -228,8 +209,6 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
       return;
     }
   };
-
-  
 
 
   // ON LOCATION CHANGE try to save the story including updated section, tags etc
@@ -379,7 +358,6 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
       //console.log("You choosed No-button");
     });
   };
-
 }]);
 
 

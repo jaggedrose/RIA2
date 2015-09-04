@@ -17,5 +17,17 @@ app.controller("ViewStoryController", ["$http", "$scope", "$location", "$routePa
     if(section == sectionid){return "navthumbcurrent";}
   };
 
+  // Change section
+
+  $scope.onSectionForward = function(){
+    
+    $scope.moved = true;
+
+      var nextSection = sectionid/1 + 1;
+      if(nextSection > 3){nextSection = 1;}
+      $location.url('/viewStory/' + id + '/section/' + nextSection);
+      $scope.moved = false;
+  };
+
 }]);
 
