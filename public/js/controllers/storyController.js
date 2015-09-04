@@ -310,6 +310,8 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
   */
 
   $scope.$on("cropme:loaded", function(ev, width, height) {
+    $scope.storyForm.sectionFile.$setDirty();
+    console.log("$scope.storyForm.sectionFile", $scope.storyForm.sectionFile);
     $scope.cropped = false;
     console.log("cropme:loaded");
   });
