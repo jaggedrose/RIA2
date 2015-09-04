@@ -29,10 +29,16 @@ h4 {
   color: #dddddd;
   font-family: 'Roboto', sans-serif;
 }
+/*
+.txtuserdatetags {
 
-
+}
+*/
 .txtuserdate {
+
   color: #777777;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 p.formerror {
   margin: 5px 0 0 12px;
@@ -40,6 +46,14 @@ p.formerror {
 
 .control {
   color: #999999;
+}
+.tag {
+  display: inline-block;
+  margin: 0 4px 4px 0;
+  padding: 0 5px 0 5px;
+  border: #444444;
+  border-radius: 3px;
+  background-color: #444444;
 }
 .mainframe {
   border: 5px solid #000000;
@@ -49,18 +63,18 @@ p.formerror {
 .navbox {
   text-align: center;
 }
-.navthumbs {
-  float: right;
-}
 .navthumb {
   border: 3px solid black;
   height: 60px;
   width: 90px;
-  margin: 0 0 10px 10px;
   opacity: 0.3;
 }
 .navthumbcurrent {
   opacity: 1;
+}
+.center {
+  margin-left: auto;
+  margin-right: auto;
 }
 .cnttxt {
   text-align: center;
@@ -77,12 +91,14 @@ p.formerror {
 }
 .stryimg {
   height: 35vh;
+  overflow: hidden;
   text-align: center;
 }
 .strytxt {
   background-color: #292929;
   font-family: 'Noticia Text', serif;
   color: #cccccc;
+  word-wrap: break-word;
 }
 .strytxt::-webkit-input-placeholder {
   color: #999999;
@@ -149,3 +165,4 @@ textarea.form-control {
 div.imgupload input {
   display: none;
 }
+

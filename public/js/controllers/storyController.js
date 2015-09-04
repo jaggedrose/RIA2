@@ -4,11 +4,11 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
   
   $scope.croppingNotDone = true;
 
-  // Counter
+  // track which section we are on
   var sectionid = $routeParams.sectionid;
  
   var storySectionCC = {
-    sectionNo:1,
+    sectionNo: sectionid,
     header: "",
     text: "",
     img: "",
@@ -20,10 +20,13 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
   // IF WE SHOULD LOAD AN EXISTING STORY
   var id = $routeParams.id;
   if(id && id!="new"){
-    
+    // An existing story has images.. hide cropMe.
+    // $scope.croppingNotDone = false;
+
+
     // GET EXISTING STORY FROM DB
     $scope.storyData = Story.getById({"_id" : id, _populate: "tags"}, function(response){
-
+      console.log("storyData: ", $scope.storyData);
       // logged in?
       if(response.user_id != Login.user._id){
         
@@ -39,12 +42,10 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
         $location.url("/");
         return;
       }
-
       $scope.storyData = response;
       $scope.niceDate = niceDate($scope.storyData.date_created);
       $scope.storySection = $scope.storyData["section" + sectionid] ? $scope.storyData["section" + sectionid] : angular.copy(storySectionCC);
       $scope.tagNames = $scope.storyData.tags.map(function(tag){return tag.tagName}).join(", ");
-      
     });
   }
 
@@ -74,13 +75,17 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
         $location.url("/writeStory/" + arrayOfNewStories[0]._id);
       }
     );
-    //$scope.tagNames = '';
-
     // DON'T DO ANYTHING ELSE INSIDE THIS ELSE
     // REDIRECT IS UNDERWAY
   }
+
   // END OF LOADING THE STORY
   window.scope = $scope;
+
+  // Check if active - set CSS .navthumbcurrent
+  $scope.activeClass = function(section){
+    if(section == sectionid){return "navthumbcurrent";}
+  };
 
   // compose a 'nice' date
   function niceDate (date) {
@@ -90,25 +95,49 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
     return nDate;
     
   }
- 
-
-  //Check if a image is choosen, upload the image and return the image url
+   
+  // Check if an image is choosen, upload the image and return the image url
   $scope.$watch("file",function(){
-    console.log("file", $scope.file);
-
-    //console.log("s2", $scope.$parent);
-    // If there is no file array or it has not length do nothing
+    // If there is no file array or it has no length do nothing
     if(!$scope.file || $scope.file.length < 1){return;}
     // Otherwise upload the file properly
     FileUploader($scope.file).success(function(imgurl) {
       console.log("file: ", $scope.file);
       $scope.hide = false;
-      //Set the image url to the greater storySection object
+      // Set the image url to the greater storySection object
       $scope.storySection.img = imgurl;
+      // Handle validation
       $scope.storyForm.sectionFile.$setValidity("required", true);
-      //console.log("filnamn: ", $scope.files[0].name, "sökväg = ", $scope.storySection.img);
+      
+      console.log("storySection: ", $scope.storySection);
+      
     });
   });
+
+  // function to show a section's saved image OR a section's currently loaded but not saved image 
+
+  $scope.showImg = function(currSec) {
+    var img = '';
+    if (
+      $scope.storyData &&
+      $scope.storyData['section' + currSec] &&
+      $scope.storyData['section' + currSec].img // &&
+      // currSec != sectionid
+    ) {
+      img = $scope.storyData['section' + currSec].img;
+      currSec == sectionid && ($scope.croppingNotDone = false);
+    } else if (
+      $scope.storySection &&
+      $scope.storySection.img &&
+      $scope.storySection.sectionNo == currSec
+    ) {
+      img = $scope.storySection.img;
+      currSec == sectionid && ($scope.croppingNotDone = false);
+    } else {
+      
+    }
+    return img;
+  };
 
   // CHANGE SECTION - Forward
   $scope.onSectionForward = function(){
@@ -121,7 +150,6 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
     
     if ($scope.storySection.img) {
       
-      //console.log("FOrm.sectionFile", $scope.storyForm.sectionFile);
       // We got an image. Set the field to valid..
       //$scope.storyForm.sectionFile.$setValidity("required", true);
       
@@ -182,8 +210,6 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
     }
   };
 
-  
-
 
   // ON LOCATION CHANGE try to save the story including updated section, tags etc
   $scope.$on('$locationChangeStart',function(){
@@ -207,10 +233,10 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
     var tagArray = $scope.tagNames;
     tagArray = tagArray.replace(/,\s/g,',').split(",");
     // Remove duplicate tags
-    // ..use js filter!
+    // ..use js filter! - dev suspended
 
     // Then GET them from db
-    // The GET is on our 'cleaned and split tagArray, the callback takes the result
+    // The GET is on our 'cleaned' and split tagArray, the callback takes the result
     // (as 'tags')
 
     Tag.get({tagName: {$in:tagArray}},function(tags){
@@ -284,6 +310,8 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
   */
 
   $scope.$on("cropme:loaded", function(ev, width, height) {
+    $scope.storyForm.sectionFile.$setDirty();
+    console.log("$scope.storyForm.sectionFile", $scope.storyForm.sectionFile);
     $scope.cropped = false;
     console.log("cropme:loaded");
   });
@@ -323,6 +351,7 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
       // If user choose "Yes"-button
       $http.post('/api/removeImage', {imgsrc: $scope.storySection.img}).success(function() {
         $scope.storySection.img = "";
+        $scope.croppingNotDone = true;
         //console.log("You choosed Yes-button", "Bildfil =",$scope.storySection.img);
       });
        
@@ -331,7 +360,6 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
       //console.log("You choosed No-button");
     });
   };
-
 }]);
 
 
