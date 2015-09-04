@@ -36,18 +36,18 @@
         <div class="row" ng-repeat="story in currentPageStories">
           <div class="row">
               <div class="col-xs-4 "> 
-                    <a ng-href="/viewStory/{{story._id}}/section/1" class="thumbnail">
-                      <img src={{story.section1.img}} title={{story.title}} class="img-responsive">
+                    <a ng-href="/viewStory/{{story._id}}/section/1"  id="NoBorder" class="thumbnail">
+                      <img src={{story.section1.img}} title={{story.title}}  id="BorderPict" class="img-responsive">
                     </a>
                </div>
                 <div class="col-xs-4"> 
-                   <a href="/viewStory/{{story._id}}/section/1" class="thumbnail">
-                      <img src={{story.section2.img}} title={{story.title}} class="img-responsive">
+                   <a href="/viewStory/{{story._id}}/section/1" id="NoBorder" class="thumbnail">
+                      <img src={{story.section2.img}} title={{story.title}} id="BorderPict" class="img-responsive">
                     </a>
                 </div>   
                 <div class="col-xs-4"> 
-                   <a href="/viewStory/{{story._id}}/section/1" class="thumbnail">
-                      <img src={{story.section3.img}} title={{story.title}} class="img-responsive">
+                   <a href="/viewStory/{{story._id}}/section/1" id="NoBorder" class="thumbnail">
+                      <img src={{story.section3.img}} title={{story.title}} id="BorderPict" class="img-responsive">
                     </a>
                 </div>
           </div>
