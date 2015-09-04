@@ -1,35 +1,31 @@
 <div class="container-fluid appbackground" >
     <div class="row">
-        <div class="col-xs-12 mainframe">
-
+        <section class="col-xs-12 mainframe loginPage">
             <!-- <div ng-show="User._id">
                 <button type="submit" class="btn btn-danger" ng-click="logoutUser()">Log Out</button>
             </div> -->
-
-            <form name="form" ng-submit="logForm()" role="form" novalidate>
+            <form name="form" ng-submit="logForm()" role="form" class="padding-bottom border-bottom" novalidate>
                 <div class="form-group" ng-class="{'has-error': form.email.$dirty && form.email.$error.required }">
                     <label for="email">Email:</label>
                     <input type="email" name="email" id="email" class="form-control" ng-model="Loginfo.email" placeholder="Enter e-mail" required />
-                    <span ng-show="form.email.$dirty && form.email.$error.required" class="help-block">Email is required</span>
-                    <span ng-show="form.email.$touched && form.email.$invalid" class="help-block">Email is invalid, it must have the format &quot;name&commat;example.com&quot;</span>
+                    <span ng-show="form.email.$dirty && form.email.$error.required">Email is required</span>
+                    <span ng-show="form.email.$touched && form.email.$invalid">Email is invalid, it must have the format &quot;name&commat;example.com&quot;</span>
                 </div>
                 <div class="form-group" ng-class="{ 'has-error': form.password.$dirty && form.password.$error.required }">
                     <label for="password">Password:</label>
                     <input type="password" name="password" id="password" class="form-control" ng-model="Loginfo.password" placeholder="Enter password" required />
-                    <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</span>
+                    <span ng-show="form.password.$dirty && form.password.$error.required">Password is required</span>
                 </div>
                 <div class="form-actions">
-                    <button type="submit" ng-disabled="form.$invalid" class="btn btn-primary">Login</button>
-                    <span class="loginErrorMsg help-block">{{authMsg}}</span>
+                    <button type="submit" ng-disabled="form.$invalid" class="btn btn-sm btncolor">Login</button>
+                    <span>{{authMsg}}</span>
                 </div>
             </form>
-
             <div>
                 <h3>New to Stories?</h3>
-                <a ng-href="/register" class="btn btn-link"><button type="submit" class="btn btn-primary">Register</button></a>
+                <button type="submit" class="btn btn-sm btncolor" ng-click="gotoRegister();">Register</button>
             </div>
-
-        </div>
+        </section>
     </div>
 </div>
 
