@@ -9,8 +9,16 @@ module.exports = function (req, res) {
 
   // read the recieved file
   fs.readFile(file.path, function (err, data) {
+
+    //Make the filename unique by adding date/time to the name
+    var newName = file.name.split(".");
+    newName[0] = "[" + new Date().getTime() + "]" + newName[0];
+    newName = newName.join(".");
+    console.log("The newName: ", newName);
+
+
     // decide where to store the file
-    var uploadPath = __dirname + "/public/upload/" + file.name;
+    var uploadPath = __dirname + "/public/upload/" + newName;
 
     // write file to file system/
     fs.writeFile(uploadPath, data, function (err, data) {
