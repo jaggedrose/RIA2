@@ -10,7 +10,7 @@ app.controller("searchController", ["$http", "$scope", "$location", "Tag", "User
     $scope.searchText = '';
      $scope.searchResults ="";
     $scope.currentPageStories='';
-    $(".pagination").hide();
+    $scope.pageshown=false;
     // $scope.search();
   };
   
@@ -19,15 +19,15 @@ app.controller("searchController", ["$http", "$scope", "$location", "Tag", "User
     $scope.searchText = '';  
      $scope.searchResults =""; 
     $scope.currentPageStories='';
-     $(".pagination").hide();
+    $scope.pageshown=false;
     // $scope.search();
   };
 
   $scope.search = function() {
-   $scope.searchResults='';
-    switch ($scope.show) {
+   switch ($scope.show) {
       case 'users':
-        $scope.data="";
+          $scope.data="";
+          $scope.currentPageStories='';  
          if ($scope.searchText.length>0) {
         User.get({user_name: new RegExp($scope.searchText, 'i')}, function(data) {
           console.log("got users", data);
@@ -38,7 +38,8 @@ app.controller("searchController", ["$http", "$scope", "$location", "Tag", "User
         break;
 
       case 'tags':
-        $scope.data="";
+          $scope.data="";
+          $scope.currentPageStories='';
          if ($scope.searchText.length>0) {
         Tag.get({tagName: new RegExp($scope.searchText, 'i')}, function(data) {
           console.log("got tags", data);
@@ -55,6 +56,7 @@ app.controller("searchController", ["$http", "$scope", "$location", "Tag", "User
         });
 
     }
+     
   };
 
 var pCount = 0;
@@ -64,6 +66,7 @@ var pCount = 0;
     var data;
     $scope.data = Story.get({tags:tagid,_populate:"tags"}, function() {
       pCount=Math.ceil($scope.data.length/3);
+      $scope.pageshown = pCount>1 ? true: false;
       console.log("data", $scope.data);  
       $scope.searchText = ("#") + tagName ;
       $scope.searchResults ="";
