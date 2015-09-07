@@ -20,7 +20,6 @@
 @plcholderhead: #AAA;
 @plcholdertxt: #999;
 
-
 // COLOURS AND FONTS **********************************************************
 
 body {
@@ -31,9 +30,21 @@ h1, h2, h3, h4 {
   color: @txtheader;
   font-family: 'Oswald', sans-serif;
 }
+
 .appbackground {
   background-color: @backgr;
 }
+
+// Reset Angular material font properties
+body, html {
+    -webkit-font-smoothing: subpixel-antialiased;
+} 
+
+h1, h2, h3, h4, h5, h6, md-card, md-list, md-select, md-toolbar, ol, p, ul {
+    text-rendering: auto;
+}
+// end Angular material reset
+
 
 .headerfont {
   color: @txtheader;
