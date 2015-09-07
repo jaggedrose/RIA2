@@ -5,7 +5,7 @@
        <form ng-submit="newUserCreate()" name="registrationForm" class="mb20" novalidate>
          <div class="form-group">
           <label for="userName" class="labels"></label>
-          <input ng-model="newUser.user_name" class="form-control" type="text" id = "userName" name = "userName" ng-minlength="5" ng-maxlength="20" placeholder="Enter username" required>
+          <input ng-model="newUser.user_name" class="form-control" type="text" id = "userName" name = "userName" ng-minlength="5" ng-maxlength="20" placeholder="Enter username - lowercase only" required>
           <p ng-show="registrationForm.userName.$error.minlength">The username is too short.</p>
           <p ng-show="registrationForm.userName.$error.maxlength">The username is too long.</p>
           <p ng-show="registrationForm.userName.$error.unique">Username is already registered.</p>

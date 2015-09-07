@@ -38,7 +38,7 @@ app.controller("registerController", ["$http", "$scope", "User", "Login", "$loca
   $http.get('js/resources/countries.json').then(function(res){
     $scope.countries = res.data;
     $scope.newUser.country = $scope.countries[0];
-    console.log("$scope.countries", $scope.countries);
+    //console.log("$scope.countries", $scope.countries);
   });
 
   //Empties form fields
