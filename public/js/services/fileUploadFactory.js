@@ -14,6 +14,7 @@ app.factory("FileUploader", ["Upload", "$q", function(Upload, $q) {
         success: function() {} // return a fake success function to preserve controller code
       };
     }
+
     // the function returns the Upload request
     // so that we can still do .success() etc. in
     // our controllers

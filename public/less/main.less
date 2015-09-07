@@ -9,6 +9,8 @@
 @txtbody: #CCC;
 @txtcontrol: #DDD;
 @txtuserdate: #777;
+@txtuserdatetags: #777;
+@taglabel: #444; 
 @frame: #000;
 @control: #999;
 @stdinputtxtcolour: #CCC;
@@ -38,6 +40,17 @@ h1, h2, h3, h4, h5, h6 {
   background-color: @backgr;
 }
 
+// Reset Angular material font properties
+body, html {
+    -webkit-font-smoothing: subpixel-antialiased;
+} 
+
+h1, h2, h3, h4, h5, h6, md-card, md-list, md-select, md-toolbar, ol, p, ul {
+    text-rendering: auto;
+}
+// end Angular material reset
+
+
 .headerfont {
   color: @txtheader;
   font-family: 'Oswald', sans-serif;
@@ -53,7 +66,7 @@ h1, h2, h3, h4, h5, h6 {
   color: @stdinputtxtcolour;
 }
 
-// colour of *background* of text input fields
+// colour of *background* of text input fields    
 
 .stdinputbgcolour {
   background-color: @stdinputbgcolour;
@@ -141,7 +154,7 @@ h1, h2, h3, h4, h5, h6 {
     a {
       color: @brtinputtxtcolour;
     }
- }
+  }
 }
 
 #NoBorder {
@@ -179,8 +192,10 @@ h1, h2, h3, h4, h5, h6 {
   font-family: 'Roboto', sans-serif;
 }
 
-.txtuserdate {
-  color: @txtuserdate;
+.txtuserdatetags {
+  color: @txtuserdatetags;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 p.formerror {
@@ -203,8 +218,18 @@ p.formerror {
 
 // GENERIC FORMATTING STUFF FOR VARIOUS DIV'S AND ELEMENTS ********************
 
-// border for app's main div
 
+// tag display in viewstory
+.tag {
+  display: inline-block;
+  margin: 0 4px 4px 0;
+  padding: 0 5px 0 5px;
+  border: @taglabel;
+  border-radius: 3px;
+  background-color: @taglabel;
+}
+
+// border for app's main div 
 .mainframe {
   border: 5px solid @frame;
   padding-top: 10px;
@@ -222,14 +247,18 @@ p.formerror {
 }
 
 .navthumbs {
-  float:right;
+  margin: 0 0 15px 0;
+  
+}
+
+.navthumbs a {
+  
 }
 
 .navthumb {
   border: 3px solid black;
   height: 60px;
   width: 90px;
-  margin: 0 0 10px 10px;
   opacity: 0.3;
 }
 
@@ -243,6 +272,11 @@ p.formerror {
   width: 90px;
   margin: 0 0 10px 10px;
 }
+
+// .center {
+//   margin-left: auto;
+//   margin-right: auto;
+// }
 
 .cnttxt {
   text-align: center;
@@ -273,8 +307,10 @@ p.formerror {
 
 .stryimg {
   height: 35vh;
+  overflow: hidden;
   text-align: center;
-} 
+  margin-bottom: 15px;
+}
 
 .stryheader {
 
@@ -295,6 +331,8 @@ p.formerror {
   .stdinputtxtcolour;
   .txtbody;
   .plcholdertxt;
+  // height: 35vh; I commented this out. We're going to look at formatting this box with the rows property /Per
+  word-wrap: break-word;
 }
 
  #SearchInput {
@@ -315,7 +353,6 @@ p.strytxt {
 textarea.form-control {
   height: 35vh;
 }
-
 
 // CURSORS ********************************************************************
 .div.imgupload i,
@@ -439,7 +476,6 @@ div.profileImgFrame {
 }
 
 //  Change element depth ***********************************************************
-
 // Z-angel
 .on-top {
   z-index: 99;
@@ -453,3 +489,10 @@ div.icons {
  fill: @control;
 }
 
+.rotatedIcon svg {
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
