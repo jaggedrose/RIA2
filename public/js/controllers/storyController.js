@@ -116,6 +116,17 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
 
   // function to show a section's saved image OR a section's currently loaded but not saved image 
 
+  function updateCropMeSize(){
+    var w = window.innerWidth - 30*2;
+    $scope.cropme = {width:w,height:w*0.75};
+    if(!$scope.$$phase){
+      $scope.$apply();
+    }
+    console.log("updating crop me size",w);
+  }
+  updateCropMeSize();
+  window.addEventListener("resize",updateCropMeSize);
+
   $scope.showImg = function(currSec) {
     var img = '';
     if (
