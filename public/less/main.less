@@ -13,6 +13,7 @@
 @taglabel: #444; 
 @frame: #000;
 @control: #999;
+@orange: #FF7A00;
 @stdinputtxtcolour: #CCC;
 @brtinputtxtcolour: #EEE;
 @drkinputtxtcolour: #999;
@@ -42,7 +43,7 @@ h1, h2, h3, h4, h5, h6 {
 
 // Reset Angular material font properties
 body, html {
-    -webkit-font-smoothing: subpixel-antialiased;
+  -webkit-font-smoothing: subpixel-antialiased;
 } 
 
 h1, h2, h3, h4, h5, h6, md-card, md-list, md-select, md-toolbar, ol, p, ul {
@@ -204,7 +205,9 @@ p.formerror {
 // For user profile txt
 .userPage p {
   font-size: 11px;
-  color: @txtbody;
+  color: @txtcontrol;
+  font-family: 'Roboto', sans-serif;
+
 }
 
 // for control elements - buttons, icons
@@ -402,6 +405,67 @@ textarea.form-control {
      color: @plcholdertxt;  
   }
 }
+
+//  BOOTSTRAP OVERRIDES ***********************************************************
+
+
+.btn {
+  color: @backgr;
+  background-color: @control;
+  font-family: 'Roboto', sans-serif;
+  -moz-border-radius:3px;
+  -webkit-border-radius:3px;
+  border-radius:3px;
+  display:inline-block;
+  cursor:pointer;
+  text-decoration:none;
+
+}
+
+// Button with orange border/glow
+
+/*
+
+.btn {
+  color: @control;
+  font-family: 'Roboto', sans-serif;
+  border: 1px solid @orange;
+  -moz-box-shadow: 0px 0px 1px 1px @orange;
+  -webkit-box-shadow: 0px 0px 1px 1px @orange;
+  box-shadow: 0px 0px 1px 1px @orange;
+  background-color:transparent;
+  -moz-border-radius:3px;
+  -webkit-border-radius:3px;
+  border-radius:3px;
+  display:inline-block;
+  cursor:pointer;
+  text-decoration:none;
+
+}
+
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // User Profile/Edit/Register/login Styling *********************
 
