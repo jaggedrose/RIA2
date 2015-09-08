@@ -7,7 +7,7 @@
 @backgr: #292929;
 @txtheader: #FFF;
 @txtbody: #CCC;
-@txtcontrol: #DDD;
+@txtcontrol: #AAA;
 @txtuserdate: #777;
 @txtuserdatetags: #777;
 @taglabel: #444; 
@@ -508,12 +508,13 @@ div.profileImgFrame {
   left: 3px;
 }
 .userEditPage input, .userEditPage select, .registerPage input, .registerPage select, .loginPage input{
-  .stdinputtxtcolour;
+  color: @brtinputtxtcolour;
   .stdinputbgcolour;
   .stdinputborder;
 }
 .userEditPage label, .loginPage label {
-  color: @brtinputtxtcolour;
+  color: @txtcontrol;
+  font-family: 'Roboto', sans-serif;
 }
 .userEditPage p, .registerPage p, .loginPage span {
   .errormsg;
