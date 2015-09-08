@@ -17,6 +17,18 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
     number_views: ""
   };
 
+  $scope.textLength = function() {
+    if (
+      $scope.storyForm &&
+      $scope.storyForm.sectionText &&
+      $scope.storyForm.sectionText.$$lastCommittedViewValue
+    ) {
+
+      return $scope.storyForm.sectionText.$$lastCommittedViewValue.length;
+    }
+    return 0;
+  };
+
   // IF WE SHOULD LOAD AN EXISTING STORY
   var id = $routeParams.id;
   if(id && id!="new"){
@@ -372,5 +384,4 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
     });
   };
 }]);
-
 
