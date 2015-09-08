@@ -3,10 +3,10 @@ app.controller("menuController", ["$scope", "$location", "Login", function($scop
    console.log("menuController is working!");
 
    $scope.User = Login.user;
-
    // Listening for any route changes,
    // depending on if a user is logged in or not.
-   $scope.$on("$routeChangeSuccess", function(event, next, current) {
+   $scope.$on("$routeChangeStart", function(event, next, current) {
+      console.log("on $routeChangeStart");
       // If there is no logged in user, return to login page
       if (!Login.user._id && next.$$route.login && next.$$route.originalPath != "/") {
          event.preventDefault();
@@ -14,6 +14,13 @@ app.controller("menuController", ["$scope", "$location", "Login", function($scop
          return;
       }
 
+      //NOT DONE!
+      //Waiting for Hugos answer on how to wait for recieveing the user on load
+      if (Login.user._id && next.$$route.originalPath == "/login") {
+         event.preventDefault();
+         $location.url("/");
+         return;
+      }
    });
 
 }]);
