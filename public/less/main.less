@@ -22,8 +22,8 @@
 @stdinputbordercolour: #000;
 @plcholderhead: #AAA;
 @plcholdertxt: #999;
-@btn-non-active-bg:#707070;
-@btn-active-bg:#fff;
+@btn-non-active-bg:#292929;
+@btn-active-bg:#999;
 @errormsg: #BD591C;
 
 // COLOURS AND FONTS **********************************************************
@@ -112,26 +112,26 @@ h1, h2, h3, h4, h5, h6, md-card, md-list, md-select, md-toolbar, ol, p, ul {
   }
   .btn-active {
     background-color: @btn-active-bg;
-    color:#333;
-    border-color:#fff;
+    color: @backgr;
+    border-color: #000;
     width: 50%;
     z-index: 2;
     border-bottom-right-radius:0.8em;
     border-bottom-left-radius:0.8em;
     font-family: 'Roboto', sans-serif;
      &:hover {
-      background-color: #eee;
-      border-color: #fff;
+      background-color: @btn-active-bg;
+      border-color: #000;
     }
      &:focus {
       background-color: @btn-active-bg;
-      border-color: #fff;
+      border-color: #000;
     } 
   }
   .btn-inactive {
     background-color: @btn-non-active-bg; 
-    color:@brtinputtxtcolour;
-    border-color:@txtcontrol;    
+    color: @control;
+    border-color: #000;
     width: 50%;
     z-index: 1;
     border-bottom-right-radius:0.8em;
@@ -174,8 +174,8 @@ h1, h2, h3, h4, h5, h6, md-card, md-list, md-select, md-toolbar, ol, p, ul {
   background-color: @stdinputbgcolour;
 }
 
-#padd18 {
-  padding: 0 18px;
+#padd15 {
+  padding: 0 15px;
 }
 
 .padding-bottom {
@@ -346,10 +346,13 @@ p.formerror {
 }
 
  #SearchInput {
+  margin-bottom: -4px;
   .stdinputbgcolour; 
   .stdinputtxtcolour;
   .txtcontrol;
   .plcholdertxt;
+  .txtcontrol;
+  .stdinputborder;
 }
 
 p.strytxt {
