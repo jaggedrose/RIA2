@@ -42,9 +42,7 @@
                 </div>
             </div> -->
           <!--   <div class="row icons" layout="row" layout-align="space-between center">
-                <div>
-                    <ng-md-icon ng-click="goToFAQ()" icon="" size="40"></ng-md-icon>
-                </div>
+                
                 <div layout="row" layout-align="center center" >
                     <div>
                         <ng-md-icon  ng-class="{true: 'disabled', false: ''}[prevPageDisabled()]" ng-click="prevPage()" ng-hide="prevPageDisabled()" icon="keyboard_arrow_left" size="60"></ng-md-icon>
@@ -54,23 +52,32 @@
                         
                     </div>
                 </div>
-                <div>
-                    <ng-md-icon ng-click="goToCreateStory()" icon="create"  size="40"></ng-md-icon>
-                </div>  
+                 
             </div> -->
-                <div class="row">
-            <ul class="pager">
-              <li  ng-class="prevPageDisabled()">
-                <a id="SearchArrow" href ng-click="prevPage()"><i class=" fa fa-caret-left fa-4x"></i></a>
-              </li>
-             <!--  <li ng-repeat="n in [] | range: pageCount()"
-                ng-class="{active: n == currentPage}" ng-click="setPage(n)">
-                <a href="#">{{n}}</a>
-              </li> -->
-              <li  ng-class="nextPageDisabled()">
-                <a id="SearchArrow" href ng-click="nextPage()"><i class="fa fa-caret-right fa-4x"></i></a>
-              </li>
-            </ul>
+        <div class="row">
+                
+                <ul class="pager">
+                    <li>
+                        <!-- <ng-md-icon ng-click="goToFAQ()" icon="" size="40"></ng-md-icon> -->
+                         <a id="SearchArrow" href ng-click="goToFAQ()"><i class="fa fa-question fa-3x"></i></a>
+                        
+                    </li>
+                  <li  ng-class="prevPageDisabled()">
+                    <a id="SearchArrow" href ng-click="prevPage()"><i class=" fa fa-caret-left fa-4x"></i></a>
+                  </li>
+                 <!--  <li ng-repeat="n in [] | range: pageCount()"
+                    ng-class="{active: n == currentPage}" ng-click="setPage(n)">
+                    <a href="#">{{n}}</a>
+                  </li> -->
+                  <li  ng-class="nextPageDisabled()">
+                    <a id="SearchArrow" href ng-click="nextPage()"><i class="fa fa-caret-right fa-4x"></i></a>
+                  </li>
+                  <li>
+                    <a id="SearchArrow" href ng-click="goToCreateStory()"><i class="fa fa-pencil fa-3x"></i></a>
+                    <!-- <ng-md-icon  ng-click="goToCreateStory()" icon="create"  size="40"></ng-md-icon> -->
+                  </li>
+                </ul>
+          
            </div>
         </div>
     </div>
