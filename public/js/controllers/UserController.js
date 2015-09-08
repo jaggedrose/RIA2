@@ -88,6 +88,13 @@ app.controller("UserController", ["$http", "$scope", "$location", "Story", "User
   $scope.deleteStory = function(storyid){
     Story.remove({_id:storyid},function(){
       $scope.UsersStories.splice(storyHash[storyid].index, 1);
+      $scope.UsersStories.forEach(function(story, index) {
+        storyHash[story._id] = {
+          index: index,
+          story:story
+        };
+      });
+     
       //$scope.UsersStories = Story.get({user_id: $scope.User._id, _populate:"user_id"});
     });
   };

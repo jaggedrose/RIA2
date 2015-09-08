@@ -43,7 +43,8 @@
             </div>
 
             <div class="row userStoryList mb40">
-                <div ng-repeat="story in UsersStories|orderBy: '-date_created'" data-story-id="{{story._id}}" scroll-to-top-when="storyDeleted">
+                <div class="row" ng-repeat="story in UsersStories|orderBy: '-date_created'" data-story-id="{{story._id}}" scroll-to-top-when="storyDeleted">
+                   
                     <a ng-href="/viewStory/{{story._id}}">
                         <div class="col-xs-4">
                             <img ng-src="{{story.section1.img}}" class="userStoryImg"></img>
