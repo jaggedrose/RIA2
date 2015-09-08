@@ -23,7 +23,8 @@ app.config(["$routeProvider", "$locationProvider", function($routeProvider, $loc
       redirectTo: "/writeStory/:id/section/1"
     })
     .when("/writeStory", {
-      redirectTo: "/writeStory/new/section/1"
+      redirectTo: "/writeStory/new/section/1",
+      login: true // route is login protected
     })
     .when("/writeStory/:id/section/:sectionid", {
       templateUrl: "partials/writeStory.html",
