@@ -204,7 +204,7 @@ p.formerror {
   margin: 5px 0 0 12px;
 }
 // For user profile txt
-.userPage p {
+.userPage p, .userImgMsg {
   font-size: 11px;
   color: @txtcontrol;
   font-family: 'Roboto', sans-serif;
@@ -290,9 +290,20 @@ p.formerror {
   border: 1px solid @stdinputbordercolour;
   border-radius: 4px;
 }
-
+.txtleft {
+  text-align: left;
+}
 .txtright {
   text-align: right;
+}
+.mt5 {
+  margin-top: 5px;
+}
+.mt10 {
+  margin-top: 10px;
+}
+.mb10 {
+  margin-bottom: 10px;
 }
 .mb20 {
   margin-bottom: 20px;
@@ -302,6 +313,9 @@ p.formerror {
 }
 .dispNone {
   display: none;
+}
+.breakWord {
+  word-wrap: break-word;
 }
 
 .width20 {
@@ -508,6 +522,9 @@ div.imgupload input {
   left:50%;
   transform:translate(-50%,-50%);
 }
+.userHeader {
+  margin-top: 0;
+}
 .userProfileImg {
   width: 100%;
 }
@@ -515,7 +532,10 @@ div.imgupload input {
   width: 100%;
 }
 div.profileImgFrame {
-  min-height: 80px;
+  min-height: 90px;
+  max-height: 200px;
+  min-width: 120px;
+  max-width: 300px;
   position: relative;
 }
 .userSaveImg, .userDeleteImg {
@@ -544,6 +564,10 @@ div.profileImgFrame {
 }
 .userEditPage p, .registerPage p, .loginPage span {
   .errormsg;
+}
+.editIcon, .deleteIcon {
+  font-size: 20px;
+
 }
 
 //  Change element depth ***********************************************************
