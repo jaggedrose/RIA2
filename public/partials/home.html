@@ -1,22 +1,22 @@
 <div class="container-fluid appbackground">
     <div class="row">
         <div class="col-xs-12 mainframe">
-            <h2 class="md-headline control">Welcome!</h2>
+            <h2 class="control">Welcome!</h2>
              <div class="row" ng-repeat="story in currentPageStories">
           <div class="row">
               <div class="col-xs-4 "> 
                     <a ng-href="/viewStory/{{story._id}}/section/1"  id="NoBorder" class="thumbnail">
-                      <img src={{story.section1.img}} title={{story.title}}  id="BorderPict" class="img-responsive">
+                      <img ng-src="{{story.section1.img}}" title="{{story.title}}"  id="BorderPict" class="img-responsive">
                     </a>
                </div>
                 <div class="col-xs-4"> 
-                   <a href="/viewStory/{{story._id}}/section/1" id="NoBorder" class="thumbnail">
-                      <img src={{story.section2.img}} title={{story.title}} id="BorderPict" class="img-responsive">
+                   <a ng-href="/viewStory/{{story._id}}/section/1" id="NoBorder" class="thumbnail">
+                      <img ng-src="{{story.section2.img}}" title="{{story.title}}" id="BorderPict" class="img-responsive">
                     </a>
                 </div>   
                 <div class="col-xs-4"> 
-                   <a href="/viewStory/{{story._id}}/section/1" id="NoBorder" class="thumbnail">
-                      <img src={{story.section3.img}} title={{story.title}} id="BorderPict" class="img-responsive">
+                   <a ng-href="/viewStory/{{story._id}}/section/1" id="NoBorder" class="thumbnail">
+                      <img ng-src="{{story.section3.img}}" title="{{story.title}}" id="BorderPict" class="img-responsive">
                     </a>
                 </div>
           </div>
@@ -59,7 +59,7 @@
                 <ul class="pager">
                     <li>
                         <!-- <ng-md-icon ng-click="goToFAQ()" icon="" size="40"></ng-md-icon> -->
-                         <a id="SearchArrow" href ng-click="goToFAQ()"><i class="fa fa-question fa-3x"></i></a>
+                         <a id="SearchArrow" ng-href="/writeStory"><i class="fa fa-question fa-3x"></i></a>
                         
                     </li>
                   <li  ng-class="prevPageDisabled()">
@@ -73,7 +73,7 @@
                     <a id="SearchArrow" href ng-click="nextPage()"><i class="fa fa-caret-right fa-4x"></i></a>
                   </li>
                   <li>
-                    <a id="SearchArrow" href ng-click="goToCreateStory()"><i class="fa fa-pencil fa-3x"></i></a>
+                    <a id="SearchArrow" ng-href="/FAQ"><i class="fa fa-pencil fa-3x"></i></a>
                     <!-- <ng-md-icon  ng-click="goToCreateStory()" icon="create"  size="40"></ng-md-icon> -->
                   </li>
                 </ul>
