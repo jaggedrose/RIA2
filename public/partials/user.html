@@ -13,7 +13,7 @@
                         <i class="fa fa-file-image-o fa-4x control centerIcon" ng-hide="User.img" ng-class="{'dispNone': User.img}"></i>
                         <input type="file" id="profileImg" name="profileImg" ngf-select ng-model="files" ngf-accept="'image/*'">
                         <img ng-if="User.img" ng-src="{{User.img}}" class="userProfileImg">
-                        <i class="fa fa-check-square fa-1x userSaveImg" ng-show="User.img && showSaveImgBtn" ng-click="saveUserImg()"></i>
+                        <i class="fa fa-check-square fa-1x userSaveImg control" ng-show="User.img && showSaveImgBtn" ng-click="saveUserImg()"></i>
                         <i class="fa fa-trash-o fa-1x userDeleteImg control" ng-show="User.img && !showSaveImgBtn" ng-click="deleteUserImg()"></i>
                     </div>
                 </div>
