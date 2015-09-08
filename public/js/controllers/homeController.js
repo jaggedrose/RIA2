@@ -88,22 +88,16 @@ app.controller("homeController", ["$http", "$scope", "$routeParams", "$location"
     return currentPage === pCount ? "hidden" : "";
   };
 
-  $scope.goToFAQ = function(){
-    $location.path('/FAQ');
-  };
-
   // If there is a logged in user go to writestory otherwise go to login
   $scope.User = Login.user;
 
-  $scope.goToCreateStory = function(){
-    if (Login.user._id) {
-      $location.path('/writeStory');
-      console.log("Logged in, now you can write a story!");
-    } else {
-      $location.path('/login');
-      console.log("Please login to write a story!");
+  $scope.$on("$routeChangeSuccess", function(event, next, current) {
+    // If there is no logged in user, return to login page
+    if (!Login.user._id && next.$$route.login && next.$$route.originalPath != "/") {
+      event.preventDefault();
+      $location.url("/login");
+      return;
     }
-    
-  };
+  });
 
 }]);
