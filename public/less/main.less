@@ -26,6 +26,7 @@
 @btn-non-active-bg:#292929;
 @btn-active-bg:#999;
 @errormsg: #BD591C;
+@drkborder: #000;
 
 // COLOURS AND FONTS **********************************************************
 
@@ -187,9 +188,7 @@ a[id^='NoBorder'] {
 }
 
 img[id^='BorderPict'] {
-  border: 1px solid #111;
-  border-radius: 0.3em;
-
+  .bord3blk
 }
 
 #basic-addon1 {
@@ -340,11 +339,13 @@ p.formerror {
 .breakWord {
   word-wrap: break-word;
 }
-
 .width20 {
   width: 20%;
 }
 
+.bord3blk {
+  border: 3px solid @drkborder;
+}
 
 // STORY WRITE / PRESENTATION *************************************************
 
@@ -356,7 +357,7 @@ p.formerror {
   width: 100%;
   overflow: hidden;
   text-align: center;
-  border: 0.2em solid black;
+  .bord3blk;
   margin-bottom: 15px;
 }
 
@@ -554,6 +555,7 @@ div.imgupload input {
 }
 .userStoryImg {
   width: 100%;
+  .bord3blk;
 }
 div.profileImgFrame {
   min-height: 90px;

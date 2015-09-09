@@ -2,9 +2,9 @@
     <div class="row">
         <section class="col-xs-12 mainframe userPage">
 
-        <div ng-show="User._id" class="logoutBtn">
+        <!-- <div ng-show="User._id" class="logoutBtn">
                 <button type="submit" class="btn btn-xs" ng-click="logoutUser()">Log Out</button>
-        </div>
+        </div> -->
 
          <h2 class="headerfont">{{User.user_name}}</h2>
             <div class="row userProfileInfo mt5 mb40">
@@ -66,7 +66,7 @@
                                         <i class="fa fa-pencil-square-o editIcon control"></i>
                                     </a>
 
-                                    <a href=""><i class="fa fa-trash-o fa-1x control" ng-click="deleteStory(story._id)"></i> </a>
+                                    <a href=""><i class="fa fa-trash-o fa-1x control" ng-click="openModal(story._id)"></i> </a>
 
                                 </div>
                             </div>
