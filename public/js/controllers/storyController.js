@@ -356,8 +356,8 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
 
   //Control modal for deleting image
  window.theScope = $scope;
-  $scope.openModal = function(size) {
-    var imgName = $scope.file.name;
+  $scope.openModal = function(size,imgName ) {
+    imgName = imgName || $scope.file.name;
     console.log("openModal !!!", imgName);
     var modalInstance = $modal.open({
       templateUrl: 'partials/deleteImgModal.html',

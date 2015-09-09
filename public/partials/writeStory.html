@@ -37,7 +37,7 @@
                 <!-- Nonvisible input to store <cropme>'s required and validity value -->
                 <input class="chooseFile" name="sectionFile" ng-model="unusedBananaModel" required>
               </div>
-              <button ng-if="storySection.img" ng-click="openModal()" class="fa fa-trash-o fa-2x control" ></button>
+              <button ng-if="storySection.img" ng-click="openModal(false,storySection.img)" class="fa fa-trash-o fa-2x control" ></button>
               <div class="form-group stdinputborder imgview" ng-show="storySection.img">                
                 <img class="img-responsive" ng-src="{{storySection.img}}"> 
               </div>
