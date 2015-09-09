@@ -32,12 +32,13 @@
                   ng-show="croppingNotDone"
                   >
                 </cropme>
+                
                 <p class="txtcontrol" ng-show="!storySection.img && storyForm.sectionFile.$dirty">Choose and crop an image for this section.</p>
                 <!-- Nonvisible input to store <cropme>'s required and validity value -->
-                <input type="hidden" name="sectionFile" ng-model="unusedBananaModel" required>
+                <input class="chooseFile" name="sectionFile" ng-model="unusedBananaModel" required>
               </div>
-              <div class="form-group stryimg stdinputborder imgview" ng-show="storySection.img">
-                <i ng-click="openModal()" class="fa fa-trash-o fa-2x control" ></i>
+              <button ng-if="storySection.img" ng-click="openModal()" class="fa fa-trash-o fa-2x control" ></button>
+              <div class="form-group stdinputborder imgview" ng-show="storySection.img">                
                 <img class="img-responsive" ng-src="{{storySection.img}}"> 
               </div>
 

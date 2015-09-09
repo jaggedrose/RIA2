@@ -1,7 +1,7 @@
 //"myAppName" controller
-app.controller("storyController", ["$http", "$scope","$routeParams","$location", "Story", "Tag", "Login", "FileUploader", "$modal",
-  function($http, $scope, $routeParams, $location, Story, Tag, Login, FileUploader, $modal) {
-  
+app.controller("storyController", ["$http", "$scope","$routeParams","$location", "Story", "Tag", "Login", "FileUploader", "$modal", "$timeout",
+  function($http, $scope, $routeParams, $location, Story, Tag, Login, FileUploader, $modal, $timeout) {
+  $scope.$broadcast("cropme:open");
   $scope.croppingNotDone = true;
 
   // track which section we are on
@@ -16,6 +16,7 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
     date_modified: "",
     number_views: ""
   };
+
 
   // IF WE SHOULD LOAD AN EXISTING STORY
   var id = $routeParams.id;
@@ -122,7 +123,7 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
     if(!$scope.$$phase){
       $scope.$apply();
     }
-    console.log("updating crop me size",w);
+    //console.log("updating crop me size",w);
   }
   updateCropMeSize();
   window.addEventListener("resize",updateCropMeSize);
@@ -343,8 +344,8 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
   //Control modal for deleting image
  window.theScope = $scope;
   $scope.openModal = function(size) {
-    var imgName = $scope.storySection.img.substr($scope.storySection.img.lastIndexOf('/') + 1);
-    //console.log("openModal !!!", imgName);
+    var imgName = $scope.file.name;
+    console.log("openModal !!!", imgName);
     var modalInstance = $modal.open({
       templateUrl: 'partials/deleteImgModal.html',
       controller: 'deleteImgController',
@@ -353,7 +354,7 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
       resolve: {
         imgUrl: function () {
           return imgName;
-          //return $scope.storySection.img;
+          
         }
       }
     });

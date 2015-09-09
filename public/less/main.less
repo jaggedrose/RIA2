@@ -12,6 +12,7 @@
 @txtuserdatetags: #777;
 @taglabel: #444; 
 @frame: #000;
+@darkbtn: #191919;
 @control: #999;
 @stdinputtxtcolour: #CCC;
 @brtinputtxtcolour: #EEE;
@@ -468,4 +469,63 @@ div.icons {
   -ms-transform: rotate(180deg);
   -o-transform: rotate(180deg);
   transform: rotate(180deg);
+}
+
+//Styling of write story image upload/crop function
+cropme .cropme-or,
+.chooseFile {
+  visibility: hidden;
+}
+//File upload field
+cropme .step-1 {
+  background-color: @backgr;  
+  border: 1px solid #111
+}
+//Crop surface
+/*cropme .overlay-border {
+  border: 2px solid #111;
+  box-shadow: none;
+}*/
+//File upload button, crop/cancel buttons
+cropme .cropme-button {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-size: 0.7em;
+  border: 1px solid #111;
+  box-shadow: none;
+  border-radius: 0.7em;
+  background: @darkbtn;
+  width: 20vw;
+  height: 6vh;
+  text-align: center;
+  margin: auto;
+  margin-left: -70px;
+  outline: none;
+}
+
+//Crop/cancel buttons
+#cropme-ok, #cropme-cancel {
+  font-family: 'Roboto', sans-serif;
+  font-color: @brtinputtxtcolour;
+  font-style: normal;
+  font-size: 1.2vh;
+  border: 1px solid #111;
+  box-shadow: none;
+  border-radius: 0.5em;
+  background: @darkbtn;
+  width: 10vw;
+  height: 3vh;
+  text-align: center;
+  margin: auto;
+  
+}
+cropme .cropme-button:hover {
+  background: @control;
+}
+//Cropped img view
+.imgview {
+  width: 100%;
+  overflow: hidden;
+  text-align: center;
+  margin-bottom: 15px;
 }
