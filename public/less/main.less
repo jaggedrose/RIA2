@@ -353,7 +353,7 @@ p.formerror {
 } 
 
 .stryimg {
-  height: 35vh;
+  width: 100%;
   overflow: hidden;
   text-align: center;
   border: 0.2em solid black;
@@ -617,12 +617,15 @@ div.icons {
 }
 
 //Styling of write story image upload/crop function
+cropme #asshatButton,
 cropme .cropme-or,
 .chooseFile {
   visibility: hidden;
 }
 //File upload field
+cropme .dropClass,
 cropme .step-1 {
+  width: 100%;
   background-color: @backgr;  
   border: 1px solid #111
 }
@@ -633,6 +636,9 @@ cropme .step-1 {
 }*/
 //File upload button, crop/cancel buttons
 cropme .cropme-button {
+  display:inline-block;
+  cursor:pointer;
+  text-decoration:none;
   font-family: 'Roboto', sans-serif;
   font-style: normal;
   font-size: 0.7em;
@@ -650,6 +656,17 @@ cropme .cropme-button {
 
 //Crop/cancel buttons
 #cropme-ok, #cropme-cancel {
+  color: @backgr;
+  background-color: @control;
+  font-family: 'Roboto', sans-serif;
+  -moz-border-radius:0.3em;
+  -webkit-border-radius:0.3em;
+  border-radius:0.3em;
+  box-shadow: none;
+  display:inline-block;
+  cursor:pointer;
+  text-decoration:none;
+  /*
   font-family: 'Roboto', sans-serif;
   font-color: @brtinputtxtcolour;
   font-style: normal;
@@ -662,7 +679,7 @@ cropme .cropme-button {
   height: 3vh;
   text-align: center;
   margin: auto;
-  
+  */
 }
 cropme .cropme-button:hover {
   background: @control;

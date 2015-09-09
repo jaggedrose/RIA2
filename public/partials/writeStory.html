@@ -22,7 +22,7 @@
                 <cropme 
                   width="{{cropme.width}}"
                   height="{{cropme.height}}"
-                  ratio="0.75"
+                  ratio="0.66"
                   icon-class=""
                   type="png"
                   destination-width="1000"
@@ -37,9 +37,9 @@
                 <!-- Nonvisible input to store <cropme>'s required and validity value -->
                 <input class="chooseFile" name="sectionFile" ng-model="unusedBananaModel" required>
               </div>
-              <button ng-if="storySection.img" ng-click="openModal(false,storySection.img)" class="fa fa-trash-o fa-2x control" ></button>
+              <i ng-if="storySection.img" ng-click="openModal(false,storySection.img)" class="fa fa-trash-o fa-2x control" ></i>
               <div class="form-group stdinputborder imgview" ng-show="storySection.img">                
-                <img class="img-responsive" ng-src="{{storySection.img}}"> 
+                <img class="stryimg" ng-src="{{storySection.img}}"> 
               </div>
 
             <div class="row">
