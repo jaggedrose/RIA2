@@ -1,6 +1,7 @@
 //"myAppName" controller.
 
-app.controller("UserController", ["$http", "$scope", "$location", "Story", "User","Login","FileUploader", function($http, $scope, $location, Story, User, Login, FileUploader) {
+app.controller("UserController", ["$http", "$scope", "$location", "Story", "User","Login","FileUploader", "$modal",
+  function($http, $scope, $location, Story, User, Login, FileUploader, $modal) {
 
   //$scope.User = Login.user;
   console.log("UserController", Login.user);
@@ -83,6 +84,36 @@ app.controller("UserController", ["$http", "$scope", "$location", "Story", "User
 
   $scope.scrollToStory = function(storyid) {
     $scope.$broadcast("storyDeleted", storyid);
+  };
+
+$scope.openModal = function(storyid) {
+    //console.log("openModal !!!", imgName);
+    var modalInstance = $modal.open({
+      templateUrl: 'partials/deleteStory.html',
+      controller: 'deleteStoryController',
+      scope: $scope,
+      resolve: {
+      }
+    });
+
+    modalInstance.result.then(function() {
+      // If user choose "Yes"-button
+     Story.remove({_id:storyid},function(){
+        $scope.UsersStories.splice(storyHash[storyid].index, 1);
+        $scope.UsersStories.forEach(function(story, index) {
+          storyHash[story._id] = {
+            index: index,
+            story:story
+          };
+        });
+       
+        //$scope.UsersStories = Story.get({user_id: $scope.User._id, _populate:"user_id"});
+      });
+       
+    }, function () {
+      // If user choose "No"-button
+      //console.log("You choosed No-button");
+    });
   };
 
   $scope.deleteStory = function(storyid){
