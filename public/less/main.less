@@ -65,19 +65,16 @@ h1, h2, h3, h4, h5, h6, md-card, md-list, md-select, md-toolbar, ol, p, ul {
 }
 
 // colour of *text* in text input fields
-
 .stdinputtxtcolour {
   color: @stdinputtxtcolour;
 }
 
 // colour of *background* of text input fields    
-
 .stdinputbgcolour {
   background-color: @stdinputbgcolour;
 }
 
 // for story text, 'editorial' on landing page etc
-
 .txtbody {
   font-family: 'Noticia Text', serif;
   color: @txtbody;
@@ -110,11 +107,14 @@ h1, h2, h3, h4, h5, h6, md-card, md-list, md-select, md-toolbar, ol, p, ul {
 .menuNav a {
   .control;
 }
+
 .menuNav i {
+  display: block;
   margin-top: 1vh;
   position: absolute;
-  left: 30%;
-  right: 30%;
+  //left: 30%;
+  //right: 30%;  
+  left: 45%; 
   font-size: 5vh;
 }
 
@@ -124,8 +124,6 @@ h1, h2, h3, h4, h5, h6, md-card, md-list, md-select, md-toolbar, ol, p, ul {
   margin-left: auto;
   margin-right: auto;
 }
-
-
 
 #btn-search {
   margin-top: -15px;
@@ -528,6 +526,7 @@ textarea.form-control {
 
 
 
+
 // User Profile/Edit/Register/login Styling *********************
 
 // Hide image input button
@@ -693,3 +692,16 @@ cropme .cropme-button:hover {
   text-align: center;
   margin-bottom: 15px;
 }
+
+//   @media-queries**********************************************
+
+@media (min-width: 900px){
+  #menuSearchIcon {
+    left: 2%;
+  }
+
+  #menuUserIcon {
+    left: -183%;
+  }
+}
+
