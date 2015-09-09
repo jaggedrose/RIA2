@@ -92,9 +92,20 @@ h1, h2, h3, h4, h5, h6, md-card, md-list, md-select, md-toolbar, ol, p, ul {
   border-color: @backgr;
   margin-bottom: 10px;
 }
+
+//Overriding bootstrap-class!
+.navbar {
+  min-height: 10px;
+}
+
 .menuNav {
   position: relative;
 }
+
+.menuNav div {
+  padding: 0 0;
+}
+
 .menuNav a {
   .control;
 }
@@ -103,7 +114,17 @@ h1, h2, h3, h4, h5, h6, md-card, md-list, md-select, md-toolbar, ol, p, ul {
   position: absolute;
   left: 30%;
   right: 30%;
+  font-size: 6vh;
 }
+
+.menuNav img {
+  height: 10vh;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
 
 #btn-search {
   margin-top: -15px;
