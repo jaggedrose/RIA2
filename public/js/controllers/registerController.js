@@ -59,8 +59,10 @@ app.controller("registerController", ["$http", "$scope", "User", "Login", "$loca
   //Every time $scope.newUser.userName changes
   $scope.$watch("newUser.user_name",function(newVal, oldVal){
 
-    //do user_name lowercase
-    $scope.newUser.user_name = $scope.newUser.user_name.toLowerCase();
+    //if user_name exists on $scope.newUser make it lowercase
+    if($scope.newUser.user_name) {
+      $scope.newUser.user_name = $scope.newUser.user_name.toLowerCase();
+    }
     console.log("$scope watch for userName", newVal, oldVal);
     //$scope.userNameAlreadyRegistered = false;
     if(!newVal){return;}

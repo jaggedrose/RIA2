@@ -1,3 +1,4 @@
+//Factory for using local storage
 app.factory("UserStore", [function() {
   if (!localStorage.stories) {
     localStorage.stories = {};
@@ -6,7 +7,6 @@ app.factory("UserStore", [function() {
   return {
     tmp: {},
     perm: localStorage.stories
-  }
-}])
+  };
+}]);
 
-// Hugo example factory for using local storage (to store drafts etc)

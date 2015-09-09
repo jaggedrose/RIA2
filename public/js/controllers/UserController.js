@@ -32,7 +32,7 @@ app.controller("UserController", ["$http", "$scope", "$location", "Story", "User
 
   });
 
-  $scope.profImage = '';
+  $scope.showSaveImgBtn = false;
 
   $scope.$watch("files",function(){
     console.log("s", $scope);
@@ -42,16 +42,30 @@ app.controller("UserController", ["$http", "$scope", "$location", "Story", "User
     // Otherwise upload the file properly
     FileUploader($scope.files[0]).success(function(imgurl) {
       $scope.User.img = imgurl;
+      $scope.showSaveImgBtn = true;
       console.log("filnamn: ", $scope.files[0].name, "sökväg = ", $scope.User.img);
     });
   });
 
-  $scope.save = function() {
+  $scope.saveUserImg = function() {
     $scope.User.$update(function() {
       console.log("Saved new profile pic ", $scope.User);
+      $scope.showSaveImgBtn = false;
     });
   };
 
+  $scope.deleteUserImg = function() {
+    $http.post('/api/removeImage', {imgsrc: $scope.User.img}).success(function() {
+      $scope.User.img = "";
+
+      delete $scope.User.password;
+      $scope.User.$update(function() {
+        console.log("Delete user img db updated: ", $scope.User);
+      });
+
+      console.log("Delete user img");
+    });
+  };
 
   // Log out function
   $scope.logoutUser = function(data) {
@@ -72,10 +86,19 @@ app.controller("UserController", ["$http", "$scope", "$location", "Story", "User
   };
 
   $scope.deleteStory = function(storyid){
-    Story.remove({_id:storyid},function(){
-      $scope.UsersStories.splice(storyHash[storyid].index, 1);
-      //$scope.UsersStories = Story.get({user_id: $scope.User._id, _populate:"user_id"});
-    });
+    if (confirm("Do you really want delete so wonderful story?")) {
+      Story.remove({_id:storyid},function(){
+        $scope.UsersStories.splice(storyHash[storyid].index, 1);
+        $scope.UsersStories.forEach(function(story, index) {
+          storyHash[story._id] = {
+            index: index,
+            story:story
+          };
+        });
+       
+        //$scope.UsersStories = Story.get({user_id: $scope.User._id, _populate:"user_id"});
+      });
+    }
   };
 
 

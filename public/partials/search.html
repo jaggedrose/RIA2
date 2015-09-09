@@ -1,32 +1,38 @@
-<div class='container appbackground control'>
+<div class="container-fluid appbackground">
   <div class="row">
-    <form class="form-horizontal text-center">
-      <div class="form-group">
-        <div class="col-xs-12 input-group" id="padd18">
-          <span class="input-group-addon" id="basic-addon1"><i class="fa fa-search fa-1x control"></i></span>
-               <input type="text" id="SearchInput" ng-model="searchText"  ng-change="search();" placeholder="{{show}}"  class="form-control txtcontrol" aria-describedby="basic-addon1">
+    <section class="col-xs-12 mainframe"> 
+      <form class="form-horizontal">
+        <div class="form-group">
+          <div class="col-xs-12 input-group" id="padd15">
+            <!-- <span class="input-group-addon stdinputborder" id="basic-addon1"><i class="fa fa-search fa-1x control"></i></span> -->
+            <input type="text" id="SearchInput" ng-model="searchText"  ng-change="search();" placeholder="{{show}}"  class="form-control" aria-describedby="basic-addon1">
+          </div>
         </div>
-      </div>
-      <div class="form-group">
-        <div class="col-xs-12">
-           <div class="btn-group btn-group-justified btn-group-xs" id="btn-search" role="group" aria-label="...">
+        <div class="form-group">
+          <div class="col-xs-12">
+            <div class="btn-group btn-group-xs" id="btn-search" role="group" aria-label="...">
               <button class="btn {{show == 'tags' ? 'btn-active' : 'btn-inactive'}}" ng-click="activateSearchTags();">Tags</button>
-               <button class="btn {{show == 'users' ? 'btn-active' : 'btn-inactive'}}" ng-click="activateSearchUsers();">Users</button>
+              <button class="btn {{show == 'users' ? 'btn-active' : 'btn-inactive'}}" ng-click="activateSearchUsers();">Users</button>
             </div>
-            
-         </div>
-      </div>
-    </form>
-  </div>
+          </div>
+        </div>
+      </form>
   <div class="row">
     <div class="">
       <div class="panel-body" >
         <ul class="list-group" id="asearch"> 
-        <li class="list-group-item" ng-repeat="res in searchResults"><a  ng href="" ng-click="searchUsers(res._id, res.user_name)">{{res.user_name}}</a><a  href="" ng-click="searchStories(res._id,res.tagName)">{{hashtag}} {{res.machineName}}</a></li>
+
+          <li class="list-group-item" ng-repeat="res in searchResults">
+            <a  class="row" ng href="" ng-click="searchUsers(res._id, res.user_name)">
+              <div class="col-xs-9">{{res.user_name}}</div><div class="col-xs-3"><img id="BorderPict" class="img-responsive" src={{res.img}}></div>
+            </a>
+            <a  href="" ng-click="searchStories(res._id,res.tagName)">{{hashtag}} {{res.machineName}}</a>
+          </li>
+
         </ul>
       </div>
     </div>
-  </div
+  </div>
   <div class="row">
     <div class="">
       <div class="panel-body" >
@@ -36,38 +42,41 @@
         <div class="row" ng-repeat="story in currentPageStories">
           <div class="row">
               <div class="col-xs-4 "> 
-                    <a ng-href="/viewStory/{{story._id}}/section/1"  id="NoBorder" class="thumbnail">
-                      <img src={{story.section1.img}} title={{story.title}}  id="BorderPict" class="img-responsive">
+
+                    <a ng-href="/viewStory/{{story._id}}/section/1"  id="NoBorder_{{story._id}}_1" class="thumbnail">
+                      <img src="{{story.section1.img}}" title="{{story.title}}"  id="BorderPict_1" class="img-responsive">
                     </a>
                </div>
                 <div class="col-xs-4"> 
-                   <a href="/viewStory/{{story._id}}/section/1" id="NoBorder" class="thumbnail">
-                      <img src={{story.section2.img}} title={{story.title}} id="BorderPict" class="img-responsive">
+                   <a href="/viewStory/{{story._id}}/section/2" id="NoBorder_{{story._id}}_2" class="thumbnail">
+                      <img src="{{story.section2.img}}" title="{{story.title}}" id="BorderPict_2" class="img-responsive">
                     </a>
                 </div>   
                 <div class="col-xs-4"> 
-                   <a href="/viewStory/{{story._id}}/section/1" id="NoBorder" class="thumbnail">
-                      <img src={{story.section3.img}} title={{story.title}} id="BorderPict" class="img-responsive">
+                   <a href="/viewStory/{{story._id}}/section/3" id="NoBorder_{{story._id}}_3" class="thumbnail">
+                      <img src="{{story.section3.img}}" title="{{story.title}}" id="BorderPict_3" class="img-responsive">
                     </a>
                 </div>
           </div>
-        </div>
-              
-         <div class="row" ng-show="pageshown">
+        </div>        
+          <div class="row" ng-show="pageshown">
             <ul class="pager">
+
               <li  ng-class="prevPageDisabled()">
-                <a id="SearchArrow" href ng-click="prevPage()"><i class=" fa fa-caret-left fa-4x"></i></a>
+                <a id="SearchArrow_1" href ng-click="prevPage()"><i class=" fa fa-caret-left fa-4x"></i></a>
+
               </li>
              <!--  <li ng-repeat="n in [] | range: pageCount()"
                 ng-class="{active: n == currentPage}" ng-click="setPage(n)">
                 <a href="#">{{n}}</a>
               </li> -->
               <li  ng-class="nextPageDisabled()">
-                <a id="SearchArrow" href ng-click="nextPage()"><i class="fa fa-caret-right fa-4x"></i></a>
+                <a id="SearchArrow_2" href ng-click="nextPage()"><i class="fa fa-caret-right fa-4x"></i></a>
               </li>
             </ul>
-           </div>
+          </div>
+        </div>
       </div>
-    </div>
+    </section>
   </div>
 </div>

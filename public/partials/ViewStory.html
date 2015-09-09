@@ -30,16 +30,18 @@
         <p class="strytxt">{{storySection.text}}</p>
       </div>
 
+      <div class="col-xs-12">
+        <div class="txtcontrol txtuserdatetags pull-right">
+          <p class="tag" ng-repeat="tags in aStory.tags">#{{tags.tagName}}</p>
+        </div>
+      </div>
+
       <div class="col-xs-12 navbox">
         <i class="fa fa-chevron-left fa-2x control" ng-click="onSectionBack()"></i>
         <i class="fa fa-chevron-right fa-2x control" ng-click="onSectionForward()" ></i>
       </div>
     
-      <div class="col-xs-12">
-        <div class="txtcontrol txtuserdatetags">
-          <p class="tag" ng-repeat="tags in aStory.tags">#{{tags.tagName}}</p>
-        </div>
-      </div>
+      
 
 
     </div>

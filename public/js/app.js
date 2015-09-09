@@ -1,5 +1,5 @@
 //app declaration and dependency injection
-var app = angular.module("stories", ["ngRoute", "ngResource", 'ngFileUpload', "ui.bootstrap","ngSanitize","ngTouch", "superswipe", "cropme",'ngMaterial','ngMdIcons']);
+var app = angular.module("stories", ["ngRoute", "ngResource", 'ngFileUpload', "ui.bootstrap","ngSanitize","ngTouch", "superswipe", "cropme"]);
 
 
 
@@ -23,7 +23,8 @@ app.config(["$routeProvider", "$locationProvider", function($routeProvider, $loc
       redirectTo: "/writeStory/:id/section/1"
     })
     .when("/writeStory", {
-      redirectTo: "/writeStory/new/section/1"
+      redirectTo: "/writeStory/new/section/1",
+      login: true // route is login protected
     })
     .when("/writeStory/:id/section/:sectionid", {
       templateUrl: "partials/writeStory.html",

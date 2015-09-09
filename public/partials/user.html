@@ -2,47 +2,55 @@
     <div class="row">
         <section class="col-xs-12 mainframe userPage">
 
-            <div ng-show="User._id" class="logoutBtn">
+        <div ng-show="User._id" class="logoutBtn">
                 <button type="submit" class="btn btn-xs" ng-click="logoutUser()">Log Out</button>
-            </div>
+        </div>
 
-            <h2 class="headerfont">{{User.user_name}}</h2>
-            <div class="row userProfileInfo mb40">
+         <h2 class="headerfont">{{User.user_name}}</h2>
+            <div class="row userProfileInfo mt5 mb40">
                 <div class="col-xs-6">
                     <div class="imgupload stdinputborder profileImgFrame">
                         <i class="fa fa-file-image-o fa-4x control centerIcon" ng-hide="User.img" ng-class="{'dispNone': User.img}"></i>
                         <input type="file" id="profileImg" name="profileImg" ngf-select ng-model="files" ngf-accept="'image/*'">
                         <img ng-if="User.img" ng-src="{{User.img}}" class="userProfileImg">
-                        <i class="fa fa-check-square fa-1x saveImg" ng-show="User.img" ng-click="save()"></i>
+                        <i class="fa fa-check-square fa-1x userSaveImg control" ng-show="User.img && showSaveImgBtn" ng-click="saveUserImg()"></i>
+                        <i class="fa fa-trash-o fa-1x userDeleteImg control" ng-show="User.img && !showSaveImgBtn" ng-click="deleteUserImg()"></i>
                     </div>
+                    <span class="userImgMsg" ng-show="User.img && showSaveImgBtn">Click the check to save your user image.</span>
                 </div>
                 <div class="col-xs-6">
                     <div class="row">
-                        <div class="col-xs-6">
-                            <p>{{User.first_name}} {{User.last_name}}</p>
+                        <div class="pull-left">
+                            <h3 class="userHeader headerfont">{{User.user_name}}</h3>
+                            <p class="breakWord">{{User.first_name}}</p>
+                            <p class="breakWord">{{User.last_name}}</p>
                         </div>
-                        <div class="col-xs-6">
-                            <p>{{UsersStories.length}} stories</p>
-                            <p>{{User.city}}, {{User.country}}</p>
+                        <div class="pull-right mt10">
+                            <p class="txtright">{{UsersStories.length}} stories</p>
+                            <p class="breakWord txtright">{{User.email}}</p>
+                            <p class="breakWord txtright">{{User.city}}, {{User.country}}</p>
                         </div>
                     </div>
-                    <div>
-                        <p>{{User.email}}</p>
-                        <button ng-click="userEdit();" type="button" class="btn btn-xs">
-                                Edit user info
-                        </button>
+                    <div>                        
+                        <div ng-show="User._id" class="logoutBtn pull-left">
+                            <button type="submit" class="btn btn-xs" ng-click="logoutUser()">Log Out</button>
+                        </div>
+                        <div class="pull-right">
+                            <button ng-click="userEdit();" type="button" class="btn btn-xs">Edit user</button>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div class="row">
-                <div class="col-xs-4 mb20">
-                    <a ng-href="/writeStory"><i class="fa fa-pencil fa-2x control"></i></a>
+                <div class="col-xs-6 mb20 pull-right">
+                    <a ng-href="/writeStory" class="pull-right"><span class="control">New story </span><i class="fa fa-pencil fa-2x control"></i></a>
                 </div>
             </div>
 
             <div class="row userStoryList mb40">
-                <div ng-repeat="story in UsersStories|orderBy: '-date_created'" data-story-id="{{story._id}}" scroll-to-top-when="storyDeleted">
+                <div class="row mb10" ng-repeat="story in UsersStories|orderBy: '-date_created'" data-story-id="{{story._id}}" scroll-to-top-when="storyDeleted">
+                   
                     <a ng-href="/viewStory/{{story._id}}">
                         <div class="col-xs-4">
                             <img ng-src="{{story.section1.img}}" class="userStoryImg"></img>
@@ -53,18 +61,19 @@
                                     <h4 class="headerfont">{{story.title}}</h4>
                                     <p>{{story.date_created| date:'yyyy-MM-dd'}}</p>
                                 </div>
-                                <div class="col-xs-4">
+                                <div class="col-xs-4 mt10">
                                     <a ng-href="/writeStory/{{story._id}}">
-                                        <i class="fa fa-pencil-square-o fa-1x control"></i>
+                                        <i class="fa fa-pencil-square-o editIcon control"></i>
                                     </a>
-                                    <i class="fa fa-trash-o fa-1x control" ng-click="deleteStory(story._id)"></i>
+
+                                    <a href=""><i class="fa fa-trash-o fa-1x control" ng-click="deleteStory(story._id)"></i> </a>
+
                                 </div>
                             </div>
                             <div>
                                 <p>{{story.section1.text | limitTo: 60 }}{{story.section1.text.length > 60 ? '...' : ''}}</p>
                             </div>
                         </div>
-
                     </a>
                 </div>
             </div>
