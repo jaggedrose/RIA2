@@ -1,5 +1,5 @@
 //"myAppName" controller.
-app.controller("searchController", ["$http", "$scope", "$location", "Tag", "User", "Story", function($http, $scope, $location, Tag, User, Story) {
+app.controller("searchController", ["$http", "$scope", "$location", "Tag", "User", "Story", "UserStore", function($http, $scope, $location, Tag, User, Story, UserStore) {
 
   $scope.show = "tags";
   $scope.$watch(function() {
@@ -8,33 +8,49 @@ app.controller("searchController", ["$http", "$scope", "$location", "Tag", "User
   $scope.activateSearchUsers = function(){
     $scope.show = "users";
     $scope.searchText = '';
-    $scope.search();
+    $scope.searchResults = "";
+    $scope.currentPageStories = '';
+    $scope.pageshown = false;
+    // $scope.search();
   };
   
   $scope.activateSearchTags = function(){
     $scope.show = "tags";
     $scope.searchText = '';
-    $scope.search();
+     $scope.searchResults = "";
+    $scope.currentPageStories = '';
+    $scope.pageshown = false;
+    // $scope.search();
   };
 
   $scope.search = function() {
-    switch ($scope.show) {
+    UserStore.tmp.search = {};
+    UserStore.tmp.search[$scope.show] = $scope.searchText;
+
+    console.log("search!");
+   switch ($scope.show) {
       case 'users':
-        $scope.data="";
+          $scope.data="";
+          $scope.currentPageStories='';
+         if ($scope.searchText.length>0) {
         User.get({user_name: new RegExp($scope.searchText, 'i')}, function(data) {
           console.log("got users", data);
           $scope.searchResults = data;
            $scope.hashtag=("");
         });
+      }
         break;
 
       case 'tags':
-        $scope.data="";
+          $scope.data="";
+          $scope.currentPageStories='';
+         if ($scope.searchText.length>0) {
         Tag.get({tagName: new RegExp($scope.searchText, 'i')}, function(data) {
           console.log("got tags", data);
           $scope.searchResults = data;
           $scope.hashtag=("#");
         });
+      }
         break;
 
       default:
@@ -42,22 +58,73 @@ app.controller("searchController", ["$http", "$scope", "$location", "Tag", "User
           console.log("got stories", data.title);
           $scope.searchResults = data;
         });
+
     }
   };
+
+  
+  if (UserStore.tmp.search) {
+    for (var i in UserStore.tmp.search) {
+      if (UserStore.tmp.search.hasOwnProperty(i)) {
+        $scope.show = i;
+        $scope.searchText = UserStore.tmp.search[i];
+        $scope.search();
+        break;
+      }
+    }
+  }
+  var pCount = 0;
 
   $scope.searchStories = function(tagid,tagName){
     console.log("tagName",tagName);
     var data;
-    $scope.data = Story.get({tags:tagid,_populate:"tags"});
+    $scope.data = Story.get({tags:tagid,_populate:"tags"}, function() {
+      pCount=Math.ceil($scope.data.length/3);
+      $scope.pageshown = pCount>1 ? true: false;
       console.log("data", $scope.data);
       $scope.searchText = ("#") + tagName ;
       $scope.searchResults ="";
+      createCurrentPage(1);
+    });
   };
 
   // Takes you to the users profile page
   $scope.searchUsers = function(userid, user_name) {
     console.log("user id + user name", userid, user_name);
     $location.path('/userProfile/' + userid);
+  };
+
+ function createCurrentPage(page){
+      $scope.currentPageStories =  $scope.data.slice((page-1)*3,page*3);
+        console.log(page,$scope.currentPageStories);
+    }
+
+
+  var currentPage = 1;
+
+   $scope.prevPage = function() {
+     console.log("Prev: ",currentPage+" "+ pCount);
+    if (currentPage > 1) {
+      currentPage--;
+      createCurrentPage(currentPage);
+    }
+  };
+
+   $scope.nextPage = function() {
+     console.log("Next: ",currentPage+" "+ pCount);
+     if (currentPage <= pCount) {
+      currentPage++;
+     
+      createCurrentPage(currentPage);
+    }
+  };
+  
+  $scope.prevPageDisabled = function() {
+    return currentPage === 1 ? "hidden" : "";
+  };
+
+  $scope.nextPageDisabled = function() {
+    return currentPage >= pCount ? "hidden" : "";
   };
 
   //$scope.search();

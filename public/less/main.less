@@ -1,5 +1,5 @@
 // WU14-RIA 2-GRUPP 1
-// LESS for the app-project STORIES 
+// LESS for the app-project STORIES
 
 // COLOUR VARIABLES ***********************************************************
 // Grayscale for the time being
@@ -7,18 +7,26 @@
 @backgr: #292929;
 @txtheader: #FFF;
 @txtbody: #CCC;
-@txtcontrol: #DDD;
-@txtuserdatetags: #777;
+@txtcontrol: #AAA;
+@txtuserdate: #777;
+@txtuserdatetags: #999;
 @taglabel: #444; 
 @frame: #000;
+@darkbtn: #191919;
 @control: #999;
+@orange: #FF7A00;
 @stdinputtxtcolour: #CCC;
 @brtinputtxtcolour: #EEE;
 @drkinputtxtcolour: #999;
+@resultcolor:#888;
 @stdinputbgcolour: #292929;
 @stdinputbordercolour: #000;
 @plcholderhead: #AAA;
 @plcholdertxt: #999;
+@btn-non-active-bg:#292929;
+@btn-active-bg:#999;
+@errormsg: #BD591C;
+@drkborder: #000;
 
 // COLOURS AND FONTS **********************************************************
 
@@ -26,7 +34,7 @@ body {
   background-color: #000;
 }
 
-h1, h2, h3, h4 {
+h1, h2, h3, h4, h5, h6 {
   color: @txtheader;
   font-family: 'Oswald', sans-serif;
 }
@@ -42,7 +50,7 @@ body, html {
 } 
 
 h1, h2, h3, h4, h5, h6, md-card, md-list, md-select, md-toolbar, ol, p, ul {
-    text-rendering: auto;
+  text-rendering: auto;
 }
 // end Angular material reset
 
@@ -52,8 +60,11 @@ h1, h2, h3, h4, h5, h6, md-card, md-list, md-select, md-toolbar, ol, p, ul {
   font-family: 'Oswald', sans-serif;
 }
 
-// colour of *text* in text input fields 
+.errormsg {
+  color: @errormsg;
+}
 
+// colour of *text* in text input fields
 .stdinputtxtcolour {
   color: @stdinputtxtcolour;
 }
@@ -64,10 +75,136 @@ h1, h2, h3, h4, h5, h6, md-card, md-list, md-select, md-toolbar, ol, p, ul {
 }
 
 // for story text, 'editorial' on landing page etc
-
 .txtbody {
   font-family: 'Noticia Text', serif;
   color: @txtbody;
+}
+
+.labels {
+  color: @txtbody;
+}
+
+// Main menu nav
+.menuColor {
+  background-color: @backgr;
+  border-color: @backgr;
+  margin-bottom: 0;
+}
+
+//Overriding bootstrap-class!
+.navbar {
+  min-height: 10px;
+}
+
+.menuNav {
+  position: relative;
+}
+
+.menuNav div {
+  padding: 0 0;
+}
+
+.menuNav a {
+  .control;
+}
+
+.menuNav i {
+  display: block;
+  margin-top: 1vh;
+  position: absolute;
+  //left: 30%;
+  //right: 30%;  
+  left: 45%; 
+  font-size: 5vh;
+}
+
+.menuNav img {
+  height: 8vh;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#btn-search {
+  margin-top: -15px;
+ 
+  .btn:last-child:not(:first-child) {
+    margin-left: -5px;
+  }
+  .btn-active {
+    background-color: @btn-active-bg;
+    color: @backgr;
+    border-color: #000;
+    width: 50%;
+    z-index: 2;
+    border-bottom-right-radius:0.8em;
+    border-bottom-left-radius:0.8em;
+    font-family: 'Roboto', sans-serif;
+     &:hover {
+      background-color: @btn-active-bg;
+      border-color: #000;
+    }
+     &:focus {
+      background-color: @btn-active-bg;
+      border-color: #000;
+    } 
+  }
+  .btn-inactive {
+    background-color: @btn-non-active-bg; 
+    color: @control;
+    border-color: #000;
+    width: 50%;
+    z-index: 1;
+    border-bottom-right-radius:0.8em;
+    border-bottom-left-radius:0.8em;
+    font-family: 'Roboto', sans-serif;
+    &:hover {
+      background-color: #ddd; 
+      border-color: #444;
+    }
+  }
+}
+
+#asearch {
+  .list-group-item {
+    background-color: @resultcolor;
+    border-radius: 0.3em;
+    margin: 3px 0;
+     &:hover {
+      background-color: #999; 
+      border-color: #fff;
+    }
+    a {
+      color: @brtinputtxtcolour;
+    }
+  }  
+}
+
+a[id^='NoBorder'] {
+  background-color: @stdinputbgcolour;
+  border-style: none;
+}
+
+img[id^='BorderPict'] {
+  .bord3blk
+}
+
+#basic-addon1 {
+  padding: 0 12px;
+  background-color: @stdinputbgcolour;
+}
+
+#padd15 {
+  padding: 0 15px;
+}
+
+.padding-bottom {
+  padding: 0 0 30px 0;
+}
+
+.center {
+  width: 20%;
+  margin: auto;
 }
 
 // for text displaying user details, text in buttons, labels
@@ -86,17 +223,38 @@ h1, h2, h3, h4, h5, h6, md-card, md-list, md-select, md-toolbar, ol, p, ul {
 p.formerror {
   margin: 5px 0 0 12px;
 }
+// For user profile txt
+.userPage p, .userImgMsg {
+  font-size: 11px;
+  color: @txtcontrol;
+  font-family: 'Roboto', sans-serif;
+
+}
+//Mixins
+//Mixin for center verticaly
+
+.vertical_align (@position: relative) {
+  position: @position;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
 
 // for control elements - buttons, icons
 
 .control {
   color: @control;
 }
+.btncolor {
+  background-color: @txtbody; 
+}
 
 // GENERIC FORMATTING STUFF FOR VARIOUS DIV'S AND ELEMENTS ********************
 
-// tag display in viewstory
 
+// tag display in viewstory
 .tag {
   display: inline-block;
   margin: 0 4px 4px 0;
@@ -107,11 +265,14 @@ p.formerror {
 }
 
 // border for app's main div 
-
 .mainframe {
   border: 5px solid @frame;
   padding-top: 10px;
-  height:100vh;
+  min-height: 100vh;
+}
+
+.border-bottom {
+  border-bottom: 1px solid black;
 }
 
 // Navigation box formatting - centered icons
@@ -121,7 +282,7 @@ p.formerror {
 }
 
 .navthumbs {
-  margin: 0 0 15px 0;
+  // margin: 0 0 15px 0;
   
 }
 
@@ -134,18 +295,24 @@ p.formerror {
   height: 60px;
   width: 90px;
   opacity: 0.3;
-
+  margin-bottom: 5px;
 }
 
 .navthumbcurrent {
   opacity: 1;
 }
 
-.center {
-  margin-left: auto;
-  margin-right: auto;
-  
+.navthumbClear{
+  border: 3px solid black;
+  height: 60px;
+  width: 90px;
+  margin: 0 0 10px 10px;
 }
+
+// .center {
+//   margin-left: auto;
+//   margin-right: auto;
+// }
 
 .cnttxt {
   text-align: center;
@@ -153,28 +320,69 @@ p.formerror {
 
 .stdinputborder {
   border: 1px solid @stdinputbordercolour;
-  border-radius: 4px;
+  border-radius: 0.3em;
 }
-
+.txtleft {
+  text-align: left;
+}
 .txtright {
   text-align: right;
+}
+.mt5 {
+  margin-top: 5px;
+}
+.mt10 {
+  margin-top: 10px;
+}
+.mb10 {
+  margin-bottom: 10px;
+}
+.mb20 {
+  margin-bottom: 20px;
+}
+.mb40 {
+  margin-bottom: 40px;
+}
+.dispNone {
+  display: none;
+}
+.breakWord {
+  word-wrap: break-word;
+}
+.width20 {
+  width: 20%;
+}
+
+.bord3blk {
+  border: 3px solid @drkborder;
 }
 
 // STORY WRITE / PRESENTATION *************************************************
 
 .strytitle {
   text-align: center;
-}
+} 
 
 .stryimg {
-  height: 35vh;
+  width: 100%;
   overflow: hidden;
   text-align: center;
+  .bord3blk;
   margin-bottom: 15px;
+  padding: 0;
 }
 
 .stryheader {
+}
 
+.pager li>a[id^='SearchArrow'] {
+  .stdinputbgcolour; 
+  .stdinputtxtcolour;
+  .plcholdertxt;
+  border-style: none;
+  &:focus {
+    outline: 0;
+  }
 }
 
 .strytxt {
@@ -184,6 +392,16 @@ p.formerror {
   .plcholdertxt;
   // height: 35vh; I commented this out. We're going to look at formatting this box with the rows property /Per
   word-wrap: break-word;
+}
+
+ #SearchInput {
+  margin-bottom: -4px;
+  .stdinputbgcolour; 
+  .stdinputtxtcolour;
+  .txtcontrol;
+  .plcholdertxt;
+  .txtcontrol;
+  .stdinputborder;
 }
 
 p.strytxt {
@@ -196,6 +414,19 @@ p.strytxt {
 
 textarea.form-control {
   height: 35vh;
+}
+
+//Textarea
+.textAreaWrap {
+  position:relative;
+}
+
+//Textarea counter
+.textAreaWrap span {
+  position: absolute;
+  top:0;
+  right: 1%;
+  color: @control;
 }
 
 // CURSORS ********************************************************************
@@ -247,6 +478,136 @@ textarea.form-control {
   }
 }
 
+//  BOOTSTRAP OVERRIDES ***********************************************************
+
+
+.btn {
+  color: @backgr;
+  background-color: @control;
+  font-family: 'Roboto', sans-serif;
+  -moz-border-radius:0.3em;
+  -webkit-border-radius:0.3em;
+  border-radius:0.3em;
+  display:inline-block;
+  cursor:pointer;
+  text-decoration:none;
+
+}
+
+// Button with orange border/glow
+
+/*
+
+.btn {
+  color: @control;
+  font-family: 'Roboto', sans-serif;
+  border: 1px solid @orange;
+  -moz-box-shadow: 0px 0px 1px 1px @orange;
+  -webkit-box-shadow: 0px 0px 1px 1px @orange;
+  box-shadow: 0px 0px 1px 1px @orange;
+  background-color:transparent;
+  -moz-border-radius:3px;
+  -webkit-border-radius:3px;
+  border-radius:3px;
+  display:inline-block;
+  cursor:pointer;
+  text-decoration:none;
+
+}
+
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// User Profile/Edit/Register/login Styling *********************
+
+// Hide image input button
+div.imgupload input {
+  max-width: 93px;
+  position: absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  padding: 25px 0;
+  opacity: 0; 
+}
+.centerIcon {
+  position: absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+}
+.userHeader {
+  margin-top: 0;
+}
+.userProfileImg {
+  max-width: 100%;
+    height: 4em;
+}
+.userStoryImg {
+  width: 100%;
+  .bord3blk;
+}
+div.profileImgFrame {
+  min-height: 90px;
+  max-height: 200px;
+  min-width: 120px;
+  max-width: 300px;
+  position: relative;
+}
+.userSaveImg, .userDeleteImg {
+  position: absolute;
+  top: 1px;
+  left: 3px;
+  padding: 0 1px;
+  background-color: @backgr;
+  border-radius: 0.3em;
+}
+.userEditPage input, .userEditPage select, .registerPage input, .registerPage select, .loginPage input{
+  color: @stdinputtxtcolour;
+  .stdinputbgcolour;
+  .stdinputborder;
+  .plcholdertxt;
+  font-family: Roboto;
+}
+
+.registerPage select {
+  color: #999;
+}
+
+.userEditPage label, .loginPage label {
+  color: @txtcontrol;
+  font-family: 'Roboto', sans-serif;
+}
+.userEditPage p, .registerPage p, .loginPage span {
+  .errormsg;
+}
+.editIcon, .deleteIcon {
+  font-size: 20px;
+
+}
+
 //  Change element depth ***********************************************************
 // Z-angel
 .on-top {
@@ -254,13 +615,11 @@ textarea.form-control {
 }
 
 // Visibility **********************************************************************
-// Hide element
-.disappear {
-  display: none;
-}
-// Hide image input button
-div.imgupload input {
-    display: none;  
+
+//Materia*****************************************************************************
+
+div.icons {
+ fill: @control;
 }
 
 .rotatedIcon svg {
@@ -270,3 +629,84 @@ div.imgupload input {
   -o-transform: rotate(180deg);
   transform: rotate(180deg);
 }
+
+//Styling of write story image upload/crop function
+cropme #asshatButton,
+cropme .cropme-label,
+cropme .cropme-or,
+.chooseFile {
+  visibility: hidden;
+}
+//File upload field
+cropme .dropClass,
+cropme .step-1 {
+  width: 100%;
+  background-color: @backgr;  
+  border: 1px solid #111;
+}
+
+//File upload button, crop/cancel buttons
+cropme .cropme-button {
+  display:inline-block;
+  cursor:pointer;
+  text-decoration:none;
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-size: 0.7em;
+  line-height: 2vh;
+  border: 1px solid #111;
+  box-shadow: none;
+  border-radius: 0.7em;
+  background: @darkbtn;
+  width: 20vw;
+  height: 6vh;
+  text-align: center;
+  margin-top: 8vh;
+  margin-right: auto;
+  margin-left: -10vw;
+  margin-bottom: auto;
+  //padding: 15% 15%;
+  outline: none;
+  max-width: 15vw;
+}
+cropme .cropme-button p {
+  .vertical_align();
+}
+
+//Crop/cancel buttons
+#cropme-ok, #cropme-cancel {
+  color: @backgr;
+  background-color: @control;
+  font-family: 'Roboto', sans-serif;
+  -moz-border-radius:0.3em;
+  -webkit-border-radius:0.3em;
+  border-radius:0.3em;
+  box-shadow: none;
+  display:inline-block;
+  cursor:pointer;
+  text-decoration:none;
+  box-shadow: none;
+}
+cropme .cropme-button:hover {
+  background: @control;
+}
+//Cropped img view
+.imgview {
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  text-align: center;
+}
+
+//   @media-queries**********************************************
+
+@media (min-width: 900px){
+  #menuSearchIcon {
+    left: 2%;
+  }
+
+  #menuUserIcon {
+    left: -183%;
+  }
+}
+

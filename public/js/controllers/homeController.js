@@ -11,10 +11,12 @@ app.controller("homeController", ["$http", "$scope", "$routeParams", "$location"
   function($http, $scope, $routeParams, $location, Story, Login) {
 
     var allStories = [];
+    var pCount=0;
     Story.get(function(data){
         allStories = data.sort(function(x,y){
           return x.date_created > y.date_created ? -1 : 1;
         });
+        pCount=Math.ceil(allStories.length/3);
         createCurrentPage(1);
 
     });
@@ -26,31 +28,31 @@ app.controller("homeController", ["$http", "$scope", "$routeParams", "$location"
     }
 
     window.da = $scope;
-
+  
   var currentPage = 1;
-  $scope.onSwipeLeft= function() {
-         console.log("Next: ",currentPage+" "+ $scope.pageCount());
-    if (currentPage <= $scope.pageCount()) {
-      currentPage++;
+  // $scope.onSwipeLeft= function() {
+  //        console.log("Next: ",currentPage+" "+ $scope.pageCount());
+  //   if (currentPage <= $scope.pageCount()) {
+  //     currentPage++;
          
-      createCurrentPage(currentPage);
-    }
-  };
+  //     createCurrentPage(currentPage);
+  //   }
+  // };
 
-  $scope.storySection = function(storyId){
-    $location.path('/viewStory/' + storyId + "/section/"+ 1 );
+  // $scope.storySection = function(storyId){
+  //   $location.path('/viewStory/' + storyId + "/section/"+ 1 );
 
-  };
+  // };
 
-  $scope.onSwipeRight = function() {
-     console.log("Prev: ",currentPage+" "+ $scope.pageCount());
-    if (currentPage > 1) {
-      currentPage--;
-      createCurrentPage(currentPage);
-    }
-  };
+  // $scope.onSwipeRight = function() {
+  //    console.log("Prev: ",currentPage+" "+ $scope.pageCount());
+  //   if (currentPage > 1) {
+  //     currentPage--;
+  //     createCurrentPage(currentPage);
+  //   }
+  // };
    $scope.prevPage = function() {
-     console.log("Prev: ",currentPage+" "+ $scope.pageCount());
+     console.log("Prev: ",currentPage+" "+ pCount);
     if (currentPage > 1) {
       currentPage--;
       createCurrentPage(currentPage);
@@ -60,21 +62,21 @@ app.controller("homeController", ["$http", "$scope", "$routeParams", "$location"
 
 
    $scope.nextPage = function() {
-     console.log("Next: ",currentPage+" "+ $scope.pageCount());
-     if (currentPage <= $scope.pageCount()) {
+     console.log("Next: ",currentPage+" "+ pCount);
+     if (currentPage <= pCount) {
       currentPage++;
      
       createCurrentPage(currentPage);
     }
   };
   
-  $scope.setPage = function(nPage) {
-         currentPage=nPage;
-      createCurrentPage(currentPage);
-    };
+  // $scope.setPage = function(nPage) {
+  //        currentPage=nPage;
+  //     createCurrentPage(currentPage);
+  //   };
 
   $scope.prevPageDisabled = function() {
-    return currentPage === 1;
+    return currentPage === 1 ? "hidden" : "";
   };
 
   $scope.pageCount = function() {
@@ -83,25 +85,19 @@ app.controller("homeController", ["$http", "$scope", "$routeParams", "$location"
   };
 
   $scope.nextPageDisabled = function() {
-    return currentPage === $scope.pageCount();
-  };
-
-  $scope.goToFAQ = function(){
-    $location.path('/FAQ');
+    return currentPage === pCount ? "hidden" : "";
   };
 
   // If there is a logged in user go to writestory otherwise go to login
   $scope.User = Login.user;
 
-  $scope.goToCreateStory = function(){
-    if (Login.user._id) {
-      $location.path('/writeStory');
-      console.log("Logged in, now you can write a story!");
-    } else {
-      $location.path('/login');
-      console.log("Please login to write a story!");
+  $scope.$on("$routeChangeSuccess", function(event, next, current) {
+    // If there is no logged in user, return to login page
+    if (!Login.user._id && next.$$route.login && next.$$route.originalPath != "/") {
+      event.preventDefault();
+      $location.url("/login");
+      return;
     }
-    
-  };
+  });
 
 }]);

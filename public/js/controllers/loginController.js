@@ -7,7 +7,7 @@ app.controller("loginController", ["$http", "$scope", "$location","Login", funct
   $scope.logForm = function() {
     console.log("login",$scope.Loginfo);
     Login.login($scope.Loginfo, function(data) {
-      console.log("Hello", data.length);
+      console.log("Is there data? ", data.length);
       if (!Login.user._id) {
         $scope.authMsg = "Your email or password is incorrect!";
       } else {
@@ -16,6 +16,10 @@ app.controller("loginController", ["$http", "$scope", "$location","Login", funct
         $location.path('/user');
       }
     });
+  };
+
+  $scope.gotoRegister = function(){
+    $location.path('/register');
   };
 
     // $scope.logoutUser = function(data) {

@@ -1,48 +1,45 @@
-<div class"container-fluid appbackground">
-    <div class="row userRow">
-        <section class="col-xs-12 col-sm-10 col-md-8 col-lg-6 col-xs-offset-0 col-sm-offset-1  col-md-offset-2  col-lg-offset-3 mainframe">
+<div class="container-fluid appbackground">
+    <div class="row">
+        <section class="col-xs-12 mainframe userPage">
 
-            <h2>User Profile</h2>
-            <article class="row">
+            <div class="row userProfileInfo mt5 mb40">
                 <div class="col-xs-6">
-                    <img ng-src="{{User.img}}"></img>
+                    <div class="stdinputborder profileImgFrame">
+                        <img ng-src="{{User.img}}" class="userProfileImg"></img>
+                    </div>
                 </div>
                 <div class="col-xs-6">
                     <div class="row">
-                        <div class="col-xs-6">
-                            <h3>{{User.user_name}}</h3>
-                            <p>{{User.first_name}} {{User.last_name}}</p>
+                        <div class="pull-left">
+                            <h3 class="userHeader headerfont">{{User.user_name}}</h3>
+                            <p class="breakWord">{{User.first_name}}</p>
+                            <p class="breakWord">{{User.last_name}}</p>
                         </div>
-                        <div class="col-xs-6">
-                            <p>{{UsersStories.length}} stories</p>
-                            <!-- <p>{{User.email}}</p> -->
-                            <p>{{User.city}}, {{User.country}}</p>
+                        <div class="pull-right mt10">
+                            <p class="txtright">{{UsersStories.length}} stories</p>
+                            <p class="breakWord txtright">{{User.email}}</p>
+                            <p class="breakWord txtright">{{User.city}}, {{User.country}}</p>
                         </div>
                     </div>
                 </div>
-            </article>
+            </div>
 
-            <a ng-href="/viewStory/{{story._id}}">
-            <br>
-            <div class="row">
-                <div class="row" ng-repeat="story in UsersStories|orderBy: '-date_created'">
-                    <div class="col-xs-4">
-                        <img ng-src="{{story.section1.img}}"></img>
-                    </div>
-                    <div class="col-xs-8">
-                        <div class="row">
-                            <div class="col-xs-6">
-                                <h3>{{story.title}}</h3>
-                            </div>
-                            <div class="col-xs-6">
+
+            <div class="row userStoryList mb40">
+                <div class="row mb10" ng-repeat="story in UsersStories|orderBy: '-date_created'">
+
+                    <a ng-href="/viewStory/{{story._id}}">
+                        <div class="col-xs-4">
+                            <img ng-src="{{story.section1.img}}" class="userStoryImg"></img>
+                        </div>
+                        <div class="col-xs-8">
+                            <div class="row">
+                                <h4 class="headerfont">{{story.title}}</h4>
                                 <p>{{story.date_created| date:'yyyy-MM-dd'}}</p>
+                                <p>{{story.section1.text | limitTo: 60 }}{{story.section1.text.length > 60 ? '...' : ''}}</p>
                             </div>
                         </div>
-                        <div class="row">
-                            <p>{{story.section1.text | limitTo: 300 }}{{story.section1.text.length > 300 ? '...' : ''}}</p></a>
-                            <span></span>
-                        </div>
-                    </div>
+                    </a>
                 </div>
             </div>
         </section>
