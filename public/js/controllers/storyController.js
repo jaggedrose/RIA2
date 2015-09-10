@@ -1,6 +1,6 @@
 //"myAppName" controller
-app.controller("storyController", ["$http", "$scope","$routeParams","$location", "Story", "Tag", "Login", "FileUploader", "$modal", "$timeout",
-  function($http, $scope, $routeParams, $location, Story, Tag, Login, FileUploader, $modal, $timeout) {
+app.controller("storyController", ["$http", "$scope","$routeParams","$location", "Story", "Tag", "Login", "FileUploader", "$modal", "$timeout", "UserStore",
+  function($http, $scope, $routeParams, $location, Story, Tag, Login, FileUploader, $modal, $timeout, UserStore) {
   $scope.$broadcast("cropme:open");
   $scope.croppingNotDone = true;
 
@@ -9,8 +9,8 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
  
   var storySectionCC = {
     sectionNo: sectionid,
-    header: "",
     text: "",
+    header: "",
     img: "",
     date_created: "",
     date_modified: "",
@@ -86,6 +86,10 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
       }, function(arrayOfNewStories){
         // As soon as we have a new story and its id
         // change url to reflect the story id
+        if (!UserStore.tmp.stories) {
+          UserStore.tmp.stories = {};
+        }
+        UserStore.tmp.stories[arrayOfNewStories[0]._id] = true;
         $location.url("/writeStory/" + arrayOfNewStories[0]._id);
       }
     );
@@ -237,13 +241,13 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
 
 
   // ON LOCATION CHANGE try to save the story including updated section, tags etc
-  $scope.$on('$locationChangeStart',function(){
-    
+  $scope.$on('$locationChangeStart',function(event, next, current){
     // Don't do anything if no storyData loaded 
     if(!$scope.storyData){return;}
 
     // Add the current section in the larger storyData object
     $scope.storyData["section" + sectionid] = $scope.storySection;
+
 
     // Handle tags (handle tags will eventually call saveStory)
     handleTags();
@@ -304,7 +308,9 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
   }
    
   function saveStory(allTags){
-
+    if (UserStore.tmp.stories && UserStore.tmp.stories[$scope.storyData._id]) {
+      delete UserStore.tmp.stories[$scope.storyData._id];
+    }
     // Add both new tag objects to the story
     $scope.storyData.tags = allTags;
     // Save the story to DB
