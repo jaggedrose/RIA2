@@ -1,8 +1,8 @@
 <div class="container-fluid appbackground">
     <div class="row">
-        <section class="col-xs-12 mainframe">
+        <div class="col-xs-12 mainframe">
           <form ng-submit="apanStory()" novalidate name="storyForm" class="">
-            <div class="form-group">
+            <div class="form-group col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
               <!-- <label for="title" class="txtcontrol">Title</label> -->
               <input ng-model="storyData.title" name="storyTitle" class="form-control stdinputbgcolour brtinputtxtcolour stdinputborder headerfont plcholderhead cnttxt" type="text" id="title" placeholder="The title of your story." ng-minlength="2" ng-maxlength="60" required>
               <p class="txtcontrol formerror" ng-show="storyForm.storyTitle.$touched && storyForm.storyTitle.$invalid || (moved && storyForm.storyTitle.$invalid)">Give your story a title. (2 - 60 characters)</p>
@@ -18,7 +18,7 @@
             </div>  -->
 
               <!-- Crop and upload image **********************************************************-->
-              <div class="form-group">
+              <div class="form-group col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
                 <cropme  ng-hide="storySection.img"
                   width="{{cropme.width}}"
                   height="{{cropme.height}}"
@@ -38,7 +38,7 @@
                 <input class="chooseFile" name="sectionFile" ng-model="unusedBananaModel" required>
               </div>
               <i ng-if="storySection.img" ng-click="openModal(false,storySection.img)" class="fa fa-trash-o fa-2x control" ></i>
-              <div class="form-group imgview" ng-show="storySection.img">                
+              <div class="form-group imgview col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3" ng-show="storySection.img">                
                 <img class="stryimg" ng-src="{{storySection.img}}"> 
               </div>
 
@@ -63,7 +63,7 @@
             </div>
             <div class="form-group">
               <div class="textAreaWrap">
-                <textarea ng-model="storySection.text" name="sectionText" class="form-control strytxt stdinputborder " id="text" placeholder="Your text.." required ng-minlength="150" ng-maxlength="300"></textarea>
+                <textarea rows="6" ng-model="storySection.text" name="sectionText" class="form-control strytxt stdinputborder " id="text" placeholder="Your text.." required ng-minlength="150" ng-maxlength="300"></textarea>
                 <span>{{textLength()}}</span>
               </div>
               <p class="txtcontrol formerror" ng-show="storyForm.sectionText.$touched && storyForm.sectionText.$invalid || (moved && storyForm.sectionText.$invalid)">Express yourself! (We expect a text of minimum 150 and up to 300 characters)</p>
@@ -79,6 +79,6 @@
             </div>
             <br><br>
           </form>
-        </section>
+        </div>
     </div>
 </div>
