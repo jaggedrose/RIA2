@@ -230,6 +230,16 @@ p.formerror {
   font-family: 'Roboto', sans-serif;
 
 }
+//Mixins
+//Mixin for center verticaly
+@mixin vertical-align($position: relative) {
+  position: $position;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
 
 // for control elements - buttons, icons
 
@@ -652,11 +662,12 @@ cropme .cropme-button {
   margin-right: auto;
   margin-left: -10vw;
   margin-bottom: auto;
-  padding: 15% 15%;
+  //padding: 15% 15%;
   outline: none;
+  max-width: 15vw;
 }
 cropme .cropme-button p {
-  margin: 10% auto;
+  @include vertical-align();
 }
 
 //Crop/cancel buttons
