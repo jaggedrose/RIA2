@@ -192,7 +192,10 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
     if ($scope.storyForm.$valid) {
       console.log ("Form valid!", $scope.storyForm.$valid);
       var nextSection = sectionid/1 + 1;
-      if(nextSection > 3){nextSection = 1;}
+      if(nextSection > 3){
+        $location.url('/user');
+        return;
+        }
       $location.url('/writeStory/' + id + '/section/' + nextSection);
       $scope.moved = false;
     }
