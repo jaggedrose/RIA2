@@ -232,8 +232,9 @@ p.formerror {
 }
 //Mixins
 //Mixin for center verticaly
-@mixin vertical-align($position: relative) {
-  position: $position;
+
+.vertical_align (@position: relative) {
+  position: @position;
   top: 50%;
   -webkit-transform: translateY(-50%);
   -ms-transform: translateY(-50%);
@@ -669,7 +670,7 @@ cropme .cropme-button {
   max-width: 15vw;
 }
 cropme .cropme-button p {
-  @include vertical-align();
+  .vertical_align();
 }
 
 //Crop/cancel buttons
