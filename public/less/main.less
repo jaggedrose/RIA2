@@ -620,6 +620,7 @@ div.icons {
 
 //Styling of write story image upload/crop function
 cropme #asshatButton,
+cropme .cropme-label,
 cropme .cropme-or,
 .chooseFile {
   visibility: hidden;
@@ -629,13 +630,9 @@ cropme .dropClass,
 cropme .step-1 {
   width: 100%;
   background-color: @backgr;  
-  border: 1px solid #111
+  border: 1px solid #111;
 }
-//Crop surface
-/*cropme .overlay-border {
-  border: 2px solid #111;
-  box-shadow: none;
-}*/
+
 //File upload button, crop/cancel buttons
 cropme .cropme-button {
   display:inline-block;
@@ -644,6 +641,7 @@ cropme .cropme-button {
   font-family: 'Roboto', sans-serif;
   font-style: normal;
   font-size: 0.7em;
+  line-height: 2vh;
   border: 1px solid #111;
   box-shadow: none;
   border-radius: 0.7em;
@@ -651,9 +649,15 @@ cropme .cropme-button {
   width: 20vw;
   height: 6vh;
   text-align: center;
-  margin: auto;
-  margin-left: -70px;
+  margin-top: 8vh;
+  margin-right: auto;
+  margin-left: -10vw;
+  margin-bottom: auto;
+  padding: 15% 15%;
   outline: none;
+}
+cropme .cropme-button p {
+  margin: 10% auto;
 }
 
 //Crop/cancel buttons
@@ -668,20 +672,7 @@ cropme .cropme-button {
   display:inline-block;
   cursor:pointer;
   text-decoration:none;
-  /*
-  font-family: 'Roboto', sans-serif;
-  font-color: @brtinputtxtcolour;
-  font-style: normal;
-  font-size: 1.2vh;
-  border: 1px solid #111;
   box-shadow: none;
-  border-radius: 0.5em;
-  background: @darkbtn;
-  width: 10vw;
-  height: 3vh;
-  text-align: center;
-  margin: auto;
-  */
 }
 cropme .cropme-button:hover {
   background: @control;
@@ -689,7 +680,7 @@ cropme .cropme-button:hover {
 //Cropped img view
 .imgview {
   width: 100%;
+  height: auto;
   overflow: hidden;
   text-align: center;
-  margin-bottom: 15px;
 }

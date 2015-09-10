@@ -19,7 +19,7 @@
 
               <!-- Crop and upload image **********************************************************-->
               <div class="form-group">
-                <cropme 
+                <cropme  ng-hide="storySection.img"
                   width="{{cropme.width}}"
                   height="{{cropme.height}}"
                   ratio="0.66"
@@ -38,7 +38,7 @@
                 <input class="chooseFile" name="sectionFile" ng-model="unusedBananaModel" required>
               </div>
               <i ng-if="storySection.img" ng-click="openModal(false,storySection.img)" class="fa fa-trash-o fa-2x control" ></i>
-              <div class="form-group stdinputborder imgview" ng-show="storySection.img">                
+              <div class="form-group imgview" ng-show="storySection.img">                
                 <img class="stryimg" ng-src="{{storySection.img}}"> 
               </div>
 
