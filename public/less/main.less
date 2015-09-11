@@ -641,12 +641,21 @@ cropme .cropme-or,
   visibility: hidden;
 }
 //File upload field
-cropme .dropClass,
-cropme .step-1 {
-  width: 100%;
-  background-color: @backgr;  
+cropme .step-1,
+cropme .step-2,
+dropbox,
+cropme {
+  //position: relative;
+  max-width: 100%;
+  max-height: 60vh;
+  display: block;
+  padding: 0;
+  margin: 0;
+  background-color: @backgr; 
+  //.bord3blk; 
   border: 1px solid #111;
 }
+
 
 //File upload button, crop/cancel buttons
 cropme .cropme-button {
@@ -666,9 +675,9 @@ cropme .cropme-button {
   text-align: center;
   margin-top: 8vh;
   margin-right: auto;
-  margin-left: -10vw;
+  margin-left: -7vw;
   margin-bottom: auto;
-  //padding: 15% 15%;
+  padding: 15% 15%;
   outline: none;
   max-width: 15vw;
 }
