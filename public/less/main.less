@@ -615,9 +615,9 @@ div.imgupload input {
 }
 div.profileImgFrame {
   min-height: 90px;
-  max-height: 200px;
+  max-height: 120px;
   min-width: 120px;
-  max-width: 300px;
+  max-width: 200px;
   position: relative;
 }
 .userSaveImg, .userDeleteImg {
@@ -648,8 +648,10 @@ div.profileImgFrame {
   .errormsg;
 }
 .editIcon, .deleteIcon {
-  font-size: 20px;
-
+  font-size: 16px;
+}
+.editIcon {
+  padding-left: 3px;
 }
 
 //  Change element depth ***********************************************************
@@ -760,6 +762,19 @@ cropme .cropme-button:hover {
 
   #menuUserIcon {
     left: -183%;
+  }
+}
+
+@media (min-width: 400px) {
+  .userProfileImg {
+    max-width: 15em;
+    height: 9em;
+  }
+  .editIcon, .deleteIcon {
+    font-size: 21px;
+  }
+  .editIcon {
+    padding-left: 6px;
   }
 }
 
