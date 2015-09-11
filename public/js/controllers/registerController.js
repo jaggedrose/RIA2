@@ -1,4 +1,4 @@
-//"myAppName" controller.
+//Controller that handles user registration
 app.controller("registerController", ["$http", "$scope", "User", "Login", "$location", function($http, $scope, User, Login, $location) {
   
   $scope.newUser = {};
@@ -14,66 +14,51 @@ app.controller("registerController", ["$http", "$scope", "User", "Login", "$loca
     password: ""
   };
 
+  //on form submit
   $scope.newUserCreate = function() {
     //make username toLowerCase
     $scope.newUser.user_name = $scope.newUser.user_name.toLowerCase();
-    console.log("$scope.newUser.user_name after toLowerCase", $scope.newUser.user_name);
     User.create($scope.newUser, function(data) {
       if (!data.status) {
-        console.log("user created", data);
         // When a new user registers, call the login function
         // to log them in automatically
         Login.login($scope.newUser, function() {
           if (Login.user._id) {
-            // And relocate them to theor user profile page
+            // And relocate them to their user profile page
             $location.path('/user');
           }
         });
       }
     });
-    console.log("$scope.newUser: ", $scope.newUser);
   };
 
   //get country data
   $http.get('js/resources/countries.json').then(function(res){
     $scope.countries = res.data;
+    //Make sure user has a country selected on load
     $scope.newUser.country = $scope.countries[0];
-    //console.log("$scope.countries", $scope.countries);
   });
 
   //Empties form fields
   $scope.resetForm = function() {
-    /*
-    $scope.registrationForm.$setPristine(true);
-    
-    console.log("$scope.registrationForm after", $scope.registrationForm);
-    //Empty newUser object
-    console.log("Reset form");
-    //We still need to fix the problem of invalid form data not removed when pushing reset-button
-    */
-    /*location.reload();*/
-    console.log("Reset form! function");
     $scope.newUser = angular.copy(userWhenReset);
   };
 
   //Every time $scope.newUser.userName changes
   $scope.$watch("newUser.user_name",function(newVal, oldVal){
-
     //if user_name exists on $scope.newUser make it lowercase
     if($scope.newUser.user_name) {
       $scope.newUser.user_name = $scope.newUser.user_name.toLowerCase();
     }
-    console.log("$scope watch for userName", newVal, oldVal);
-    //$scope.userNameAlreadyRegistered = false;
     if(!newVal){return;}
     // check if userName is registered
     User.get({user_name:newVal},function(listOfUsers){
-      console.log("listOfUsers:", listOfUsers);
+      //If user with that userName is registered
       if(listOfUsers.length > 0){
-        console.log("Username exists");
-        //$scope.userNameAlreadyRegistered = true;
+        //make userName-input invalid
         $scope.registrationForm.userName.$setValidity("unique", false);
       }else {
+        //make userName-input valid
         $scope.registrationForm.userName.$setValidity("unique", true);
       }
     });
@@ -81,40 +66,33 @@ app.controller("registerController", ["$http", "$scope", "User", "Login", "$loca
 
   //Every time $scope.newUser.email changes
   $scope.$watch("newUser.email",function(newVal,oldVal){
-    //$scope.emailAlreadyRegistered = false;
     if(!newVal){return;}
     // check if email is registered
     User.get({email:newVal},function(listOfUsers){
       //If users with that email exists
       if(listOfUsers.length){
-        
-        //$scope.emailAlreadyRegistered = true;
-        
         //make email-input invalid
         $scope.registrationForm.email.$setValidity("unique", false);
       }else{
+        //make email-input valid
         $scope.registrationForm.email.$setValidity("unique", true);
       }
     });
   });
 
-
   //When word in password-inputs changes to valid word
   function pwdWatch(){
-    // console.log("watch for pw");
-    console.log("$scope.registrationForm.password", $scope.registrationForm.password);
+    //if password inputs match
     if($scope.newUser.password == $scope.password2){
       //Make form item valid
-      console.log("They are the same");
       $scope.registrationForm.password.$setValidity("identical", true);
     }else {
       //Make form item invalid
-      console.log("They are not the same");
       $scope.registrationForm.password.$setValidity("identical", false);
     }
   }
 
-  //Whenever these changes value - run pwdWatch
+  //Whenever any of these changes value - run pwdWatch
   $scope.$watch("newUser.password", pwdWatch);
   $scope.$watch("password2", pwdWatch);
 

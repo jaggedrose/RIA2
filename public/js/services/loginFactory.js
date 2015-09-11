@@ -1,7 +1,6 @@
 // login factory
 app.factory("Login",["$http", "$rootScope", "$location", function($http, $rootScope, $location){
 
-
   // Never ever change which object loginObj.user is once it has been created
   // since the will break references to the object from $scope.User etc in different controllers
   function updateUserObj(toClone){
@@ -11,9 +10,7 @@ app.factory("Login",["$http", "$rootScope", "$location", function($http, $rootSc
     for(i in toClone){
       loginObj.user[i] = toClone[i];
     }
-    //console.log("UPDATED USER OBJ",loginObj.user)
   }
-
 
   var loginObj = {
     user: {},
@@ -61,7 +58,6 @@ app.factory("Login",["$http", "$rootScope", "$location", function($http, $rootSc
     }
     });
   }, 30000);
-
 
   return loginObj;
 }]);

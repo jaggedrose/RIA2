@@ -1,4 +1,4 @@
-//Controls the "Yes-"/"No-"options in the deleteImgModal
+//Controls the "Yes-"/"No-"options in the deleteStoryModal
 app.controller('deleteStoryController', ["$scope", "$modalInstance",  function($scope, $modalInstance) {
 
   $scope.ok = function() {

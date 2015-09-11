@@ -30,27 +30,7 @@ app.controller("homeController", ["$http", "$scope", "$routeParams", "$location"
     window.da = $scope;
   
   var currentPage = 1;
-  // $scope.onSwipeLeft= function() {
-  //        console.log("Next: ",currentPage+" "+ $scope.pageCount());
-  //   if (currentPage <= $scope.pageCount()) {
-  //     currentPage++;
-         
-  //     createCurrentPage(currentPage);
-  //   }
-  // };
 
-  // $scope.storySection = function(storyId){
-  //   $location.path('/viewStory/' + storyId + "/section/"+ 1 );
-
-  // };
-
-  // $scope.onSwipeRight = function() {
-  //    console.log("Prev: ",currentPage+" "+ $scope.pageCount());
-  //   if (currentPage > 1) {
-  //     currentPage--;
-  //     createCurrentPage(currentPage);
-  //   }
-  // };
    $scope.prevPage = function() {
      console.log("Prev: ",currentPage+" "+ pCount);
     if (currentPage > 1) {
@@ -58,8 +38,6 @@ app.controller("homeController", ["$http", "$scope", "$routeParams", "$location"
       createCurrentPage(currentPage);
     }
   };
-
-
 
    $scope.nextPage = function() {
      console.log("Next: ",currentPage+" "+ pCount);
@@ -69,11 +47,6 @@ app.controller("homeController", ["$http", "$scope", "$routeParams", "$location"
       createCurrentPage(currentPage);
     }
   };
-  
-  // $scope.setPage = function(nPage) {
-  //        currentPage=nPage;
-  //     createCurrentPage(currentPage);
-  //   };
 
   $scope.prevPageDisabled = function() {
     return currentPage === 1 ? "hidden" : "";
