@@ -30,10 +30,17 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
     return 0;
   };
 
+
+  var createStory=false;
+ 
   var id = $routeParams.id;
   // If we should load and existing story.
   if(id && id!="new"){
+    // An existing story has images.. hide cropMe.
+    // $scope.croppingNotDone = false;
 
+    createStory=false;
+  
     // Get existing story from db.
     $scope.storyData = Story.getById({"_id" : id, _populate: "tags"}, function(response){
       console.log("storyData: ", $scope.storyData);
@@ -60,7 +67,11 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
   }
 
   else {
+
+    createStory=true;
+
     //Create a new story and immidiately save to db
+
     // logged in?
     if(!Login.user._id){
       //goto "went wrong controller";
@@ -68,27 +79,12 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
       $location.url("/");
       return;
     }
-
-    Story.create(
-      {
-        user_id:Login.user._id,
-        title:"",
-        date_created: "",
-        date_modified: "",
-        tags:[],
-        number_views: ""
-      }, function(arrayOfNewStories){
-        // As soon as we have a new story and its id
-        // change url to reflect the story id
-        if (!UserStore.tmp.stories) {
-          UserStore.tmp.stories = {};
-        }
-        UserStore.tmp.stories[arrayOfNewStories[0]._id] = true;
-        $location.url("/writeStory/" + arrayOfNewStories[0]._id);
-      }
-    );
-    // DON'T DO ANYTHING ELSE INSIDE THIS ELSE
-    // REDIRECT IS UNDERWAY
+    $scope.storyData = {
+      user_id:Login.user._id//,
+      //section1: angular.copy(storySectionCC)
+    };
+    $scope.storySection = angular.copy(storySectionCC);
+    sectionid = 1;
   }
 
   // End of loading ghe story.
@@ -181,6 +177,26 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
       console.log ("Form valid!", $scope.storyForm.$valid);
       var nextSection = sectionid/1 + 1;
       if(nextSection > 3){nextSection = 1;}
+      if (createStory) {
+        $scope.storyData['section' + sectionid] = $scope.storySection;
+        Story.create($scope.storyData, function(arrayOfNewStories){
+          // As soon as we have a new story and its id
+          // change url to reflect the story id
+          if (!UserStore.tmp.stories) {
+            UserStore.tmp.stories = {};
+          }
+          $scope.storyData = arrayOfNewStories[0];
+          id = arrayOfNewStories[0]._id;
+          UserStore.tmp.stories[arrayOfNewStories[0]._id] = true;
+          $location.url('/writeStory/' + id + '/section/' + nextSection);
+          $scope.moved = false;
+          // Now (since there story has been created - we are inside a create callback) we can update it with tags
+          handleTags();
+        });
+        // don't do anything else if new story created - return
+        return;
+      }
+      handleTags();
       $location.url('/writeStory/' + id + '/section/' + nextSection);
       $scope.moved = false;
     }
@@ -213,6 +229,7 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
       console.log ("Form valid! backwards..", $scope.storyForm.$valid);
       var nextSection = sectionid/1 - 1;
       if(nextSection < 1){nextSection = 3;}
+
       $location.url('/writeStory/' + id + '/section/' + nextSection);
       $scope.moved = false;
     }
@@ -274,7 +291,7 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
         preSaveStory();
       }
       function preSaveStory(newTags){
-        newTags = newTags || [];
+         newTags = newTags || [];
         var allTags = tags.concat(newTags);
         saveStory(allTags);
       }
@@ -286,9 +303,7 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
     if (UserStore.tmp.stories && UserStore.tmp.stories[$scope.storyData._id]) {
       delete UserStore.tmp.stories[$scope.storyData._id];
     }
-    // Add both new tag objects to the story
-    $scope.storyData.tags = allTags;
-    // Save the story to DB
+     $scope.storyData.tags = allTags;
     Story.update({_id:$scope.storyData._id},$scope.storyData);
 
   }
