@@ -11,7 +11,7 @@
             <!-- Crop and upload image **********************************************************-->
             <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
               <div class="row">
-                <div class="form-group col-xs-12">
+                <div class="form-group col-xs-12 mb0">
                   <cropme  ng-hide="storySection.img"
                     width="{{cropme.width}}"
                     height="{{cropme.height}}"
@@ -33,9 +33,9 @@
               </div>
             </div>
 
-            <i ng-if="storySection.img" ng-click="openModal(false,storySection.img)" class="fa fa-trash-o fa-2x control" ></i>
             <div class="form-group imgview col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3" ng-show="storySection.img">                
-              <img class="stryimg" ng-src="{{storySection.img}}"> 
+              <img class="stryimg" ng-src="{{storySection.img}}">
+              <i ng-if="storySection.img" ng-click="openModal(false,storySection.img)" class="fa fa-trash-o fa-2x control storyDeleteIcon"></i>
             </div>
 
             
