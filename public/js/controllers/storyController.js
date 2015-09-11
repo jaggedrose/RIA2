@@ -30,14 +30,14 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
     return 0;
   };
 
-
+  var CreateStory=false;
   // IF WE SHOULD LOAD AN EXISTING STORY
   var id = $routeParams.id;
   if(id && id!="new"){
     // An existing story has images.. hide cropMe.
     // $scope.croppingNotDone = false;
 
-
+    CreateStory=false;
     // GET EXISTING STORY FROM DB
     $scope.storyData = Story.getById({"_id" : id, _populate: "tags"}, function(response){
       console.log("storyData: ", $scope.storyData);
@@ -66,7 +66,7 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
   else {
 
     // CREATE A NEW STORY AND IMMIDIATELY SAVE TO DB
-
+    CreateStory=true;
     // logged in?
     if(!Login.user._id){
       //goto "went wrong controller";
@@ -74,25 +74,11 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
       $location.url("/");
       return;
     }
-
-    Story.create(
-      {
-        user_id:Login.user._id,
-        title:"",
-        date_created: "",
-        date_modified: "",
-        tags:[],
-        number_views: ""
-      }, function(arrayOfNewStories){
-        // As soon as we have a new story and its id
-        // change url to reflect the story id
-        if (!UserStore.tmp.stories) {
-          UserStore.tmp.stories = {};
-        }
-        UserStore.tmp.stories[arrayOfNewStories[0]._id] = true;
-        $location.url("/writeStory/" + arrayOfNewStories[0]._id);
-      }
-    );
+    $scope.storyData = {
+      user_id:Login.user._id,
+    };
+    sectionid = sectionid ? sectionid : 1;
+    $scope.storySection = $scope.storyData["section" + sectionid] ? $scope.storyData["section" + sectionid] : angular.copy(storySectionCC);
     // DON'T DO ANYTHING ELSE INSIDE THIS ELSE
     // REDIRECT IS UNDERWAY
   }
@@ -197,6 +183,28 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
       console.log ("Form valid!", $scope.storyForm.$valid);
       var nextSection = sectionid/1 + 1;
       if(nextSection > 3){nextSection = 1;}
+      if (CreateStory) {
+        $scope.storyData['section' + sectionid] = $scope.storySection;
+        // handleTags();
+       
+        $scope.storyData = Story.create(
+            $scope.storyData, function(arrayOfNewStories){
+            // As soon as we have a new story and its id
+            // change url to reflect the story id
+            if (!UserStore.tmp.stories) {
+              UserStore.tmp.stories = {};
+            }
+            id = arrayOfNewStories[0]._id;
+             UserStore.tmp.stories[arrayOfNewStories[0]._id] = true;
+            $location.url('/writeStory/' + id + '/section/' + nextSection);
+            $scope.moved = false;
+          }
+        );
+        handleTags();
+    console.log("AAA tags",$scope.storyData);
+        
+        return;
+      }
       $location.url('/writeStory/' + id + '/section/' + nextSection);
       $scope.moved = false;
     }
@@ -230,6 +238,7 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
       console.log ("Form valid! backwards..", $scope.storyForm.$valid);
       var nextSection = sectionid/1 - 1;
       if(nextSection < 1){nextSection = 3;}
+
       $location.url('/writeStory/' + id + '/section/' + nextSection);
       $scope.moved = false;
     }
@@ -248,7 +257,7 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
     // Add the current section in the larger storyData object
     $scope.storyData["section" + sectionid] = $scope.storySection;
 
-
+    console.log("location changes");
     // Handle tags (handle tags will eventually call saveStory)
     handleTags();
 
@@ -260,6 +269,7 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
 
     // Read entered tags, remove whitespace, split on comma
     var tagArray = $scope.tagNames;
+    console.log("Tags str",$scope.tagNames);
     tagArray = tagArray.replace(/,\s/g,',').split(",");
     // Remove duplicate tags
     // ..use js filter! - dev suspended
@@ -299,6 +309,7 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
         preSaveStory();
       }
       function preSaveStory(newTags){
+        console.log("nnn", newTags);
         newTags = newTags || [];
         var allTags = tags.concat(newTags);
         saveStory(allTags);
@@ -311,9 +322,9 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
     if (UserStore.tmp.stories && UserStore.tmp.stories[$scope.storyData._id]) {
       delete UserStore.tmp.stories[$scope.storyData._id];
     }
-    // Add both new tag objects to the story
+    console.log("oOOOo ",allTags);
+    console.log("sID", $scope.storyData._id);
     $scope.storyData.tags = allTags;
-    // Save the story to DB
     Story.update({_id:$scope.storyData._id},$scope.storyData);
 
   }
