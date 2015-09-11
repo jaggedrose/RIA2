@@ -1,70 +1,89 @@
 <div class="container-fluid appbackground">
     <div class="row">
-        <section class="col-xs-12 mainframe">
+        <div class="col-xs-12 mainframe">
           <form ng-submit="apanStory()" novalidate name="storyForm" class="">
-            <div class="form-group">
+            <div class="form-group col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
               <input ng-model="storyData.title" name="storyTitle" class="form-control stdinputbgcolour brtinputtxtcolour stdinputborder headerfont plcholderhead cnttxt" type="text" id="title" placeholder="The title of your story." ng-minlength="2" ng-maxlength="60" required>
               <p class="txtcontrol formerror" ng-show="storyForm.storyTitle.$touched && storyForm.storyTitle.$invalid || (moved && storyForm.storyTitle.$invalid)">Give your story a title. (2 - 60 characters)</p>
             </div>
-
-              <!-- Crop and upload image *****************-->
-              <div class="form-group">
-                <cropme  ng-hide="storySection.img"
-                  width="{{cropme.width}}"
-                  height="{{cropme.height}}"
-                  ratio="0.66"
-                  icon-class=""
-                  type="png"
-                  destination-width="1000"
-                  id="fileUpload"
-                  ok-label="Crop"
-                  cancel-label="Select"
-                  ng-show="croppingNotDone"
-                  >
-                </cropme>
-                
-                <p class="txtcontrol" ng-show="!storySection.img && storyForm.sectionFile.$dirty">Choose and crop an image for this section.</p>
-                <!-- Nonvisible input to store <cropme>'s required and validity value -->
-                <input class="chooseFile" name="sectionFile" ng-model="unusedBananaModel" required>
-              </div>
-              <i ng-if="storySection.img" ng-click="openModal(false,storySection.img)" class="fa fa-trash-o fa-2x control" ></i>
-              <div class="form-group imgview" ng-show="storySection.img">                
-                <img class="stryimg" ng-src="{{storySection.img}}"> 
-              </div>
-
-            <div class="row">
-              <div class="col-xs-12">
-                <div class="navthumbs pull-right">
-                  <img ng-class="activeClass(1)" ng-src="{{showImg(1)}}" class="navthumb">
-                  <img ng-class="activeClass(2)" ng-src="{{showImg(2)}}" class="navthumb">
-                  <img ng-class="activeClass(3)" ng-src="{{showImg(3)}}" class="navthumb">
+            <!-- Crop and upload image **********************************************************-->
+            <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
+              <div class="row">
+                <div class="form-group col-xs-12 mb0">
+                  <cropme  ng-hide="storySection.img"
+                    width="{{cropme.width}}"
+                    height="{{cropme.height}}"
+                    ratio="0.66"
+                    icon-class=""
+                    type="png"
+                    destination-width="1000"
+                    id="fileUpload"
+                    ok-label="Crop"
+                    cancel-label="Cancel"
+                    ng-show="croppingNotDone"
+                    >
+                  </cropme>
+                  
+                  <p class="txtcontrol uploadtxt" ng-show="!storySection.img && storyForm.sectionFile.$dirty">Choose and crop an image for this section.</p>
+                  <!-- Nonvisible input to store <cropme>'s required and validity value -->
+                  <input class="chooseFile" name="sectionFile" ng-model="unusedBananaModel" required>
                 </div>
               </div>
-              <div class="form-group col-xs-8">
-                <input ng-class="{true: 'invalidInput', false: ''}[storyForm.sectionHeader.$invalid]" ng-model="storySection.header" name="sectionHeader" class="form-control stdinputbgcolour brtinputtxtcolour stdinputborder headerfont plcholderhead" type="text" id="header" placeholder="Headline for this section.." ng-minlength="2" ng-maxlength="30" required>
-                <p class="txtcontrol formerror" ng-show="storyForm.sectionHeader.$touched && storyForm.sectionHeader.$invalid || (moved && storyForm.sectionHeader.$invalid)">Write a headline for this section. (2 - 60 characters)</p>
+            </div>
+
+            <div class="form-group imgview col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3" ng-show="storySection.img">     
+
+              <img class="stryimg img-responsive" ng-src="{{storySection.img}}"> 
+              <i ng-if="storySection.img" ng-click="openModal(false,storySection.img)" class="fa fa-trash-o fa-2x control storyDeleteIcon"></i>
+            </div>
+
+            <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
+            <div class="navthumbs pull-right">
+              <img ng-class="activeClass(1)" ng-src="{{showImg(1)}}" class="navthumb">
+              <img ng-class="activeClass(2)" ng-src="{{showImg(2)}}" class="navthumb">
+              <img ng-class="activeClass(3)" ng-src="{{showImg(3)}}" class="navthumb">
+            </div>
+          </div>
+   
+            <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
+              <div class="row">
+                <div class="form-group col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                  <input ng-class="{true: 'invalidInput', false: ''}[storyForm.sectionHeader.$invalid]" ng-model="storySection.header" name="sectionHeader" class="form-control stdinputbgcolour brtinputtxtcolour stdinputborder headerfont plcholderhead" type="text" id="header" placeholder="Headline for this section.." ng-minlength="2" ng-maxlength="30" required>
+                  <p class="txtcontrol formerror" ng-show="storyForm.sectionHeader.$touched && storyForm.sectionHeader.$invalid || (moved && storyForm.sectionHeader.$invalid)">Write a headline for this section. (2 - 60 characters)</p>
+                </div>
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 control">
+                <p class="pull-right">{{niceDate}}</p>
+                </div>
               </div>
-              <div class="col-xs-4 control">
-              <p class="pull-right">{{niceDate}}</p>
+            </div>   
+            
+            <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
+              <div class="row">
+                <div class="form-group col-xs-12">
+                  <div class="textAreaWrap">
+                    <textarea rows="6" ng-model="storySection.text" name="sectionText" class="form-control strytxt stdinputborder " id="text" placeholder="Your text.." required ng-minlength="150" ng-maxlength="300"></textarea>
+                    <span>{{textLength()}}</span>
+                  </div>
+                  <p class="txtcontrol formerror" ng-show="storyForm.sectionText.$touched && storyForm.sectionText.$invalid || (moved && storyForm.sectionText.$invalid)">Express yourself! (We expect a text of minimum 150 and up to 300 characters)</p>
+                </div>
               </div>
             </div>
-            <div class="form-group">
-              <div class="textAreaWrap">
-                <textarea ng-model="storySection.text" name="sectionText" class="form-control strytxt stdinputborder " id="text" placeholder="Your text.." required ng-minlength="150" ng-maxlength="300"></textarea>
-                <span>{{textLength()}}</span>
+
+            <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
+              <div class="row">
+                <div class="form-group col-xs-12">
+                  <input ng-model="tagNames" name="storyTags" class="form-control stdinputbgcolour stdinputtxtcolour stdinputborder txtbody plcholdertxt" type="text" id="tags" placeholder="Add tags here, separated by commas. No # needed." ng-minlength="2" ng-maxlength="150"required>
+                  <p class="txtcontrol formerror" ng-show="(storyForm.storyTags.$touched && storyForm.storyTags.$invalid) || (moved && storyForm.storyTags.$invalid)">Give your story at least one tag.</p>
+                </div>
               </div>
-              <p class="txtcontrol formerror" ng-show="storyForm.sectionText.$touched && storyForm.sectionText.$invalid || (moved && storyForm.sectionText.$invalid)">Express yourself! (We expect a text of minimum 150 and up to 300 characters)</p>
             </div>
-            <div class="form-group">
-                <input ng-model="tagNames" name="storyTags" class="form-control stdinputbgcolour stdinputtxtcolour stdinputborder txtbody plcholdertxt" type="text" id="tags" placeholder="Add tags here, separated by commas. No # needed." ng-minlength="2" ng-maxlength="150"required>
-                <p class="txtcontrol formerror" ng-show="(storyForm.storyTags.$touched && storyForm.storyTags.$invalid) || (moved && storyForm.storyTags.$invalid)">Give your story at least one tag.</p>
-            </div>
-            <div class="navbox">
+
+
+            <div class="navbox col-xs-12">
               <i class="fa fa-chevron-left fa-2x control" ng-disabled="storyForm.$invalid" ng-click="onSectionBack()"></i>
               <i class="fa fa-chevron-right fa-2x control" ng-disabled="storyForm.$invalid" ng-click="onSectionForward()" ></i>
             </div>
-            <br><br>
           </form>
-        </section>
+        </div>
     </div>
 </div>

@@ -172,7 +172,10 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
 
     if ($scope.storyForm.$valid) {
       var nextSection = sectionid/1 + 1;
-      if(nextSection > 3){nextSection = 1;}
+      if(nextSection > 3){
+        $location.url('/user');
+        return;
+        }
       if (createStory) {
         $scope.storyData['section' + sectionid] = $scope.storySection;
         Story.create($scope.storyData, function(arrayOfNewStories){
