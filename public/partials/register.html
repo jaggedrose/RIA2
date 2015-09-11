@@ -34,7 +34,6 @@
          <div class="form-group">
           <label for="country"></label>
           <select class="form-control" ng-options="country for country in countries" ng-model="newUser.country" name="country" ng-selected="Afghanistan">
-            <!-- <option ng-repeat="country in countries">{{country}}</option> -->
           </select>
          </div>
          <div class="form-group">
@@ -46,7 +45,6 @@
          <div class="form-group">
           <label for="password2" class="labels"></label>
           <input ng-model="password2" class="form-control" type="password" id="password2" name="password2"  ng-minlength="7" placeholder="Enter password again" required>
-          <!-- <p ng-show="registrationForm.password.$error.identical">The passwords doesn't match.</p> -->
          </div>
          <button class="btn btn-sm btncolor" type="submit" ng-disabled="registrationForm.$invalid">Register</button>
          <button class="btn btn-sm btncolor" type="button" ng-click="resetForm()">Empty</button>

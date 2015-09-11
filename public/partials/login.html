@@ -1,9 +1,6 @@
 <div class="container-fluid appbackground" >
     <div class="row">
         <section class="col-xs-12 mainframe loginPage">
-            <!-- <div ng-show="User._id">
-                <button type="submit" class="btn btn-danger" ng-click="logoutUser()">Log Out</button>
-            </div> -->
             <form name="form" ng-submit="logForm()" role="form" class="padding-bottom border-bottom" novalidate>
                 <div class="form-group" ng-class="{'has-error': form.email.$dirty && form.email.$error.required }">
                     <label for="email">Email:</label>
@@ -23,7 +20,7 @@
             </form>
             <div>
                 <h3>New to Stories?</h3>
-                <button type="submit" class="btn btn-sm btncolor" ng-click="gotoRegister();">Register</button>
+                <a ng-href="register"><button type="submit" class="btn btn-sm btncolor">Register</button></a>
             </div>
         </section>
     </div>

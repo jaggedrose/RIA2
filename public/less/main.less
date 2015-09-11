@@ -30,6 +30,10 @@
 
 // COLOURS AND FONTS **********************************************************
 
+body, html {
+    -webkit-font-smoothing: subpixel-antialiased;
+}
+
 body {
   background-color: #000;
 }
@@ -42,18 +46,6 @@ h1, h2, h3, h4, h5, h6 {
 .appbackground {
   background-color: @backgr;
 }
-
-// Reset Angular material font and color properties
-body, html {
-  -webkit-font-smoothing: subpixel-antialiased;
-  background-color: #000;
-} 
-
-h1, h2, h3, h4, h5, h6, md-card, md-list, md-select, md-toolbar, ol, p, ul {
-  text-rendering: auto;
-}
-// end Angular material reset
-
 
 .headerfont {
   color: @txtheader;
@@ -91,11 +83,6 @@ h1, h2, h3, h4, h5, h6, md-card, md-list, md-select, md-toolbar, ol, p, ul {
   margin-bottom: 0;
 }
 
-//Overriding bootstrap-class!
-.navbar {
-  min-height: 10px;
-}
-
 .menuNav {
   position: relative;
 }
@@ -124,6 +111,10 @@ h1, h2, h3, h4, h5, h6, md-card, md-list, md-select, md-toolbar, ol, p, ul {
   margin-left: auto;
   margin-right: auto;
 }
+
+#BorderPictUser {
+    max-height: 10vh;
+  }
 
 #btn-search {
   margin-top: -15px;
@@ -208,7 +199,6 @@ img[id^='BorderPict'] {
 }
 
 // for text displaying user details, text in buttons, labels
-
 .txtcontrol {
   color: @txtcontrol;
   font-family: 'Roboto', sans-serif;
@@ -233,7 +223,6 @@ p.formerror {
 }
 //Mixins
 //Mixin for center verticaly
-
 .vertical_align (@position: relative) {
   position: @position;
   top: 50%;
@@ -244,7 +233,6 @@ p.formerror {
 
 
 // for control elements - buttons, icons
-
 .control {
   color: @control;
 }
@@ -285,14 +273,12 @@ p.formerror {
 }
 
 // Navigation box formatting - centered icons
-
 .navbox {
   text-align: center;
 }
 
 .navthumbs {
   // margin: 0 0 15px 0;
-  
 }
 
 .navthumbs a {
@@ -318,11 +304,6 @@ p.formerror {
   margin: 0 0 10px 10px;
 }
 
-// .center {
-//   margin-left: auto;
-//   margin-right: auto;
-// }
-
 .cnttxt {
   text-align: center;
 }
@@ -331,15 +312,19 @@ p.formerror {
   border: 1px solid @stdinputbordercolour;
   border-radius: 0.3em;
 }
+
 .txtleft {
   text-align: left;
 }
+
 .txtright {
   text-align: right;
 }
+
 .mt5 {
   margin-top: 5px;
 }
+
 .mt10 {
   margin-top: 10px;
 }
@@ -349,18 +334,23 @@ p.formerror {
 .mb10 {
   margin-bottom: 10px;
 }
+
 .mb20 {
   margin-bottom: 20px;
 }
+
 .mb40 {
   margin-bottom: 40px;
 }
+
 .dispNone {
   display: none;
 }
+
 .breakWord {
   word-wrap: break-word;
 }
+
 .width20 {
   width: 20%;
 }
@@ -506,7 +496,6 @@ p.strytxt {
 
 //  BOOTSTRAP OVERRIDES ***********************************************************
 
-
 .btn {
   color: @backgr;
   background-color: @control;
@@ -543,28 +532,13 @@ p.strytxt {
 
 */
 
+.navbar {
+  min-height: 10px;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.modal-dialog {
+  max-width: 95vw;
+}
 
 // User Profile/Edit/Register/login Styling *********************
 
@@ -601,10 +575,6 @@ div.imgupload input {
   height: 7em;
   .bord3blk;
 }
-.userStoryList {
-  // margin: 0 10px 0 0;
-}
-
 .userStoryList {
   padding-right: 5px;
 }
