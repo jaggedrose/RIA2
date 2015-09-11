@@ -23,7 +23,7 @@
 
           <li class="list-group-item" ng-repeat="res in searchResults">
             <a  class="row" ng href="" ng-click="searchUsers(res._id, res.user_name)">
-              <div class="col-xs-9">{{res.user_name}}</div><div class="col-xs-3"><img id="BorderPict" class="img-responsive" src={{res.img}}></div>
+              <div class="col-xs-9">{{res.user_name}}</div><div class="col-xs-3"><img id="BorderPictUser" class="img-responsive" src={{res.img}}></div>
             </a>
             <a href="" ng-click="searchStories(res._id,res.tagName)">{{hashtag}} {{res.machineName}}</a>
           </li>
