@@ -23,8 +23,7 @@
 
 (function() {
   angular.module("cropme").directive("cropme", ["$swipe", "$window", "$timeout", "$rootScope", "$q", "elementOffset", "canvasToBlob", function($swipe, $window, $timeout, $rootScope, $q, elementOffset, canvasToBlob) {
-    var borderSensitivity, minHeight, minWidth;
-    minWidth = 100;
+    var borderSensitivity, minHeight;
     minHeight = 100;
     borderSensitivity = 8;
     return {
@@ -143,7 +142,7 @@
               width = img.width;
               height = img.height;
               errors = [];
-              if (width < minWidth) {
+              if (width < scope.width) {
                 errors.push("The image you dropped has a width of " + width + ", but the minimum is " + scope.width + ".");
               }
               minHeight = Math.min(scope.height, scope.destinationHeight);
