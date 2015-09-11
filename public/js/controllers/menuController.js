@@ -1,12 +1,11 @@
-
+//Controller for menu
 app.controller("menuController", ["$scope", "$location", "Login", "UserStore", "Story", function($scope, $location, Login, UserStore, Story) {
-   console.log("menuController is working!");
 
    $scope.User = Login.user;
+   
    // Listening for any route changes,
    // depending on if a user is logged in or not.
    $scope.$on("$routeChangeStart", function(event, next, current) {
-      console.log("on $routeChangeStart", next);
 
       // if users are leaving the "writeStory" route,
       // delete all "unsaved" stories

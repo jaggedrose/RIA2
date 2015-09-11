@@ -1,4 +1,4 @@
-//"myAppName" controller
+//Story controller
 app.controller("storyController", ["$http", "$scope","$routeParams","$location", "Story", "Tag", "Login", "FileUploader", "$modal", "$timeout", "UserStore",
   function($http, $scope, $routeParams, $location, Story, Tag, Login, FileUploader, $modal, $timeout, UserStore) {
   $scope.$broadcast("cropme:open");
@@ -7,6 +7,7 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
   // track which section we are on
   var sectionid = $routeParams.sectionid;
  
+  //Template story to start out from
   var storySectionCC = {
     sectionNo: sectionid,
     text: "",
@@ -17,28 +18,23 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
     number_views: ""
   };
 
-
+  //Returns length of a section-text to counter in textarea
   $scope.textLength = function() {
     if (
       $scope.storyForm &&
       $scope.storyForm.sectionText &&
       $scope.storyForm.sectionText.$$lastCommittedViewValue
     ) {
-
       return $scope.storyForm.sectionText.$$lastCommittedViewValue.length;
     }
     return 0;
   };
 
-
-  // IF WE SHOULD LOAD AN EXISTING STORY
   var id = $routeParams.id;
+  // If we should load and existing story.
   if(id && id!="new"){
-    // An existing story has images.. hide cropMe.
-    // $scope.croppingNotDone = false;
 
-
-    // GET EXISTING STORY FROM DB
+    // Get existing story from db.
     $scope.storyData = Story.getById({"_id" : id, _populate: "tags"}, function(response){
       console.log("storyData: ", $scope.storyData);
       // logged in?
@@ -64,9 +60,7 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
   }
 
   else {
-
-    // CREATE A NEW STORY AND IMMIDIATELY SAVE TO DB
-
+    //Create a new story and immidiately save to db
     // logged in?
     if(!Login.user._id){
       //goto "went wrong controller";
@@ -97,7 +91,7 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
     // REDIRECT IS UNDERWAY
   }
 
-  // END OF LOADING THE STORY
+  // End of loading ghe story.
   window.scope = $scope;
 
   // Check if active - set CSS .navthumbcurrent
@@ -107,11 +101,9 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
 
   // compose a 'nice' date
   function niceDate (date) {
-
     var nDate = new Date (date);
     nDate = nDate.toString().slice(0,21);
     return nDate;
-    
   }
    
   // Check if an image is choosen, upload the image and return the image url
@@ -126,21 +118,16 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
       $scope.storySection.img = imgurl;
       // Handle validation
       $scope.storyForm.sectionFile.$setValidity("required", true);
-      
-      console.log("storySection: ", $scope.storySection);
-      
     });
   });
 
   // function to show a section's saved image OR a section's currently loaded but not saved image 
-
   function updateCropMeSize(){
     var w = window.innerWidth - 30*2;
     $scope.cropme = {width:w,height:w*0.75};
     if(!$scope.$$phase){
       $scope.$apply();
     }
-    //console.log("updating crop me size",w);
   }
   updateCropMeSize();
   window.addEventListener("resize",updateCropMeSize);
@@ -168,17 +155,14 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
     return img;
   };
 
-  // CHANGE SECTION - Forward
+  // Change section - Forward
   $scope.onSectionForward = function(){
-    
     $scope.moved = true;
-
     // Validation for the sectionFile field, *in case we are editing an existing story/section*.
     // The *ng-model* of the sectionFile input is set to 'file' in order to feed ng-file-upload,
     // and won't do for validating. Hence, we test .img on the storySection object.
     
     if ($scope.storySection.img) {
-      
       // We got an image. Set the field to valid..
       //$scope.storyForm.sectionFile.$setValidity("required", true);
       
@@ -206,12 +190,11 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
     }
   };
 
-  // CHANGE SECTION - Backwards
+  // Change section - Backwards
   $scope.onSectionBack = function(){
     $scope.moved = true;
 
-    if ($scope.storySection.img) {
-      
+    if ($scope.storySection.img) {      
       // We got an image. Set the field to valid..
       //$scope.storyForm.sectionFile.$setValidity("required", true);
       
@@ -234,7 +217,7 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
       $scope.moved = false;
     }
     else {
-      console.log ("backward motherFucker! valid: ", $scope.storyForm.$valid);
+      console.log ("backward! valid: ", $scope.storyForm.$valid);
       return;
     }
   };
@@ -248,14 +231,12 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
     // Add the current section in the larger storyData object
     $scope.storyData["section" + sectionid] = $scope.storySection;
 
-
     // Handle tags (handle tags will eventually call saveStory)
     handleTags();
 
   });
 
-  // TAGS!
-
+  // Tags!
   function handleTags(){
 
     // Read entered tags, remove whitespace, split on comma
@@ -267,23 +248,18 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
     // Then GET them from db
     // The GET is on our 'cleaned' and split tagArray, the callback takes the result
     // (as 'tags')
-
     Tag.get({tagName: {$in:tagArray}},function(tags){
 
       // tags is an array of objects. 'map' out only the tagName(s) to new array 
       // (existingTagNames)
-
       existingTagNames = tags.map(function(x){
         return x.tagName;
       });
       
       // find non-existing tagnames 
-
       nonExistingTagNames = tagArray.filter(function(aTagName){
         return aTagName && existingTagNames.indexOf(aTagName)<0;
       });
-
-      console.log("Needs to be created",nonExistingTagNames);
 
       var tagObjectsToCreate = nonExistingTagNames.map(function(tagName){
         return {tagName: tagName};
@@ -291,7 +267,6 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
 
       // Save new tags to DB if needed 
       // .create does not like empty arrays - hence if/else
-
       if(tagObjectsToCreate.length > 0){
         Tag.create(tagObjectsToCreate,preSaveStory);
       }
@@ -318,53 +293,24 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
 
   }
 
-  /*
-  //Function will check if there is a file choosen and then sent it to server folder uploads
-  //then send the image url to the db
-    function uploadImage(){
-      $scope.$watch("files",function(){
-      // If there is no file array or it has not length do nothing
-      if(!$scope.files || $scope.files.length < 1){return;}
-      // Otherwise upload the file properly
-      FileUploader($scope.files[0]).success(function(imgurl) {
-      $scope.imgurl = storySection.img;
-      console.log("filnamn: ", $scope.files[0].name, "sökväg = ", storySection.img);
-    });
-  });
-  }
-  */
-  /*
-    $scope.uploadImage = function(){
-      console.log ("Hey! Image upload!");
-        
-    };
-  */
-
+  //when picture to crop is loaded
   $scope.$on("cropme:loaded", function(ev, width, height) {
     $scope.storyForm.sectionFile.$setDirty();
-    console.log("$scope.storyForm.sectionFile", $scope.storyForm.sectionFile);
     $scope.cropped = false;
-    console.log("cropme:loaded");
   });
 
   //When user presses "Crop"-button
   $scope.$on("cropme:done", function(ev, result, canvasEl) {
     var pseudoFile = result.croppedImage;
     pseudoFile.name = result.filename;
-    //FileUploader(pseudoFile).success(function(imgurl) {
-      //$scope.storySection.img = imgurl;
-    //});
-    console.log("Pseudofile: ", pseudoFile);
     $scope.file = pseudoFile;
     $scope.croppingNotDone = false;
   });
-
 
   //Control modal for deleting image
  window.theScope = $scope;
   $scope.openModal = function(size,imgName ) {
     imgName = imgName || $scope.file.name;
-    console.log("openModal !!!", imgName);
     var modalInstance = $modal.open({
       templateUrl: 'partials/deleteImgModal.html',
       controller: 'deleteImgController',
@@ -383,7 +329,6 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
       $http.post('/api/removeImage', {imgsrc: $scope.storySection.img}).success(function() {
         $scope.storySection.img = "";
         $scope.croppingNotDone = true;
-        //console.log("You choosed Yes-button", "Bildfil =",$scope.storySection.img);
       });
        
     }, function () {

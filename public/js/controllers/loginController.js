@@ -1,9 +1,10 @@
-//"myAppName" controller.
+//Login controller.
 app.controller("loginController", ["$http", "$scope", "$location","Login", function($http, $scope, $location, Login) {
   $scope.authMsg = '';
   $scope.Loginfo = {};
   $scope.User = Login.user;
 
+  //on login-form submit
   $scope.logForm = function() {
     console.log("login",$scope.Loginfo);
     Login.login($scope.Loginfo, function(data) {
@@ -17,15 +18,5 @@ app.controller("loginController", ["$http", "$scope", "$location","Login", funct
       }
     });
   };
-
-  $scope.gotoRegister = function(){
-    $location.path('/register');
-  };
-
-    // $scope.logoutUser = function(data) {
-    //   Login.logout();
-    //   console.log("User logged out!");
-    //   $location.path('/');
-    // };
 
 }]);
