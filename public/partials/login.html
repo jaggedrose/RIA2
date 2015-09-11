@@ -1,6 +1,8 @@
 <div class="container-fluid appbackground" >
     <div class="row">
         <section class="col-xs-12 mainframe loginPage">
+
+          <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
             <form name="form" ng-submit="logForm()" role="form" class="padding-bottom border-bottom" novalidate>
                 <div class="form-group" ng-class="{'has-error': form.email.$dirty && form.email.$error.required }">
                     <label for="email">Email:</label>
@@ -22,6 +24,7 @@
                 <h3>New to Stories?</h3>
                 <a ng-href="register"><button type="submit" class="btn btn-sm btncolor">Register</button></a>
             </div>
+           </div> 
         </section>
     </div>
 </div>
