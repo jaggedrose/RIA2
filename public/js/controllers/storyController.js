@@ -39,11 +39,10 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
     // An existing story has images.. hide cropMe.
     // $scope.croppingNotDone = false;
 
-    createStory=false;
+    createStory = false;
   
     // Get existing story from db.
     $scope.storyData = Story.getById({"_id" : id, _populate: "tags"}, function(response){
-      console.log("storyData: ", $scope.storyData);
       // logged in?
       if(response.user_id != Login.user._id){
         
@@ -108,7 +107,6 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
     if(!$scope.file || $scope.file.length < 1){return;}
     // Otherwise upload the file properly
     FileUploader($scope.file).success(function(imgurl) {
-      console.log("file: ", $scope.file);
       $scope.hide = false;
       // Set the image url to the greater storySection object
       $scope.storySection.img = imgurl;
@@ -134,7 +132,6 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
       $scope.storyData &&
       $scope.storyData['section' + currSec] &&
       $scope.storyData['section' + currSec].img // &&
-      // currSec != sectionid
     ) {
       img = $scope.storyData['section' + currSec].img;
       currSec == sectionid && ($scope.croppingNotDone = false);
@@ -174,7 +171,6 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
     }
 
     if ($scope.storyForm.$valid) {
-      console.log ("Form valid!", $scope.storyForm.$valid);
       var nextSection = sectionid/1 + 1;
       if(nextSection > 3){nextSection = 1;}
       if (createStory) {
@@ -201,7 +197,6 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
       $scope.moved = false;
     }
     else {
-      console.log ("storyForm.$valid: ", $scope.storyForm.$valid);
       return;
     }
   };
@@ -226,7 +221,6 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
     }
 
     if ($scope.storyForm.$valid) {
-      console.log ("Form valid! backwards..", $scope.storyForm.$valid);
       var nextSection = sectionid/1 - 1;
       if(nextSection < 1){nextSection = 3;}
 
@@ -234,7 +228,6 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
       $scope.moved = false;
     }
     else {
-      console.log ("backward! valid: ", $scope.storyForm.$valid);
       return;
     }
   };
@@ -348,7 +341,6 @@ app.controller("storyController", ["$http", "$scope","$routeParams","$location",
        
     }, function () {
       // If user choose "No"-button
-      //console.log("You choosed No-button");
     });
   };
 }]);

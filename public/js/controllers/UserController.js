@@ -95,7 +95,6 @@ app.controller("UserController", ["$http", "$scope", "$location", "Story", "User
        
     }, function () {
       // If user choose "No"-button
-      //console.log("You choosed No-button");
     });
   };
 

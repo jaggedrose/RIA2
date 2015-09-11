@@ -2,9 +2,6 @@
 app.controller("searchController", ["$http", "$scope", "$location", "Tag", "User", "Story", "UserStore", function($http, $scope, $location, Tag, User, Story, UserStore) {
 
   $scope.show = "tags";
-  /*$scope.$watch(function() {
-    console.log("s", $scope.show);
-  });*/
 
   //User-search tab chosen
   $scope.activateSearchUsers = function(){
@@ -35,7 +32,6 @@ app.controller("searchController", ["$http", "$scope", "$location", "Tag", "User
             $scope.currentPageStories='';
            if ($scope.searchText.length>0) {
           User.get({user_name: new RegExp($scope.searchText, 'i')}, function(data) {
-            console.log("got users", data);
             $scope.searchResults = data;
              $scope.hashtag=("");
           });
@@ -88,7 +84,6 @@ app.controller("searchController", ["$http", "$scope", "$location", "Tag", "User
 
   // Takes you to the users profile page
   $scope.searchUsers = function(userid, user_name) {
-    console.log("user id + user name", userid, user_name);
     $location.path('/userProfile/' + userid);
   };
 
@@ -96,13 +91,11 @@ app.controller("searchController", ["$http", "$scope", "$location", "Tag", "User
   
  function createCurrentPage(page){
       $scope.currentPageStories =  $scope.data.slice((page-1)*3,page*3);
-        console.log(page,$scope.currentPageStories);
     }
 
   var currentPage = 1;
 
    $scope.prevPage = function() {
-     console.log("Prev: ",currentPage+" "+ pCount);
     if (currentPage > 1) {
       currentPage--;
       createCurrentPage(currentPage);
@@ -110,7 +103,6 @@ app.controller("searchController", ["$http", "$scope", "$location", "Tag", "User
   };
 
    $scope.nextPage = function() {
-     console.log("Next: ",currentPage+" "+ pCount);
      if (currentPage <= pCount) {
       currentPage++;  
       createCurrentPage(currentPage);

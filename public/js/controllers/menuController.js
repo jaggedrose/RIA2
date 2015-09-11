@@ -13,7 +13,6 @@ app.controller("menuController", ["$scope", "$location", "Login", "UserStore", "
       if (UserStore.tmp.stories && !nextPage) {
          for (var i in UserStore.tmp.stories) {
             Story.remove({_id: i}, function(data) {
-               console.log("deleted " + i);
                delete UserStore.tmp.stories[i];
             });
          }

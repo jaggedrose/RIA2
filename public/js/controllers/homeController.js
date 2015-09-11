@@ -24,7 +24,6 @@ app.controller("homeController", ["$http", "$scope", "$routeParams", "$location"
 
     function createCurrentPage(page){
       $scope.currentPageStories =  allStories.slice((page-1)*3,page*3);
-        console.log(page,$scope.currentPageStories);
     }
 
     window.da = $scope;
@@ -32,7 +31,6 @@ app.controller("homeController", ["$http", "$scope", "$routeParams", "$location"
   var currentPage = 1;
 
    $scope.prevPage = function() {
-     console.log("Prev: ",currentPage+" "+ pCount);
     if (currentPage > 1) {
       currentPage--;
       createCurrentPage(currentPage);
@@ -40,10 +38,8 @@ app.controller("homeController", ["$http", "$scope", "$routeParams", "$location"
   };
 
    $scope.nextPage = function() {
-     console.log("Next: ",currentPage+" "+ pCount);
      if (currentPage <= pCount) {
-      currentPage++;
-     
+      currentPage++;     
       createCurrentPage(currentPage);
     }
   };

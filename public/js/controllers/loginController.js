@@ -11,14 +11,11 @@ app.controller("loginController", ["$http", "$scope", "$location","Login", funct
 
   //on login-form submit
   $scope.logForm = function() {
-    console.log("login",$scope.Loginfo);
     Login.login($scope.Loginfo, function(data) {
-      console.log("Is there data? ", data.length);
       if (!Login.user._id) {
         $scope.authMsg = "Your email or password is incorrect!";
       } else {
         var id = data._id;
-        console.log("userId: ", id);
         $location.path('/user');
       }
     });

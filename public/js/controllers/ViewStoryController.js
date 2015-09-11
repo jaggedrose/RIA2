@@ -8,7 +8,6 @@ app.controller("ViewStoryController", ["$http", "$scope", "$location", "$routePa
     
   // Load the current section
   $scope.storySection =  $scope.aStory["section" + sectionid];
-  console.log ("aStory: ", $scope.aStory);
     
   });
 
