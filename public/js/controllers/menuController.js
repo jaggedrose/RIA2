@@ -26,13 +26,6 @@ app.controller("menuController", ["$scope", "$location", "Login", "UserStore", "
          return;
       }
 
-      //NOT DONE!
-      //Waiting for Hugos answer on how to wait for recieveing the user on load
-      if (Login.user._id && next.$$route.originalPath == "/login") {
-         event.preventDefault();
-         $location.url("/");
-         return;
-      }
    });
 
 }]);

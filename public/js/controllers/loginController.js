@@ -4,6 +4,11 @@ app.controller("loginController", ["$http", "$scope", "$location","Login", funct
   $scope.Loginfo = {};
   $scope.User = Login.user;
 
+  // if logged in already goto the user page
+  if($scope.User.user_name){
+    $location.path("/user");
+  }
+
   //on login-form submit
   $scope.logForm = function() {
     console.log("login",$scope.Loginfo);
